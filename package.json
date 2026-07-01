@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "devDependencies": {
+    "afk-research": "github:RTTJogja/afk-research"
+  }
+}

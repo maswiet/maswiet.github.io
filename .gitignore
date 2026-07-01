@@ -1,0 +1,5 @@
+# afk-research generated artifacts
+.outputs/
+
+# local dependencies
+node_modules/
