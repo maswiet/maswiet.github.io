@@ -1,0 +1,57 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        page: "#F8F6F1",
+        surface: "#FFFFFF",
+        "surface-muted": "#F1EEE7",
+        text: "#1F1F1B",
+        "text-muted": "#5F625C",
+        border: "#D8D2C5",
+        accent: "#8A2D1F",
+        "accent-hover": "#6F2117",
+        "on-accent": "#FFFFFF",
+        support: "#2F5D62",
+      },
+      fontFamily: {
+        serif: ["Source Serif 4", "Georgia", "serif"],
+        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+      },
+      fontSize: {
+        display: ["56px", { lineHeight: "1.05", fontWeight: "600", letterSpacing: "0px" }],
+        "headline-lg": ["40px", { lineHeight: "1.15", fontWeight: "600", letterSpacing: "0px" }],
+        "headline-md": ["30px", { lineHeight: "1.2", fontWeight: "600", letterSpacing: "0px" }],
+        "title-md": ["22px", { lineHeight: "1.3", fontWeight: "600", letterSpacing: "0px" }],
+        "body-lg": ["20px", { lineHeight: "1.65", fontWeight: "400", letterSpacing: "0px" }],
+        "body-md": ["18px", { lineHeight: "1.7", fontWeight: "400", letterSpacing: "0px" }],
+        "body-sm": ["15px", { lineHeight: "1.55", fontWeight: "400", letterSpacing: "0px" }],
+        "label-lg": ["15px", { lineHeight: "1.3", fontWeight: "600", letterSpacing: "0px" }],
+        "label-md": ["14px", { lineHeight: "1.35", fontWeight: "500", letterSpacing: "0px" }],
+        "label-sm": ["12px", { lineHeight: "1.35", fontWeight: "500", letterSpacing: "0px" }],
+        caption: ["13px", { lineHeight: "1.45", fontWeight: "400", letterSpacing: "0px" }],
+      },
+      borderRadius: {
+        none: "0px",
+        sm: "4px",
+        md: "6px",
+        full: "9999px",
+      },
+      spacing: {
+        xs: "4px",
+        sm: "8px",
+        md: "16px",
+        lg: "24px",
+        xl: "32px",
+        xxl: "48px",
+        section: "96px",
+        "mobile-margin": "20px",
+        "page-margin": "32px",
+        "rail-width": "260px",
+        "content-width": "760px",
+        "site-width": "1180px",
+      },
+    },
+  },
+};

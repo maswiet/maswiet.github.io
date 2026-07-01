@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research — Wiwit Suryanto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="sample-banner">
+    Design Sample · Elegant minimalist · illustrative content — not the live site
+  </div>
+
+  <div class="site">
+    <aside class="rail">
+      <div class="rail__identity">
+        <p class="rail__name">Wiwit Suryanto</p>
+        <p class="rail__affiliation body-sm">
+          Seismologist · Geophysics, Universitas Gadjah Mada
+        </p>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__link" href="index.html">Home</a>
+        <a class="nav__link nav__link--active" href="research.html" aria-current="page">Research</a>
+        <a class="nav__link" href="publications.html">Publications</a>
+        <a class="nav__link" href="teaching.html">Teaching</a>
+      </nav>
+
+      <dl class="rail__contact">
+        <dt>Office</dt>
+        <dd>Sekip Utara, Yogyakarta</dd>
+        <dt>Email</dt>
+        <dd><a href="#">ws@ugm.ac.id</a></dd>
+        <dt>Profiles</dt>
+        <dd><a href="#">ORCID</a> · <a href="#">Scholar</a></dd>
+      </dl>
+    </aside>
+
+    <main class="main">
+      <section class="section reading">
+        <p class="eyebrow">Research portfolio</p>
+        <h1 class="headline-lg">Research</h1>
+        <p class="lede" style="margin-top: var(--space-md)">
+          Ongoing and recent projects in seismology and volcano geophysics.
+          Each entry summarises the question, my role, and the outputs it has
+          produced.
+        </p>
+      </section>
+
+      <section class="section reading">
+        <div class="section__head">
+          <h2 class="headline-md">Active projects</h2>
+        </div>
+
+        <article class="entry">
+          <h3 class="title-md">Real-time seismic monitoring of Mount Merapi</h3>
+          <div class="entry__meta">
+            <span><strong>Role:</strong>&nbsp;Principal investigator</span>
+            <span><strong>Period:</strong>&nbsp;2021 – present</span>
+            <span><strong>With:</strong>&nbsp;BPPTKG, GFZ Potsdam</span>
+          </div>
+          <ul class="tags">
+            <li class="tag">Volcano seismology</li>
+            <li class="tag">Event classification</li>
+            <li class="tag">Hazard</li>
+          </ul>
+          <p>
+            A broadband and short-period network feeding a continuous
+            processing pipeline that detects, classifies, and locates
+            volcano-tectonic and long-period events. The goal is to shorten the
+            time between anomalous seismicity and actionable hazard assessment.
+          </p>
+          <p class="entry__outputs">
+            <strong>Outputs:</strong>
+            2 journal articles · open event catalog · monitoring dashboard
+          </p>
+        </article>
+
+        <article class="entry">
+          <h3 class="title-md">Ambient noise tomography of central Java</h3>
+          <div class="entry__meta">
+            <span><strong>Role:</strong>&nbsp;Co-investigator</span>
+            <span><strong>Period:</strong>&nbsp;2020 – present</span>
+            <span><strong>With:</strong>&nbsp;ITB, Kyoto University</span>
+          </div>
+          <ul class="tags">
+            <li class="tag">Tomography</li>
+            <li class="tag">Crustal structure</li>
+            <li class="tag">Basin imaging</li>
+          </ul>
+          <p>
+            Cross-correlating months of continuous noise records to recover
+            surface-wave dispersion and invert for shear-velocity structure,
+            resolving the depth of sedimentary basins that amplify ground
+            shaking near Yogyakarta.
+          </p>
+          <p class="entry__outputs">
+            <strong>Outputs:</strong>
+            1 journal article · velocity model (open data)
+          </p>
+        </article>
+      </section>
+
+      <section class="section reading">
+        <div class="section__head">
+          <h2 class="headline-md">Recent projects</h2>
+        </div>
+
+        <article class="entry">
+          <h3 class="title-md">Low-cost seismic sensor network for schools</h3>
+          <div class="entry__meta">
+            <span><strong>Role:</strong>&nbsp;Lead</span>
+            <span><strong>Period:</strong>&nbsp;2019 – 2022</span>
+            <span><strong>With:</strong>&nbsp;Regional education offices</span>
+          </div>
+          <ul class="tags">
+            <li class="tag">Instrumentation</li>
+            <li class="tag">Open hardware</li>
+            <li class="tag">Outreach</li>
+          </ul>
+          <p>
+            Designing an affordable geophone-plus-microcontroller station and
+            classroom curriculum, expanding the density of seismic observations
+            while building earthquake awareness among students.
+          </p>
+          <p class="entry__outputs">
+            <strong>Outputs:</strong>
+            hardware guide · 1 proceedings paper · 12 deployed stations
+          </p>
+        </article>
+
+        <div class="callout" style="margin-top: var(--space-xl)">
+          <p class="callout__title">Data &amp; code</p>
+          <p>
+            Processing tools and open catalogs from these projects are released
+            where licensing permits. Ask about access to raw waveform archives
+            for collaborative work.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

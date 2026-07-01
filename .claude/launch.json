@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "design-sample-academic-pages",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4599",
+        "--directory",
+        ".design/design-system/elegant-minimalist/outputs/academic-site-pages"
+      ],
+      "port": 4599
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teaching — Wiwit Suryanto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="sample-banner">
+    Design Sample · Elegant minimalist · illustrative content — not the live site
+  </div>
+
+  <div class="site">
+    <aside class="rail">
+      <div class="rail__identity">
+        <p class="rail__name">Wiwit Suryanto</p>
+        <p class="rail__affiliation body-sm">
+          Seismologist · Geophysics, Universitas Gadjah Mada
+        </p>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__link" href="index.html">Home</a>
+        <a class="nav__link" href="research.html">Research</a>
+        <a class="nav__link" href="publications.html">Publications</a>
+        <a class="nav__link nav__link--active" href="teaching.html" aria-current="page">Teaching</a>
+      </nav>
+
+      <dl class="rail__contact">
+        <dt>Office</dt>
+        <dd>Sekip Utara, Yogyakarta</dd>
+        <dt>Email</dt>
+        <dd><a href="#">ws@ugm.ac.id</a></dd>
+        <dt>Profiles</dt>
+        <dd><a href="#">ORCID</a> · <a href="#">Scholar</a></dd>
+      </dl>
+    </aside>
+
+    <main class="main">
+      <section class="section reading">
+        <p class="eyebrow">Teaching · Geophysics UGM</p>
+        <h1 class="headline-lg">Teaching</h1>
+        <p class="lede" style="margin-top: var(--space-md)">
+          Courses I teach in the Geophysics program, with lecture material and
+          references for students. Slides and problem sets are linked per topic.
+        </p>
+
+        <div class="callout" style="margin-top: var(--space-lg)">
+          <p class="callout__title">Office hours</p>
+          <p>
+            Tuesdays &amp; Thursdays, 13.00 – 15.00, Physics Building room 3.
+            Email ahead for thesis and research supervision meetings.
+          </p>
+        </div>
+      </section>
+
+      <!-- Course: Seismology -->
+      <section class="section reading">
+        <div class="section__head">
+          <h2 class="headline-md">Current courses</h2>
+          <span class="label-md text-muted">Semester Genap 2025/26</span>
+        </div>
+
+        <div class="course-group">
+          <h3 class="course-group__title">Introduction to Seismology</h3>
+          <p class="course-group__code">GEO 3021 · 3 credits · Undergraduate</p>
+          <ul class="lecture-list">
+            <li class="lecture">
+              <div>
+                <p class="lecture__title">1 — Seismic waves and the wave equation</p>
+                <p class="lecture__desc">Body waves, surface waves, ray theory basics</p>
+              </div>
+              <a class="lecture__action" href="#">Slides →</a>
+            </li>
+            <li class="lecture">
+              <div>
+                <p class="lecture__title">2 — Earthquake sources and magnitude</p>
+                <p class="lecture__desc">Fault mechanics, moment tensor, magnitude scales</p>
+              </div>
+              <a class="lecture__action" href="#">Slides →</a>
+            </li>
+            <li class="lecture">
+              <div>
+                <p class="lecture__title">3 — Locating earthquakes</p>
+                <p class="lecture__desc">Travel-time picking, location inversion, uncertainty</p>
+              </div>
+              <a class="lecture__action" href="#">Slides →</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="course-group">
+          <h3 class="course-group__title">Volcano Geophysics</h3>
+          <p class="course-group__code">GEO 4033 · 3 credits · Graduate</p>
+          <ul class="lecture-list">
+            <li class="lecture">
+              <div>
+                <p class="lecture__title">1 — Monitoring methods overview</p>
+                <p class="lecture__desc">Seismic, deformation, gas, and thermal observations</p>
+              </div>
+              <a class="lecture__action" href="#">Slides →</a>
+            </li>
+            <li class="lecture">
+              <div>
+                <p class="lecture__title">2 — Volcano-seismic signals</p>
+                <p class="lecture__desc">VT, LP, tremor, and event classification</p>
+              </div>
+              <a class="lecture__action" href="#">Slides →</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Schedule table -->
+      <section class="section reading">
+        <div class="section__head">
+          <h2 class="headline-md">Weekly schedule</h2>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Time</th>
+              <th scope="col">Course</th>
+              <th scope="col">Room</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monday</td>
+              <td>09.00 – 11.30</td>
+              <td>Introduction to Seismology</td>
+              <td>Lecture Hall A</td>
+            </tr>
+            <tr>
+              <td>Wednesday</td>
+              <td>13.00 – 15.30</td>
+              <td>Volcano Geophysics</td>
+              <td>Seminar Room 2</td>
+            </tr>
+            <tr>
+              <td>Friday</td>
+              <td>08.00 – 10.00</td>
+              <td>Seismology lab session</td>
+              <td>Computing Lab</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
