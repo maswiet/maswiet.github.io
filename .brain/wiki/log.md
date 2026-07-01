@@ -94,3 +94,25 @@ No activity entries yet. This vault is treated as an initial setup baseline.
   - `.brain/wiki/log.md`
 - Key result: Captured the workbook and summarized 82 FMIPA UGM industrial/applied project rows dated 2022-2026, including collaborator patterns, funding-column totals, dominant applied geophysics themes, and source limitations.
 - Follow-ups: Confirm the Funding column currency, the intended date range given 2026 rows in a 2022-2025 file, and which projects should be attributed directly to Wiwit Suryanto.
+
+## [2026-07-01] ingest | LEAF 2026 FMIPA Experiment deck
+
+- Trigger: User requested ingest of `/Users/maswiet/Downloads/LEAF_2026_Wiwit_Suryanto_v3_The_FMIPA_Experiment.pptx`.
+- Files changed:
+  - `.brain/raw/2026-07-01_leaf-2026-wiwit-suryanto-the-fmipa-experiment/LEAF_2026_Wiwit_Suryanto_v3_The_FMIPA_Experiment.pptx`
+  - `.brain/raw/2026-07-01_leaf-2026-wiwit-suryanto-the-fmipa-experiment/provenance.md`
+  - `.brain/wiki/sources/leaf-2026-wiwit-suryanto-the-fmipa-experiment.md`
+  - `.brain/wiki/sources/project-industri-fmipa-2022-2025.md`
+  - `.brain/wiki/entities/wiwit-suryanto.md`
+  - `.brain/wiki/entities/fmipa-ugm.md`
+  - `.brain/wiki/entities/universitas-gadjah-mada.md`
+  - `.brain/wiki/entities/leaf-2026.md`
+  - `.brain/wiki/concepts/research-management-kpi-experiment.md`
+  - `.brain/wiki/concepts/industry-funded-applied-research-portfolio.md`
+  - `.brain/wiki/concepts/seismology-and-seismic-exploration.md`
+  - `.brain/wiki/claims/fmipa-research-management-kpi-experiment-2022-2026.md`
+  - `.brain/wiki/syntheses/fmipa-experiment-portfolio-and-kpi-shift.md`
+  - `.brain/wiki/index.md`
+  - `.brain/wiki/log.md`
+- Key result: Captured the LEAF 2026 deck and extracted the "FMIPA Experiment" narrative: a 2022-2026 research-management KPI shift toward industry funding, product adoption, and community impact, with publication output treated as a control.
+- Follow-ups: Reconcile the deck's Rp 184 billion and annual trajectory figures against the workbook; validate the cited Scival FMIPA publication-output claim; confirm whether `v3` is the final LEAF 2026 deck.

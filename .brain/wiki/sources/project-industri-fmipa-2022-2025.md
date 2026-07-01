@@ -50,6 +50,7 @@ The file name says 2022-2025, but the extracted rows include five 2026 entries. 
 - The file name indicates 2022-2025, while the rows include 2026 projects. Treat the ending year as needs-review until the dataset owner confirms the intended date range.
 - Two 2026 rows have project topics and partner names but no funding values.
 - Row numbering is inconsistent near the 2026 entries: numbers `77` and `78` repeat, and the final two rows have no number.
+- The LEAF 2026 deck agrees on 82 projects but reports Rp 184 billion and a different annual trajectory; see [[wiki/sources/leaf-2026-wiwit-suryanto-the-fmipa-experiment]] and [[wiki/syntheses/fmipa-experiment-portfolio-and-kpi-shift]].
 
 ## Open Questions
 

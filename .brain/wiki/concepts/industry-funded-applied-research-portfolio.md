@@ -6,6 +6,7 @@ created: 2026-07-01
 updated: 2026-07-01
 sources:
   - "[[wiki/sources/project-industri-fmipa-2022-2025]]"
+  - "[[wiki/sources/leaf-2026-wiwit-suryanto-the-fmipa-experiment]]"
 tags:
   - applied-research
   - industry-collaboration
@@ -14,7 +15,7 @@ tags:
 
 ## Summary
 
-An industry-funded applied research portfolio is a structured record of projects connecting university expertise with external partners, funding, and applied problem domains. In the FMIPA UGM workbook, the portfolio shows a strong applied geophysics and energy-sector pattern, alongside broader digital, public-sector, engineering, social-security modelling, and materials-research projects.
+An industry-funded applied research portfolio is a structured record of projects connecting university expertise with external partners, funding, and applied problem domains. In the FMIPA UGM workbook, the portfolio shows a strong applied geophysics and energy-sector pattern, alongside broader digital, public-sector, engineering, social-security modelling, and materials-research projects. In the LEAF 2026 deck, the portfolio becomes evidence for a research-management argument: industry funding and adoption can be treated as management signals, not only as downstream outputs.
 
 ## Key Points
 
@@ -22,20 +23,24 @@ An industry-funded applied research portfolio is a structured record of projects
 - The portfolio is concentrated in applied geophysics, especially passive seismic acquisition/processing, seismic reprocessing, reservoir characterization, hydrocarbon detection, EOR, and geophysical software.
 - The portfolio also reaches beyond geophysics into digital government systems, MinerbaOne maintenance, actuarial modelling, PFAS-free electrospun nanofiber research, and infrastructure/geotechnical testing.
 - The source supports a high-level institutional story about FMIPA UGM's applied and industry-facing research capacity, but not yet a person-level attribution story for Wiwit Suryanto.
+- The LEAF 2026 deck turns the same portfolio logic into a KPI-design hypothesis for research management.
 
 ## Evidence
 
 - [[wiki/sources/project-industri-fmipa-2022-2025]]
+- [[wiki/sources/leaf-2026-wiwit-suryanto-the-fmipa-experiment]]
 
 ## Links
 
 - Faculty entity: [[wiki/entities/fmipa-ugm]]
 - Parent organization: [[wiki/entities/universitas-gadjah-mada]]
 - Related geophysics concept: [[wiki/concepts/seismology-and-seismic-exploration]]
+- Related KPI concept: [[wiki/concepts/research-management-kpi-experiment]]
 
 ## Conflicts / Updates
 
 - The portfolio's title and file name imply a 2022-2025 range, but rows include 2026 entries.
+- The LEAF 2026 deck and workbook agree on 82 projects, but differ on funding total and annual distribution.
 
 ## Open Questions
 
