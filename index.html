@@ -1,3 +1,946 @@
-"Halo dunia " 
-Ini website siapa, ya?
-Website Wiwit Suryanto
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wiwit Suryanto | Geophysics, Seismology, Volcanology</title>
+  <meta name="description" content="Personal academic website of Dr.rer.nat. Wiwit Suryanto, S.Si., M.Si., Universitas Gadjah Mada. Research in seismology, volcanology, computational geophysics, and seismic hazard.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page: #F8F6F1;
+      --surface: #FFFFFF;
+      --surface-muted: #F1EEE7;
+      --text: #1F1F1B;
+      --text-muted: #5F625C;
+      --border: #D8D2C5;
+      --accent: #8A2D1F;
+      --accent-hover: #6F2117;
+      --on-accent: #FFFFFF;
+      --support: #2F5D62;
+      --serif: "Source Serif 4", Georgia, serif;
+      --sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --site-width: 1180px;
+      --rail-width: 260px;
+      --content-width: 760px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.7;
+      letter-spacing: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(31, 31, 27, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(31, 31, 27, 0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity: 0.42;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    a:hover,
+    a:focus {
+      color: var(--accent-hover);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .site {
+      width: min(var(--site-width), calc(100% - 64px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: var(--rail-width) minmax(0, 1fr);
+      gap: 64px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .identity-rail {
+      min-height: 100vh;
+      padding: 48px 0 40px;
+      position: sticky;
+      top: 0;
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      font-family: var(--sans);
+      color: var(--text-muted);
+    }
+
+    .portrait-wrap {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    .portrait {
+      width: 156px;
+      height: 156px;
+      object-fit: cover;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--surface-muted);
+      margin-bottom: 20px;
+    }
+
+    .rail-name {
+      margin: 0 0 8px;
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+    .rail-title {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .rail-label {
+      margin: 0 0 10px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .rail-text {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .rail-block {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    .nav-list,
+    .contact-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-list a,
+    .contact-list a {
+      display: inline-flex;
+      width: fit-content;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.35;
+      padding: 6px 0;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav-list a:hover,
+    .nav-list a:focus,
+    .contact-list a:hover,
+    .contact-list a:focus {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    main {
+      padding: 48px 0 72px;
+      max-width: var(--content-width);
+    }
+
+    .hero {
+      min-height: 82vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: 56px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--support);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-family: var(--serif);
+      font-size: 56px;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: 0;
+      max-width: 12ch;
+    }
+
+    .hero-lede {
+      margin-bottom: 28px;
+      font-size: 22px;
+      line-height: 1.55;
+      max-width: 690px;
+    }
+
+    .hero-summary {
+      color: var(--text-muted);
+      font-size: 18px;
+      line-height: 1.65;
+      max-width: 700px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 32px 0 0;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      padding: 11px 16px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text);
+      text-decoration: none;
+      background: var(--surface);
+    }
+
+    .button.primary {
+      color: var(--on-accent);
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .button.primary:hover,
+    .button.primary:focus {
+      color: var(--on-accent);
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .button:hover,
+    .button:focus {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 30px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border-radius: 9999px;
+      background: var(--surface-muted);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    section {
+      padding: 88px 0 0;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .section-kicker {
+      margin: 0;
+      color: var(--text-muted);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 680px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    .metric {
+      padding: 20px 18px 18px 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric:last-child {
+      border-right: 0;
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 6px;
+      color: var(--text-muted);
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .callout {
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 24px;
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .entry {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 24px;
+    }
+
+    .entry h3 {
+      margin-bottom: 8px;
+      font-family: var(--sans);
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .entry-meta {
+      margin: 0 0 12px;
+      color: var(--text-muted);
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .entry p:last-child {
+      margin-bottom: 0;
+    }
+
+    .research-list .entry {
+      border-radius: 0;
+      border-left: 0;
+      border-right: 0;
+      background: transparent;
+      padding: 28px 0;
+    }
+
+    .research-list .entry + .entry {
+      border-top: 0;
+    }
+
+    .publication-list,
+    .course-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .publication-list li,
+    .course-list li {
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr);
+      gap: 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .publication-year,
+    .course-level {
+      color: var(--support);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .publication-title,
+    .course-title {
+      margin: 0 0 5px;
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .publication-meta,
+    .course-meta {
+      margin: 0;
+      color: var(--text-muted);
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .split-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .plain-panel {
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+
+    .plain-panel h3 {
+      margin-bottom: 10px;
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .plain-panel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text-muted);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .source-note {
+      margin-top: 18px;
+      color: var(--text-muted);
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .footer {
+      margin-top: 96px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 920px) {
+      .site {
+        width: min(100% - 40px, 760px);
+        display: block;
+      }
+
+      .identity-rail {
+        min-height: auto;
+        position: static;
+        padding: 28px 0 20px;
+        gap: 18px;
+      }
+
+      .portrait-wrap {
+        display: grid;
+        grid-template-columns: 96px minmax(0, 1fr);
+        align-items: center;
+        gap: 18px;
+      }
+
+      .portrait {
+        width: 96px;
+        height: 96px;
+        margin: 0;
+      }
+
+      .nav-list,
+      .contact-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px 18px;
+      }
+
+      main {
+        padding-top: 16px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 52px 0 56px;
+      }
+
+      h1 {
+        font-size: 44px;
+        max-width: 100%;
+      }
+
+      h2 {
+        font-size: 34px;
+      }
+
+      .hero-lede {
+        font-size: 20px;
+      }
+
+      .metrics,
+      .intro-grid,
+      .split-list {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .metric:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        font-size: 17px;
+      }
+
+      .site {
+        width: calc(100% - 32px);
+      }
+
+      .portrait-wrap {
+        grid-template-columns: 78px minmax(0, 1fr);
+      }
+
+      .portrait {
+        width: 78px;
+        height: 78px;
+      }
+
+      .rail-name {
+        font-size: 24px;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      h2 {
+        font-size: 30px;
+      }
+
+      .hero-lede {
+        font-size: 19px;
+      }
+
+      section {
+        padding-top: 64px;
+      }
+
+      .publication-list li,
+      .course-list li {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .nav-list,
+      .contact-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px 12px;
+        width: 100%;
+      }
+
+      .nav-list a,
+      .contact-list a {
+        width: 100%;
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .button {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profile">
+      <div class="portrait-wrap">
+        <img class="portrait" src="assets/wiwit-suryanto-profile.jpg" alt="Portrait of Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name">Wiwit Suryanto</p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geophysics, Seismology, Volcanology</p>
+        </div>
+      </div>
+
+      <div class="rail-block">
+        <p class="rail-label">Affiliation</p>
+        <p class="rail-text">Faculty of Mathematics and Natural Sciences, Universitas Gadjah Mada. Lab. Geofisika and Department of Physics.</p>
+      </div>
+
+      <nav class="rail-block" aria-label="Site navigation">
+        <p class="rail-label">Sections</p>
+        <ul class="nav-list">
+          <li><a href="#research">Research</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#profile">Profile</a></li>
+        </ul>
+      </nav>
+
+      <div class="rail-block">
+        <p class="rail-label">Contact</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">UGM profile</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+          <li><a href="https://www.linkedin.com/in/wiwit-suryanto-20215a6/">LinkedIn</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+      <header class="hero" id="top">
+        <p class="eyebrow">Universitas Gadjah Mada / Geophysics</p>
+        <h1>Wiwit Suryanto</h1>
+        <p class="hero-lede">Seismology, volcanology, and computational geophysics for understanding hazardous earth processes and building practical monitoring systems.</p>
+        <p class="hero-summary">My work connects passive seismic methods, earthquake hazard analysis, volcanic activity monitoring, geothermal microearthquake observation, and signal processing. The emphasis is evidence-led: field measurements, numerical methods, and tools that help institutions make better decisions around risk and exploration.</p>
+        <div class="actions">
+          <a class="button primary" href="mailto:ws@ugm.ac.id">Contact by email</a>
+          <a class="button" href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">View Scholar profile</a>
+        </div>
+        <div class="tags" aria-label="Research topics">
+          <span class="tag">Seismology</span>
+          <span class="tag">Volcanology</span>
+          <span class="tag">Computational geophysics</span>
+          <span class="tag">Earthquake hazard</span>
+          <span class="tag">Passive seismic</span>
+        </div>
+      </header>
+
+      <section id="research" aria-labelledby="research-heading">
+        <div class="section-header">
+          <h2 id="research-heading">Research</h2>
+          <p class="section-kicker">A focused academic profile across seismic observation, hazard modeling, and applied geophysical systems.</p>
+        </div>
+
+        <div class="intro-grid">
+          <div class="research-list">
+            <article class="entry">
+              <h3>Earthquake hazard and source processes</h3>
+              <p>Research spans earthquake hazard, source characterization, local seismicity, the 2006 Yogyakarta earthquake, seismic vulnerability, and probabilistic approaches to risk.</p>
+            </article>
+            <article class="entry">
+              <h3>Volcano monitoring and Merapi studies</h3>
+              <p>Work on volcanic activity monitoring includes Merapi lava dome behavior, deformation, seismic noise, and warning-system oriented observation.</p>
+            </article>
+            <article class="entry">
+              <h3>Passive seismic, exploration, and computation</h3>
+              <p>Projects apply passive seismic and computational methods to geothermal microearthquake monitoring, hydrocarbon prospecting, seismic data processing, and signal analysis.</p>
+            </article>
+          </div>
+
+          <aside class="callout">
+            <p><strong>Google Scholar snapshot.</strong> Captured 2026-07-01: 1,429 citations, h-index 17, i10-index 26, with profile labels for seismology, volcanology, and computational geophysics.</p>
+            <p>Citation metrics change over time and should be refreshed before formal reporting.</p>
+          </aside>
+        </div>
+
+        <div class="metrics" aria-label="Academic metrics snapshot">
+          <div class="metric">
+            <strong>1,429</strong>
+            <span>Citations, all time</span>
+          </div>
+          <div class="metric">
+            <strong>17</strong>
+            <span>h-index, all time</span>
+          </div>
+          <div class="metric">
+            <strong>26</strong>
+            <span>i10-index, all time</span>
+          </div>
+          <div class="metric">
+            <strong>100</strong>
+            <span>Scholar works captured</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" aria-labelledby="projects-heading">
+        <div class="section-header">
+          <h2 id="projects-heading">Projects</h2>
+          <p class="section-kicker">Selected research and applied work visible in the UGM Academic Staff profile.</p>
+        </div>
+
+        <div class="entry-list">
+          <article class="entry">
+            <p class="entry-meta">2026 / Research</p>
+            <h3>AI-Science for deformation anomaly detection</h3>
+            <p>Forecasts and early warnings for volcanic eruptions and earthquakes through anomaly detection in deformation signals.</p>
+          </article>
+          <article class="entry">
+            <p class="entry-meta">2026 / Research</p>
+            <h3>Scalable low-cost seismic sensor monitoring at Merapi</h3>
+            <p>Development of a sustainable seismic sensor network for monitoring activity at Gunung Merapi.</p>
+          </article>
+          <article class="entry">
+            <p class="entry-meta">2025 / Research</p>
+            <h3>UGM-Antenna multi-array seismometer initiative</h3>
+            <p>Optimization and experiments with multi-array seismometers for Merapi activity monitoring and tectonic earthquake observation.</p>
+          </article>
+          <article class="entry">
+            <p class="entry-meta">2018 / Research</p>
+            <h3>Yogyakarta 2006 earthquake source characteristics</h3>
+            <p>Characterizing the damaging 2006 Yogyakarta earthquake to support ground-motion scenario development in Indonesia.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="publications" aria-labelledby="publications-heading">
+        <div class="section-header">
+          <h2 id="publications-heading">Publications</h2>
+          <p class="section-kicker">Selected works from the captured Google Scholar profile, emphasizing highly cited and thematically representative publications.</p>
+        </div>
+
+        <ul class="publication-list">
+          <li>
+            <span class="publication-year">2006</span>
+            <div>
+              <p class="publication-title">Rotational motions in seismology: theory, observation, simulation</p>
+              <p class="publication-meta">Earthquake source asymmetry, structural media and rotation effects. 194 citations in the captured Scholar snapshot.</p>
+            </div>
+          </li>
+          <li>
+            <span class="publication-year">2006</span>
+            <div>
+              <p class="publication-title">First comparison of array-derived rotational ground motions with direct ring laser measurements</p>
+              <p class="publication-meta">Bulletin of the Seismological Society of America. 185 citations in the captured Scholar snapshot.</p>
+            </div>
+          </li>
+          <li>
+            <span class="publication-year">2022</span>
+            <div>
+              <p class="publication-title">Evaluation of GPM IMERG performance using gauge data over Indonesian maritime continent at different time scales</p>
+              <p class="publication-meta">Remote Sensing. 99 citations in the captured Scholar snapshot.</p>
+            </div>
+          </li>
+          <li>
+            <span class="publication-year">2015</span>
+            <div>
+              <p class="publication-title">Volcano-tectonic control of Merapi's lava dome splitting</p>
+              <p class="publication-meta">Tectonophysics. High-resolution TerraSAR-X observation of the November 2013 fracture.</p>
+            </div>
+          </li>
+          <li>
+            <span class="publication-year">2019</span>
+            <div>
+              <p class="publication-title">Velocity structure of the earthquake zone of the M6.3 Yogyakarta earthquake 2006</p>
+              <p class="publication-meta">Geophysical Journal International. Seismic tomography study of the Yogyakarta earthquake zone.</p>
+            </div>
+          </li>
+          <li>
+            <span class="publication-year">2020</span>
+            <div>
+              <p class="publication-title">Mechanical imaging of a volcano plumbing system from GNSS unsupervised modeling</p>
+              <p class="publication-meta">Geophysical Research Letters. Volcano deformation and plumbing-system interpretation.</p>
+            </div>
+          </li>
+        </ul>
+        <p class="source-note">Scholar metrics and article rows were captured on 2026-07-01 and may change.</p>
+      </section>
+
+      <section id="teaching" aria-labelledby="teaching-heading">
+        <div class="section-header">
+          <h2 id="teaching-heading">Teaching</h2>
+          <p class="section-kicker">Courses listed in the UGM Academic Staff profile across undergraduate, master's, and doctoral levels.</p>
+        </div>
+
+        <ul class="course-list">
+          <li>
+            <span class="course-level">Doctor</span>
+            <div>
+              <p class="course-title">Computational Seismology</p>
+              <p class="course-meta">3 credits</p>
+            </div>
+          </li>
+          <li>
+            <span class="course-level">Doctor</span>
+            <div>
+              <p class="course-title">Topik Khusus Seismologi</p>
+              <p class="course-meta">3 credits</p>
+            </div>
+          </li>
+          <li>
+            <span class="course-level">Master</span>
+            <div>
+              <p class="course-title">Advance Geophysical Exploration</p>
+              <p class="course-meta">2 credits</p>
+            </div>
+          </li>
+          <li>
+            <span class="course-level">Master</span>
+            <div>
+              <p class="course-title">Research Method and Research Methodology</p>
+              <p class="course-meta">2 credits</p>
+            </div>
+          </li>
+          <li>
+            <span class="course-level">Undergrad</span>
+            <div>
+              <p class="course-title">Seismology, Geodynamics, Geophysical Data Processing, Paleomagnetism, Meteorology</p>
+              <p class="course-meta">Listed undergraduate course areas</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section id="profile" aria-labelledby="profile-heading">
+        <div class="section-header">
+          <h2 id="profile-heading">Profile</h2>
+          <p class="section-kicker">Academic background, professional memberships, and applied collaborations from the captured UGM profile.</p>
+        </div>
+
+        <div class="split-list">
+          <div class="plain-panel">
+            <h3>Education</h3>
+            <ul>
+              <li>Doctorate, Geo-und-Umweltwissenschaften, Ludwig-Maximilians-Universitaet Muenchen, Germany.</li>
+              <li>Master's in Physics, Universitas Gadjah Mada.</li>
+              <li>Undergraduate study in Physics, Universitas Gadjah Mada.</li>
+            </ul>
+          </div>
+          <div class="plain-panel">
+            <h3>Professional associations</h3>
+            <ul>
+              <li>American Geophysical Union.</li>
+              <li>Seismological Society of America.</li>
+              <li>European Association of Geoscientists & Engineers.</li>
+              <li>Society of Exploration Geophysicists.</li>
+              <li>Himpunan Ahli Geofisika Indonesia.</li>
+            </ul>
+          </div>
+          <div class="plain-panel">
+            <h3>Applied collaboration</h3>
+            <ul>
+              <li>Volcanology and geological hazard mitigation.</li>
+              <li>Meteorology, climatology, and geophysics institutions.</li>
+              <li>Nuclear agency seismic-station analysis and maintenance.</li>
+              <li>Passive seismic work for geothermal and hydrocarbon settings.</li>
+            </ul>
+          </div>
+          <div class="plain-panel">
+            <h3>Community service themes</h3>
+            <ul>
+              <li>Science-based disaster mitigation education near Merapi.</li>
+              <li>Tsunami-ready community collaboration in coastal Yogyakarta.</li>
+              <li>Geophysics training and outreach for students and teachers.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Faculty of Mathematics and Natural Sciences, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
