@@ -9,13 +9,14 @@ sources:
   - "[[wiki/sources/ugm-acadstaff-wiwit-suryanto]]"
   - "[[wiki/sources/google-scholar-wiwit-suryanto-profile]]"
   - "[[wiki/sources/leaf-2026-wiwit-suryanto-the-fmipa-experiment]]"
+  - "[[wiki/sources/life-balance-as-lecturer-2023]]"
 tags:
   - person
 ---
 
 ## Summary
 
-Dr.rer.nat. Wiwit Suryanto, S.Si., M.Si. is an academic profile entity. UGM Academic Staff lists him with the Faculty of Mathematics and Natural Sciences, Lab. Geofisika, and describes his expertise as earth sciences, seismology and seismic exploration, and geophysics. Google Scholar also identifies him with UGM's Department of Physics and the Seismology, Volcanology and Hazard Research Group. The LEAF 2026 deck identifies him as Vice Dean for Research and Community Services at FMIPA UGM and frames him as the presenter of "An Experiment in Research Management."
+Dr.rer.nat. Wiwit Suryanto, S.Si., M.Si. is an academic profile entity. UGM Academic Staff lists him with the Faculty of Mathematics and Natural Sciences, Lab. Geofisika, and describes his expertise as earth sciences, seismology and seismic exploration, and geophysics. Google Scholar also identifies him with UGM's Department of Physics and the Seismology, Volcanology and Hazard Research Group. The 2023 "Life Balance As Lecturer" deck frames his lecturer identity through Tridharma, professional service, global engagement, and industrial collaboration. The LEAF 2026 deck identifies him as Vice Dean for Research and Community Services at FMIPA UGM and frames him as the presenter of "An Experiment in Research Management."
 
 ## Related Sources
 
@@ -23,12 +24,14 @@ Dr.rer.nat. Wiwit Suryanto, S.Si., M.Si. is an academic profile entity. UGM Acad
 - [[wiki/sources/ugm-acadstaff-wiwit-suryanto]]
 - [[wiki/sources/google-scholar-wiwit-suryanto-profile]]
 - [[wiki/sources/leaf-2026-wiwit-suryanto-the-fmipa-experiment]]
+- [[wiki/sources/life-balance-as-lecturer-2023]]
 
 ## Related Concepts
 
 - [[wiki/concepts/seismology-and-seismic-exploration]]
 - [[wiki/concepts/research-management-kpi-experiment]]
 - [[wiki/concepts/industry-funded-applied-research-portfolio]]
+- [[wiki/concepts/lecturer-life-balance-through-tridharma]]
 
 ## Claims
 
@@ -37,6 +40,7 @@ Dr.rer.nat. Wiwit Suryanto, S.Si., M.Si. is an academic profile entity. UGM Acad
 - The access-limited LinkedIn URL with the slug `wiwit-suryanto-20215a6` was supplied for ingest, but profile contents were not available in the raw capture. See [[wiki/sources/linkedin-wiwit-suryanto-profile]].
 - UGM Academic Staff lists research interests including earthquake hazard, microearthquake, numerical methods, signal processing, and seismology. See [[wiki/sources/ugm-acadstaff-wiwit-suryanto]].
 - Google Scholar lists topic labels for seismology, volcanology, and computational geophysics, and provides a dated citation-metrics snapshot. See [[wiki/sources/google-scholar-wiwit-suryanto-profile]].
+- [[wiki/claims/wiwit-suryanto-tridharma-and-professional-service-roles-2023]]
 - [[wiki/claims/fmipa-research-management-kpi-experiment-2022-2026]]
 
 ## Open Questions
@@ -45,3 +49,4 @@ Dr.rer.nat. Wiwit Suryanto, S.Si., M.Si. is an academic profile entity. UGM Acad
 - Is the UGM profile biography's vice-dean statement current as of 2026-07-01?
 - Should citation metrics be stored as a recurring snapshot if the site will use them over time?
 - Which FMIPA industrial project rows should be attributed directly to Wiwit Suryanto, if any?
+- Which professional service roles from the 2023 life-balance deck should be validated against independent sources before public use?

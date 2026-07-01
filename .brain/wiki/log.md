@@ -116,3 +116,24 @@ No activity entries yet. This vault is treated as an initial setup baseline.
   - `.brain/wiki/log.md`
 - Key result: Captured the LEAF 2026 deck and extracted the "FMIPA Experiment" narrative: a 2022-2026 research-management KPI shift toward industry funding, product adoption, and community impact, with publication output treated as a control.
 - Follow-ups: Reconcile the deck's Rp 184 billion and annual trajectory figures against the workbook; validate the cited Scival FMIPA publication-output claim; confirm whether `v3` is the final LEAF 2026 deck.
+
+## [2026-07-01] ingest | Life Balance As Lecturer PDF
+
+- Trigger: User requested ingest of `/Users/maswiet/Library/Mobile Documents/com~apple~CloudDocs/Downloads/Life Balance As Lecturer.pdf`.
+- Files changed:
+  - `.brain/raw/2026-07-01_life-balance-as-lecturer/Life_Balance_As_Lecturer.pdf`
+  - `.brain/raw/2026-07-01_life-balance-as-lecturer/provenance.md`
+  - `.brain/wiki/sources/life-balance-as-lecturer-2023.md`
+  - `.brain/wiki/entities/wiwit-suryanto.md`
+  - `.brain/wiki/entities/fmipa-ugm.md`
+  - `.brain/wiki/entities/universitas-gadjah-mada.md`
+  - `.brain/wiki/concepts/lecturer-life-balance-through-tridharma.md`
+  - `.brain/wiki/concepts/industry-funded-applied-research-portfolio.md`
+  - `.brain/wiki/concepts/seismology-and-seismic-exploration.md`
+  - `.brain/wiki/claims/wiwit-suryanto-tridharma-and-professional-service-roles-2023.md`
+  - `.brain/wiki/sources/project-industri-fmipa-2022-2025.md`
+  - `.brain/wiki/syntheses/fmipa-experiment-portfolio-and-kpi-shift.md`
+  - `.brain/wiki/index.md`
+  - `.brain/wiki/log.md`
+- Key result: Captured the 2023 PDF deck and extracted a Tridharma-based lecturer-balance narrative linking teaching, impactful research, global/community service, professional roles, and 2022-2023 industrial contract portfolios.
+- Follow-ups: Confirm the original audience/event for the deck, validate listed professional service roles against independent sources before public use, and reconcile the deck's USD industrial-contract totals with the later FMIPA project workbook.

@@ -47,6 +47,7 @@ The file name says 2022-2025, but the extracted rows include five 2026 entries. 
 
 ## Conflicts / Updates
 
+- The 2023 life-balance deck lists overlapping 2022 and 2023 industrial projects and reports totals in USD; see [[wiki/sources/life-balance-as-lecturer-2023]].
 - The file name indicates 2022-2025, while the rows include 2026 projects. Treat the ending year as needs-review until the dataset owner confirms the intended date range.
 - Two 2026 rows have project topics and partner names but no funding values.
 - Row numbering is inconsistent near the 2026 entries: numbers `77` and `78` repeat, and the final two rows have no number.

@@ -34,12 +34,14 @@ Last updated: 2026-07-01
 - [[wiki/sources/linkedin-wiwit-suryanto-profile]] - Access-limited LinkedIn profile capture for Wiwit Suryanto.
 - [[wiki/sources/ugm-acadstaff-wiwit-suryanto]] - Public UGM Academic Staff profile with affiliation, expertise, education, projects, courses, and publication-list data.
 - [[wiki/sources/google-scholar-wiwit-suryanto-profile]] - Google Scholar profile with UGM affiliation, topic labels, dated citation metrics, and article-list captures.
+- [[wiki/sources/life-balance-as-lecturer-2023]] - Local 2023 PDF deck framing lecturer balance through Tridharma, professional service, global engagement, and early industrial contract portfolios.
 - [[wiki/sources/project-industri-fmipa-2022-2025]] - Local workbook listing FMIPA UGM industrial/applied project rows for 2022-2026, with funding values and collaborator names.
 - [[wiki/sources/leaf-2026-wiwit-suryanto-the-fmipa-experiment]] - Local LEAF 2026 deck framing FMIPA UGM's 2022-2026 industry-collaboration shift as a research-management KPI experiment.
 
 ## Concepts
 
 - [[wiki/concepts/seismology-and-seismic-exploration]] - Research area tied to Wiwit Suryanto's UGM and Google Scholar profiles, including earthquake hazard, passive seismic uses, volcanology, and microearthquake monitoring.
+- [[wiki/concepts/lecturer-life-balance-through-tridharma]] - Academic-career concept seeded from the 2023 life-balance deck, linking teaching, research, service, global roles, and industry work.
 - [[wiki/concepts/industry-funded-applied-research-portfolio]] - Pattern for university-industry applied research portfolios, seeded from the FMIPA UGM industrial project workbook.
 - [[wiki/concepts/research-management-kpi-experiment]] - KPI-design concept from the LEAF 2026 deck, linking industry funding, product adoption, community impact, and publication-output control.
 
@@ -54,6 +56,7 @@ Last updated: 2026-07-01
 
 - [[wiki/claims/wiwit-suryanto-ugm-academic-profile]] - UGM Academic Staff profile evidence for Wiwit Suryanto's affiliation and expertise.
 - [[wiki/claims/wiwit-suryanto-google-scholar-profile-metrics]] - Dated Google Scholar profile and citation-metrics snapshot for Wiwit Suryanto.
+- [[wiki/claims/wiwit-suryanto-tridharma-and-professional-service-roles-2023]] - Needs-review claim summarizing the 2023 life-balance deck's Tridharma framing and listed professional service roles.
 - [[wiki/claims/fmipa-ugm-industrial-project-portfolio-2022-2026]] - Needs-review claim summarizing the FMIPA UGM industrial project portfolio rows, totals, dominant partner pattern, and uncertainty.
 - [[wiki/claims/fmipa-research-management-kpi-experiment-2022-2026]] - Needs-review claim summarizing the LEAF 2026 deck's FMIPA research-management KPI experiment narrative.
 
@@ -84,3 +87,4 @@ Last updated: 2026-07-01
 - Brain setup should also ensure generated export/import artifacts under `.outputs/` are ignored by Git.
 - Confirm attribution before using the FMIPA industrial project workbook as evidence for Wiwit Suryanto personally; the workbook does not identify per-person roles.
 - Reconcile the LEAF deck and FMIPA project workbook before using public-facing numbers for contract value, annual project counts, or geophysics-only 2025 totals.
+- Validate professional service roles from the 2023 life-balance deck against independent sources before presenting them as externally confirmed.
