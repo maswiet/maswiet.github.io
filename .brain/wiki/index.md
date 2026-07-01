@@ -3,7 +3,7 @@
 
 This is the content map for the `.brain` second brain. Read this file before answering from or editing the wiki. Update it on every ingest and every durable query that changes the vault.
 
-Last updated: Initial setup baseline
+Last updated: 2026-07-01
 
 ## Start Here
 
@@ -31,7 +31,7 @@ Last updated: Initial setup baseline
 
 ## Sources
 
-- No source pages currently.
+- [[wiki/sources/linkedin-wiwit-suryanto-profile]] - Access-limited LinkedIn profile capture for Wiwit Suryanto.
 
 ## Concepts
 
@@ -39,7 +39,7 @@ Last updated: Initial setup baseline
 
 ## Entities
 
-- No entity pages currently.
+- [[wiki/entities/wiwit-suryanto]] - Person entity seeded from supplied profile URLs; details require verification from additional sources.
 
 ## Claims
 

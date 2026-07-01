@@ -1,0 +1,21 @@
+HTTP/2 429 
+date: Wed, 01 Jul 2026 09:07:21 GMT
+content-type: text/html
+content-length: 792
+x-li-fabric: prod-ltx1
+report-to: {"group":"network-errors","max_age":2592000,"endpoints":[{"url":"https://www.linkedin.com/li/rep"}],"include_subdomains":true}
+nel: {"report_to":"network-errors","max_age":1296000,"success_fraction":0.00066,"failure_fraction":1,"include_subdomains":true}
+pragma: no-cache
+expires: Thu, 01 Jan 1970 00:00:00 GMT
+cache-control: no-cache, no-store, no-transform
+x-li-pop: cf-prod-ltx1-x
+x-li-proto: http/2
+x-li-uuid: AAZViQTquUx/csvuQ6uTmA==
+cf-cache-status: DYNAMIC
+set-cookie: __cf_bm=IyPH5Fnuop1ptbL34DwjTZxHzXJbVSuLng8VRav.Z.Q-1782896841.5253968-1.0.1.1-nHOyWYQf.4dZuA0Kf8qbqG14leZmFH9Qr7wZCH2mkARg.F4SZ8rtlefzfnq86LEcolfHqNChu467iHT0aqlDavTi6Fb8aokRhGeKECuYbiir21eb9lzsZmTespgAULXR; HttpOnly; SameSite=None; Secure; Path=/; Domain=linkedin.com; Expires=Wed, 01 Jul 2026 09:37:21 GMT
+strict-transport-security: max-age=31536000
+x-content-type-options: nosniff
+server: cloudflare
+cf-ray: a144428b8d5eaa7f-SIN
+alt-svc: h3=":443"; ma=86400
+
