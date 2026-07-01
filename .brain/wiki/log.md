@@ -77,3 +77,20 @@ No activity entries yet. This vault is treated as an initial setup baseline.
   - `.brain/wiki/log.md`
 - Key result: Captured Google Scholar profile metadata, dated citation metrics, top cited articles, and 100 list-works rows; cross-linked the source to Wiwit Suryanto, UGM, and the seismology/geophysics concept.
 - Follow-ups: Refresh metrics before time-sensitive use; decide which publication source should be canonical if a polished CV or website page is generated.
+
+## [2026-07-01] ingest | Project Industri FMIPA 2022-2025 workbook
+
+- Trigger: User requested ingest of `/Users/maswiet/Downloads/Project_Industri_FMIPA_2022_2025.xlsx`.
+- Files changed:
+  - `.brain/raw/2026-07-01_project-industri-fmipa-2022-2025/Project_Industri_FMIPA_2022_2025.xlsx`
+  - `.brain/raw/2026-07-01_project-industri-fmipa-2022-2025/provenance.md`
+  - `.brain/wiki/sources/project-industri-fmipa-2022-2025.md`
+  - `.brain/wiki/entities/fmipa-ugm.md`
+  - `.brain/wiki/entities/universitas-gadjah-mada.md`
+  - `.brain/wiki/concepts/industry-funded-applied-research-portfolio.md`
+  - `.brain/wiki/concepts/seismology-and-seismic-exploration.md`
+  - `.brain/wiki/claims/fmipa-ugm-industrial-project-portfolio-2022-2026.md`
+  - `.brain/wiki/index.md`
+  - `.brain/wiki/log.md`
+- Key result: Captured the workbook and summarized 82 FMIPA UGM industrial/applied project rows dated 2022-2026, including collaborator patterns, funding-column totals, dominant applied geophysics themes, and source limitations.
+- Follow-ups: Confirm the Funding column currency, the intended date range given 2026 rows in a 2022-2025 file, and which projects should be attributed directly to Wiwit Suryanto.
