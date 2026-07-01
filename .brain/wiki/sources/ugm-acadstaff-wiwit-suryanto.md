@@ -53,9 +53,9 @@ This public UGM Academic Staff profile identifies Dr.rer.nat. Wiwit Suryanto, S.
 
 - This source substantially upgrades [[wiki/entities/wiwit-suryanto]] from a LinkedIn-slug-only placeholder to an evidence-backed academic profile.
 - The LinkedIn source remains access-limited and does not independently confirm the UGM profile details.
+- [[wiki/sources/google-scholar-wiwit-suryanto-profile]] reinforces the UGM affiliation and related seismology/geophysics themes, but exposes a different publication-list surface than this UGM Academic Staff profile.
 
 ## Open Questions
 
 - Which publication list should be treated as canonical when UGM Academic Staff and Google Scholar differ?
 - Are the UGM Academic Staff role and vice-dean statement current as of 2026-07-01, or copied from an older profile biography?
-

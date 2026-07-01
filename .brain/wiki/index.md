@@ -33,19 +33,21 @@ Last updated: 2026-07-01
 
 - [[wiki/sources/linkedin-wiwit-suryanto-profile]] - Access-limited LinkedIn profile capture for Wiwit Suryanto.
 - [[wiki/sources/ugm-acadstaff-wiwit-suryanto]] - Public UGM Academic Staff profile with affiliation, expertise, education, projects, courses, and publication-list data.
+- [[wiki/sources/google-scholar-wiwit-suryanto-profile]] - Google Scholar profile with UGM affiliation, topic labels, dated citation metrics, and article-list captures.
 
 ## Concepts
 
-- [[wiki/concepts/seismology-and-seismic-exploration]] - Research area tied to Wiwit Suryanto's UGM profile, including earthquake hazard, passive seismic uses, and microearthquake monitoring.
+- [[wiki/concepts/seismology-and-seismic-exploration]] - Research area tied to Wiwit Suryanto's UGM and Google Scholar profiles, including earthquake hazard, passive seismic uses, volcanology, and microearthquake monitoring.
 
 ## Entities
 
-- [[wiki/entities/wiwit-suryanto]] - UGM academic profile entity focused on geophysics, seismology, seismic exploration, and earthquake hazard topics.
-- [[wiki/entities/universitas-gadjah-mada]] - Institution hosting the UGM Academic Staff profile for Wiwit Suryanto.
+- [[wiki/entities/wiwit-suryanto]] - UGM academic profile entity focused on geophysics, seismology, volcanology, seismic exploration, and earthquake hazard topics.
+- [[wiki/entities/universitas-gadjah-mada]] - Institution linked to Wiwit Suryanto through UGM Academic Staff and Google Scholar profile evidence.
 
 ## Claims
 
 - [[wiki/claims/wiwit-suryanto-ugm-academic-profile]] - UGM Academic Staff profile evidence for Wiwit Suryanto's affiliation and expertise.
+- [[wiki/claims/wiwit-suryanto-google-scholar-profile-metrics]] - Dated Google Scholar profile and citation-metrics snapshot for Wiwit Suryanto.
 
 ## Questions
 

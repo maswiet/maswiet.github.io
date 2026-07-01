@@ -1,0 +1,17 @@
+HTTP/2 200 
+date: Wed, 01 Jul 2026 09:11:53 GMT
+expires: Fri, 01 Jan 1990 00:00:00 GMT
+cache-control: no-cache, must-revalidate
+pragma: no-cache
+content-type: text/html; charset=UTF-8
+set-cookie: NID=532=i7SrBo4YPMXgPuoONXAkz1Y74e3Jrhgrhd34Ek7YkmWmFlY5zak0BMs_Y9C-sQ0bOIC_Lo1sDIsNpDA-nVOg97_v5wWyCxZQLVRdor0vsVakzplXMuye838sLFgUoMkJN5F5mUIlm1ycPVDAaJdKGyEyADSowzSxqG_jjZenHMdhyAko9GLri2Kpp8rOglK8IOgSPg; expires=Thu, 31-Dec-2026 09:11:53 GMT; path=/; domain=.google.com; Secure; HttpOnly; SameSite=none
+set-cookie: GSP=LM=1782897113:S=Qj6h6Q6VL8x_p9OB; expires=Fri, 30-Jun-2028 09:11:53 GMT; path=/; domain=scholar.google.com; HttpOnly; SameSite=None; Secure
+p3p: CP="This is not a P3P policy! See g.co/p3phelp for more info."
+x-content-type-options: nosniff
+content-encoding: gzip
+server: citations
+content-length: 40175
+x-xss-protection: 0
+x-frame-options: SAMEORIGIN
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+

@@ -57,3 +57,23 @@ No activity entries yet. This vault is treated as an initial setup baseline.
   - `.brain/wiki/log.md`
 - Key result: Captured the public UGM profile and tab data; updated Wiwit Suryanto as an active academic entity with UGM affiliation, geophysics/seismology expertise, education, courses, projects, and publication-list summary.
 - Follow-ups: Check role currentness against an additional institutional source if vice-dean status matters; compare publication data with Google Scholar during the next ingest.
+
+## [2026-07-01] ingest | Google Scholar profile for Wiwit Suryanto
+
+- Trigger: User requested ingest of `https://scholar.google.com/citations?user=9lJKKt0AAAAJ&hl=en`.
+- Files changed:
+  - `.brain/raw/2026-07-01_wiwit-suryanto-google-scholar/provenance.md`
+  - `.brain/raw/2026-07-01_wiwit-suryanto-google-scholar/headers.txt`
+  - `.brain/raw/2026-07-01_wiwit-suryanto-google-scholar/page.html`
+  - `.brain/raw/2026-07-01_wiwit-suryanto-google-scholar/list-works-headers.txt`
+  - `.brain/raw/2026-07-01_wiwit-suryanto-google-scholar/list-works.html`
+  - `.brain/wiki/sources/google-scholar-wiwit-suryanto-profile.md`
+  - `.brain/wiki/sources/ugm-acadstaff-wiwit-suryanto.md`
+  - `.brain/wiki/entities/wiwit-suryanto.md`
+  - `.brain/wiki/entities/universitas-gadjah-mada.md`
+  - `.brain/wiki/concepts/seismology-and-seismic-exploration.md`
+  - `.brain/wiki/claims/wiwit-suryanto-google-scholar-profile-metrics.md`
+  - `.brain/wiki/index.md`
+  - `.brain/wiki/log.md`
+- Key result: Captured Google Scholar profile metadata, dated citation metrics, top cited articles, and 100 list-works rows; cross-linked the source to Wiwit Suryanto, UGM, and the seismology/geophysics concept.
+- Follow-ups: Refresh metrics before time-sensitive use; decide which publication source should be canonical if a polished CV or website page is generated.
