@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Academic Staff</title>
+         <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+          <!-- ========================= CSS here ========================= -->
+  <link rel="shortcut icon" href="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/images/ugm_favicon.png" type="image/x-icon" />
+
+  <link href="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/plugins/bootstrap-5.3.0-alpha3/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/plugins/bootstrap-icons-1.10.5/font/bootstrap-icons.min.css">
+
+  <link rel="stylesheet" href="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/css/app.css">
+
+
+
+
+
+
+
+        
+    
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165289732-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-165289732-1');
+</script>
+
+<!-- Google tag (gtag.js) - GTAG 4 UGM-wide -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L4JC39NX24"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L4JC39NX24');
+</script>
+</head>
+    <body>
+
+        <!--Header-->
+        
+<!-- Navbar Advanced -->
+<nav class="navbar navbar-expand-lg sticky-top" id="navbar">
+	<div class="container">
+		<a class="navbar-brand" href="https://acadstaff.ugm.ac.id/">
+			<img src="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/images/logo.png" alt="">
+		</a>
+		<div class="ms-auto hstack gap-3 text-nowrap">
+			<div class="d-none d-lg-flex align-items-center gap-3">
+				<form action="https://acadstaff.ugm.ac.id/search" action="GET" class="searchform input-group">
+					<input type="text" name="key" id="key" class="form-control" minlength="3" placeholder="Input your keywords (eg: expert’s name / lecturer’s name, research, etc)...">
+					<button><i class="bi bi-search"></i></button>
+				</form>
+				<div class="divider d-none d-lg-block"></div>
+				<a href="https://acadstaff.ugm.ac.id/advanced" class="nav-link">Advanced Search</a>
+				<div class="divider d-none d-lg-block"></div>
+			</div>
+			<a href="https://simaster.ugm.ac.id/" target="_blank" class="nav-link"><i class="bi bi-person me-2"></i><span class="d-none d-md-inline-block">Login</span></a>
+			<div class="divider d-none d-lg-block"></div>
+			<div class="dropdown dropdown-lang">
+								<a href="https://acadstaff.ugm.ac.id/en" class="dropdown-toggle hstack gap-2 nav-link" data-bs-toggle="dropdown">
+					<img src="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/images/flag/en.png" alt=""> EN				</a>
+				<div class="dropdown-menu dropdown-menu-end">
+					<a href="https://acadstaff.ugm.ac.id/en" class="dropdown-item hstack gap-3">
+						<img src="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/images/flag/en.png" alt=""> EN
+					</a>
+					<a href="https://acadstaff.ugm.ac.id/id" class="dropdown-item hstack gap-3">
+						<img src="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/images/flag/id.png" alt=""> ID
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+
+
+<style>
+    #spinner-div {
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        text-align: center;
+        background-color: #5C808080;
+        z-index: 99;
+    }
+</style>
+<div id="spinner-div" class="pt-5">
+    <div class="row">
+        <div class='col-sm-12' style='text-align:center;margin-top:15%;'>
+            <img src="https://acadstaff.ugm.ac.id/assets/images/ugm.png"/><br/>
+            <h5 style="color: #cbcbcb">ACADSTAFF UGM</h5><br/>
+            <img src="https://acadstaff.ugm.ac.id/assets/images/load-baru.gif"/>
+        </div>
+    </div>
+</div>
+
+        <div class="px-content">
+    <section class="page-header page-header-offset">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="https://acadstaff.ugm.ac.id/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Faculty</li>
+        </ol>
+    </nav>
+  </div>
+</section>
+<section class="page bg-light">
+    <div class="container">
+        <div class="card card-lecturer-profile border-0 shadow-sm mb-4">
+            <div class="card-body p-lg-5 d-flex flex-column flex-lg-row gap-4">
+                <div class="photo text-center text-lg-start">
+                    <!--                    <img src="--><!--file/img/--><!--" style="max-width: 150px; max-height:150px" alt="" class="img-fluid img-circle">-->
+                    <img src="https://files.simaster.ugm.ac.id/get/acdstf.php?param=bVZ2RVErMlgyRy8rNFcvdXB6SzUwS0lHbHdqcDFqLzFmcnBrYmZVNzVoNisxa3dSVHBiTU82OEk0VW1UNGUvdkJyR0hYZFJDZC9Yd2ZwUWlSZFdzMHc9PQ==" style="max-width: 150px; max-height:150px" alt="" class="img-fluid img-circle">
+                </div>
+                <div class="profile-info flex-grow-1 text-center text-lg-start">
+                    <h4 class="fw-bold text-darkblue">Dr.rer.nat. Wiwit Suryanto, S.Si., M.Si.</h4>
+                    <div class="mb-3">
+                                                    <p class="text-dark">EARTH SCIENCES/ SEISMOLOGY AND SEISMIC EXPLORATION/ GEOPHYSICS</p>                                            </div>
+                    
+                    <div class="hstack gap-3 text-darkblue mb-1">
+                        <i class="bi bi-building"></i>
+                        Faculty of Mathematics and Natural Sciences                    </div>
+                    <div class="hstack gap-3 text-darkblue mb-1">
+                        <i class="bi bi-geo-alt"></i>
+                        Lab. Geofisika                    </div>
+                    <div class="hstack gap-3 text-darkblue mb-1">
+                        <i class="bi bi-link"></i>
+                        https://acadstaff.ugm.ac.id/wiwit                    </div>
+                    <div class="hstack gap-3 text-darkblue mb-1">
+                        <i class="bi bi-envelope"></i>
+                        ws@ugm.ac.id                    </div>
+                </div>
+
+                <div class="profile-social text-center text-lg-start">
+                    <h4 class="fw-bold">FOLLOW SOCIAL MEDIA</h4>
+                    <ul class="nav justify-content-center justify-content-lg-start">
+                        <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-facebook"></i></a></li>
+                        <!-- <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-twitter"></i></a></li> -->
+                        <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-instagram"></i></a></li>
+                        <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-youtube"></i></a></li>
+                        <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-tiktok"></i></a></li>
+                        <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+                    
+        <nav class="profile-tabs mb-4">
+            <ul class="nav nav-pills flex-nowrap overflow-auto text-nowrap">
+                <li class="nav-item"><a href="#" class="nav-link btn-profile active" id="btn-profile">Profile</a></li>
+                <li class="nav-item"><a href="#" class="nav-link btn-course" id="btn-course">Course & Supervision</a></li>
+                <li class="nav-item"><a href="#" class="nav-link btn-grant" id="btn-grant">Grant & Project</a></li>
+                <li class="nav-item"><a href="#" class="nav-link btn-research" id="btn-research">Research</a></li>
+                <li class="nav-item"><a href="#" class="nav-link btn-community" id="btn-community">Community Services</a></li>
+                <li class="nav-item"><a href="#" class="nav-link btn-patent" id="btn-patent">Intellectual Property/Patent</a></li>
+                <li class="nav-item"><a href="#" class="nav-link btn-publish" id="btn-publish">Publication</a></li>
+                <li class="nav-item"><a href="#" class="nav-link btn-prototipe" id="btn-prototipe">Innovation</a></li>
+            </ul>
+        </nav>
+
+    <div>
+    
+    <div class="flex-column gap-3">
+        <div id="acad-tab"></div>
+    </div>
+</section>
+
+<!-- <script type="text/javascript" src="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/js/jquery-3.3.1.min.js"></script> -->
+<script type="text/javascript" src="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/js/jquery-3.7.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#tab-profile").show();
+        $("#tab-course").hide();
+        $("#tab-grant").hide();
+        $("#tab-research").hide();
+        $("#tab-community").hide();
+        $("#tab-publish").hide();
+        $("#tab-prototipe").hide();
+
+        var tabActive = 'profile';
+        loadTab();
+
+        function loadTab(nickname){
+            $('#acad-tab').html('');
+            $("#spinner-div").show();
+            $("#alert-div").hide();
+            
+            var nickname  = 'wiwit';
+
+            $.ajax({
+                url: 'https://acadstaff.ugm.ac.id/ajax-tab-detail',
+                type: 'POST',
+                dataType: 'HTML',
+                data:{nickname:nickname, tab:tabActive},
+                success: function(response){
+                    $('#acad-tab').html(response);
+                },
+                complete: function () {
+                    $("#spinner-div").hide();
+                    $("#alert-div").show();
+                },
+                error: function (request, status, error) {
+                    $('#postsList').empty();
+                    $("#spinner-div").hide();
+                    $("#alert-div").show();
+                    document.getElementById('acad-tab').innerHTML = "Sorry, We can't show your request yet, something went wrong, we will check it soon";
+                }
+            });
+        }
+
+      $('#btn-profile').click(function() { 
+        checkActiveTab('profile');
+        loadTab();
+      });
+
+      $('#btn-course').click(function() { 
+        checkActiveTab('course');
+        loadTab();
+      });
+
+      $('#btn-grant').click(function() { 
+        checkActiveTab('grant');
+        loadTab();
+      });
+
+      $('#btn-research').click(function() {
+        checkActiveTab('research');
+        loadTab();
+      });
+
+      $('#btn-community').click(function() {
+        checkActiveTab('community');
+        loadTab();
+      });
+
+      $('#btn-patent').click(function() {
+        checkActiveTab('patent');
+        loadTab();
+      });
+
+      $('#btn-publish').click(function() { 
+        checkActiveTab('publish');
+        loadTab();
+      });
+
+        $('#btn-prototipe').click(function() {
+            checkActiveTab('prototipe');
+            loadTab();
+        });
+
+      function checkActiveTab(tab = null){
+        removeActiveTab();
+        
+        tabActive = tab;
+        if(tab == 'profile'){
+            $(".btn-profile").removeClass("acad").addClass("active");
+        }
+        else if(tab == 'course'){
+            $(".btn-course").removeClass("acad").addClass("active");  
+        }
+        else if(tab == 'grant'){
+            $(".btn-grant").removeClass("acad").addClass("active");   
+        }
+        else if(tab == 'research'){
+            $(".btn-research").removeClass("acad").addClass("active");
+        }
+        else if(tab == 'community'){
+            $(".btn-community").removeClass("acad").addClass("active");
+        }
+        else if(tab == 'patent'){
+            $(".btn-patent").removeClass("acad").addClass("active");
+        }
+        else if(tab == 'publish'){
+            $(".btn-publish").removeClass("acad").addClass("active");  
+        }else if (tab == 'prototipe'){
+            $(".btn-prototipe").removeClass("acad").addClass("active");
+        }
+    }
+
+    function removeActiveTab(){
+        $(".btn-profile").removeClass("active").addClass("acad");
+        $(".btn-course").removeClass("active").addClass("acad");
+        $(".btn-grant").removeClass("active").addClass("acad");
+        $(".btn-research").removeClass("active").addClass("acad");
+        $(".btn-community").removeClass("active").addClass("acad");
+        $(".btn-patent").removeClass("active").addClass("acad");
+        $(".btn-publish").removeClass("active").addClass("acad");
+        $(".btn-prototipe").removeClass("active").addClass("acad");
+    }
+
+    });
+    
+    function cite(id){
+      $('#modal-footer').hide();
+      $('#modalContent').html('Please wait...');
+      $('#modal_form').modal('show');
+      $.ajax({
+              url: 'https://acadstaff.ugm.ac.id/ajax-modal/' + id,
+              type: 'GET',
+              dataType: "HTML",
+              success: function(response) {
+                  $('#modal-footer').show();
+                  $('#modalContent').html(response);
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                $('#modal-footer').hide();
+                $('#modalContent').html("Sorry, We can't show your request yet, something went wrong, we will check it soon");
+              }
+          });
+    }
+
+    </script>
+
+
+<!-- Bootstrap modal -->
+<div class="modal fade" id="modal_form" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite this Article</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="modalContent">Please wait...</div>
+      </div>
+      <div class="col-md-12" id="modal-footer" style="display: none;">
+        <center><p><i>Warning: These citations may not always be 100% accurate.</i></p></center>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+<!-- End Bootstrap modal --></div>
+
+        <style>
+	.widget-title {
+  color: #fff;
+  font-size: 12px !important;
+}
+</style>
+<footer>
+		<div class="container py-3 py-lg-5">
+			<div class="row g-4">
+				<div class="col-lg-4">
+					<div class="logo-footer">
+						<div class="mb-4">
+							<img src="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/images/background/logo-ugm.png" alt="" width="60">
+						</div>
+						<h4>UNIVERSITAS GADJAH MADA</h4>
+						<p>
+							Bulaksumur Yogyakarta 55281
+						</p>
+					</div>
+					<div class="mt-3">
+						<div class="hstack gap-3 mb-2">
+							<i class="fa fa-envelope"></i>
+							info[at]ugm.ac.id
+						</div>
+						<div class="hstack gap-3 mb-2">
+							<i class="fa fa-phone"></i>
+							+62 (274) 520669
+						</div>
+						<div class="hstack gap-3 mb-2">
+							<i class="fa fa-fax"></i>
+							+62(274)520669
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="row g-4 mt-lg-5">
+						<div class="col-lg-3">
+							<h5 class="widget-title">PARTNERSHIP</h5>
+							<ul>
+								<li><a href="https://alumni.ugm.ac.id/">Alumni</a></li>
+								<li><a href="https://oia.ugm.ac.id/">International Affairs</a></li>
+							</ul>
+						</div>
+						<div class="col-lg-3">
+							<h5 class="widget-title">ABOUT UGM</h5>
+							<ul>
+								<li><a href="https://ugm.ac.id/id/tentang-ugm/3689-sambutan.rektor">Rector's Welcome</a></li>
+								<li><a href="https://ugm.ac.id/id/tentang-ugm/1356-sejarah">History</a></li>
+								<li><a href="https://ugm.ac.id/id/tentang-ugm/1359-visi.dan.misi">Vision and Mission</a></li>
+								<li><a href="https://ugm.ac.id/en/about-us/1433-the.board.of.executive">The Board of Executive</a></li>
+								<li><a href="https://ugm.ac.id/en/about-us/1325-management">Management</a></li>
+							</ul>
+						</div>
+						<div class="col-lg-3">
+							<h5 class="widget-title">VISIT UGM</h5>
+							<ul>
+								<li><a href="https://ugm.ac.id/en/about-us/1428-campus.map">Campus Map</a></li>
+								<li><a href="https://ugm.ac.id/en/agenda/listAgenda">Event</a></li>
+							</ul>
+						</div>
+						<div class="col-lg-3">
+							<h5 class="widget-title">REGISTRATION</h5>
+							<ul>
+								<li><a href="http://um.ugm.ac.id/v.2015/id_home.php?l=aWRfcGFnZSMxNjAxMTAxI1JhZ2FtIFNlbGVrc2kjMSNQcm9ncmFtIFNhcmphbmE=">Undergraduate</a></li>
+								<li><a href="https://ugm.ac.id/en/academics/1327-graduate">Graduate</a></li>
+								<li><a href="http://um.ugm.ac.id/v.2015/id_home.php?l=aWRfcGFnZSMxNTUxMDEjU2VraWxhcyBTZWtvbGFoIFZva2FzaSM1I1Byb2dyYW0gRGlwbG9tYQ==">Vocation School</a></li>
+								<li><a href="http://um.ugm.ac.id/v.2015/id_home.php?l=aWRfcGFnZSMxNTgwMDIjUHJvZ3JhbSBTdHVkaSM4I1Byb2dyYW0gUHJvZmVzaQ==">Profesional Program</a></li>
+								<li><a href="https://ugm.ac.id/id/akademik/3619-program.internasional">International Program</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="copyright py-3">
+			<div class="container">
+				<div class="row justify-content-between">
+					<div class="col-lg-auto">
+						&copy 2023 UNIVERSITAS GADJAH MADA
+					</div>
+					<div class="col-lg-auto">
+						<ul class="nav">
+							<li class="nav-item"><a href="https://www.ugm.ac.id/en/policy" class="nav-link">PRIVACY POLICY</a></li>
+							<li class="nav-item"><a href="https://www.ugm.ac.id/en/contact" class="nav-link">CONTACT</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+        <!-- ========================= JS here ========================= -->
+        <script src="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/plugins/bootstrap-5.3.0-alpha3/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="https://acadstaff.ugm.ac.id/assets/stylesheets/themes2/js/app.js"></script>
+        
+    </body>
+</html>
