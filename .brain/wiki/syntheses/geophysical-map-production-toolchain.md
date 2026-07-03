@@ -7,6 +7,7 @@ updated: 2026-07-03
 sources:
   - "[[wiki/sources/user-map-production-requirements-2026-07-03]]"
   - "[[wiki/sources/cuseistut-gmt6-topographic-map]]"
+  - "[[wiki/sources/gmt-tutorials]]"
 tags:
   - geophysical-mapping
   - gmt
@@ -30,11 +31,13 @@ The user's target workflow is recurring production of high-quality geophysical m
 
 - The user requires recurring high-quality maps with shaded topography/bathymetry, legend, north indicator, and index map.
 - The CUSeisTut GMT6 example demonstrates the core GMT recipe for a shaded topographic map: region/projection, relief CPT, remote `earth_relief` grid, intensity shading, coastlines, contextual tectonic lines, stations, labels, inset map, and colorbar.
+- GMT Tutorials broadens the map-production reference set to layout design, hillshade, map elements, CPT/colorbar editing, 3D maps, focal mechanisms, image draping, and PyGMT notebooks.
 
 ## Links
 
 - Source: [[wiki/sources/user-map-production-requirements-2026-07-03]]
 - Source: [[wiki/sources/cuseistut-gmt6-topographic-map]]
+- Source: [[wiki/sources/gmt-tutorials]]
 - Concept: [[wiki/concepts/publication-quality-geophysical-mapping]]
 - Entity: [[wiki/entities/generic-mapping-tools]]
 - Question: [[wiki/questions/gmt-qgis-geophysical-map-production]]

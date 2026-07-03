@@ -1,0 +1,4 @@
+requested_url: https://gmt-tutorials.org/en/
+final_url: https://gmt-tutorials.org/en/
+http_code: 200
+content_type: text/html; charset=utf-8

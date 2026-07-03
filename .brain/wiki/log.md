@@ -171,3 +171,22 @@ No activity entries yet. This vault is treated as an initial setup baseline.
   - `.brain/wiki/log.md`
 - Key result: Captured a concrete GMT6 recipe for a shaded topographic geophysical map using relief CPT, `@earth_relief_01m`, intensity shading, coastlines, tectonic/station overlays, labels, inset map, and colorbar.
 - Follow-ups: Adapt the GMT example into a reusable Indonesian regional-map template and decide which DEM/bathymetry resolution should be standardized.
+
+## [2026-07-03] ingest | GMT Tutorials
+
+- Trigger: User requested ingest of `https://gmt-tutorials.org/en/`.
+- Files changed:
+  - `.brain/raw/2026-07-03_gmt-tutorials/page.html`
+  - `.brain/raw/2026-07-03_gmt-tutorials/headers.txt`
+  - `.brain/raw/2026-07-03_gmt-tutorials/curl-metadata.txt`
+  - `.brain/raw/2026-07-03_gmt-tutorials/provenance.md`
+  - `.brain/wiki/sources/gmt-tutorials.md`
+  - `.brain/wiki/entities/generic-mapping-tools.md`
+  - `.brain/wiki/concepts/publication-quality-geophysical-mapping.md`
+  - `.brain/wiki/claims/gmt-tutorials-provide-map-production-learning-path.md`
+  - `.brain/wiki/questions/gmt-qgis-geophysical-map-production.md`
+  - `.brain/wiki/syntheses/geophysical-map-production-toolchain.md`
+  - `.brain/wiki/index.md`
+  - `.brain/wiki/log.md`
+- Key result: Captured a structured GMT/PyGMT learning resource covering topography coloring, layout, hillshade, map elements, CPT/colorbar editing, 3D maps, focal mechanisms, image draping, and PyGMT notebooks.
+- Follow-ups: Ingest specific chapters later if a reusable house-style map template needs operational command details.

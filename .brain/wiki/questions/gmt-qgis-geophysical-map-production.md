@@ -7,6 +7,7 @@ updated: 2026-07-03
 sources:
   - "[[wiki/sources/user-map-production-requirements-2026-07-03]]"
   - "[[wiki/sources/cuseistut-gmt6-topographic-map]]"
+  - "[[wiki/sources/gmt-tutorials]]"
 tags:
   - gmt
   - qgis
@@ -21,17 +22,19 @@ For the user's recurring geophysical analysis maps, when should GMT/PyGMT be pre
 
 ## Current Answer
 
-Needs review after ingesting all referenced sources. The CUSeisTut GMT6 source strengthens the case for GMT as a reproducible scripted baseline for shaded topographic maps with insets, symbols, labels, and colorbar legends. QGIS and PyGMT still need separate evidence before deciding the default or hybrid workflow.
+Needs review after ingesting all referenced sources. The two GMT sources strengthen the case for GMT as a reproducible scripted baseline for shaded topographic maps and as a learning path for layout, hillshade, colorbar, map elements, and PyGMT examples. QGIS still needs separate evidence before deciding the default or hybrid workflow.
 
 ## Evidence So Far
 
 - User requirement: recurring high-quality geophysical maps need shaded topography/bathymetry, legend, north indicator, and index map.
 - CUSeisTut GMT6: scripted GMT can produce a layered topographic map with relief coloring, `@earth_relief_01m`, intensity shading, coastline overlays, station symbols, an inset map, labels, and a colorbar.
+- GMT Tutorials: the learning path covers topography coloring, layout design, hillshade, map elements, CPT/colorbar editing, focal mechanisms, 3D maps, image draping, and PyGMT notebooks.
 
 ## Links
 
 - Source: [[wiki/sources/user-map-production-requirements-2026-07-03]]
 - Source: [[wiki/sources/cuseistut-gmt6-topographic-map]]
+- Source: [[wiki/sources/gmt-tutorials]]
 - Concept: [[wiki/concepts/publication-quality-geophysical-mapping]]
 - Entity: [[wiki/entities/generic-mapping-tools]]
 - Synthesis: [[wiki/syntheses/geophysical-map-production-toolchain]]
