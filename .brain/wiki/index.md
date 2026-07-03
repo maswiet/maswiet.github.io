@@ -3,7 +3,7 @@
 
 This is the content map for the `.brain` second brain. Read this file before answering from or editing the wiki. Update it on every ingest and every durable query that changes the vault.
 
-Last updated: 2026-07-01
+Last updated: 2026-07-03
 
 ## Start Here
 
@@ -31,6 +31,7 @@ Last updated: 2026-07-01
 
 ## Sources
 
+- [[wiki/sources/user-map-production-requirements-2026-07-03]] - User-stated requirements for recurring high-quality geophysical maps with shaded topography/bathymetry, legend, north indicator, and index map.
 - [[wiki/sources/linkedin-wiwit-suryanto-profile]] - Access-limited LinkedIn profile capture for Wiwit Suryanto.
 - [[wiki/sources/ugm-acadstaff-wiwit-suryanto]] - Public UGM Academic Staff profile with affiliation, expertise, education, projects, courses, and publication-list data.
 - [[wiki/sources/google-scholar-wiwit-suryanto-profile]] - Google Scholar profile with UGM affiliation, topic labels, dated citation metrics, and article-list captures.
@@ -40,6 +41,7 @@ Last updated: 2026-07-01
 
 ## Concepts
 
+- [[wiki/concepts/publication-quality-geophysical-mapping]] - Working standard for complete, reproducible, high-quality geophysical maps and their required cartographic elements.
 - [[wiki/concepts/seismology-and-seismic-exploration]] - Research area tied to Wiwit Suryanto's UGM and Google Scholar profiles, including earthquake hazard, passive seismic uses, volcanology, and microearthquake monitoring.
 - [[wiki/concepts/lecturer-life-balance-through-tridharma]] - Academic-career concept seeded from the 2023 life-balance deck, linking teaching, research, service, global roles, and industry work.
 - [[wiki/concepts/industry-funded-applied-research-portfolio]] - Pattern for university-industry applied research portfolios, seeded from the FMIPA UGM industrial project workbook.
@@ -54,6 +56,7 @@ Last updated: 2026-07-01
 
 ## Claims
 
+- [[wiki/claims/user-requires-publication-quality-geophysical-maps]] - User-stated requirement for frequent high-quality geophysical maps with shaded relief/bathymetry, legend, north indicator, and index map.
 - [[wiki/claims/wiwit-suryanto-ugm-academic-profile]] - UGM Academic Staff profile evidence for Wiwit Suryanto's affiliation and expertise.
 - [[wiki/claims/wiwit-suryanto-google-scholar-profile-metrics]] - Dated Google Scholar profile and citation-metrics snapshot for Wiwit Suryanto.
 - [[wiki/claims/wiwit-suryanto-tridharma-and-professional-service-roles-2023]] - Needs-review claim summarizing the 2023 life-balance deck's Tridharma framing and listed professional service roles.
@@ -62,10 +65,11 @@ Last updated: 2026-07-01
 
 ## Questions
 
-- No durable question pages yet.
+- [[wiki/questions/gmt-qgis-geophysical-map-production]] - Tracks when GMT/PyGMT, QGIS, or hybrid workflows should be used for the user's geophysical map production.
 
 ## Syntheses
 
+- [[wiki/syntheses/geophysical-map-production-toolchain]] - Evolving synthesis for a reproducible, high-quality geophysical map production workflow across GMT, PyGMT, and QGIS.
 - [[wiki/syntheses/fmipa-experiment-portfolio-and-kpi-shift]] - Cross-source synthesis connecting the LEAF 2026 narrative to the industrial project workbook and their numeric reconciliation issues.
 
 ## Outputs
@@ -88,3 +92,4 @@ Last updated: 2026-07-01
 - Confirm attribution before using the FMIPA industrial project workbook as evidence for Wiwit Suryanto personally; the workbook does not identify per-person roles.
 - Reconcile the LEAF deck and FMIPA project workbook before using public-facing numbers for contract value, annual project counts, or geophysics-only 2025 totals.
 - Validate professional service roles from the 2023 life-balance deck against independent sources before presenting them as externally confirmed.
+- Define a reusable geophysical map house style covering projections, DEM/bathymetry sources, relief shading, color palettes, legends, north indicators, scale bars, and index maps.

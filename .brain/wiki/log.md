@@ -137,3 +137,18 @@ No activity entries yet. This vault is treated as an initial setup baseline.
   - `.brain/wiki/log.md`
 - Key result: Captured the 2023 PDF deck and extracted a Tridharma-based lecturer-balance narrative linking teaching, impactful research, global/community service, professional roles, and 2022-2023 industrial contract portfolios.
 - Follow-ups: Confirm the original audience/event for the deck, validate listed professional service roles against independent sources before public use, and reconcile the deck's USD industrial-contract totals with the later FMIPA project workbook.
+
+## [2026-07-03] ingest | User geophysical map production requirements
+
+- Trigger: User requested ingest of map-production context and related GMT/PyGMT/QGIS URLs.
+- Files changed:
+  - `.brain/raw/2026-07-03_user-map-production-requirements/source.md`
+  - `.brain/wiki/sources/user-map-production-requirements-2026-07-03.md`
+  - `.brain/wiki/concepts/publication-quality-geophysical-mapping.md`
+  - `.brain/wiki/claims/user-requires-publication-quality-geophysical-maps.md`
+  - `.brain/wiki/questions/gmt-qgis-geophysical-map-production.md`
+  - `.brain/wiki/syntheses/geophysical-map-production-toolchain.md`
+  - `.brain/wiki/index.md`
+  - `.brain/wiki/log.md`
+- Key result: Captured the user's durable requirement for recurring high-quality geophysical maps with shaded topography/bathymetry, legend, north indicator, and index map, and seeded the GMT/QGIS workflow question.
+- Follow-ups: Ingest the referenced GMT, PyGMT, and QGIS sources to ground the toolchain synthesis in documentation.
