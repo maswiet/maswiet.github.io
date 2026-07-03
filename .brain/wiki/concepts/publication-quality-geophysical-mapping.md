@@ -1,11 +1,12 @@
 ---
 title: "Publication-Quality Geophysical Mapping"
 type: concept
-status: seed
+status: active
 created: 2026-07-03
 updated: 2026-07-03
 sources:
   - "[[wiki/sources/user-map-production-requirements-2026-07-03]]"
+  - "[[wiki/sources/cuseistut-gmt6-topographic-map]]"
 tags:
   - geophysical-mapping
   - cartography
@@ -26,10 +27,17 @@ Publication-quality geophysical mapping means turning analysis outputs into maps
 - Map layout should be reproducible enough that later figures can reuse scale, typography, color, projection, and data-source decisions.
 - Tool choice should balance geophysics norms, reproducibility, cartographic quality, and speed of iteration.
 
+## GMT Pattern
+
+The CUSeisTut GMT6 example provides a practical baseline for a publication-style geophysical base map: define region and projection, create a relief CPT, render GMT remote relief with intensity shading, add coastlines and tectonic/context layers, place an inset/index map, plot analysis or station symbols, annotate features, and add a labeled colorbar.
+
 ## Links
 
 - Source: [[wiki/sources/user-map-production-requirements-2026-07-03]]
+- Source: [[wiki/sources/cuseistut-gmt6-topographic-map]]
+- Entity: [[wiki/entities/generic-mapping-tools]]
 - Claim: [[wiki/claims/user-requires-publication-quality-geophysical-maps]]
+- Claim: [[wiki/claims/gmt-supports-reproducible-shaded-topographic-maps]]
 - Question: [[wiki/questions/gmt-qgis-geophysical-map-production]]
 - Synthesis: [[wiki/syntheses/geophysical-map-production-toolchain]]
 
@@ -38,3 +46,4 @@ Publication-quality geophysical mapping means turning analysis outputs into maps
 - What house style should define fonts, line weights, label hierarchy, scale bars, color palettes, and export formats?
 - Which projections should be default for regional Indonesian maps and smaller local study areas?
 - How should maps distinguish analysis layers from context layers such as DEM, bathymetry, faults, coastlines, stations, and seismicity?
+- Which GMT elements are mandatory in the reusable template and which are study-specific?

@@ -152,3 +152,22 @@ No activity entries yet. This vault is treated as an initial setup baseline.
   - `.brain/wiki/log.md`
 - Key result: Captured the user's durable requirement for recurring high-quality geophysical maps with shaded topography/bathymetry, legend, north indicator, and index map, and seeded the GMT/QGIS workflow question.
 - Follow-ups: Ingest the referenced GMT, PyGMT, and QGIS sources to ground the toolchain synthesis in documentation.
+
+## [2026-07-03] ingest | CUSeisTut GMT6 topographic map tutorial
+
+- Trigger: User requested ingest of `https://cuseistut.readthedocs.io/en/latest/GMT6-1/index.html`.
+- Files changed:
+  - `.brain/raw/2026-07-03_cuseistut-gmt6-topographic-map/page.html`
+  - `.brain/raw/2026-07-03_cuseistut-gmt6-topographic-map/headers.txt`
+  - `.brain/raw/2026-07-03_cuseistut-gmt6-topographic-map/curl-metadata.txt`
+  - `.brain/raw/2026-07-03_cuseistut-gmt6-topographic-map/provenance.md`
+  - `.brain/wiki/sources/cuseistut-gmt6-topographic-map.md`
+  - `.brain/wiki/entities/generic-mapping-tools.md`
+  - `.brain/wiki/concepts/publication-quality-geophysical-mapping.md`
+  - `.brain/wiki/claims/gmt-supports-reproducible-shaded-topographic-maps.md`
+  - `.brain/wiki/questions/gmt-qgis-geophysical-map-production.md`
+  - `.brain/wiki/syntheses/geophysical-map-production-toolchain.md`
+  - `.brain/wiki/index.md`
+  - `.brain/wiki/log.md`
+- Key result: Captured a concrete GMT6 recipe for a shaded topographic geophysical map using relief CPT, `@earth_relief_01m`, intensity shading, coastlines, tectonic/station overlays, labels, inset map, and colorbar.
+- Follow-ups: Adapt the GMT example into a reusable Indonesian regional-map template and decide which DEM/bathymetry resolution should be standardized.

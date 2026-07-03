@@ -32,6 +32,7 @@ Last updated: 2026-07-03
 ## Sources
 
 - [[wiki/sources/user-map-production-requirements-2026-07-03]] - User-stated requirements for recurring high-quality geophysical maps with shaded topography/bathymetry, legend, north indicator, and index map.
+- [[wiki/sources/cuseistut-gmt6-topographic-map]] - CUSeisTut GMT6 tutorial demonstrating a scripted shaded topographic map with relief CPT, `earth_relief`, inset map, station symbols, labels, and colorbar.
 - [[wiki/sources/linkedin-wiwit-suryanto-profile]] - Access-limited LinkedIn profile capture for Wiwit Suryanto.
 - [[wiki/sources/ugm-acadstaff-wiwit-suryanto]] - Public UGM Academic Staff profile with affiliation, expertise, education, projects, courses, and publication-list data.
 - [[wiki/sources/google-scholar-wiwit-suryanto-profile]] - Google Scholar profile with UGM affiliation, topic labels, dated citation metrics, and article-list captures.
@@ -49,6 +50,7 @@ Last updated: 2026-07-03
 
 ## Entities
 
+- [[wiki/entities/generic-mapping-tools]] - Open-source command-line mapping toolchain tracked as the geophysics-style scripted baseline for reproducible map production.
 - [[wiki/entities/wiwit-suryanto]] - UGM academic profile entity focused on geophysics, seismology, volcanology, seismic exploration, and earthquake hazard topics.
 - [[wiki/entities/universitas-gadjah-mada]] - Institution linked to Wiwit Suryanto through UGM Academic Staff and Google Scholar profile evidence.
 - [[wiki/entities/fmipa-ugm]] - Faculty of Mathematics and Natural Sciences at UGM, linked to Wiwit Suryanto's UGM profile and the industrial project workbook.
@@ -57,6 +59,7 @@ Last updated: 2026-07-03
 ## Claims
 
 - [[wiki/claims/user-requires-publication-quality-geophysical-maps]] - User-stated requirement for frequent high-quality geophysical maps with shaded relief/bathymetry, legend, north indicator, and index map.
+- [[wiki/claims/gmt-supports-reproducible-shaded-topographic-maps]] - CUSeisTut evidence that GMT can script shaded topographic maps with relief grids, insets, symbols, annotations, and colorbar legends.
 - [[wiki/claims/wiwit-suryanto-ugm-academic-profile]] - UGM Academic Staff profile evidence for Wiwit Suryanto's affiliation and expertise.
 - [[wiki/claims/wiwit-suryanto-google-scholar-profile-metrics]] - Dated Google Scholar profile and citation-metrics snapshot for Wiwit Suryanto.
 - [[wiki/claims/wiwit-suryanto-tridharma-and-professional-service-roles-2023]] - Needs-review claim summarizing the 2023 life-balance deck's Tridharma framing and listed professional service roles.

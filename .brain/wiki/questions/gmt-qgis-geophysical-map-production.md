@@ -6,6 +6,7 @@ created: 2026-07-03
 updated: 2026-07-03
 sources:
   - "[[wiki/sources/user-map-production-requirements-2026-07-03]]"
+  - "[[wiki/sources/cuseistut-gmt6-topographic-map]]"
 tags:
   - gmt
   - qgis
@@ -20,12 +21,19 @@ For the user's recurring geophysical analysis maps, when should GMT/PyGMT be pre
 
 ## Current Answer
 
-Needs review after ingesting the referenced GMT, PyGMT, and QGIS sources. The initial requirement suggests GMT should remain the scientific reproducibility baseline, while QGIS may be valuable for GIS layer management, interactive inspection, and polished layout work.
+Needs review after ingesting all referenced sources. The CUSeisTut GMT6 source strengthens the case for GMT as a reproducible scripted baseline for shaded topographic maps with insets, symbols, labels, and colorbar legends. QGIS and PyGMT still need separate evidence before deciding the default or hybrid workflow.
+
+## Evidence So Far
+
+- User requirement: recurring high-quality geophysical maps need shaded topography/bathymetry, legend, north indicator, and index map.
+- CUSeisTut GMT6: scripted GMT can produce a layered topographic map with relief coloring, `@earth_relief_01m`, intensity shading, coastline overlays, station symbols, an inset map, labels, and a colorbar.
 
 ## Links
 
 - Source: [[wiki/sources/user-map-production-requirements-2026-07-03]]
+- Source: [[wiki/sources/cuseistut-gmt6-topographic-map]]
 - Concept: [[wiki/concepts/publication-quality-geophysical-mapping]]
+- Entity: [[wiki/entities/generic-mapping-tools]]
 - Synthesis: [[wiki/syntheses/geophysical-map-production-toolchain]]
 
 ## Open Questions
