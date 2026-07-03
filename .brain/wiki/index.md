@@ -35,6 +35,7 @@ Last updated: 2026-07-03
 - [[wiki/sources/cuseistut-gmt6-topographic-map]] - CUSeisTut GMT6 tutorial demonstrating a scripted shaded topographic map with relief CPT, `earth_relief`, inset map, station symbols, labels, and colorbar.
 - [[wiki/sources/gmt-tutorials]] - Structured GMT/PyGMT learning resource covering topography coloring, layout, hillshade, map elements, CPT/colorbar editing, 3D maps, focal mechanisms, and image draping.
 - [[wiki/sources/pygmt-v0-1-0-overview]] - Versioned PyGMT overview describing PyGMT as a Python wrapper for GMT and a route to high-quality static maps; API details need current-docs review.
+- [[wiki/sources/qgis-homepage]] - QGIS homepage evidence for cartographic design, layout designer, atlases/reports, editing, analysis workflows, data-format support, and publishing.
 - [[wiki/sources/linkedin-wiwit-suryanto-profile]] - Access-limited LinkedIn profile capture for Wiwit Suryanto.
 - [[wiki/sources/ugm-acadstaff-wiwit-suryanto]] - Public UGM Academic Staff profile with affiliation, expertise, education, projects, courses, and publication-list data.
 - [[wiki/sources/google-scholar-wiwit-suryanto-profile]] - Google Scholar profile with UGM affiliation, topic labels, dated citation metrics, and article-list captures.
@@ -54,6 +55,7 @@ Last updated: 2026-07-03
 
 - [[wiki/entities/generic-mapping-tools]] - Open-source command-line mapping toolchain tracked as the geophysics-style scripted baseline for reproducible map production.
 - [[wiki/entities/pygmt]] - Python interface to GMT tracked as a possible analysis-to-map bridge for reproducible geophysical figures.
+- [[wiki/entities/qgis]] - Free and open-source GIS platform tracked for layer management, cartographic layout, atlas/report maps, interoperability, and publishing.
 - [[wiki/entities/wiwit-suryanto]] - UGM academic profile entity focused on geophysics, seismology, volcanology, seismic exploration, and earthquake hazard topics.
 - [[wiki/entities/universitas-gadjah-mada]] - Institution linked to Wiwit Suryanto through UGM Academic Staff and Google Scholar profile evidence.
 - [[wiki/entities/fmipa-ugm]] - Faculty of Mathematics and Natural Sciences at UGM, linked to Wiwit Suryanto's UGM profile and the industrial project workbook.
@@ -65,6 +67,7 @@ Last updated: 2026-07-03
 - [[wiki/claims/gmt-supports-reproducible-shaded-topographic-maps]] - CUSeisTut evidence that GMT can script shaded topographic maps with relief grids, insets, symbols, annotations, and colorbar legends.
 - [[wiki/claims/gmt-tutorials-provide-map-production-learning-path]] - Evidence that GMT Tutorials offers a structured learning path for high-quality GMT/PyGMT map production.
 - [[wiki/claims/pygmt-connects-python-analysis-to-gmt-quality-maps]] - Needs-review claim that PyGMT bridges Python analysis to GMT-quality static maps; current docs needed for API details.
+- [[wiki/claims/qgis-supports-professional-map-layout-and-gis-workflows]] - Evidence that QGIS supports professional map layout, atlases/reports, GIS editing, analysis workflows, interoperability, and publishing.
 - [[wiki/claims/wiwit-suryanto-ugm-academic-profile]] - UGM Academic Staff profile evidence for Wiwit Suryanto's affiliation and expertise.
 - [[wiki/claims/wiwit-suryanto-google-scholar-profile-metrics]] - Dated Google Scholar profile and citation-metrics snapshot for Wiwit Suryanto.
 - [[wiki/claims/wiwit-suryanto-tridharma-and-professional-service-roles-2023]] - Needs-review claim summarizing the 2023 life-balance deck's Tridharma framing and listed professional service roles.
@@ -82,7 +85,7 @@ Last updated: 2026-07-03
 
 ## Outputs
 
-- No output pages currently.
+- [[wiki/outputs/geophysical-map-quality-checklist]] - Seed checklist for high-quality geophysical maps across GMT, PyGMT, and QGIS workflows.
 
 ## Templates
 
@@ -102,3 +105,4 @@ Last updated: 2026-07-03
 - Validate professional service roles from the 2023 life-balance deck against independent sources before presenting them as externally confirmed.
 - Define a reusable geophysical map house style covering projections, DEM/bathymetry sources, relief shading, color palettes, legends, north indicators, scale bars, and index maps.
 - Refresh PyGMT evidence from current documentation before committing to API-level map templates.
+- Ingest QGIS manual pages for print layout, atlas/report generation, hillshade/terrain analysis, layer styling, and processing models before making QGIS templates.

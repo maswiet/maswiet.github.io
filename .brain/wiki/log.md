@@ -210,3 +210,23 @@ No activity entries yet. This vault is treated as an initial setup baseline.
   - `.brain/wiki/log.md`
 - Key result: Captured PyGMT as a Python wrapper around GMT for spatial processing and high-quality static map output, while marking the page as old versioned documentation that should be refreshed before API-level template work.
 - Follow-ups: Ingest current PyGMT documentation before building reusable PyGMT map templates.
+
+## [2026-07-03] ingest | QGIS homepage
+
+- Trigger: User requested ingest of `https://www.qgis.org/`.
+- Files changed:
+  - `.brain/raw/2026-07-03_qgis-homepage/page.html`
+  - `.brain/raw/2026-07-03_qgis-homepage/headers.txt`
+  - `.brain/raw/2026-07-03_qgis-homepage/curl-metadata.txt`
+  - `.brain/raw/2026-07-03_qgis-homepage/provenance.md`
+  - `.brain/wiki/sources/qgis-homepage.md`
+  - `.brain/wiki/entities/qgis.md`
+  - `.brain/wiki/concepts/publication-quality-geophysical-mapping.md`
+  - `.brain/wiki/claims/qgis-supports-professional-map-layout-and-gis-workflows.md`
+  - `.brain/wiki/questions/gmt-qgis-geophysical-map-production.md`
+  - `.brain/wiki/syntheses/geophysical-map-production-toolchain.md`
+  - `.brain/wiki/outputs/geophysical-map-quality-checklist.md`
+  - `.brain/wiki/index.md`
+  - `.brain/wiki/log.md`
+- Key result: Captured QGIS as the GIS/layout complement to GMT/PyGMT, especially for layer management, professional layout, atlases/reports, editing, analysis workflows, data-format support, interoperability, and publishing.
+- Follow-ups: Ingest specific QGIS manual pages for print layout, atlas/report generation, hillshade/terrain analysis, layer styling, and processing models before building QGIS templates.

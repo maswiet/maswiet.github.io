@@ -1,0 +1,4 @@
+requested_url: https://www.qgis.org/
+final_url: https://www.qgis.org/
+http_code: 200
+content_type: text/html

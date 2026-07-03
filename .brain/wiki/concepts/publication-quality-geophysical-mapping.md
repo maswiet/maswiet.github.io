@@ -9,6 +9,7 @@ sources:
   - "[[wiki/sources/cuseistut-gmt6-topographic-map]]"
   - "[[wiki/sources/gmt-tutorials]]"
   - "[[wiki/sources/pygmt-v0-1-0-overview]]"
+  - "[[wiki/sources/qgis-homepage]]"
 tags:
   - geophysical-mapping
   - cartography
@@ -41,20 +42,28 @@ GMT Tutorials expands the operational reference set beyond one map: topography c
 
 PyGMT is relevant when map production should sit close to Python analysis code. The captured v0.1.0 overview supports the conceptual bridge from Python to GMT-quality static maps, but current PyGMT documentation should be checked before writing reusable templates.
 
+## GIS And Layout Path
+
+QGIS is relevant when the work requires GIS data management, layer editing, visual QA, professional print layout, atlas/report generation, broad data-format support, or publishing workflows. It complements GMT/PyGMT rather than replacing them for every figure.
+
 ## Links
 
 - Source: [[wiki/sources/user-map-production-requirements-2026-07-03]]
 - Source: [[wiki/sources/cuseistut-gmt6-topographic-map]]
 - Source: [[wiki/sources/gmt-tutorials]]
 - Source: [[wiki/sources/pygmt-v0-1-0-overview]]
+- Source: [[wiki/sources/qgis-homepage]]
 - Entity: [[wiki/entities/generic-mapping-tools]]
 - Entity: [[wiki/entities/pygmt]]
+- Entity: [[wiki/entities/qgis]]
 - Claim: [[wiki/claims/user-requires-publication-quality-geophysical-maps]]
 - Claim: [[wiki/claims/gmt-supports-reproducible-shaded-topographic-maps]]
 - Claim: [[wiki/claims/gmt-tutorials-provide-map-production-learning-path]]
 - Claim: [[wiki/claims/pygmt-connects-python-analysis-to-gmt-quality-maps]]
+- Claim: [[wiki/claims/qgis-supports-professional-map-layout-and-gis-workflows]]
 - Question: [[wiki/questions/gmt-qgis-geophysical-map-production]]
 - Synthesis: [[wiki/syntheses/geophysical-map-production-toolchain]]
+- Output: [[wiki/outputs/geophysical-map-quality-checklist]]
 
 ## Open Questions
 
@@ -64,3 +73,4 @@ PyGMT is relevant when map production should sit close to Python analysis code. 
 - Which GMT elements are mandatory in the reusable template and which are study-specific?
 - Which GMT Tutorials chapters should be converted first into local templates?
 - Which current PyGMT examples should replace or supplement the old v0.1.0 overview before production use?
+- Which QGIS layout and terrain/hillshade documentation pages should be ingested before making QGIS templates?
