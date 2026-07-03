@@ -190,3 +190,23 @@ No activity entries yet. This vault is treated as an initial setup baseline.
   - `.brain/wiki/log.md`
 - Key result: Captured a structured GMT/PyGMT learning resource covering topography coloring, layout, hillshade, map elements, CPT/colorbar editing, 3D maps, focal mechanisms, image draping, and PyGMT notebooks.
 - Follow-ups: Ingest specific chapters later if a reusable house-style map template needs operational command details.
+
+## [2026-07-03] ingest | PyGMT v0.1.0 overview
+
+- Trigger: User requested ingest of `https://www.pygmt.org/v0.1.0/overview.html`.
+- Files changed:
+  - `.brain/raw/2026-07-03_pygmt-v0-1-0-overview/page.html`
+  - `.brain/raw/2026-07-03_pygmt-v0-1-0-overview/headers.txt`
+  - `.brain/raw/2026-07-03_pygmt-v0-1-0-overview/curl-metadata.txt`
+  - `.brain/raw/2026-07-03_pygmt-v0-1-0-overview/provenance.md`
+  - `.brain/wiki/sources/pygmt-v0-1-0-overview.md`
+  - `.brain/wiki/entities/pygmt.md`
+  - `.brain/wiki/entities/generic-mapping-tools.md`
+  - `.brain/wiki/concepts/publication-quality-geophysical-mapping.md`
+  - `.brain/wiki/claims/pygmt-connects-python-analysis-to-gmt-quality-maps.md`
+  - `.brain/wiki/questions/gmt-qgis-geophysical-map-production.md`
+  - `.brain/wiki/syntheses/geophysical-map-production-toolchain.md`
+  - `.brain/wiki/index.md`
+  - `.brain/wiki/log.md`
+- Key result: Captured PyGMT as a Python wrapper around GMT for spatial processing and high-quality static map output, while marking the page as old versioned documentation that should be refreshed before API-level template work.
+- Follow-ups: Ingest current PyGMT documentation before building reusable PyGMT map templates.

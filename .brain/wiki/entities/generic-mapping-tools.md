@@ -7,6 +7,7 @@ updated: 2026-07-03
 sources:
   - "[[wiki/sources/cuseistut-gmt6-topographic-map]]"
   - "[[wiki/sources/gmt-tutorials]]"
+  - "[[wiki/sources/pygmt-v0-1-0-overview]]"
 tags:
   - gmt
   - mapping-software
@@ -29,11 +30,14 @@ Generic Mapping Tools (GMT) is an open-source command-line mapping and plotting 
 
 - [[wiki/sources/cuseistut-gmt6-topographic-map]] provides a concrete topographic-map recipe.
 - [[wiki/sources/gmt-tutorials]] provides a broader learning path for first maps, topography coloring, layout, hillshade, map elements, CPT/colorbar work, 3D maps, focal mechanisms, and PyGMT examples.
+- [[wiki/sources/pygmt-v0-1-0-overview]] documents PyGMT as a Python wrapper around GMT, useful for analysis-to-map scripting when verified against current docs.
 
 ## Links
 
 - Source: [[wiki/sources/cuseistut-gmt6-topographic-map]]
 - Source: [[wiki/sources/gmt-tutorials]]
+- Source: [[wiki/sources/pygmt-v0-1-0-overview]]
+- Entity: [[wiki/entities/pygmt]]
 - Concept: [[wiki/concepts/publication-quality-geophysical-mapping]]
 - Claim: [[wiki/claims/gmt-supports-reproducible-shaded-topographic-maps]]
 - Claim: [[wiki/claims/gmt-tutorials-provide-map-production-learning-path]]

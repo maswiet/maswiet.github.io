@@ -8,6 +8,7 @@ sources:
   - "[[wiki/sources/user-map-production-requirements-2026-07-03]]"
   - "[[wiki/sources/cuseistut-gmt6-topographic-map]]"
   - "[[wiki/sources/gmt-tutorials]]"
+  - "[[wiki/sources/pygmt-v0-1-0-overview]]"
 tags:
   - geophysical-mapping
   - cartography
@@ -36,15 +37,22 @@ The CUSeisTut GMT6 example provides a practical baseline for a publication-style
 
 GMT Tutorials expands the operational reference set beyond one map: topography coloring, layout design, hillshade, map elements, CPT/colorbar editing, focal mechanisms, 3D maps, and image draping are all candidates for future map-template standards.
 
+## Python Bridge
+
+PyGMT is relevant when map production should sit close to Python analysis code. The captured v0.1.0 overview supports the conceptual bridge from Python to GMT-quality static maps, but current PyGMT documentation should be checked before writing reusable templates.
+
 ## Links
 
 - Source: [[wiki/sources/user-map-production-requirements-2026-07-03]]
 - Source: [[wiki/sources/cuseistut-gmt6-topographic-map]]
 - Source: [[wiki/sources/gmt-tutorials]]
+- Source: [[wiki/sources/pygmt-v0-1-0-overview]]
 - Entity: [[wiki/entities/generic-mapping-tools]]
+- Entity: [[wiki/entities/pygmt]]
 - Claim: [[wiki/claims/user-requires-publication-quality-geophysical-maps]]
 - Claim: [[wiki/claims/gmt-supports-reproducible-shaded-topographic-maps]]
 - Claim: [[wiki/claims/gmt-tutorials-provide-map-production-learning-path]]
+- Claim: [[wiki/claims/pygmt-connects-python-analysis-to-gmt-quality-maps]]
 - Question: [[wiki/questions/gmt-qgis-geophysical-map-production]]
 - Synthesis: [[wiki/syntheses/geophysical-map-production-toolchain]]
 
@@ -55,3 +63,4 @@ GMT Tutorials expands the operational reference set beyond one map: topography c
 - How should maps distinguish analysis layers from context layers such as DEM, bathymetry, faults, coastlines, stations, and seismicity?
 - Which GMT elements are mandatory in the reusable template and which are study-specific?
 - Which GMT Tutorials chapters should be converted first into local templates?
+- Which current PyGMT examples should replace or supplement the old v0.1.0 overview before production use?

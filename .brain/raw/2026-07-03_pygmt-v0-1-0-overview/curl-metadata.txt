@@ -1,0 +1,4 @@
+requested_url: https://www.pygmt.org/v0.1.0/overview.html
+final_url: https://www.pygmt.org/v0.1.0/overview.html
+http_code: 200
+content_type: text/html; charset=utf-8
