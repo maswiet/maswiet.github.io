@@ -12,6 +12,18 @@
         ".design/design-system/elegant-minimalist/outputs/academic-site-pages"
       ],
       "port": 4599
+    },
+    {
+      "name": "talk-flores-deck",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4600",
+        "--directory",
+        ".design/design-system/elegant-minimalist/outputs/talk-flores-2026"
+      ],
+      "port": 4600
     }
   ]
 }
