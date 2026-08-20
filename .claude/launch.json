@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "personal-site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4601", "--directory", "."],
+      "port": 4601
+    },
+    {
       "name": "design-sample-academic-pages",
       "runtimeExecutable": "python3",
       "runtimeArgs": [

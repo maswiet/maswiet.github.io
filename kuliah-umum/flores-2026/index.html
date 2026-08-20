@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Respons Tanggap Darurat Gempa Flores 2026 — Wiwit Suryanto</title>
+  <meta name="description" content="Materi kuliah umum / diskusi publik PSBA UGM: sudut pandang seismologi atas gempa Mw 7,7 Flores (NTT) 15 Agustus 2026. Slide, PDF, PPTX, dan rekaman waveform GE.MMRI Maumere.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);
+      font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;
+      border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);
+      font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;
+      font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:46px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;
+      font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 0}
+    .button{display:inline-flex;align-items:center;gap:8px;min-height:44px;border-radius:4px;
+      border:1px solid var(--border);padding:11px 16px;font-family:var(--sans);font-size:15px;
+      font-weight:600;line-height:1.3;color:var(--text);text-decoration:none;background:var(--surface)}
+    .button.primary{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
+    .button.primary:hover{color:var(--on-accent);background:var(--accent-hover);border-color:var(--accent-hover)}
+    .button:hover{color:var(--accent);border-color:var(--accent)}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    .kicker{margin:0 0 22px;color:var(--text-muted);font-family:var(--sans);font-size:15px;line-height:1.55}
+
+    .deck-embed{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--border);
+      border-radius:6px;overflow:hidden;background:var(--surface)}
+    .deck-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .deck-hint{margin:10px 0 0;font-family:var(--sans);font-size:13px;color:var(--text-muted)}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);
+      border-radius:6px;overflow:hidden}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);
+      padding:10px 16px;border-top:1px solid var(--border)}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;
+      background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;
+      padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55}
+    .callout p:last-child{margin-bottom:0}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);
+      color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:36px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:30px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .actions .button{justify-content:center;width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#kuliah-umum" class="active">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#kuliah-umum">Kuliah Umum</a> &nbsp;/&nbsp; Gempa Flores 2026</p>
+      <p class="eyebrow">Diskusi Publik &middot; PSBA UGM</p>
+      <h1>Respons Tanggap Darurat Gempa Flores (NTT) 2026</h1>
+      <p class="lede">Sudut pandang seismologi atas gempa M<sub>w</sub>&nbsp;7,7 Flores &mdash; dari peta seismisitas Indonesia hingga rekaman guncangan di Maumere &mdash; dan apa peran geofisika di 72 jam pertama tanggap darurat.</p>
+
+      <dl class="meta-grid">
+        <dt>Acara</dt><dd>Diskusi Publik &mdash; Pusat Studi Bencana (PSBA) UGM</dd>
+        <dt>Tanggal</dt><dd>Jumat, 21 Agustus 2026, 19.30 WIB</dd>
+        <dt>Format</dt><dd>Daring (Zoom) &middot; terbuka untuk umum</dd>
+        <dt>Peran</dt><dd>Narasumber &mdash; Departemen Geofisika, FMIPA UGM</dd>
+      </dl>
+
+      <div class="actions">
+        <a class="button primary" href="deck.html" target="_blank" rel="noopener">Buka presentasi &nearr;</a>
+        <a class="button" href="materi-gempa-flores-2026.pdf" target="_blank" rel="noopener">Unduh PDF</a>
+        <a class="button" href="materi-gempa-flores-2026.pptx">Unduh PPTX</a>
+      </div>
+
+      <section class="block" aria-label="Presentasi">
+        <h2>Presentasi</h2>
+        <p class="kicker">Jelajahi slide langsung di sini (gunakan panah atau klik), atau buka layar penuh.</p>
+        <div class="deck-embed">
+          <iframe src="deck.html" title="Slide: Respons Tanggap Darurat Gempa Flores 2026" loading="lazy"></iframe>
+        </div>
+        <p class="deck-hint">Di dalam presentasi: &larr;/&rarr; atau klik untuk navigasi, <b>F</b> layar penuh, <b>P</b> cetak PDF.</p>
+      </section>
+
+      <section class="block" aria-label="Gambar utama">
+        <h2>Gambar utama</h2>
+        <p class="kicker">Dua ilustrasi inti dari presentasi.</p>
+        <figure class="fig">
+          <img src="assets/w01_seismisitas_indonesia.png" alt="Peta seismisitas Indonesia 1998-2024 dari katalog BMKG">
+          <figcaption>Seismisitas Indonesia &mdash; katalog BMKG 1998&ndash;2024 (217.801 gempa). Warna = kedalaman hiposenter. Sumber: repositori Kuliah Seismologi.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="assets/waveform_mmri_flores2026.png" alt="Rekaman waveform GE.MMRI Maumere untuk gempa Flores 2026">
+          <figcaption>Rekaman 3-komponen + spektrogram stasiun GEOFON GE.MMRI (Maumere), &Delta;&approx;104 km. PGV &approx; 1,9 cm/s, PGA &approx; 0,14 g. Data: GEOFON (GFZ), diproses dengan ObsPy.</figcaption>
+        </figure>
+      </section>
+
+      <section class="block" aria-label="Ringkasan">
+        <h2>Ringkasan</h2>
+        <ul class="points">
+          <li><b>Indonesia adalah rumah gempa.</b> 217.801 gempa dalam 26 tahun; NTT berada di sabuk aktif busur Sunda&ndash;Banda.</li>
+          <li><b>Sumbernya sesar naik busur-belakang Flores</b> &mdash; sesar yang sama dengan seri gempa Lombok 2018 dan tsunami Flores 1992.</li>
+          <li><b>Peran seismologi di 72 jam pertama:</b> lokasi &amp; magnitudo cepat, ShakeMap, keputusan peringatan tsunami, dan prakiraan gempa susulan.</li>
+          <li><b>Untuk tsunami dekat-pantai, guncangan kuat itu sendiri adalah peringatan</b> &mdash; segera evakuasi mandiri ke tempat tinggi.</li>
+          <li><b>Indonesia timur butuh lebih banyak mata:</b> jaringan sensor biaya rendah &amp; berbasis komunitas untuk merapatkan pemantauan.</li>
+        </ul>
+      </section>
+
+      <section class="block" aria-label="Data dan sumber">
+        <h2>Data &amp; sumber</h2>
+        <div class="callout">
+          <p><strong>Parameter gempa.</strong> USGS M<sub>w</sub>&nbsp;7,7 (GFZ M<sub>w</sub>&nbsp;7,61), 15 Agu 2026 05:58 WITA, kedalaman 10&nbsp;km, episenter 8,31&deg;S 121,35&deg;E, mekanisme sesar naik. Dampak dan gempa susulan dari BMKG.</p>
+          <p><strong>Waveform.</strong> Stasiun GEOFON GE.MMRI (broadband + akselerometer), diambil via layanan FDSN GEOFON dan diproses dengan ObsPy.</p>
+        </div>
+        <p class="source-note">Catatan: angka dampak masih berkembang mengikuti pemutakhiran BMKG. Materi ini disiapkan untuk keperluan diskusi publik dan edukasi.</p>
+      </section>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Geofisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Diskusi Publik — Respons Tanggap Darurat Gempa Flores 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --page:#F8F6F1; --surface:#FFFFFF; --surface-muted:#F1EEE7;
+    --text:#1F1F1B; --text-muted:#5F625C; --border:#D8D2C5;
+    --accent:#8A2D1F; --accent-hover:#6F2117; --on-accent:#FFFFFF; --support:#2F5D62;
+    --serif:"Source Serif 4",Georgia,serif; --ui:"Inter",-apple-system,Segoe UI,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#111;color:var(--text);font-family:var(--serif)}
+
+  /* Deck runtime */
+  .deck{position:relative}
+  .slide{
+    position:relative;width:100vw;height:100vh;display:none;
+    background:var(--page);overflow:hidden;
+  }
+  .slide.active{display:block}
+  /* 16:9 inner stage, scaled to viewport, centered */
+  .stage{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:1280px;height:720px;background:var(--page);
+    padding:64px 72px;display:flex;flex-direction:column;
+  }
+  @media (max-aspect-ratio:16/9){ .stage{transform:translate(-50%,-50%) scale(calc(100vw/1280))} }
+  @media (min-aspect-ratio:16/9){ .stage{transform:translate(-50%,-50%) scale(calc(100vh/720))} }
+
+  .eyebrow{font-family:var(--ui);font-size:15px;font-weight:600;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--support);margin-bottom:18px}
+  h1{font-family:var(--serif);font-weight:600;line-height:1.04;font-size:64px}
+  h2{font-family:var(--serif);font-weight:600;line-height:1.12;font-size:44px}
+  .lede{font-family:var(--serif);font-size:26px;line-height:1.5;color:var(--text);max-width:60ch}
+  .muted{color:var(--text-muted)}
+  .accent{color:var(--accent)}
+  .support-c{color:var(--support)}
+  p{font-family:var(--ui)}
+
+  /* figure frame */
+  figure{border:1px solid var(--border);background:var(--surface);border-radius:6px;overflow:hidden}
+  figcaption{font-family:var(--ui);font-size:14px;color:var(--text-muted);
+    padding:10px 16px;border-top:1px solid var(--border);background:var(--surface)}
+  .fill-img{width:100%;height:100%;object-fit:contain;background:var(--surface)}
+
+  /* zoom viewport (slide 2) */
+  .zoom{width:100%;height:100%;background-image:var(--map);
+    background-repeat:no-repeat;background-size:250%;background-position:60% 61%}
+  .ring{position:absolute;width:120px;height:120px;border:4px solid var(--accent);
+    border-radius:999px;left:50%;top:50%;transform:translate(-50%,-50%);
+    box-shadow:0 0 0 6px rgba(138,45,31,.18)}
+  .ring::after{content:"";position:absolute;inset:-4px;border-radius:999px;
+    border:4px solid var(--accent);animation:pulse 1.8s ease-out infinite}
+  @keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.9);opacity:0}}
+  .pin-label{position:absolute;left:calc(50% + 76px);top:calc(50% - 46px);
+    font-family:var(--ui);font-weight:600;font-size:20px;color:var(--accent);
+    background:rgba(248,246,241,.9);padding:6px 10px;border-radius:4px;border:1px solid var(--border)}
+
+  /* two-column */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:44px;flex:1;min-height:0}
+  .cols.wide-left{grid-template-columns:1.15fr .85fr}
+  .col{min-height:0;display:flex;flex-direction:column}
+
+  /* fact table */
+  table.facts{width:100%;border-collapse:collapse;font-family:var(--ui)}
+  table.facts td{padding:11px 4px;border-bottom:1px solid var(--border);
+    font-size:19px;vertical-align:baseline}
+  table.facts td.k{color:var(--text-muted);width:42%;font-weight:500}
+  table.facts td.v{font-weight:600}
+
+  /* big stat */
+  .stat{display:flex;flex-direction:column;gap:2px}
+  .stat .n{font-family:var(--serif);font-weight:600;font-size:76px;line-height:1;color:var(--accent)}
+  .stat .l{font-family:var(--ui);font-size:18px;color:var(--text-muted);margin-top:8px}
+  .stat-row{display:flex;gap:56px;margin-top:8px}
+
+  ul.clean{list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:8px}
+  ul.clean li{font-family:var(--ui);font-size:20px;line-height:1.45;padding-left:26px;position:relative}
+  ul.clean li::before{content:"";position:absolute;left:0;top:11px;width:9px;height:9px;
+    background:var(--accent);border-radius:2px}
+  ul.clean li b{font-weight:600}
+  ul.clean.teal li::before{background:var(--support)}
+
+  /* timeline */
+  .timeline{display:flex;flex-direction:column;gap:0;margin-top:10px}
+  .tl{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--border)}
+  .tl .yr{font-family:var(--ui);font-weight:600;font-size:26px;color:var(--accent)}
+  .tl .d{font-family:var(--ui);font-size:19px;line-height:1.4}
+  .tl .d b{font-weight:600}
+
+  .callout{background:var(--surface-muted);border-left:4px solid var(--support);
+    border-radius:6px;padding:22px 26px;font-family:var(--ui);font-size:21px;line-height:1.5}
+  .callout.warn{border-left-color:var(--accent)}
+  .callout .t{font-weight:600;text-transform:uppercase;letter-spacing:.05em;font-size:15px;
+    color:var(--support);margin-bottom:8px}
+  .callout.warn .t{color:var(--accent)}
+
+  .placeholder{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;
+    border:2px dashed var(--border);border-radius:6px;background:var(--surface);
+    font-family:var(--ui);color:var(--text-muted);font-size:18px;padding:24px}
+
+  .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;
+    font-family:var(--ui);font-size:14px;color:var(--text-muted);padding-top:20px}
+
+  .title-meta{margin-top:auto;font-family:var(--ui);font-size:17px;color:var(--text-muted);line-height:1.6}
+  .title-meta b{color:var(--text);font-weight:600}
+
+  /* progress + controls (screen only) */
+  .hud{position:fixed;bottom:16px;right:20px;z-index:20;font-family:var(--ui);
+    font-size:13px;color:#cfc9bd;background:rgba(31,31,27,.72);padding:6px 12px;border-radius:999px}
+  .hint{position:fixed;bottom:16px;left:20px;z-index:20;font-family:var(--ui);
+    font-size:12px;color:#8f897d}
+
+  @media print{
+    html,body{background:#fff}
+    .slide{display:block!important;width:100%;height:auto;page-break-after:always;break-after:page}
+    .stage{position:relative;top:auto;left:auto;transform:none;width:1280px;height:720px;
+      margin:0 auto;box-shadow:none}
+    .hud,.hint{display:none}
+    @page{size:1280px 720px;margin:0}
+    .ring::after{animation:none}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- 1 · OPENER -->
+  <section class="slide active">
+    <div class="stage">
+      <div class="eyebrow">Diskusi Publik · PSBA UGM · 21 Agustus 2026</div>
+      <h1>Indonesia adalah<br><span class="accent">rumah gempa.</span></h1>
+      <p class="lede muted" style="margin-top:20px">217.801 gempa dalam 26 tahun. Pertanyaannya bukan
+        <i>apakah</i> akan terjadi, tapi <i>di mana, kapan,</i> dan <i>seberapa siap</i> kita.</p>
+      <div class="foot">
+        <div>Dr.rer.nat. Wiwit Suryanto — Departemen Geofisika, FMIPA UGM</div>
+        <div>1 / 9</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · THE MAP (full) -->
+  <section class="slide">
+    <div class="stage">
+      <div class="eyebrow">Satu peta, satu pertanyaan</div>
+      <h2 style="font-size:34px;margin-bottom:14px">Setiap titik adalah satu gempa yang pernah mengguncang negeri ini</h2>
+      <figure style="flex:1;display:flex;flex-direction:column">
+        <img class="fill-img" src="assets/w01_seismisitas_indonesia.png" alt="Peta seismisitas Indonesia 1998-2024" style="flex:1;min-height:0"/>
+        <figcaption>Seismisitas Indonesia — katalog BMKG 1998–2024 (217.801 gempa). Warna = kedalaman hiposenter (0–700 km).</figcaption>
+      </figure>
+      <div class="foot"><div>Sumber gambar: katalog BMKG · Kuliah Seismologi UGM</div><div>2 / 9</div></div>
+    </div>
+  </section>
+
+  <!-- 3 · ZOOM TO FLORES -->
+  <section class="slide">
+    <div class="stage" style="padding:0">
+      <div class="zoom" id="zoom" style="--map:url('assets/w01_seismisitas_indonesia.png')"></div>
+      <div class="ring"></div>
+      <div class="pin-label">Flores · 15 Agu 2026</div>
+      <div style="position:absolute;left:64px;top:56px;max-width:560px">
+        <div class="eyebrow" style="color:var(--accent)">Perbesar: Nusa Tenggara Timur</div>
+        <h2 style="font-size:38px;background:rgba(248,246,241,.86);display:inline;
+             box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:6px 10px;border-radius:4px">
+          Titik ini bukan kebetulan — ia bagian dari denyut kegempaan Indonesia</h2>
+      </div>
+      <div class="foot" style="position:absolute;left:64px;right:64px;bottom:40px">
+        <div style="background:rgba(248,246,241,.86);padding:4px 8px;border-radius:4px">
+          Busur Sunda–Banda · sesar naik busur-belakang Flores</div>
+        <div style="background:rgba(248,246,241,.86);padding:4px 8px;border-radius:4px">3 / 9</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · FACT SHEET -->
+  <section class="slide">
+    <div class="stage">
+      <div class="eyebrow">Gempa Flores — 15 Agustus 2026</div>
+      <h2 style="font-size:34px;margin-bottom:22px">Apa yang terjadi, dalam angka</h2>
+      <div class="cols">
+        <div class="col">
+          <table class="facts">
+            <tr><td class="k">Waktu asal</td><td class="v">05:58:21 WITA</td></tr>
+            <tr><td class="k">Magnitudo</td><td class="v">M<sub>w</sub> 7,7 <span class="muted" style="font-weight:400">(USGS) · 7,61 (GFZ)</span></td></tr>
+            <tr><td class="k">Kedalaman</td><td class="v">10 km — dangkal</td></tr>
+            <tr><td class="k">Episenter</td><td class="v">±68 km BBL Ende, lepas pantai utara Flores</td></tr>
+            <tr><td class="k">Mekanisme</td><td class="v">Sesar naik (thrust)</td></tr>
+            <tr><td class="k">Sumber</td><td class="v">Flores Back-arc Thrust</td></tr>
+            <tr><td class="k">Guncangan maks</td><td class="v">MMI VIII · PGA 0,635 g (Kuwus)</td></tr>
+          </table>
+        </div>
+        <div class="col" style="justify-content:center;gap:26px">
+          <div class="stat"><div class="n">±73</div><div class="l">korban jiwa · 1.182 luka · ±59.600 mengungsi</div></div>
+          <div class="stat"><div class="n">&gt;2.768</div><div class="l">gempa susulan hingga 19 Agu (terbesar M6,2)</div></div>
+          <div class="stat"><div class="n">2′16″</div><div class="l">peringatan dini tsunami terbit setelah gempa</div></div>
+        </div>
+      </div>
+      <div class="foot"><div>Sumber: BMKG · USGS · GFZ (data masih berkembang)</div><div>4 / 9</div></div>
+    </div>
+  </section>
+
+  <!-- 5 · SOURCE / ANALOG TIMELINE -->
+  <section class="slide">
+    <div class="stage">
+      <div class="eyebrow">Sesar yang sama, berulang</div>
+      <h2 style="font-size:34px;margin-bottom:12px">Sesar naik busur-belakang Flores: sudah lama kita kenal</h2>
+      <div class="cols wide-left">
+        <div class="col">
+          <div class="timeline">
+            <div class="tl"><div class="yr">1992</div><div class="d"><b>Flores, M<sub>w</sub> 7,8</b> — tsunami mematikan, ±2.500 korban. Pelajaran pahit pertama.</div></div>
+            <div class="tl"><div class="yr">2018</div><div class="d"><b>Lombok, seri M<sub>w</sub> 6,3–6,9</b> — segmen barat sesar yang sama. <span class="support-c">Data & analisis b-value kami.</span></div></div>
+            <div class="tl"><div class="yr">2026</div><div class="d"><b>Flores, M<sub>w</sub> 7,7</b> — pecah makin ke timur. Peristiwa yang kita bahas malam ini.</div></div>
+          </div>
+        </div>
+        <div class="col" style="justify-content:center">
+          <div class="callout">
+            <div class="t">Pesan kunci</div>
+            Ini bukan ancaman baru. Sesar naik di utara busur Nusa Tenggara berulang kali melepaskan
+            gempa besar. Yang bisa kita ubah bukan gempanya — tapi <b>kesiapan</b> kita.
+          </div>
+        </div>
+      </div>
+      <div class="foot"><div>Analog seismotektonik — Flores Back-arc Thrust</div><div>5 / 9</div></div>
+    </div>
+  </section>
+
+  <!-- 6 · 72 HOURS / ROLE OF SEISMOLOGY -->
+  <section class="slide">
+    <div class="stage">
+      <div class="eyebrow">72 jam pertama</div>
+      <h2 style="font-size:34px;margin-bottom:14px">Apa yang dikerjakan seismologi saat tanggap darurat</h2>
+      <ul class="clean">
+        <li><b>Menit pertama — membaca "telegram" bumi.</b> Gelombang P tiba lebih dulu, membawa lokasi, kedalaman, magnitudo, dan mekanisme dalam hitungan menit.</li>
+        <li><b>ShakeMap.</b> Dari satu sumber, kita petakan sebaran guncangan — menebak di mana kerusakan terparah <i>sebelum</i> laporan masuk, untuk mengarahkan SAR.</li>
+        <li><b>Peringatan tsunami.</b> Keputusan besar diambil di menit-menit awal (lihat: 2 menit 16 detik).</li>
+        <li><b>Prakiraan gempa susulan.</b> Melindungi penyintas dan relawan yang masuk ke bangunan retak.</li>
+      </ul>
+      <div class="callout" style="margin-top:22px">
+        <div class="t">Kecepatan vs ketelitian</div>
+        M<sub>w</sub> 7,7 (USGS) vs 7,61 (GFZ); 10 km vs 25 km. Magnitudo <b>direvisi</b> seiring data masuk — ini normal, bukan kesalahan. Publik perlu memahaminya.
+      </div>
+      <div class="foot"><div>Peran geofisika dalam rantai tanggap darurat</div><div>6 / 9</div></div>
+    </div>
+  </section>
+
+  <!-- 7 · WAVEFORM MMRI -->
+  <section class="slide">
+    <div class="stage">
+      <div class="eyebrow">Rekaman langsung — GE.MMRI, Maumere</div>
+      <h2 style="font-size:32px;margin-bottom:14px">Guncangan yang meruntuhkan Pelabuhan Maumere, terekam ±104 km dari sumber</h2>
+      <div class="cols wide-left">
+        <div class="col">
+          <figure style="flex:1;display:flex;flex-direction:column">
+            <img class="fill-img" src="assets/waveform_mmri_flores2026.png" alt="Rekaman waveform GE.MMRI gempa Flores 2026" style="flex:1;min-height:0"/>
+            <figcaption>GE.MMRI (8,64°S 122,24°E), broadband + akselerometer, Δ≈104 km. Data: GEOFON · ObsPy.</figcaption>
+          </figure>
+        </div>
+        <div class="col" style="justify-content:center;gap:20px">
+          <div class="stat-row" style="margin-top:0;gap:36px">
+            <div class="stat"><div class="n" style="font-size:52px">0,14 g</div><div class="l">PGA (akselerometer)</div></div>
+            <div class="stat"><div class="n" style="font-size:52px">1,9 cm/s</div><div class="l">PGV puncak</div></div>
+          </div>
+          <ul class="clean teal">
+            <li>Jeda <b>waktu asal → gelombang P (~15 dtk)</b>: gelombang butuh waktu menempuh 104 km.</li>
+            <li>Rekaman ini "menyaksikan" runtuhnya <b>terminal Pelabuhan Maumere</b> — jembatan ke dampak struktural.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot"><div>Data: GEOFON (GFZ) · workflow ObsPy internal</div><div>7 / 9</div></div>
+    </div>
+  </section>
+
+  <!-- 8 · AFTERSHOCKS + TSUNAMI MESSAGE -->
+  <section class="slide">
+    <div class="stage">
+      <div class="eyebrow">Dua pertanyaan yang paling ditanya warga</div>
+      <div class="cols">
+        <div class="col" style="justify-content:center">
+          <h2 style="font-size:30px;margin-bottom:12px">"Akan ada susulan yang lebih besar?"</h2>
+          <ul class="clean">
+            <li><b>&gt;2.768 susulan</b> mengikuti pola peluruhan (hukum Omori): rapat di awal, mereda seiring waktu.</li>
+            <li>Peluang susulan besar mengecil tiap hari — tapi <b>tak pernah nol</b>. Jangan masuk bangunan retak.</li>
+          </ul>
+        </div>
+        <div class="col" style="justify-content:center">
+          <div class="callout warn">
+            <div class="t">Pesan yang menyelamatkan</div>
+            Untuk tsunami dekat-pantai, <b>guncangan kuat itu sendiri adalah peringatan.</b>
+            Jangan tunggu sirene atau pengumuman — <b>segera evakuasi mandiri</b> ke tempat tinggi.
+          </div>
+          <p class="muted" style="margin-top:16px;font-size:16px">1992: tsunami Flores tiba dalam hitungan menit. Waktu adalah nyawa.</p>
+        </div>
+      </div>
+      <div class="foot"><div>Komunikasi risiko saat darurat</div><div>8 / 9</div></div>
+    </div>
+  </section>
+
+  <!-- 9 · CLOSING -->
+  <section class="slide">
+    <div class="stage">
+      <div class="eyebrow">Yang bisa kita perbaiki</div>
+      <h2 style="font-size:40px;margin-bottom:18px">Indonesia timur butuh <span class="accent">lebih banyak mata</span></h2>
+      <div class="cols wide-left">
+        <div class="col" style="justify-content:center">
+          <ul class="clean">
+            <li>Kerapatan stasiun di NTT jauh di bawah Jawa → lokasi lebih tak pasti, respons lebih lambat.</li>
+            <li><b>Seismometer biaya rendah & jaringan berbasis komunitas–sekolah</b> — merapatkan pemantauan sekaligus membangun kesadaran.</li>
+            <li>Penyebaran alat sementara pasca-gempa untuk memantau susulan & memetakan sesar aktif.</li>
+          </ul>
+        </div>
+        <div class="col" style="justify-content:center">
+          <div class="callout">
+            <div class="t">Penutup</div>
+            Kita tak bisa mencegah gempa. Tapi setiap sensor tambahan, setiap warga yang tahu harus
+            <b>lari ke tempat tinggi</b>, memperpendek jarak antara guncangan dan keselamatan.
+          </div>
+        </div>
+      </div>
+      <div class="title-meta" style="margin-top:26px">
+        <b>Dr.rer.nat. Wiwit Suryanto</b> · Departemen Geofisika, FMIPA UGM &nbsp;·&nbsp; Terima kasih.
+      </div>
+      <div class="foot"><div>Diskusi Publik PSBA UGM — Respons Tanggap Darurat Gempa NTT</div><div>9 / 9</div></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="hud" id="hud">1 / 9</div>
+<div class="hint">← → / spasi navigasi · F layar penuh · P cetak PDF</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const hud=document.getElementById('hud');
+  let i=0;
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    hud.textContent=(i+1)+' / '+slides.length;
+  }
+  function next(){show(i+1)} function prev(){show(i-1)}
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();next()}
+    else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();prev()}
+    else if(e.key==='Home'){show(0)} else if(e.key==='End'){show(slides.length-1)}
+    else if(e.key.toLowerCase()==='f'){document.documentElement.requestFullscreen?.()}
+    else if(e.key.toLowerCase()==='p'){window.print()}
+  });
+  document.getElementById('deck').addEventListener('click',e=>{
+    if(e.clientX < window.innerWidth*0.28) prev(); else next();
+  });
+  show(0);
+</script>
+</body>
+</html>
