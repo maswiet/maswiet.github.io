@@ -103,7 +103,7 @@ run(p,"217.801 gempa dalam 26 tahun. Pertanyaannya bukan ",22,MUT,SERIF)
 run(p,"apakah",22,MUT,SERIF,italic=True); run(p," akan terjadi, tapi ",22,MUT,SERIF)
 run(p,"di mana, kapan,",22,MUT,SERIF,italic=True); run(p," dan ",22,MUT,SERIF)
 run(p,"seberapa siap",22,MUT,SERIF,italic=True); run(p," kita.",22,MUT,SERIF)
-footer(s,"Dr.rer.nat. Wiwit Suryanto — Departemen Geofisika, FMIPA UGM",1)
+footer(s,"Dr.rer.nat. Wiwit Suryanto — Geoscience Research Group, Departemen Fisika, FMIPA UGM",1)
 
 # ---------- 2 full map ----------
 s=slide()
@@ -229,7 +229,7 @@ callout(s,8.0,2.4,4.7,2.6,"Penutup",
  [("Kita tak bisa mencegah gempa. Tapi setiap sensor tambahan, setiap warga yang tahu harus ",False),("lari ke tempat tinggi",True),(", memperpendek jarak antara guncangan dan keselamatan.",False)])
 _,tf=tb(s,0.62,5.6,12,0.6); p=tf.paragraphs[0]
 run(p,"Dr.rer.nat. Wiwit Suryanto",17,TEXT,UI,bold=True)
-run(p,"  ·  Departemen Geofisika, FMIPA UGM  ·  Terima kasih.",17,MUT,UI)
+run(p,"  ·  Geoscience Research Group, Departemen Fisika, FMIPA UGM  ·  Terima kasih.",17,MUT,UI)
 footer(s,"Diskusi Publik PSBA UGM — Respons Tanggap Darurat Gempa NTT",9)
 
 out="Diskusi_Publik_Gempa_Flores_2026_Wiwit_Suryanto.pptx"
