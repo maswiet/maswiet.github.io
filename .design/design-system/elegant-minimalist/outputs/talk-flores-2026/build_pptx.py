@@ -52,7 +52,7 @@ def eyebrow(s,txt,x=0.62,y=0.5,color=SUP):
 def footer(s,left,idx):
     _,tf=tb(s,0.62,6.95,9,0.4); run(tf.paragraphs[0],left,10.5,MUT,UI)
     _,tf2=tb(s,11.8,6.95,1.0,0.4); p=tf2.paragraphs[0]; p.alignment=PP_ALIGN.RIGHT
-    run(p,f"{idx} / 9",10.5,MUT,UI)
+    run(p,f"{idx} / 10",10.5,MUT,UI)
 
 def rect(s,x,y,w,h,fill=None,line=None,lw=1.0,dash=None):
     sh=s.shapes.add_shape(MSO_SHAPE.RECTANGLE,Inches(x),Inches(y),Inches(w),Inches(h))
@@ -169,7 +169,27 @@ callout(s,7.7,2.2,5.0,2.6,"Pesan kunci",
   [("Ini bukan ancaman baru. Sesar naik di utara busur Nusa Tenggara berulang kali melepaskan gempa besar. Yang bisa kita ubah bukan gempanya — tapi ",False),("kesiapan",True),(" kita.",False)])
 footer(s,"Analog seismotektonik — Flores Back-arc Thrust",5)
 
-# ---------- 6 72 hours ----------
+# ---------- 6 historical (Wichmann) ----------
+s=slide()
+eyebrow(s,"Sebelum era seismograf")
+_,tf=tb(s,0.6,0.95,12,0.7); run(tf.paragraphs[0],"Sejarah sudah mencatatnya — jauh sebelum kita bisa mengukurnya",25,TEXT,SERIF,bold=True)
+hist=[("1648",[("Solor–Larantuka",True),(" — rangkaian gempa merusak paling awal tercatat di NTT; tembok Benteng Henricus runtuh.",False)]),
+      ("1837",[("Laut utara Flores",True),(" — gempa laut (seaquake) kuat dirasakan dari perahu.",False)]),
+      ("1855",[("Nanga Rama, Manggarai",True),(" — gelombang besar menerjang teluk (kandidat tsunami).",False)]),
+      ("1868",[("Ambugaga, Ende",True),(" — guncangan sangat keras ±2 menit di Flores tengah.",False)])]
+y=1.95
+for yr,segs in hist:
+    _,tf=tb(s,0.62,y,1.2,0.6); run(tf.paragraphs[0],yr,23,ACC,UI,bold=True)
+    _,tf=tb(s,1.95,y+0.02,5.2,0.95); p=tf.paragraphs[0]; p.line_spacing=1.12
+    for seg,b in segs: run(p,seg,14.5,TEXT,UI,bold=b)
+    rect(s,0.62,y+0.9,6.75,0.014,fill=BORDER)
+    y+=1.0
+_,tf=tb(s,0.62,y+0.02,6.8,0.5); run(tf.paragraphs[0],"Catatan makroseismik historis — belum dapat diberi magnitudo atau dipastikan dari sesar yang sama.",11,MUT,UI,italic=True)
+callout(s,7.7,2.2,5.0,3.2,"Benang merah",
+  [("Katalog Arthur Wichmann (hingga 1877) mencatat gempa, gempa laut, dan tsunami di Flores–NTT jauh sebelum ada seismograf. ",False),("Sejarah sudah memperingatkan; 2026 menegaskannya.",True),(" Ke depan, kesiapsiagaan bukan pilihan.",False)])
+footer(s,"Sumber: A. Wichmann, katalog gempa Kepulauan Hindia (hingga 1877)",6)
+
+# ---------- 7 72 hours ----------
 s=slide()
 eyebrow(s,"72 jam pertama")
 _,tf=tb(s,0.6,0.95,12,0.7); run(tf.paragraphs[0],"Apa yang dikerjakan seismologi saat tanggap darurat",26,TEXT,SERIF,bold=True)
@@ -181,7 +201,7 @@ bullets(s,0.62,1.95,12,[
 ],size=17,gap=12)
 callout(s,0.62,5.0,12.1,1.5,"Kecepatan vs ketelitian",
  [("Mw 7,7 (USGS) vs 7,61 (GFZ); 10 km vs 25 km. Magnitudo ",False),("direvisi",True),(" seiring data masuk — ini normal, bukan kesalahan. Publik perlu memahaminya.",False)])
-footer(s,"Peran geofisika dalam rantai tanggap darurat",6)
+footer(s,"Peran geofisika dalam rantai tanggap darurat",7)
 
 # ---------- 7 waveform ----------
 s=slide()
@@ -200,7 +220,7 @@ bullets(s,8.35,3.85,4.6,[
  [("Jeda waktu asal → gelombang P (~15 dtk): ",True),("gelombang butuh waktu menempuh 104 km.",False)],
  [("Rekaman ini “menyaksikan” runtuhnya terminal Pelabuhan Maumere",True),(" — jembatan ke dampak struktural.",False)],
 ],size=16,gap=12,mark=SUP)
-footer(s,"Data: GEOFON (GFZ) · workflow ObsPy (adaptasi load.py)",7)
+footer(s,"Data: GEOFON (GFZ) · workflow ObsPy (adaptasi load.py)",8)
 
 # ---------- 8 aftershocks + tsunami ----------
 s=slide()
@@ -213,7 +233,7 @@ bullets(s,0.62,2.4,5.9,[
 callout(s,7.0,1.9,5.7,2.4,"Pesan yang menyelamatkan",
  [("Untuk tsunami dekat-pantai, ",False),("guncangan kuat itu sendiri adalah peringatan.",True),(" Jangan tunggu sirene — ",False),("segera evakuasi mandiri",True),(" ke tempat tinggi.",False)],accent=ACC)
 _,tf=tb(s,7.0,4.5,5.7,0.8); run(tf.paragraphs[0],"1992: tsunami Flores tiba dalam hitungan menit. Waktu adalah nyawa.",15,MUT,UI,italic=True)
-footer(s,"Komunikasi risiko saat darurat",8)
+footer(s,"Komunikasi risiko saat darurat",9)
 
 # ---------- 9 closing ----------
 s=slide()
@@ -230,7 +250,7 @@ callout(s,8.0,2.4,4.7,2.6,"Penutup",
 _,tf=tb(s,0.62,5.6,12,0.6); p=tf.paragraphs[0]
 run(p,"Dr.rer.nat. Wiwit Suryanto",17,TEXT,UI,bold=True)
 run(p,"  ·  Geoscience Research Group, Departemen Fisika, FMIPA UGM  ·  Terima kasih.",17,MUT,UI)
-footer(s,"Diskusi Publik PSBA UGM — Respons Tanggap Darurat Gempa NTT",9)
+footer(s,"Diskusi Publik PSBA UGM — Respons Tanggap Darurat Gempa NTT",10)
 
 out="Diskusi_Publik_Gempa_Flores_2026_Wiwit_Suryanto.pptx"
 prs.save(out)

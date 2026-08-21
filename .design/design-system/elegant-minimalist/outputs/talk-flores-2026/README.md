@@ -22,10 +22,11 @@ Slide deck untuk Wiwit Suryanto sebagai narasumber di **Diskusi Publik PSBA UGM*
 3. Zoom Flores — titik ini bagian dari denyut kegempaan nasional
 4. Fakta gempa (Mw 7,7; 15 Agu 2026)
 5. Analog FBAT: 1992 Flores → 2018 Lombok → 2026 Flores
-6. 72 jam pertama — peran seismologi
-7. Waveform GE.MMRI — PGA 0,14 g, PGV 1,9 cm/s, Δ104 km
-8. Susulan (Omori) & pesan evakuasi mandiri
-9. Penutup — pemantauan Indonesia timur & sensor biaya rendah
+6. Sejarah pra-instrumen (katalog Wichmann): Solor 1648, laut utara Flores 1837, Nanga Rama 1855, Ende 1868
+7. 72 jam pertama — peran seismologi
+8. Waveform GE.MMRI — PGA 0,14 g, PGV 1,9 cm/s, Δ104 km
+9. Susulan (Omori) & pesan evakuasi mandiri
+10. Penutup — pemantauan Indonesia timur & sensor biaya rendah
 
 ## Data & sumber
 
