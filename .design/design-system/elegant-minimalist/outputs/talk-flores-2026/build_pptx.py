@@ -226,7 +226,7 @@ bullets(s,0.62,2.4,7.0,[
  [("Penyebaran alat sementara pasca-gempa untuk memantau susulan & memetakan sesar aktif.",False)],
 ],size=17,gap=14)
 callout(s,8.0,2.4,4.7,2.6,"Penutup",
- [("Kita tak bisa mencegah gempa. Tapi setiap sensor tambahan, setiap warga yang tahu harus ",False),("lari ke tempat tinggi",True),(", memperpendek jarak antara guncangan dan keselamatan.",False)])
+ [("Kita tak bisa mencegah gempa. Tapi setiap sensor tambahan dan setiap warga yang tahu harus ",False),("segera lari ke tempat tinggi",True),(" memperbesar peluang kita selamat saat gempa berikutnya datang.",False)])
 _,tf=tb(s,0.62,5.6,12,0.6); p=tf.paragraphs[0]
 run(p,"Dr.rer.nat. Wiwit Suryanto",17,TEXT,UI,bold=True)
 run(p,"  ·  Geoscience Research Group, Departemen Fisika, FMIPA UGM  ·  Terima kasih.",17,MUT,UI)
