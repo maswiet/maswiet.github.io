@@ -16,6 +16,7 @@ ACC=RGBColor(0x8A,0x2D,0x1F); SUP=RGBColor(0x2F,0x5D,0x62)
 SERIF="Source Serif 4"; UI="Inter"
 IMG_MAP="assets/w01_seismisitas_indonesia.png"
 IMG_WAVE="assets/waveform_mmri_flores2026.png"
+IMG_HIST="assets/wichmann_historical_map.png"
 
 prs=Presentation(); prs.slide_width=Inches(13.333); prs.slide_height=Inches(7.5)
 BLANK=prs.slide_layouts[6]
@@ -52,7 +53,7 @@ def eyebrow(s,txt,x=0.62,y=0.5,color=SUP):
 def footer(s,left,idx):
     _,tf=tb(s,0.62,6.95,9,0.4); run(tf.paragraphs[0],left,10.5,MUT,UI)
     _,tf2=tb(s,11.8,6.95,1.0,0.4); p=tf2.paragraphs[0]; p.alignment=PP_ALIGN.RIGHT
-    run(p,f"{idx} / 10",10.5,MUT,UI)
+    run(p,f"{idx} / 11",10.5,MUT,UI)
 
 def rect(s,x,y,w,h,fill=None,line=None,lw=1.0,dash=None):
     sh=s.shapes.add_shape(MSO_SHAPE.RECTANGLE,Inches(x),Inches(y),Inches(w),Inches(h))
@@ -189,7 +190,17 @@ callout(s,7.7,2.2,5.0,3.2,"Benang merah",
   [("Katalog Arthur Wichmann (hingga 1877) mencatat gempa, gempa laut, dan tsunami di Flores–NTT jauh sebelum ada seismograf. ",False),("Sejarah sudah memperingatkan; 2026 menegaskannya.",True),(" Ke depan, kesiapsiagaan bukan pilihan.",False)])
 footer(s,"Sumber: A. Wichmann, katalog gempa Kepulauan Hindia (hingga 1877)",6)
 
-# ---------- 7 72 hours ----------
+# ---------- 7 historical map (Wichmann) ----------
+s=slide()
+eyebrow(s,"Peta gempa historis — katalog Wichmann")
+_,tf=tb(s,0.6,0.95,12.1,0.7); run(tf.paragraphs[0],"Jejak gempa & tsunami NTT tersebar luas — jauh sebelum 1877",25,TEXT,SERIF,bold=True)
+rect(s,0.6,1.75,12.13,4.75,fill=SURF,line=BORDER,lw=1)
+_pic=s.shapes.add_picture(IMG_HIST,Inches(0.75),Inches(1.9),height=Inches(4.2))
+_pic.left=Inches(0.6)+(Inches(12.13)-_pic.width)//2
+_,tf=tb(s,0.75,6.15,11.5,0.4); run(tf.paragraphs[0],"Lokasi perkiraan kejadian utama hingga 1877 — gempa darat/pesisir, seaquake/tsunami, peristiwa regional. Sumber: katalog A. Wichmann.",12.5,MUT,UI)
+footer(s,"Sumber: A. Wichmann, katalog gempa Kepulauan Hindia (hingga 1877)",7)
+
+# ---------- 8 72 hours ----------
 s=slide()
 eyebrow(s,"72 jam pertama")
 _,tf=tb(s,0.6,0.95,12,0.7); run(tf.paragraphs[0],"Apa yang dikerjakan seismologi saat tanggap darurat",26,TEXT,SERIF,bold=True)
@@ -201,7 +212,7 @@ bullets(s,0.62,1.95,12,[
 ],size=17,gap=12)
 callout(s,0.62,5.0,12.1,1.5,"Kecepatan vs ketelitian",
  [("Mw 7,7 (USGS) vs 7,61 (GFZ); 10 km vs 25 km. Magnitudo ",False),("direvisi",True),(" seiring data masuk — ini normal, bukan kesalahan. Publik perlu memahaminya.",False)])
-footer(s,"Peran geofisika dalam rantai tanggap darurat",7)
+footer(s,"Peran geofisika dalam rantai tanggap darurat",8)
 
 # ---------- 7 waveform ----------
 s=slide()
@@ -220,7 +231,7 @@ bullets(s,8.35,3.85,4.6,[
  [("Jeda waktu asal → gelombang P (~15 dtk): ",True),("gelombang butuh waktu menempuh 104 km.",False)],
  [("Rekaman ini “menyaksikan” runtuhnya terminal Pelabuhan Maumere",True),(" — jembatan ke dampak struktural.",False)],
 ],size=16,gap=12,mark=SUP)
-footer(s,"Data: GEOFON (GFZ) · workflow ObsPy (adaptasi load.py)",8)
+footer(s,"Data: GEOFON (GFZ) · workflow ObsPy (adaptasi load.py)",9)
 
 # ---------- 8 aftershocks + tsunami ----------
 s=slide()
@@ -233,7 +244,7 @@ bullets(s,0.62,2.4,5.9,[
 callout(s,7.0,1.9,5.7,2.4,"Pesan yang menyelamatkan",
  [("Untuk tsunami dekat-pantai, ",False),("guncangan kuat itu sendiri adalah peringatan.",True),(" Jangan tunggu sirene — ",False),("segera evakuasi mandiri",True),(" ke tempat tinggi.",False)],accent=ACC)
 _,tf=tb(s,7.0,4.5,5.7,0.8); run(tf.paragraphs[0],"1992: tsunami Flores tiba dalam hitungan menit. Waktu adalah nyawa.",15,MUT,UI,italic=True)
-footer(s,"Komunikasi risiko saat darurat",9)
+footer(s,"Komunikasi risiko saat darurat",10)
 
 # ---------- 9 closing ----------
 s=slide()
@@ -250,7 +261,7 @@ callout(s,8.0,2.4,4.7,2.6,"Penutup",
 _,tf=tb(s,0.62,5.6,12,0.6); p=tf.paragraphs[0]
 run(p,"Dr.rer.nat. Wiwit Suryanto",17,TEXT,UI,bold=True)
 run(p,"  ·  Geoscience Research Group, Departemen Fisika, FMIPA UGM  ·  Terima kasih.",17,MUT,UI)
-footer(s,"Diskusi Publik PSBA UGM — Respons Tanggap Darurat Gempa NTT",10)
+footer(s,"Diskusi Publik PSBA UGM — Respons Tanggap Darurat Gempa NTT",11)
 
 out="Diskusi_Publik_Gempa_Flores_2026_Wiwit_Suryanto.pptx"
 prs.save(out)

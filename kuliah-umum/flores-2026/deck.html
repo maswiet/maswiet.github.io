@@ -256,6 +256,19 @@
     </div>
   </section>
 
+  <!-- 7 · HISTORICAL MAP (Wichmann) -->
+  <section class="slide">
+    <div class="stage">
+      <div class="eyebrow">Peta gempa historis — katalog Wichmann</div>
+      <h2 style="font-size:30px;margin-bottom:12px">Jejak gempa &amp; tsunami NTT tersebar luas — jauh sebelum 1877</h2>
+      <figure style="flex:1;display:flex;flex-direction:column">
+        <img class="fill-img" src="assets/wichmann_historical_map.png" alt="Peta gempa historis NTT dari katalog Arthur Wichmann" style="flex:1;min-height:0"/>
+        <figcaption>Lokasi perkiraan kejadian utama hingga 1877 — gempa darat/pesisir, seaquake/tsunami, dan peristiwa regional. Sumber: katalog A. Wichmann.</figcaption>
+      </figure>
+      <div class="foot"><div>Sumber: A. Wichmann, katalog gempa Kepulauan Hindia (hingga 1877)</div><div>7 / 11</div></div>
+    </div>
+  </section>
+
   <!-- 6 · 72 HOURS / ROLE OF SEISMOLOGY -->
   <section class="slide">
     <div class="stage">
@@ -363,6 +376,8 @@
 <script>
   const slides=[...document.querySelectorAll('.slide')];
   const hud=document.getElementById('hud');
+  const N=slides.length;
+  slides.forEach((s,k)=>{const f=s.querySelector('.foot');if(f&&f.lastElementChild){f.lastElementChild.textContent=(k+1)+' / '+N;}});
   let i=0;
   function show(n){
     i=Math.max(0,Math.min(slides.length-1,n));
