@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Representasi Sumber Seismik — Seismologi Kuantitatif — Wiwit Suryanto</title>
+  <meta name="description" content="Materi kuliah Seismologi Kuantitatif (Magister Geofisika UGM), Bab 3 Aki &amp; Richards: representasi sumber seismik, double couple, momen seismik, dan tensor momen. Slide, bahan belajar, dan aktivitas Python di Colab.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);
+      font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;
+      border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);
+      font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;
+      font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:46px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;
+      font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 0}
+    .button{display:inline-flex;align-items:center;gap:8px;min-height:44px;border-radius:4px;
+      border:1px solid var(--border);padding:11px 16px;font-family:var(--sans);font-size:15px;
+      font-weight:600;line-height:1.3;color:var(--text);text-decoration:none;background:var(--surface)}
+    .button.primary{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
+    .button.primary:hover{color:var(--on-accent);background:var(--accent-hover);border-color:var(--accent-hover)}
+    .button:hover{color:var(--accent);border-color:var(--accent)}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    .kicker{margin:0 0 22px;color:var(--text-muted);font-family:var(--sans);font-size:15px;line-height:1.55}
+
+    .deck-embed{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--border);
+      border-radius:6px;overflow:hidden;background:var(--surface)}
+    .deck-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .deck-hint{margin:10px 0 0;font-family:var(--sans);font-size:13px;color:var(--text-muted)}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);
+      border-radius:6px;overflow:hidden}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);
+      padding:10px 16px;border-top:1px solid var(--border)}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;
+      background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;
+      padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55}
+    .callout p:last-child{margin-bottom:0}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);
+      color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:36px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:30px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .actions .button{justify-content:center;width:100%}
+    }
+  
+    .toc{font-family:var(--sans);font-size:15px;columns:2;column-gap:32px;margin:28px 0 0;padding:20px 24px;
+      background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:2px 0;break-inside:avoid}
+    table.data{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;line-height:1.5;margin:0 0 20px;
+      background:var(--surface);border:1px solid var(--border)}
+    table.data th,table.data td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+    table.data th{background:var(--surface-muted);font-weight:600}
+    .figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:8px 0 20px}
+    .stage-fig{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px}
+    .stage-fig svg{width:100%;height:auto;display:block}
+    .stage-fig p{margin:10px 0 0;font-family:var(--sans);font-size:14px;line-height:1.45;color:var(--text-muted)}
+    .stage-fig p b{color:var(--text)}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    main h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:28px 0 8px}
+    details{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px 16px;margin:0 0 16px;
+      font-family:var(--sans);font-size:15px}
+    details summary{cursor:pointer;font-weight:600}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; Seismologi Kuantitatif &nbsp;/&nbsp; Bab 3</p>
+      <p class="eyebrow">Seismologi Kuantitatif &middot; Program Magister</p>
+      <h1>Bab 3 &mdash; Representasi Sumber Seismik</h1>
+      <p class="lede">Gempa bumi dapat dimodelkan sebagai sistem gaya ekuivalen di dalam medium elastik, dan seluruh sistem gaya itu dirangkum oleh sembilan angka: tensor momen <b>M</b>. Bahan ini mengikuti Aki &amp; Richards, <i>Quantitative Seismology</i>, Bab 3.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Seismologi Kuantitatif (Magister Geofisika)</dd>
+        <dt>Rujukan utama</dt><dd>Aki &amp; Richards (2002), Bab 3, hlm. 37&ndash;62</dd>
+        <dt>Durasi</dt><dd>4 pertemuan &times; 90 menit</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Geoscience Research Group, Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <div class="actions">
+        <a class="button primary" href="deck.html" target="_blank" rel="noopener">Buka presentasi &nearr;</a>
+        <a class="button" href="https://colab.research.google.com/github/maswiet/maswiet.github.io/blob/master/kuliah/seismologi-kuantitatif/bab3/aktivitas/aktivitas1_turunan_delta.ipynb" target="_blank" rel="noopener">Aktivitas 1 di Colab</a>
+        <a class="button" href="https://colab.research.google.com/github/maswiet/maswiet.github.io/blob/master/kuliah/seismologi-kuantitatif/bab3/aktivitas/aktivitas2_rotasi_tensor.ipynb" target="_blank" rel="noopener">Aktivitas 2 di Colab</a>
+      </div>
+
+      <nav class="toc" aria-label="Daftar isi"><ol>
+        <li><a href="#pengantar">Pengantar</a></li><li><a href="#sejarah">Sejarah: Reid dan elastic rebound</a></li>
+        <li><a href="#bahasa-dasar">Bahasa dasar</a></li><li><a href="#alat">Fungsi Green dan fungsi delta</a></li>
+        <li><a href="#double-couple">Double couple</a></li><li><a href="#momen">Momen seismik dan Mw</a></li>
+        <li><a href="#tensor">Tensor momen</a></li><li><a href="#sumber-lain">Rekah tarik dan sumber volume</a></li>
+        <li><a href="#panduan">Panduan kerja</a></li><li><a href="#rangkuman">Rangkuman persamaan</a></li>
+        <li><a href="#miskonsepsi">Miskonsepsi umum</a></li><li><a href="#latihan">Latihan</a></li>
+        <li><a href="#python">Aktivitas Python</a></li><li><a href="#rujukan">Rujukan</a></li>
+      </ol></nav>
+
+      <section class="block" aria-label="Presentasi">
+        <h2>Presentasi</h2>
+        <p class="kicker">28 slide untuk empat pertemuan. Klik atau gunakan panah untuk berpindah slide, atau buka layar penuh.</p>
+        <div class="deck-embed"><iframe src="deck.html" title="Slide: Representasi Sumber Seismik" loading="lazy"></iframe></div>
+        <p class="deck-hint">Di dalam presentasi: &larr;/&rarr; atau klik untuk navigasi, <b>F</b> layar penuh, <b>N</b> catatan pengajar, <b>P</b> cetak PDF.</p>
+      </section>
+
+      <section class="block" id="pengantar">
+        <h2>1. Pengantar</h2>
+        <p><b>Masalahnya.</b> Persamaan gerak elastik mengandaikan perpindahan yang kontinu. Saat sesar bergeser, perpindahan di kedua sisi bidang sesar melompat, sehingga persamaan itu tidak berlaku tepat di bidang sesar. Solusinya: ganti pergeseran sesar dengan gaya-gaya yang menghasilkan gelombang yang persis sama, lalu pakai persamaan gelombang biasa.</p>
+        <div class="callout"><p><b>Peta besar.</b> Sesar bergeser &rarr; setara dengan sistem gaya &rarr; dirangkum oleh tensor momen M &rarr; M dikonvolusi dengan turunan fungsi Green = seismogram.</p>
+        <p><b>Sumber dan perambatan.</b> Model sumber menjawab apa yang terjadi di tempat gempa; model perambatan menjawab bagaimana sinyal sampai ke alat. Satu seismogram memuat keduanya.</p></div>
+        <h3>Tujuan belajar</h3>
+        <ol>
+          <li>Menjelaskan mengapa pergeseran sesar setara dengan <i>double couple</i>, bukan <i>single couple</i>.</li>
+          <li>Menghitung momen seismik M<sub>0</sub> dan magnitudo momen M<sub>w</sub> dari parameter sesar.</li>
+          <li>Menuliskan tensor momen untuk sesar geser, rekah tarik, dan ledakan.</li>
+          <li>Menjelaskan arti fisis setiap komponen tensor momen.</li>
+          <li>Menjelaskan mengapa bidang sesar dan bidang bantu tidak dapat dibedakan dari sumber titik.</li>
+        </ol>
+        <h3>Jadwal</h3>
+        <table class="data"><tr><th>Pertemuan</th><th>Fokus</th><th>Bagian</th><th>Produk belajar</th></tr>
+          <tr><td>1</td><td>Dari gempa nyata ke model sesar</td><td>1&ndash;5</td><td>Sketsa bidang, normal n, dan slip s</td></tr>
+          <tr><td>2</td><td>Mengukur ukuran sumber</td><td>6</td><td>Perhitungan M<sub>0</sub> dan M<sub>w</sub></td></tr>
+          <tr><td>3</td><td>Dari satu angka ke sembilan komponen</td><td>7</td><td>Tensor momen sesar geser</td></tr>
+          <tr><td>4</td><td>Sumber lain dan batas interpretasi</td><td>8&ndash;12</td><td>Klasifikasi model sumber dan soal akhir</td></tr></table>
+        <p>Prasyarat minimum hanya perkalian, luas, satuan, dan vektor. Turunan, integral, tensor, dan fungsi Green diperkenalkan ketika diperlukan.</p>
+      </section>
+
+      <section class="block" id="sejarah">
+        <h2>2. Sejarah: H. F. Reid dan teori elastic rebound</h2>
+        <p>Teori <i>elastic rebound</i> lahir dari data geodesi gempa San Francisco 18 April 1906. Harry Fielding Reid menuliskannya dalam laporan Komisi Gempa California (Reid, 1910, Vol. II, hlm. 16&ndash;32) dan merangkumnya setahun kemudian (Reid, 1911).</p>
+        <table class="data"><tr><th>Survei</th><th>Tahun</th><th>Yang terlihat</th></tr>
+          <tr><td>I</td><td>1851&ndash;1865</td><td>Keadaan awal jaringan titik triangulasi</td></tr>
+          <tr><td>II</td><td>1874&ndash;1892</td><td>Kepulauan Farallon, jauh dari sesar, bergeser 1,4 m ke utara relatif terhadap sisi timur</td></tr>
+          <tr><td>III</td><td>1906&ndash;1907</td><td>Bergeser lagi 1,8 m; garis yang semula lurus kini melengkung, paling tajam di dekat sesar</td></tr></table>
+        <div class="figrow"><div class="stage-fig"><svg viewBox="0 0 440 280" width="440" height="280" aria-label="tahap 1 elastic rebound"><rect x="1" y="1" width="438" height="278" rx="16" fill="#FDFCF9" stroke="#D6CFC0" stroke-width="2"/><line x1="220" y1="24" x2="220" y2="256" stroke="#5B6472" stroke-width="3" stroke-dasharray="12 8"/><line x1="36" y1="140" x2="404" y2="140" stroke="#2F6FB0" stroke-width="7"/></svg><p><b>1. Sebelum regangan</b><br>garis survei lurus melintang sesar</p></div><div class="stage-fig"><svg viewBox="0 0 440 280" width="440" height="280" aria-label="tahap 2 elastic rebound"><rect x="1" y="1" width="438" height="278" rx="16" fill="#FDFCF9" stroke="#D6CFC0" stroke-width="2"/><line x1="220" y1="24" x2="220" y2="256" stroke="#5B6472" stroke-width="3" stroke-dasharray="12 8"/><path d="M36 80 C120 80, 190 100, 220 140 C250 180, 320 200, 404 200" fill="none" stroke="#2F6FB0" stroke-width="7"/><line x1="60.0" y1="230.0" x2="60.0" y2="176.0" stroke="#B8501F" stroke-width="5"/><polygon points="60.0,160.0 68.8,176.0 51.2,176.0" fill="#B8501F"/><line x1="380.0" y1="50.0" x2="380.0" y2="104.0" stroke="#B8501F" stroke-width="5"/><polygon points="380.0,120.0 371.2,104.0 388.8,104.0" fill="#B8501F"/></svg><p><b>2. Regangan terkumpul</b><br>gerak lempeng (panah) melengkungkan garis</p></div><div class="stage-fig"><svg viewBox="0 0 440 280" width="440" height="280" aria-label="tahap 3 elastic rebound"><rect x="1" y="1" width="438" height="278" rx="16" fill="#FDFCF9" stroke="#D6CFC0" stroke-width="2"/><line x1="220" y1="24" x2="220" y2="256" stroke="#5B6472" stroke-width="3" stroke-dasharray="12 8"/><line x1="36" y1="80" x2="220" y2="80" stroke="#2F6FB0" stroke-width="7"/><line x1="220" y1="200" x2="404" y2="200" stroke="#2F6FB0" stroke-width="7"/><line x1="250.0" y1="140.0" x2="250.0" y2="102.0" stroke="#B8501F" stroke-width="4"/><polygon points="250.0,88.0 257.7,102.0 242.3,102.0" fill="#B8501F"/><line x1="250.0" y1="140.0" x2="250.0" y2="178.0" stroke="#B8501F" stroke-width="4"/><polygon points="250.0,192.0 242.3,178.0 257.7,178.0" fill="#B8501F"/></svg><p><b>3. Sesar pecah, 1906</b><br>tiap sisi lurus lagi; slip ≈ 6 m</p></div></div>
+        <h3>Penalaran Reid, langkah demi langkah</h3>
+        <ol>
+          <li><b>Geser, bukan lentur.</b> Wilayah terdeformasi panjangnya 435 km, jauh lebih besar dari lebarnya.</li>
+          <li><b>Gaya elastik, bukan gravitasi.</b> Gerak saat gempa horizontal; hanya gaya elastik tersimpan yang bisa bekerja tiba-tiba.</li>
+          <li><b>Regangan geser = sudut distorsi.</b> Sekitar 1/1.700 di permukaan dan 1/1.500 di kedalaman sesaat sebelum pecah; di terowongan Wright s &asymp; 2,5/5.150 &asymp; 1/2.000.</li>
+          <li><b>Tegangan:</b> &tau; = &mu;s. Dengan &mu; granit 2 &times; 10<sup>10</sup> Pa diperoleh &tau; &asymp; 13 MPa, sedikit di bawah kuat geser granit: bidang sesar lebih lemah dari batuan utuh.</li>
+          <li><b>Energi:</b> W = &tau; A (&#363;/2) &asymp; 1,75 &times; 10<sup>17</sup> J untuk sesar 435 km &times; 20 km dengan slip rata-rata 4 m.</li>
+          <li><b>Waktu akumulasi.</b> Sekitar 3,2 m dalam &plusmn;50 tahun, separuh slip 1906 &mdash; regangan terkumpul kira-kira 100 tahun. Cikal bakal konsep siklus gempa.</li>
+          <li><b>Letak gaya penggerak.</b> f &prop; &minus;d&tau;/dx = &minus;&mu; d&sup2;u/dx&sup2;: gaya berupa seretan di dasar kerak.</li>
+          <li><b>Prediksi.</b> Deretan pilar berjarak &plusmn;1 km melintang sesar; regangan &plusmn;1/2.000 menandakan gempa kuat &mdash; pendahulu GPS dan InSAR.</li>
+        </ol>
+        <p><b>Eksperimen jeli.</b> Lembaran jeli kaku di antara dua papan digores garis lurus, dipotong sepanjang &ldquo;sesar&rdquo;, lalu satu papan digeser sambil ditahan. Saat dilepas, kedua sisi tergelincir dan besar slip sama dengan total pergeseran papan. Bisa diulang dengan agar-agar.</p>
+        <table class="data"><tr><th>Gagasan Reid (1910)</th><th>Bentuk modern di Aki &amp; Richards</th></tr>
+          <tr><td>Slip melepas regangan elastik</td><td>Diskontinuitas [u] pada &Sigma; (&sect;3.1)</td></tr>
+          <tr><td>Energi W = &frac12; &tau; &#363; A</td><td>Box 3.4: &Delta;E = &minus;&frac12;&int;[u](&sigma;<sup>0</sup> + &sigma;<sup>1</sup>)&nu; d&Sigma;, dengan &sigma;<sup>1</sup> &asymp; 0</td></tr>
+          <tr><td>Gaya f &prop; &minus;&mu; d&sup2;u/dx&sup2;</td><td>Gaya-benda ekuivalen (pers. 3.5), 50 tahun sebelum Burridge &amp; Knopoff (1964)</td></tr>
+          <tr><td>&mu;, slip, dan luas sesar</td><td>Momen seismik M<sub>0</sub> = &mu;&#363;A (pers. 3.16)</td></tr></table>
+        <p><b>Coba hitung.</b> M<sub>0</sub> = (2 &times; 10<sup>10</sup> Pa)(4 m)(435 km &times; 20 km) &asymp; 7 &times; 10<sup>20</sup> N&middot;m, sehingga M<sub>w</sub> &asymp; 7,8 &mdash; dekat estimasi modern gempa 1906.</p>
+      </section>
+
+      <section class="block" id="bahasa-dasar">
+        <h2>3. Bahasa dasar: bidang, normal, slip, dan satuan</h2>
+        <p>Yang menentukan gempa bukan gerak absolut tiap sisi sesar, melainkan <b>selisih perpindahan</b> antara kedua sisinya:</p>
+        <div class="eq">$$\mathbf{s} = [\mathbf{u}] = \mathbf{u}^{+} - \mathbf{u}^{-}$$</div>
+        <ul class="points">
+          <li><b>n</b> (di buku: &nu;) adalah vektor satuan tegak lurus bidang, dari sisi &minus; ke sisi +.</li>
+          <li><b>s &middot; n = 0</b>: slip sejajar bidang, geser murni. <b>s &middot; n &ne; 0</b>: bidang juga membuka atau menutup.</li>
+          <li>Membalik definisi plus-minus membalik tanda s dan n bersamaan; sumber fisiknya tetap sama.</li>
+        </ul>
+        <table class="data"><tr><th>Simbol</th><th>Arti</th><th>Satuan SI</th></tr>
+          <tr><td>A</td><td>Luas bidang yang bergeser</td><td>m&sup2;</td></tr>
+          <tr><td>D (atau &#363;)</td><td>Slip rata-rata</td><td>m</td></tr>
+          <tr><td>&mu;</td><td>Modulus geser: kekakuan batuan terhadap geser</td><td>Pa = N/m&sup2;</td></tr></table>
+        <p><b>Cek satuan.</b> 10 km&sup2; = 10 &times; (10<sup>3</sup> m)&sup2; = 10<sup>7</sup> m&sup2;, bukan 10 m&sup2;.</p>
+      </section>
+
+      <section class="block" id="alat">
+        <h2>4. Bekal awal: fungsi Green dan fungsi delta</h2>
+        <table class="data"><tr><th>Konsep seismologi</th><th>Padanan di listrik-magnet</th><th>Arti fisis</th></tr>
+          <tr><td>Fungsi Green G<sub>np</sub>(x, t; &xi;, &tau;)</td><td>Potensial dari muatan titik</td><td>Perpindahan komponen n di x akibat gaya impuls satuan arah p di &xi;</td></tr>
+          <tr><td>Superposisi &int; f<sub>p</sub> G<sub>np</sub> dV</td><td>&phi; = &int; &rho; G dV</td><td>Medan total = jumlah respons semua sumber titik</td></tr>
+          <tr><td>&delta;(&eta; &minus; &xi;)</td><td>Muatan titik</td><td>Gaya terpusat di satu titik</td></tr>
+          <tr><td>&part;&delta;/&part;&eta;<sub>q</sub></td><td>Dipol listrik</td><td>Dua gaya berlawanan yang sangat berdekatan</td></tr></table>
+        <figure class="fig"><div style="padding:16px"><svg viewBox="0 0 760 440" width="100%" height="auto" style="max-width:640px;display:block;margin:auto" aria-label="turunan fungsi delta berbentuk dua paku berlawanan"><line x1="30" y1="220" x2="730" y2="220" stroke="#5B6472" stroke-width="3"/><path d="M 40.0 220.0 L 41.7 220.0 L 43.4 220.0 L 45.1 220.0 L 46.8 220.0 L 48.5 220.0 L 50.2 220.0 L 51.9 220.0 L 53.6 220.0 L 55.3 220.0 L 57.0 220.0 L 58.7 220.0 L 60.5 220.0 L 62.2 220.0 L 63.9 220.0 L 65.6 220.0 L 67.3 220.0 L 69.0 220.0 L 70.7 220.0 L 72.4 220.0 L 74.1 220.0 L 75.8 220.0 L 77.5 220.0 L 79.2 220.0 L 80.9 220.0 L 82.6 220.0 L 84.3 220.0 L 86.0 220.0 L 87.7 220.0 L 89.4 220.0 L 91.1 220.0 L 92.8 220.0 L 94.5 220.0 L 96.2 220.0 L 97.9 220.0 L 99.6 220.0 L 101.4 220.0 L 103.1 220.0 L 104.8 220.0 L 106.5 220.0 L 108.2 220.0 L 109.9 220.0 L 111.6 220.0 L 113.3 220.0 L 115.0 220.0 L 116.7 220.0 L 118.4 220.0 L 120.1 220.0 L 121.8 220.0 L 123.5 220.0 L 125.2 220.0 L 126.9 220.0 L 128.6 220.0 L 130.3 220.0 L 132.0 220.0 L 133.7 220.0 L 135.4 220.0 L 137.1 220.0 L 138.8 220.0 L 140.6 220.0 L 142.3 220.0 L 144.0 220.0 L 145.7 220.0 L 147.4 220.0 L 149.1 220.0 L 150.8 220.0 L 152.5 220.0 L 154.2 220.0 L 155.9 220.0 L 157.6 220.0 L 159.3 220.0 L 161.0 220.0 L 162.7 220.0 L 164.4 220.0 L 166.1 220.0 L 167.8 220.0 L 169.5 220.0 L 171.2 220.0 L 172.9 220.0 L 174.6 220.0 L 176.3 220.0 L 178.0 220.0 L 179.7 220.0 L 181.5 220.0 L 183.2 220.0 L 184.9 220.0 L 186.6 220.0 L 188.3 220.0 L 190.0 220.0 L 191.7 220.0 L 193.4 220.0 L 195.1 220.0 L 196.8 220.0 L 198.5 219.9 L 200.2 219.9 L 201.9 219.9 L 203.6 219.9 L 205.3 219.9 L 207.0 219.9 L 208.7 219.8 L 210.4 219.8 L 212.1 219.8 L 213.8 219.7 L 215.5 219.7 L 217.2 219.6 L 218.9 219.6 L 220.7 219.5 L 222.4 219.4 L 224.1 219.3 L 225.8 219.2 L 227.5 219.1 L 229.2 218.9 L 230.9 218.8 L 232.6 218.6 L 234.3 218.4 L 236.0 218.2 L 237.7 217.9 L 239.4 217.6 L 241.1 217.3 L 242.8 216.9 L 244.5 216.5 L 246.2 216.0 L 247.9 215.5 L 249.6 214.9 L 251.3 214.2 L 253.0 213.5 L 254.7 212.7 L 256.4 211.9 L 258.1 210.9 L 259.8 209.8 L 261.6 208.7 L 263.3 207.4 L 265.0 206.0 L 266.7 204.5 L 268.4 202.9 L 270.1 201.1 L 271.8 199.2 L 273.5 197.2 L 275.2 195.0 L 276.9 192.6 L 278.6 190.1 L 280.3 187.4 L 282.0 184.6 L 283.7 181.6 L 285.4 178.4 L 287.1 175.0 L 288.8 171.5 L 290.5 167.7 L 292.2 163.9 L 293.9 159.8 L 295.6 155.7 L 297.3 151.3 L 299.0 146.9 L 300.8 142.3 L 302.5 137.6 L 304.2 132.8 L 305.9 128.0 L 307.6 123.1 L 309.3 118.2 L 311.0 113.3 L 312.7 108.4 L 314.4 103.5 L 316.1 98.8 L 317.8 94.2 L 319.5 89.7 L 321.2 85.4 L 322.9 81.3 L 324.6 77.4 L 326.3 73.9 L 328.0 70.7 L 329.7 67.8 L 331.4 65.3 L 333.1 63.3 L 334.8 61.7 L 336.5 60.6 L 338.2 60.0 L 339.9 60.0 L 341.7 60.5 L 343.4 61.7 L 345.1 63.4 L 346.8 65.7 L 348.5 68.7 L 350.2 72.3 L 351.9 76.6 L 353.6 81.5 L 355.3 87.0 L 357.0 93.1 L 358.7 99.8 L 360.4 107.1 L 362.1 114.9 L 363.8 123.2 L 365.5 132.0 L 367.2 141.3 L 368.9 150.9 L 370.6 161.0 L 372.3 171.3 L 374.0 181.8 L 375.7 192.6 L 377.4 203.5 L 379.1 214.5 L 380.9 225.5 L 382.6 236.5 L 384.3 247.4 L 386.0 258.2 L 387.7 268.7 L 389.4 279.0 L 391.1 289.1 L 392.8 298.7 L 394.5 308.0 L 396.2 316.8 L 397.9 325.1 L 399.6 332.9 L 401.3 340.2 L 403.0 346.9 L 404.7 353.0 L 406.4 358.5 L 408.1 363.4 L 409.8 367.7 L 411.5 371.3 L 413.2 374.3 L 414.9 376.6 L 416.6 378.3 L 418.3 379.5 L 420.1 380.0 L 421.8 380.0 L 423.5 379.4 L 425.2 378.3 L 426.9 376.7 L 428.6 374.7 L 430.3 372.2 L 432.0 369.3 L 433.7 366.1 L 435.4 362.6 L 437.1 358.7 L 438.8 354.6 L 440.5 350.3 L 442.2 345.8 L 443.9 341.2 L 445.6 336.5 L 447.3 331.6 L 449.0 326.7 L 450.7 321.8 L 452.4 316.9 L 454.1 312.0 L 455.8 307.2 L 457.5 302.4 L 459.2 297.7 L 461.0 293.1 L 462.7 288.7 L 464.4 284.3 L 466.1 280.2 L 467.8 276.1 L 469.5 272.3 L 471.2 268.5 L 472.9 265.0 L 474.6 261.6 L 476.3 258.4 L 478.0 255.4 L 479.7 252.6 L 481.4 249.9 L 483.1 247.4 L 484.8 245.0 L 486.5 242.8 L 488.2 240.8 L 489.9 238.9 L 491.6 237.1 L 493.3 235.5 L 495.0 234.0 L 496.7 232.6 L 498.4 231.3 L 500.2 230.2 L 501.9 229.1 L 503.6 228.1 L 505.3 227.3 L 507.0 226.5 L 508.7 225.8 L 510.4 225.1 L 512.1 224.5 L 513.8 224.0 L 515.5 223.5 L 517.2 223.1 L 518.9 222.7 L 520.6 222.4 L 522.3 222.1 L 524.0 221.8 L 525.7 221.6 L 527.4 221.4 L 529.1 221.2 L 530.8 221.1 L 532.5 220.9 L 534.2 220.8 L 535.9 220.7 L 537.6 220.6 L 539.3 220.5 L 541.1 220.4 L 542.8 220.4 L 544.5 220.3 L 546.2 220.3 L 547.9 220.2 L 549.6 220.2 L 551.3 220.2 L 553.0 220.1 L 554.7 220.1 L 556.4 220.1 L 558.1 220.1 L 559.8 220.1 L 561.5 220.1 L 563.2 220.0 L 564.9 220.0 L 566.6 220.0 L 568.3 220.0 L 570.0 220.0 L 571.7 220.0 L 573.4 220.0 L 575.1 220.0 L 576.8 220.0 L 578.5 220.0 L 580.3 220.0 L 582.0 220.0 L 583.7 220.0 L 585.4 220.0 L 587.1 220.0 L 588.8 220.0 L 590.5 220.0 L 592.2 220.0 L 593.9 220.0 L 595.6 220.0 L 597.3 220.0 L 599.0 220.0 L 600.7 220.0 L 602.4 220.0 L 604.1 220.0 L 605.8 220.0 L 607.5 220.0 L 609.2 220.0 L 610.9 220.0 L 612.6 220.0 L 614.3 220.0 L 616.0 220.0 L 617.7 220.0 L 619.4 220.0 L 621.2 220.0 L 622.9 220.0 L 624.6 220.0 L 626.3 220.0 L 628.0 220.0 L 629.7 220.0 L 631.4 220.0 L 633.1 220.0 L 634.8 220.0 L 636.5 220.0 L 638.2 220.0 L 639.9 220.0 L 641.6 220.0 L 643.3 220.0 L 645.0 220.0 L 646.7 220.0 L 648.4 220.0 L 650.1 220.0 L 651.8 220.0 L 653.5 220.0 L 655.2 220.0 L 656.9 220.0 L 658.6 220.0 L 660.4 220.0 L 662.1 220.0 L 663.8 220.0 L 665.5 220.0 L 667.2 220.0 L 668.9 220.0 L 670.6 220.0 L 672.3 220.0 L 674.0 220.0 L 675.7 220.0 L 677.4 220.0 L 679.1 220.0 L 680.8 220.0 L 682.5 220.0 L 684.2 220.0 L 685.9 220.0 L 687.6 220.0 L 689.3 220.0 L 691.0 220.0 L 692.7 220.0 L 694.4 220.0 L 696.1 220.0 L 697.8 220.0 L 699.5 220.0 L 701.3 220.0 L 703.0 220.0 L 704.7 220.0 L 706.4 220.0 L 708.1 220.0 L 709.8 220.0 L 711.5 220.0 L 713.2 220.0 L 714.9 220.0 L 716.6 220.0 L 718.3 220.0 L 720.0 220.0" fill="none" stroke="#2F6FB0" stroke-width="6"/><line x1="269.2" y1="220.0" x2="269.2" y2="90.0" stroke="#B8501F" stroke-width="6"/><polygon points="269.2,70.0 280.2,90.0 258.2,90.0" fill="#B8501F"/><line x1="490.8" y1="220.0" x2="490.8" y2="350.0" stroke="#B8501F" stroke-width="6"/><polygon points="490.8,370.0 479.8,350.0 501.8,350.0" fill="#B8501F"/></svg></div>
+          <figcaption>Turunan fungsi delta (biru) berbentuk dua &ldquo;paku&rdquo; berlawanan; panah jingga adalah tafsiran fisisnya: sepasang gaya (couple).</figcaption></figure>
+        <p><b>Kunci seluruh bab:</b> turunan fungsi Green terhadap posisi sumber sama dengan respons terhadap sebuah couple.</p>
+        <div class="eq">$$\frac{\partial}{\partial \xi_q} G_{np}(\mathbf{x}, t-\tau; \boldsymbol{\xi}, 0) = -\iiint_V \frac{\partial}{\partial \eta_q}\delta(\boldsymbol{\eta}-\boldsymbol{\xi})\, G_{np}(\mathbf{x}, t-\tau; \boldsymbol{\eta}, 0)\, dV$$</div>
+        <p><i>Pendalaman.</i> Untuk sesar berluas dan sumber yang berlangsung lama, kontribusi tiap unsur luas dan tiap saat dijumlahkan:</p>
+        <div class="eq">$$u_k(\mathbf{x}, t) = \iint_{\Sigma} \sum_{p,q} \left[ m_{pq} * \frac{\partial G_{kp}}{\partial \xi_q} \right](t)\, d\Sigma$$</div>
+        <p>Sumber berada dalam m<sub>pq</sub>; perambatan berada dalam G. Coba sendiri di <a href="#python">Aktivitas 1</a>.</p>
+      </section>
+
+      <section class="block" id="double-couple">
+        <h2>5. Sesar sederhana dan double couple</h2>
+        <p>Pergeseran pada sesar setara dengan <b>dua pasang gaya yang torsinya saling meniadakan</b> (&sect;3.2). Ambil bidang sesar &Sigma; di &xi;<sub>3</sub> = 0 dengan slip [u<sub>1</sub>] ke arah &xi;<sub>1</sub>. Dari 27 suku rumus gaya-benda ekuivalen, pada medium isotropik hanya c<sub>1313</sub> = c<sub>1331</sub> = &mu; yang tersisa:</p>
+        <div class="eq">$$f_1 = -\mu\,[u_1]\,\frac{\partial}{\partial \eta_3}\delta(\eta_3), \qquad f_3 = -\frac{\partial}{\partial \eta_1}\left\{\mu\,[u_1]\right\}\delta(\eta_3)$$</div>
+        <p>f<sub>1</sub> adalah couple horizontal (gaya ke +&eta;<sub>1</sub> di atas sesar, ke &minus;&eta;<sub>1</sub> di bawahnya). f<sub>3</sub> adalah gaya vertikal yang berbalik arah sepanjang sesar; totalnya memberi torsi &minus;&mu;&#363;A yang melawan torsi +&mu;&#363;A dari f<sub>1</sub>.</p>
+        <div class="figrow"><div class="stage-fig"><svg viewBox="0 0 620 340" width="620" height="340" aria-label="single couple"><line x1="40" y1="170" x2="580" y2="170" stroke="#5B6472" stroke-width="3" stroke-dasharray="14 10"/><line x1="220.0" y1="148.0" x2="382.0" y2="148.0" stroke="#2F6FB0" stroke-width="6"/><polygon points="400.0,148.0 382.0,157.9 382.0,138.1" fill="#2F6FB0"/><line x1="400.0" y1="192.0" x2="238.0" y2="192.0" stroke="#2F6FB0" stroke-width="6"/><polygon points="220.0,192.0 238.0,182.1 238.0,201.9" fill="#2F6FB0"/><path d="M 470 90 A 150 150 0 0 1 500 250" fill="none" stroke="#5B6472" stroke-width="4"/><polygon points="500,262 486,236 512,240" fill="#5B6472"/></svg><p><b>Single couple</b><br>torsi neto ≠ 0: medium berputar — mustahil</p></div><div class="stage-fig"><svg viewBox="0 0 620 340" width="620" height="340" aria-label="double couple"><line x1="40" y1="170" x2="580" y2="170" stroke="#5B6472" stroke-width="3" stroke-dasharray="14 10"/><line x1="220.0" y1="148.0" x2="382.0" y2="148.0" stroke="#2F6FB0" stroke-width="6"/><polygon points="400.0,148.0 382.0,157.9 382.0,138.1" fill="#2F6FB0"/><line x1="400.0" y1="192.0" x2="238.0" y2="192.0" stroke="#2F6FB0" stroke-width="6"/><polygon points="220.0,192.0 238.0,182.1 238.0,201.9" fill="#2F6FB0"/><line x1="480.0" y1="280.0" x2="480.0" y2="78.0" stroke="#B8501F" stroke-width="6"/><polygon points="480.0,60.0 489.9,78.0 470.1,78.0" fill="#B8501F"/><line x1="140.0" y1="60.0" x2="140.0" y2="262.0" stroke="#B8501F" stroke-width="6"/><polygon points="140.0,280.0 130.1,262.0 149.9,262.0" fill="#B8501F"/></svg><p><b>Double couple</b><br>gaya neto = 0 dan torsi neto = 0 — setara dengan slip</p></div></div>
+        <p><b>Mengapa harus dua pasang?</b> Gempa adalah proses internal: total gaya = 0 dan total torsi = 0 (pers. 3.6&ndash;3.7). Satu couple memutar medium; couple kedua menetralkannya.</p>
+        <p><b>Gaya ekuivalen adalah alat matematis</b>, bukan gaya fisik di tiap titik sesar, dan bentuk permukaannya tidak unik (Gambar 3.5 vs 3.6); yang unik hanyalah gaya-benda per satuan volume (Box 3.3).</p>
+      </section>
+
+      <section class="block" id="momen">
+        <h2>6. Momen seismik dan magnitudo momen</h2>
+        <div class="eq">$$M_0 = \mu\,\bar{u}\,A \qquad M_w = \tfrac{2}{3}\left(\log_{10} M_0\,[\mathrm{N\,m}] - 9.1\right)$$</div>
+        <p>Buku memakai dyn&middot;cm: log M<sub>0</sub> = 1,5 M<sub>w</sub> + 16,1. Jangan mencampur konstanta 9,1 dan 16,1. Rentang M<sub>0</sub>: dari &plusmn;10<sup>5</sup> dyn&middot;cm (retakan laboratorium) sampai &plusmn;10<sup>30</sup> dyn&middot;cm (Chile 1960).</p>
+        <table class="data"><tr><th>Contoh</th><th>Parameter</th><th>M<sub>0</sub></th><th>M<sub>w</sub></th></tr>
+          <tr><td>Gempa sedang</td><td>10 km &times; 5 km, D = 0,20 m, &mu; = 30 GPa</td><td>3 &times; 10<sup>17</sup> N&middot;m</td><td>&asymp; 5,6</td></tr>
+          <tr><td>Gempa besar</td><td>20 km &times; 10 km, D = 1 m, &mu; = 30 GPa</td><td>6 &times; 10<sup>18</sup> N&middot;m</td><td>&asymp; 6,5</td></tr></table>
+        <p><b>Momen bukan energi.</b> Dimensinya sama (N&middot;m), maknanya berbeda. Untuk slip tak seragam, M<sub>0</sub> = &int;&int; &mu;(&xi;) D(&xi;) d&Sigma;. Brune (1968): jumlah momen gempa pada satu sesar seluas S memberi slip total &Delta;U = &Sigma;M<sub>0</sub><sup>i</sup>/(&mu;S).</p>
+      </section>
+
+      <section class="block" id="tensor">
+        <h2>7. Tensor momen</h2>
+        <p>Setiap komponen M<sub>pq</sub> adalah satu pasang gaya dengan gaya ke arah p dan lengan ke arah q (Gambar 3.7). Komponen diagonal adalah dipol vektor tanpa torsi; komponen luar diagonal adalah couple. Karena total torsi nol, M simetris dan hanya <b>enam komponen yang bebas</b>.</p>
+        <div class="eq">$$m_{pq} = \lambda\,(\mathbf{s}\cdot\mathbf{n})\,\delta_{pq} + \mu\,(s_p n_q + n_p s_q) \qquad \mathbf{M} = M_0\left(\hat{\mathbf{s}}\,\mathbf{n}^{T} + \mathbf{n}\,\hat{\mathbf{s}}^{T}\right)$$</div>
+        <p><b>Persamaan terpenting bab ini</b> (pers. 3.23): seismogram = sumber dikonvolusi jalur.</p>
+        <div class="eq">$$u_n(\mathbf{x}, t) = M_{pq} * G_{np,q}$$</div>
+        <p>Untuk sesar di Bagian 5, hanya M<sub>13</sub> = M<sub>31</sub> = M<sub>0</sub>. Diputar 45&deg; terhadap sumbu 2 (Soal 3.4), tensor itu menjadi diagonal:</p>
+        <div class="eq">$$\mathbf{M} = \begin{pmatrix} 0 & 0 & M_0 \\ 0 & 0 & 0 \\ M_0 & 0 & 0 \end{pmatrix} \;\longrightarrow\; \mathbf{M}' = \begin{pmatrix} M_0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & -M_0 \end{pmatrix}$$</div>
+        <figure class="fig"><div style="padding:16px"><svg viewBox="0 0 400 400" width="100%" height="auto" style="max-width:320px;display:block;margin:auto" aria-label="pola radiasi gelombang P empat cuping"><circle cx="200" cy="200" r="180" fill="#FDFCF9" stroke="#D6CFC0" stroke-width="3"/><polygon points="200,200 200.0,200.0 206.0,199.9 212.0,199.6 217.9,199.0 223.9,198.3 229.7,197.4 235.5,196.2 241.3,194.9 246.9,193.3 252.4,191.6 257.9,189.7 263.2,187.6 268.3,185.3 273.3,182.9 278.2,180.3 282.9,177.5 287.4,174.6 291.7,171.6 295.8,168.5 299.8,165.2 303.5,161.9 307.0,158.4 310.3,154.9 313.3,151.3 316.1,147.6 318.7,143.9 321.1,140.2 323.1,136.4 325.0,132.7 326.6,128.9 327.9,125.1 329.0,121.4 329.8,117.7 330.4,114.1 330.8,110.5 330.9,107.0 330.7,103.6 330.3,100.3 329.7,97.1 328.8,94.0 327.7,91.1 326.4,88.3 324.9,85.7 323.2,83.2 321.2,80.9 319.1,78.8 316.8,76.8 314.3,75.1 311.7,73.6 308.9,72.3 306.0,71.2 302.9,70.3 299.7,69.7 296.4,69.3 293.0,69.1 289.5,69.2 285.9,69.6 282.3,70.2 278.6,71.0 274.9,72.1 271.1,73.4 267.3,75.0 263.6,76.9 259.8,78.9 256.1,81.3 252.4,83.9 248.7,86.7 245.1,89.7 241.6,93.0 238.1,96.5 234.8,100.2 231.5,104.2 228.4,108.3 225.4,112.6 222.5,117.1 219.7,121.8 217.1,126.7 214.7,131.7 212.4,136.8 210.3,142.1 208.4,147.6 206.7,153.1 205.1,158.7 203.8,164.5 202.6,170.3 201.7,176.1 201.0,182.1 200.4,188.0 200.1,194.0 200.0,200.0" fill="#2F6FB0" fill-opacity="0.75"/><polygon points="200,200 200.0,200.0 199.9,194.0 199.6,188.0 199.0,182.1 198.3,176.1 197.4,170.3 196.2,164.5 194.9,158.7 193.3,153.1 191.6,147.6 189.7,142.1 187.6,136.8 185.3,131.7 182.9,126.7 180.3,121.8 177.5,117.1 174.6,112.6 171.6,108.3 168.5,104.2 165.2,100.2 161.9,96.5 158.4,93.0 154.9,89.7 151.3,86.7 147.6,83.9 143.9,81.3 140.2,78.9 136.4,76.9 132.7,75.0 128.9,73.4 125.1,72.1 121.4,71.0 117.7,70.2 114.1,69.6 110.5,69.2 107.0,69.1 103.6,69.3 100.3,69.7 97.1,70.3 94.0,71.2 91.1,72.3 88.3,73.6 85.7,75.1 83.2,76.8 80.9,78.8 78.8,80.9 76.8,83.2 75.1,85.7 73.6,88.3 72.3,91.1 71.2,94.0 70.3,97.1 69.7,100.3 69.3,103.6 69.1,107.0 69.2,110.5 69.6,114.1 70.2,117.7 71.0,121.4 72.1,125.1 73.4,128.9 75.0,132.7 76.9,136.4 78.9,140.2 81.3,143.9 83.9,147.6 86.7,151.3 89.7,154.9 93.0,158.4 96.5,161.9 100.2,165.2 104.2,168.5 108.3,171.6 112.6,174.6 117.1,177.5 121.8,180.3 126.7,182.9 131.7,185.3 136.8,187.6 142.1,189.7 147.6,191.6 153.1,193.3 158.7,194.9 164.5,196.2 170.3,197.4 176.1,198.3 182.1,199.0 188.0,199.6 194.0,199.9 200.0,200.0" fill="#B8501F" fill-opacity="0.75"/><polygon points="200,200 200.0,200.0 194.0,200.1 188.0,200.4 182.1,201.0 176.1,201.7 170.3,202.6 164.5,203.8 158.7,205.1 153.1,206.7 147.6,208.4 142.1,210.3 136.8,212.4 131.7,214.7 126.7,217.1 121.8,219.7 117.1,222.5 112.6,225.4 108.3,228.4 104.2,231.5 100.2,234.8 96.5,238.1 93.0,241.6 89.7,245.1 86.7,248.7 83.9,252.4 81.3,256.1 78.9,259.8 76.9,263.6 75.0,267.3 73.4,271.1 72.1,274.9 71.0,278.6 70.2,282.3 69.6,285.9 69.2,289.5 69.1,293.0 69.3,296.4 69.7,299.7 70.3,302.9 71.2,306.0 72.3,308.9 73.6,311.7 75.1,314.3 76.8,316.8 78.8,319.1 80.9,321.2 83.2,323.2 85.7,324.9 88.3,326.4 91.1,327.7 94.0,328.8 97.1,329.7 100.3,330.3 103.6,330.7 107.0,330.9 110.5,330.8 114.1,330.4 117.7,329.8 121.4,329.0 125.1,327.9 128.9,326.6 132.7,325.0 136.4,323.1 140.2,321.1 143.9,318.7 147.6,316.1 151.3,313.3 154.9,310.3 158.4,307.0 161.9,303.5 165.2,299.8 168.5,295.8 171.6,291.7 174.6,287.4 177.5,282.9 180.3,278.2 182.9,273.3 185.3,268.3 187.6,263.2 189.7,257.9 191.6,252.4 193.3,246.9 194.9,241.3 196.2,235.5 197.4,229.7 198.3,223.9 199.0,217.9 199.6,212.0 199.9,206.0 200.0,200.0" fill="#2F6FB0" fill-opacity="0.75"/><polygon points="200,200 200.0,200.0 200.1,206.0 200.4,212.0 201.0,217.9 201.7,223.9 202.6,229.7 203.8,235.5 205.1,241.3 206.7,246.9 208.4,252.4 210.3,257.9 212.4,263.2 214.7,268.3 217.1,273.3 219.7,278.2 222.5,282.9 225.4,287.4 228.4,291.7 231.5,295.8 234.8,299.8 238.1,303.5 241.6,307.0 245.1,310.3 248.7,313.3 252.4,316.1 256.1,318.7 259.8,321.1 263.6,323.1 267.3,325.0 271.1,326.6 274.9,327.9 278.6,329.0 282.3,329.8 285.9,330.4 289.5,330.8 293.0,330.9 296.4,330.7 299.7,330.3 302.9,329.7 306.0,328.8 308.9,327.7 311.7,326.4 314.3,324.9 316.8,323.2 319.1,321.2 321.2,319.1 323.2,316.8 324.9,314.3 326.4,311.7 327.7,308.9 328.8,306.0 329.7,302.9 330.3,299.7 330.7,296.4 330.9,293.0 330.8,289.5 330.4,285.9 329.8,282.3 329.0,278.6 327.9,274.9 326.6,271.1 325.0,267.3 323.1,263.6 321.1,259.8 318.7,256.1 316.1,252.4 313.3,248.7 310.3,245.1 307.0,241.6 303.5,238.1 299.8,234.8 295.8,231.5 291.7,228.4 287.4,225.4 282.9,222.5 278.2,219.7 273.3,217.1 268.3,214.7 263.2,212.4 257.9,210.3 252.4,208.4 246.9,206.7 241.3,205.1 235.5,203.8 229.7,202.6 223.9,201.7 217.9,201.0 212.0,200.4 206.0,200.1 200.0,200.0" fill="#B8501F" fill-opacity="0.75"/><line x1="20" y1="200" x2="380" y2="200" stroke="#5B6472" stroke-width="3" stroke-dasharray="10 8"/><line x1="200" y1="20" x2="200" y2="380" stroke="#5B6472" stroke-width="2" stroke-dasharray="4 8"/></svg></div>
+          <figcaption>Pola radiasi gelombang P di bidang 1&ndash;3: cuping biru searah sumbu T (kompresi), cuping jingga searah sumbu P (dilatasi). Amplitudo nol sepanjang bidang sesar dan bidang bantu.</figcaption></figure>
+        <p><b>Bidang sesar vs bidang bantu.</b> Menukar peran normal dan slip menghasilkan M yang sama persis, sehingga dari sumber titik kedua bidang tidak dapat dibedakan. Diperlukan informasi lain: gempa susulan, jejak permukaan, geodesi, atau model sesar berukuran.</p>
+        <p><b>Cek jejak.</b> M<sub>11</sub> + M<sub>22</sub> + M<sub>33</sub> = 0 untuk geser murni (tanpa perubahan volume). Model titik berlaku jika panjang gelombang jauh lebih besar dari ukuran sumber. Coba sendiri di <a href="#python">Aktivitas 2</a>.</p>
+      </section>
+
+      <section class="block" id="sumber-lain">
+        <h2>8. Rekah tarik dan sumber volume</h2>
+        <table class="data"><tr><th>Sumber</th><th>Tensor momen M</th><th>Perubahan volume</th><th>Contoh</th></tr>
+          <tr><td>Sesar geser</td><td>M<sub>13</sub> = M<sub>31</sub> = M<sub>0</sub>, lainnya 0</td><td>Tidak ada</td><td>Gempa tektonik</td></tr>
+          <tr><td>Rekah tarik</td><td>diag(&lambda;, &lambda;, &lambda; + 2&mu;)&middot;[u<sub>3</sub>]A</td><td>Ada</td><td>Intrusi dike, rekahan hidrolik</td></tr>
+          <tr><td>Ledakan / pemuaian</td><td>(&lambda; + &frac23;&mu;)&Delta;V &middot; I</td><td>Ada</td><td>Ledakan bawah tanah, perubahan fase</td></tr></table>
+        <p>Pada benda Poisson (&lambda; = &mu;), rekah tarik memberi tiga dipol dengan rasio <b>1 : 1 : 3</b>. Jika retakan menutup, tanda seluruh tensor berbalik.</p>
+        <p><b>Eksperimen pikiran Eshelby.</b> Bayangkan bola logam yang dipanaskan sehingga ingin memuai, padahal terkurung pas di dalam lubang. Regangan yang &ldquo;ingin&rdquo; terjadi adalah regangan transformasi &Delta;e<sub>rs</sub>. Potong, regangkan, beri gaya agar kembali, las, lalu lepaskan gaya:</p>
+        <div class="eq">$$\frac{dM_{pq}}{dV} = c_{pqrs}\,\Delta e_{rs}, \qquad M_{pq} = \iiint_V c_{pqrs}\,\Delta e_{rs}\,dV$$</div>
+        <p>c<sub>pqrs</sub>&Delta;e<sub>rs</sub> disebut <i>stress glut</i>, <b>bukan</b> <i>stress drop</i>. Tensor isotropik hanya model sederhana; tidak setiap peristiwa vulkanik pasti isotropik.</p>
+      </section>
+
+      <section class="block" id="panduan">
+        <h2>9. Panduan kerja: dari deskripsi ke model sumber</h2>
+        <ol>
+          <li><b>Gambar geometri.</b> Pilih sumbu x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>; gambar bidang atau volume sumber.</li>
+          <li><b>Tulis n dan s</b> beserta satuannya.</li>
+          <li><b>Klasifikasikan.</b> s &middot; n = 0 berarti geser murni; &ne; 0 berarti membuka atau menutup.</li>
+          <li><b>Hitung skala.</b> M<sub>0</sub> = &mu;AD, semua dalam SI.</li>
+          <li><b>Tulis tensor.</b> Periksa simetri, jejak, dan satuan.</li>
+          <li><b>Nyatakan batas model.</b> Tensor titik cukup untuk gelombang panjang; sumber besar memerlukan slip sebagai fungsi posisi dan waktu.</li>
+        </ol>
+        <p><b>Contoh.</b> Sesar vertikal, n = (1, 0, 0), slip vertikal &#349; = (0, 0, 1), M<sub>0</sub> = 3 &times; 10<sup>17</sup> N&middot;m: hanya komponen (1,3) dan (3,1) yang tidak nol &mdash; sama dengan sesar mendatar ber-slip mendatar. Keduanya pasangan bidang sesar dan bidang bantu.</p>
+      </section>
+
+      <section class="block" id="rangkuman">
+        <h2>10. Rangkuman persamaan kunci</h2>
+        <table class="data"><tr><th>No.</th><th>Persamaan</th><th>Cara membacanya</th></tr>
+          <tr><td>3.2</td><td>u<sub>n</sub> = &int;d&tau; &int;&int;<sub>&Sigma;</sub> [u<sub>i</sub>] c<sub>ijpq</sub> &nu;<sub>j</sub> &part;G<sub>np</sub>/&part;&xi;<sub>q</sub> d&Sigma;</td><td>Slip di sesar cukup untuk menentukan perpindahan di mana pun</td></tr>
+          <tr><td>3.5</td><td>f<sub>p</sub> = &minus;&int;&int;<sub>&Sigma;</sub> [u<sub>i</sub>] c<sub>ijpq</sub> &nu;<sub>j</sub> &part;&delta;(&eta;&minus;&xi;)/&part;&eta;<sub>q</sub> d&Sigma;</td><td>Gaya-benda ekuivalen dari diskontinuitas perpindahan</td></tr>
+          <tr><td>3.16</td><td>M<sub>0</sub> = &mu;&#363;A</td><td>Momen seismik = kekakuan &times; slip rata-rata &times; luas</td></tr>
+          <tr><td>3.17</td><td>log M<sub>0</sub> = 1,5 M<sub>w</sub> + 16,1 (dyn&middot;cm)</td><td>Magnitudo momen dari M<sub>0</sub></td></tr>
+          <tr><td>3.19</td><td>m<sub>pq</sub> = [u<sub>i</sub>] &nu;<sub>j</sub> c<sub>ijpq</sub></td><td>Densitas momen = slip &times; normal &times; kekakuan</td></tr>
+          <tr><td>3.23</td><td>u<sub>n</sub> = M<sub>pq</sub> &lowast; G<sub>np,q</sub></td><td>Seismogram = sumber &lowast; jalur</td></tr>
+          <tr><td>3.32</td><td>M<sub>pq</sub> = &int;&int;&int;<sub>V</sub> c<sub>pqrs</sub> &Delta;e<sub>rs</sub> dV</td><td>Tensor momen sumber volume</td></tr></table>
+      </section>
+
+      <section class="block" id="miskonsepsi">
+        <h2>11. Miskonsepsi umum</h2>
+        <table class="data"><tr><th>Miskonsepsi</th><th>Yang benar</th></tr>
+          <tr><td>Gempa setara dengan satu pasang gaya</td><td>Satu couple melanggar kekekalan momentum sudut; yang benar double couple (&sect;3.2)</td></tr>
+          <tr><td>Gaya ekuivalen adalah gaya fisik di tiap titik sesar</td><td>Alat matematis; gaya ekuivalen permukaan tidak unik (Box 3.3)</td></tr>
+          <tr><td>Seismogram adalah peta slip</td><td>Rekaman menggabungkan sumber, jalur, dan instrumen</td></tr>
+          <tr><td>Momen seismik sama dengan energi</td><td>Dimensi sama (N&middot;m), makna berbeda (Box 3.4)</td></tr>
+          <tr><td>Tensor momen sama dengan tegangan di sumber</td><td>c&Delta;e adalah stress glut, bukan stress drop (hlm. 57)</td></tr>
+          <tr><td>M<sub>w</sub> hanyalah skala magnitudo lain</td><td>Diturunkan dari besaran fisis M<sub>0</sub>, bukan amplitudo empiris</td></tr>
+          <tr><td>Seismogram langsung memberi bidang sesar</td><td>Bidang sesar dan bidang bantu memberi M yang sama (hlm. 49)</td></tr>
+          <tr><td>Sesar adalah bidang tipis sempurna</td><td>Zona sesar bisa &plusmn;200 m, tetapi tetap jauh lebih kecil dari panjang gelombang (Box 3.1)</td></tr></table>
+      </section>
+
+      <section class="block" id="latihan">
+        <h2>12. Latihan</h2>
+        <h3>A. Konsep (diskusi berpasangan)</h3>
+        <ol>
+          <li>Mengapa satu seismogram tidak langsung sama dengan peta slip pada sesar?</li>
+          <li>Apa arti [u]? Apakah batuan harus benar-benar terbelah di sepanjang seluruh bidang matematis?</li>
+          <li>Apa beda momen seismik dan energi seismik?</li>
+        </ol>
+        <h3>B. Hitung mandiri</h3>
+        <ol start="4">
+          <li>Sesar 8 km &times; 4 km, D = 0,5 m, &mu; = 25 GPa. Hitung M<sub>0</sub>.</li>
+          <li>Untuk n = (0, 1, 0) dan &#349; = (1, 0, 0), tulis M/M<sub>0</sub> dan sebutkan komponen yang tidak nol.</li>
+          <li>Sumber volume dengan K = 40 GPa dan &Delta;V = 10<sup>3</sup> m<sup>3</sup>. Tulis tensor momen isotropiknya.</li>
+          <li>Dua model titik bertensor identik tetapi bidang sesarnya berbeda. Dapatkah gelombang panjang saja menentukan bidang yang sebenarnya?</li>
+          <li>Data Reid 1906: &mu; = 2 &times; 10<sup>10</sup> Pa, 435 km &times; 20 km, slip 4 m. Hitung M<sub>0</sub>, M<sub>w</sub>, dan W = &frac12;&tau;&#363;A untuk &tau; = 10 MPa.</li>
+        </ol>
+        <details><summary>Kunci ringkas</summary>
+          <ol>
+            <li>Rekaman menggabungkan sumber, jalur perambatan, dan instrumen.</li>
+            <li>Selisih perpindahan kedua sisi; bidang ideal mewakili zona sesar yang tipis dibanding panjang gelombang.</li>
+            <li>M<sub>0</sub> mengukur skala sumber; energi radiasi mengukur energi gelombang. Dimensi sama, makna berbeda.</li>
+            <li>A = 3,2 &times; 10<sup>7</sup> m&sup2;; M<sub>0</sub> = 4 &times; 10<sup>17</sup> N&middot;m.</li>
+            <li>M<sub>12</sub> = M<sub>21</sub> = M<sub>0</sub>, lainnya nol.</li>
+            <li>M = 4 &times; 10<sup>13</sup> I N&middot;m.</li>
+            <li>Tidak; perlu informasi tambahan tentang geometri sesar.</li>
+            <li>A = 8,7 &times; 10<sup>9</sup> m&sup2;; M<sub>0</sub> &asymp; 7 &times; 10<sup>20</sup> N&middot;m; M<sub>w</sub> &asymp; 7,8; W &asymp; 1,7 &times; 10<sup>17</sup> J.</li>
+          </ol></details>
+        <h3>C. Tugas</h3>
+        <ul class="points">
+          <li><b>Soal 3.4 buku:</b> tunjukkan bahwa double couple pers. 3.25 yang diputar 45&deg; menjadi diag(M<sub>0</sub>, 0, &minus;M<sub>0</sub>); tentukan sumbu P dan T.</li>
+          <li><b>Gempa Indonesia:</b> pilih satu gempa M<sub>w</sub> &ge; 6 dari katalog USGS atau BMKG, hitung M<sub>0</sub>, dan perkirakan slip rata-rata dengan asumsi yang wajar.</li>
+          <li><b>Reflektif:</b> rancang satu analogi atau alat peraga untuk menjelaskan double couple kepada siswa SMA.</li>
+        </ul>
+      </section>
+
+      <section class="block" id="python">
+        <h2>13. Aktivitas Python</h2>
+        <p class="kicker">Dua skrip siap pakai. Buka langsung di Google Colab, atau unduh berkas <code>.py</code> untuk dijalankan di komputer sendiri (butuh <code>numpy</code> dan <code>matplotlib</code>).</p>
+        <figure class="fig"><img src="aktivitas/aktivitas1_turunan_delta.png" alt="Keluaran Aktivitas 1: Gauss, turunannya, dan tafsiran sebagai sepasang gaya">
+          <figcaption><b>Aktivitas 1 &mdash; turunan delta = sepasang gaya.</b> <a href="https://colab.research.google.com/github/maswiet/maswiet.github.io/blob/master/kuliah/seismologi-kuantitatif/bab3/aktivitas/aktivitas1_turunan_delta.ipynb" target="_blank" rel="noopener">Buka di Colab</a> &middot; <a href="aktivitas/aktivitas1_turunan_delta.py" download>Unduh .py</a></figcaption></figure>
+        <figure class="fig"><img src="aktivitas/aktivitas2_rotasi_tensor.png" alt="Keluaran Aktivitas 2: komponen tensor saat diputar, double couple dengan sumbu P dan T, dan pola radiasi P">
+          <figcaption><b>Aktivitas 2 &mdash; rotasi tensor momen.</b> <a href="https://colab.research.google.com/github/maswiet/maswiet.github.io/blob/master/kuliah/seismologi-kuantitatif/bab3/aktivitas/aktivitas2_rotasi_tensor.ipynb" target="_blank" rel="noopener">Buka di Colab</a> &middot; <a href="aktivitas/aktivitas2_rotasi_tensor.py" download>Unduh .py</a></figcaption></figure>
+      </section>
+
+      <section class="block" id="rujukan">
+        <h2>14. Rujukan</h2>
+        <ul class="points">
+          <li>Aki, K. &amp; Richards, P. G. (2002). <i>Quantitative Seismology</i>, 2nd ed., Bab 3 &ldquo;Representation of Seismic Sources&rdquo;, hlm. 37&ndash;62.</li>
+          <li>Reid, H. F. (1910). <i>The Mechanics of the Earthquake</i>. The California Earthquake of April 18, 1906, Vol. II. Carnegie Institution of Washington. <a href="https://archive.org/details/cu31924004102079">Internet Archive</a></li>
+          <li>Reid, H. F. (1911). The elastic-rebound theory of earthquakes. <i>Univ. Calif. Publ. Bull. Dept. Geol.</i>, 6, 413&ndash;444. <a href="https://archive.org/details/bulletinofde619101911univ">Internet Archive</a></li>
+          <li>Jost, M. L. &amp; Herrmann, R. B. (1989). A student&rsquo;s guide to and review of moment tensors. <i>Seismological Research Letters</i>, 60, 37&ndash;57.</li>
+          <li>Burridge, R. &amp; Knopoff, L. (1964). Body force equivalents for seismic dislocations. <i>Bull. Seismol. Soc. Am.</i>, 54, 1875&ndash;1888.</li>
+        </ul>
+        <p class="source-note">Bahan ini adalah parafrasa dan penyederhanaan pedagogis. Untuk penurunan lengkap teorema representasi, gaya-benda ekuivalen, dan sumber dalam medium anisotropik, gunakan teks aslinya.</p>
+      </section>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Geoscience Research Group, Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
