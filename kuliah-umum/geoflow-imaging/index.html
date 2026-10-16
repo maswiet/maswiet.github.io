@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Memetakan Permeabilitas Bawah Permukaan untuk Menekan Risiko Eksplorasi Panas Bumi — Wiwit Suryanto</title>
+  <meta name="description" content="Materi kuliah umum (keynote IGRF #7, IAGI): pelajaran dari eksperimen EGS 6 km di Finlandia, rekaman mikroseismik sumur dalam pada 2–4 kHz, dan gagasan GeoFlow Imaging untuk memetakan permeabilitas hingga resolusi sekitar 50 m. Slide, PDF, latihan, dan daftar data terbuka.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);
+      font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;
+      border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);
+      font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;
+      font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:42px;font-weight:600;line-height:1.1}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;
+      font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 0}
+    .button{display:inline-flex;align-items:center;gap:8px;min-height:44px;border-radius:4px;
+      border:1px solid var(--border);padding:11px 16px;font-family:var(--sans);font-size:15px;
+      font-weight:600;line-height:1.3;color:var(--text);text-decoration:none;background:var(--surface)}
+    .button.primary{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
+    .button.primary:hover{color:var(--on-accent);background:var(--accent-hover);border-color:var(--accent-hover)}
+    .button:hover{color:var(--accent);border-color:var(--accent)}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    h3{font-family:var(--serif);font-size:22px;font-weight:600;line-height:1.25;margin:32px 0 8px}
+    .kicker{margin:0 0 22px;color:var(--text-muted);font-family:var(--sans);font-size:15px;line-height:1.55}
+    .prose p{margin:0 0 16px}
+    .prose sub,.prose sup{line-height:0}
+
+    .deck-embed{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--border);
+      border-radius:6px;overflow:hidden;background:var(--surface)}
+    .deck-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .deck-hint{margin:10px 0 0;font-family:var(--sans);font-size:13px;color:var(--text-muted)}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);
+      border-radius:6px;overflow:hidden}
+    figure.fig img{margin:0 auto;padding:10px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--text-muted);
+      padding:10px 16px;border-top:1px solid var(--border)}
+    .fig-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .fig-pair figure.fig{margin:0 0 24px}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;
+      background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+
+    table.t{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;margin:8px 0 24px}
+    table.t th,table.t td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+    table.t th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);font-weight:600}
+    table.t td.k{font-weight:600;width:28%}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;
+      padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:0 0 20px}
+    .callout p{margin:0 0 12px}
+    .callout p:last-child{margin-bottom:0}
+    .callout.warn{border-left:4px solid var(--accent)}
+    .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:17px;font-weight:600;
+      background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px 16px;margin:0 0 18px;
+      overflow-x:auto}
+    details{border:1px solid var(--border);background:var(--surface);border-radius:6px;margin:0 0 12px;
+      font-family:var(--sans);font-size:15px;line-height:1.55}
+    details summary{cursor:pointer;padding:12px 16px;font-weight:600}
+    details div{padding:0 16px 14px}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    ol.refs{margin:0;padding-left:22px;font-family:var(--sans);font-size:14px;line-height:1.55}
+    ol.refs li{margin-bottom:10px}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);
+      color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:34px}
+      .fig-pair{grid-template-columns:1fr}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:28px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .actions .button{justify-content:center;width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#kuliah-umum" class="active">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#kuliah-umum">Kuliah Umum</a> &nbsp;/&nbsp; GeoFlow Imaging</p>
+      <p class="eyebrow">Keynote &middot; Indonesian Geological Research Forum #7 &middot; IAGI</p>
+      <h1>Memetakan Permeabilitas Bawah Permukaan untuk Menekan Risiko Eksplorasi Panas Bumi</h1>
+      <p class="lede">Dari eksperimen EGS 6&nbsp;km di Finlandia ke rekaman mikroseismik sumur dalam pada 2&ndash;4&nbsp;kHz: mengapa keterhubungan permeabilitas menjadi kunci eksplorasi panas bumi, dan bagaimana gagasan GeoFlow Imaging berusaha memetakannya hingga resolusi &asymp;&nbsp;50&nbsp;m.</p>
+
+      <dl class="meta-grid">
+        <dt>Acara</dt><dd>Indonesian Geological Research Forum #7 &mdash; Road to 55th PIT IAGI and XIX GEOSEA 2026</dd>
+        <dt>Tanggal</dt><dd>Kamis, 29 Oktober 2026, 19.50 WIB</dd>
+        <dt>Format</dt><dd>Daring (Zoom)</dd>
+        <dt>Peran</dt><dd>Narasumber &mdash; Geoscience Research Group, Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <div class="actions">
+        <a class="button primary" href="deck.html" target="_blank" rel="noopener">Buka presentasi &nearr;</a>
+        <a class="button" href="materi-geoflow-imaging-igrf7.pdf" target="_blank" rel="noopener">Unduh PDF</a>
+      </div>
+
+      <section class="block" aria-label="Presentasi">
+        <h2>Presentasi</h2>
+        <p class="kicker">Jelajahi 23 slide langsung di sini (gunakan panah atau klik), atau buka layar penuh.</p>
+        <div class="deck-embed">
+          <iframe src="deck.html" title="Slide: Memetakan Permeabilitas, Menekan Risiko Eksplorasi Panas Bumi" loading="lazy"></iframe>
+        </div>
+        <p class="deck-hint">Di dalam presentasi: &larr;/&rarr; atau klik untuk navigasi, <b>F</b> layar penuh, <b>P</b> cetak PDF.</p>
+      </section>
+
+      <section class="block" aria-label="Tujuan belajar">
+        <h2>Tujuan belajar</h2>
+        <p class="kicker">Setelah membaca materi ini, Anda diharapkan dapat:</p>
+        <ul class="points">
+          <li>menjelaskan mengapa permeabilitas dan <b>keterhubungannya</b> menjadi ketidakpastian utama eksplorasi panas bumi;</li>
+          <li>membaca angka eksperimen EGS Otaniemi (volume, tekanan, konduktivitas hidrolik) beserta pelajaran seismologisnya;</li>
+          <li>membedakan model kerak <b>berlapis</b>, <b>acak</b>, dan <b>pink</b>, serta konsekuensinya bagi distribusi permeabilitas;</li>
+          <li>membaca waveform dan spektrum mikroseismik sumur dalam, dan menghubungkan <b>frekuensi</b> dengan <b>panjang gelombang</b> serta skala heterogenitas;</li>
+          <li>menilai bukti dan batas klaim, lalu merancang uji validasi dari sudut geologi, geokimia, dan reservoir engineering.</li>
+        </ul>
+      </section>
+
+      <section class="block prose" aria-label="Latar belakang Finlandia">
+        <h2>1. Latar belakang: dua sumur 6&nbsp;km di Finlandia</h2>
+        <p class="kicker">Eksperimen EGS terdalam di lingkungan perkotaan, dan apa yang diajarkannya tentang permeabilitas.</p>
+        <p>Pada Juni&ndash;Juli 2018, proyek <b>St1 Deep Heat</b> di Otaniemi, Espoo (dekat Helsinki), memompa 18.160&nbsp;m&sup3; air tawar (netto) selama 49 hari ke dalam basement kristalin Prakambrium pada kedalaman 5,5&ndash;6,1&nbsp;km. Tujuannya membuat reservoir EGS untuk panas dasar jaringan pemanas kota. Pemantauan seismik hampir waktu nyata dengan sistem lampu lalu lintas menjaga magnitudo maksimum di M<sub>w</sub>&nbsp;1,9, di bawah batas 2,0 yang ditetapkan otoritas (Kwiatek dkk., 2019). Proyek ini digagas grup St1; pendiri dan Ketua Dewan St1, Mika Anttonen, mengaitkannya dengan strategi investasi energi terbarukan perusahaan.</p>
+        <figure class="fig">
+          <img src="assets/finlandia-lokasi-proyek.png" alt="Blok diagram proyek St1 Deep Heat: sumur pemantau OTN-2 dengan 12 geofon, sumur stimulasi OTN-3 dengan lima tahap S1 sampai S5, dan suhu 120 derajat Celsius pada sekitar 6 km" width="1169" height="865">
+          <figcaption>Lokasi proyek dan tahap stimulasi S1&ndash;S5 pada sumur OTN-3. Gambar: Kwiatek dkk. (2019), <i>Science Advances</i> 5:eaav7224, lisensi CC BY-NC 4.0; dipotong dari aslinya.</figcaption>
+        </figure>
+
+        <table class="t">
+          <tr><th>Parameter</th><th>Nilai</th></tr>
+          <tr><td class="k">Total dipompa</td><td>18.538 m&sup3;; kembali 378 m&sup3;; tertahan 18.160 m&sup3;</td></tr>
+          <tr><td class="k">Interval injeksi</td><td>5,5&ndash;6,1 km, lima tahap (S1&ndash;S5)</td></tr>
+          <tr><td class="k">Tekanan kepala sumur</td><td>60&ndash;90 MPa (batas pompa 95 MPa)</td></tr>
+          <tr><td class="k">Laju injeksi</td><td>400&ndash;800 liter per menit</td></tr>
+          <tr><td class="k">Jaringan seismik</td><td>24 stasiun bor: 12 level di OTN-2 (2,20&ndash;2,65 km) dan 12 satelit</td></tr>
+          <tr><td class="k">Katalog</td><td>6.150 event awal; 43.882 event setelah diproses ulang; 1.977 event direlokasi (presisi 27 m dan 66 m untuk 68% dan 95%)</td></tr>
+        </table>
+
+        <p>Hiposenter terlokasi ulang membentuk <b>tiga gugus utama</b> yang terpisah ruang tetapi aktif bersamaan, meluas ke tenggara&ndash;barat laut, hampir sejajar dengan tegangan horizontal maksimum (N110&deg;E). Awan event tidak menjajar pada satu bidang patahan; radius sumber 11&ndash;34&nbsp;m cocok dengan aktivasi jaringan rekahan terdistribusi.</p>
+        <figure class="fig">
+          <img src="assets/finlandia-hiposenter.png" alt="Peta dan penampang hiposenter gempa terinduksi OTN-3 berkode warna per fase stimulasi" width="1467" height="748">
+          <figcaption>Hiposenter terlokasi ulang (n = 1.977): (A) peta, (B) penampang barat daya&ndash;timur laut. Gambar: Kwiatek dkk. (2019), CC BY-NC 4.0; dipotong dari aslinya.</figcaption>
+        </figure>
+
+        <h3>Sisi hidrolik dan hasil akhirnya</h3>
+        <p>Kukkonen dkk. (2023) melaporkan konduktivitas hidrolik alami sekitar 5&times;10<sup>&minus;10</sup>&ndash;5&times;10<sup>&minus;9</sup>&nbsp;m/s (permeabilitas &asymp;&nbsp;10<sup>&minus;17</sup>&ndash;10<sup>&minus;16</sup>&nbsp;m&sup2;), sesuai model kerak getas pada kedalaman itu. Stimulasi menaikkannya ke sekitar 10<sup>&minus;8</sup>&ndash;10<sup>&minus;7</sup>&nbsp;m/s, tetapi nilai itu <b>turun kembali</b> setelah tekanan dilepas. Hanya sebagian kecil rekahan yang terbuka dan konduktif, sehingga medium bersifat heterogen secara hidrolik. Pada stimulasi OTN-2 (2020), sinyal tekanan terekam di OTN-3, tetapi pilot itu tidak pernah dikomersialkan: peningkatan konduktivitas tidak memadai agar sistem sirkulasi panas bekerja. Menurut rilis St1, kedua sumur kini dibuka untuk riset (2024).</p>
+        <div class="callout warn">
+          <p><strong>Pelajaran.</strong> Seismisitas yang terkendali tidak menjamin aliran yang dapat dipakai, dan dua sumur yang berdekatan tidak otomatis terhubung. Yang menentukan adalah jaringan rekahan yang bersambung &mdash; sifat permeabilitas bawah permukaan yang justru paling sulit dipetakan.</p>
+        </div>
+      </section>
+
+      <section class="block prose" aria-label="Risiko eksplorasi">
+        <h2>2. Risiko eksplorasi dan tiga disiplin</h2>
+        <p class="kicker">Mengapa celah pengetahuan tentang permeabilitas mahal.</p>
+        <p>Studi global IFC (2013) atas 52 lapangan menemukan keberhasilan rata-rata <b>50%</b> untuk sumur pertama dalam satu lapangan, <b>59%</b> untuk lima sumur pertama, dan <b>78%</b> untuk seluruh sumur yang statusnya terverifikasi. Biaya pengeboran menyumbang <b>35&ndash;40%</b> dari biaya modal proyek dan hilang bila sumber daya tidak ditemukan. IFC mendefinisikan sukses terutama dari kapasitas sumur (MW<sub>e</sub>); angkanya informatif untuk gambaran umum, bukan prediksi untuk lapangan tertentu.</p>
+        <table class="t">
+          <tr><th>Disiplin</th><th>Mengukur</th><th>Celah terhadap permeabilitas</th></tr>
+          <tr><td class="k">Geologi dan struktur</td><td>Rekahan, sesar, litologi, alterasi</td><td>Rekahan terbuka atau tertutup dan keterhubungan 3D tidak terlihat</td></tr>
+          <tr><td class="k">Geokimia</td><td>Temperatur reservoir, asal fluida, tracer</td><td>Titik atau rata-rata; jalur dan laju aliran hanya disimpulkan</td></tr>
+          <tr><td class="k">Reservoir engineering</td><td>Uji sumur, injektivitas, interferensi, kurva produksi</td><td>Baru ada setelah bor, dan hanya di sekitar sumur</td></tr>
+          <tr><td class="k">Geofisika konvensional</td><td>Resistivitas, densitas, kecepatan</td><td>Sifat batuan, bukan sifat aliran</td></tr>
+        </table>
+      </section>
+
+      <section class="block prose" aria-label="Gagasan GFI">
+        <h2>3. Gagasan: kerak pink dan mikroseismik sebagai pengamat aliran</h2>
+        <p class="kicker">Hipotesis kerja GeoFlow Imaging (Leary dan Malin, 2022; Leary dkk., 2024).</p>
+        <p>Kerak sering digambarkan <b>berlapis</b> (deterministik) atau <b>acak</b> (white noise). GeoFlow Imaging mengusulkan model ketiga: porositas atau poro-konektivitas berspektrum <b>pink</b>, S(k)&nbsp;~&nbsp;1/k<sup>&beta;</sup> dengan &beta;&nbsp;&asymp;&nbsp;1, yang berkorelasi spasial lintas skala. Dasar empirisnya adalah penskalaan hukum-pangkat yang diamati pada data log sumur.</p>
+        <div class="fig-pair">
+          <figure class="fig"><img src="assets/model-berlapis.png" alt="Ilustrasi kerak berlapis" width="944" height="760"><figcaption><b>Berlapis:</b> lapisan homogen dengan batas tegas.</figcaption></figure>
+          <figure class="fig"><img src="assets/model-acak.png" alt="Ilustrasi kerak acak" width="944" height="760"><figcaption><b>Acak:</b> variasi tanpa korelasi spasial.</figcaption></figure>
+        </div>
+        <figure class="fig">
+          <img src="assets/model-pink.png" alt="Ilustrasi kerak pink: gugus bernilai tinggi dan rendah yang berkorelasi lintas skala" width="944" height="760" style="max-width:520px">
+          <figcaption><b>Pink:</b> berkorelasi spasial lintas skala. Ketiga gambar adalah ilustrasi sintetis 2D dengan skala warna yang sama, bukan data lapangan.</figcaption>
+        </figure>
+        <p>Bila permeabilitas bergantung eksponensial pada porositas, maka permeabilitas menjadi <b>lognormal</b>: sedikit volume yang sangat permeabel membentuk gugus aliran terhubung.</p>
+        <div class="formula">k = k0 &middot; exp(&alpha; &middot; &phi;)</div>
+        <p>Pola ini sejalan dengan pola Pareto 80/20 pada produktivitas sumur. Pada sampel produksi minyak AS tahun 1960 di bawah, sekitar 29% sumur memberi sekitar 85% produksi &mdash; sebuah analog, bukan bukti untuk panas bumi.</p>
+        <figure class="fig">
+          <img src="assets/produksi-minyak-as-1960.png" alt="Histogram produksi per sumur minyak AS tahun 1960" width="1400" height="700">
+          <figcaption>Produksi per sumur, minyak AS 1960 (analisis penulis atas data EIA). Angka pada gambar: persen sumur dan persen produksi.</figcaption>
+        </figure>
+
+        <h3>Mikroseismik sebagai pengamat aliran</h3>
+        <p>Hipotesisnya: sebagian event mikroseismik adalah emisi dari struktur poro-permeabel yang bertekanan lebih, sehingga lokasinya menandai jalur aliran aktif. Diagnostiknya empat: <b>distribusi ukuran</b> (momen cenderung lognormal), <b>korelasi spasial</b> G(r)&nbsp;~&nbsp;1/r<sup>p</sup> dengan p&nbsp;&asymp;&nbsp;1, <b>bentuk gelombang</b> (first-motion berosilasi dua arah), dan <b>waktu kejadian</b> terhadap injeksi.</p>
+        <div class="fig-pair">
+          <figure class="fig"><img src="assets/emisi-waveform-tipe.png" alt="Waveform tipe: slip patahan berbentuk tangga dan emisi struktur poro-permeabel berosilasi" width="640" height="480"><figcaption>Waveform tipe: slip patahan (tangga, atas) dan emisi struktur poro-permeabel (osilasi, bawah).</figcaption></figure>
+          <figure class="fig"><img src="assets/emisi-spektrum-tipe.png" alt="Spektrum kedua tipe emisi" width="519" height="389"><figcaption>Spektrumnya: patahan berenergi di frekuensi rendah; struktur poro-permeabel berpuncak pada satu pita frekuensi.</figcaption></figure>
+        </div>
+        <div class="callout warn">
+          <p><strong>Bukan semua event.</strong> Yang diklaim hanya subpopulasi yang lolos beberapa diagnostik sekaligus. Membedakannya dari slip sesar adalah inti ilmiah yang paling perlu diuji.</p>
+        </div>
+      </section>
+
+      <section class="block prose" aria-label="Rekaman sumur dalam">
+        <h2>4. Rekaman sumur dalam pada 2&ndash;4&nbsp;kHz</h2>
+        <p class="kicker">Contoh waveform Utah FORGE dan Helsinki, dan apa yang terlihat pada kHz dan deka Hertz.</p>
+        <p>Sensor permukaan umumnya hanya melihat <b>deka Hertz</b>. Di Helsinki, array geofon di OTN-2 (2,20&ndash;2,65&nbsp;km) merekam pada <b>2&nbsp;kHz</b>. Pada stimulasi Utah FORGE April 2022, satu kanal regangan pada kedalaman 1,4&nbsp;km merekam kontinu beberapa hari pada <b>4&nbsp;kHz</b> (Leary dkk., 2024; data Whidden dkk., 2023). Katalog data FORGE juga melaporkan rekaman DAS (<i>distributed acoustic sensing</i>, serat optik sebagai rangkaian sensor regangan) pada 10&nbsp;kS/s untuk April 2024. Geofon sumur ber-sampling kHz sudah lama dipakai pada pemantauan rekah hidrolik; yang relatif baru adalah rekaman EGS kontinu yang terbuka untuk riset dan kanal serat optik yang rapat.</p>
+
+        <h3>Contoh waveform</h3>
+        <div class="fig-pair">
+          <figure class="fig"><img src="assets/utah-jendela-1-menit.png" alt="Rekaman regangan satu menit pada 4 kHz dari Utah FORGE" width="393" height="316"><figcaption>Utah FORGE: jendela 1 menit (&asymp;&nbsp;240.000 sampel pada 4&nbsp;kHz) dengan event besar dan kecil.</figcaption></figure>
+          <figure class="fig"><img src="assets/utah-koda-diperbesar.png" alt="Sumbu waktu diperbesar untuk satu event Utah: koda menurun perlahan" width="400" height="300"><figcaption>Sumbu waktu diperbesar: koda menurun perlahan, jauh lebih lama daripada pulsa awal.</figcaption></figure>
+        </div>
+        <figure class="fig">
+          <img src="assets/helsinki-p-s-koda.png" alt="Waveform Helsinki dengan tiga kotak: latar sebelum P, gelombang P, dan gelombang S serta koda" width="767" height="285">
+          <figcaption>Helsinki (2&nbsp;kHz): kotak 1 latar sebelum P, kotak 2 gelombang P, kotak 3 gelombang S dan koda. P dan S terpisah jauh karena sumber &asymp;&nbsp;4&nbsp;km di bawah sensor; setelah &frac12; detik koda masih di atas latar. Sumbu: jumlah sampel; amplitudo relatif.</figcaption>
+        </figure>
+
+        <h3>Spektrum: kHz dan deka Hertz sekaligus</h3>
+        <p>Spektrum rata-rata event Utah menunjukkan energi besar di sekitar 1&nbsp;kHz dan, tidak terduga, puncak amplitudo pada 10&ndash;100&nbsp;Hz. Dua puncak tajam pada frekuensi yang sama di semua event adalah artefak sensor dan dibuang dengan filter digital (garis merah).</p>
+        <figure class="fig">
+          <img src="assets/utah-spektrum-rata-rata.png" alt="Spektrum amplitudo rata-rata event Utah dari 0 sampai 2000 Hz" width="635" height="456" style="max-width:560px">
+          <figcaption>Spektrum rata-rata lebih dari 120 event Utah yang dinormalisasi. Biru: mentah; merah: difilter.</figcaption>
+        </figure>
+
+        <h3>Deka Hertz sebagai sisa hamburan</h3>
+        <p>Di Helsinki, sumber berjarak &asymp;&nbsp;4&nbsp;km dari sensor. Spektrum latar sebelum gelombang P memuat deka Hertz tetapi hampir tanpa kHz, dan bentuknya mengikuti spektrum event. Itu yang diharapkan bila latar adalah <b>residu hamburan</b> wavelet kHz sepanjang jalan. Di Utah, jarak sumber&ndash;sensor hanya &asymp;&nbsp;200&ndash;400&nbsp;m sehingga komponen kHz masih menonjol. Kesimpulannya: energi deka Hertz bukan bagian langsung dari proses sumber, melainkan hasil hamburan oleh heterogenitas medium.</p>
+        <figure class="fig">
+          <img src="assets/helsinki-latar-vs-event.png" alt="Spektrum Helsinki: latar (biru) dan interval event (merah) dengan bentuk serupa" width="526" height="412" style="max-width:520px">
+          <figcaption>Helsinki: spektrum latar sebelum P (biru) dan interval event (merah) pada empat contoh.</figcaption>
+        </figure>
+
+        <h3>Koda hiperbolik</h3>
+        <p>Peluruhan amplitudo koda umumnya diasumsikan eksponensial (satu skala hamburan). Data Utah lebih cocok dengan kurva hiperbolik bentuk Arps, <code>H(t) = 1/(1 + b&prime;t/t&#8320;)^(1/b&prime;)</code> dengan 1&nbsp;&lt;&nbsp;b&prime;&nbsp;&lt;&nbsp;2. Nilai b&prime;&nbsp;&asymp;&nbsp;1,5 (yang paling sering) setara parameter Arps b&nbsp;&asymp;&nbsp;0,5. Penafsiran GFI: seperti penurunan produksi sumur yang hiperbolik karena banyak skala aliran, koda hiperbolik mencerminkan banyak skala hamburan, yaitu heterogenitas multiskala yang selaras dengan permeabilitas pink.</p>
+        <figure class="fig">
+          <img src="assets/utah-koda-hiperbolik.png" alt="Empat contoh koda Utah dengan kurva hiperbolik terpasang" width="1647" height="347">
+          <figcaption>Empat contoh koda event Utah (biru) dengan kurva hiperbolik terpasang (merah); b&prime; &asymp; 1,25; 1,6; 1,3; 1,7.</figcaption>
+        </figure>
+      </section>
+
+      <section class="block prose" aria-label="Resolusi 50 m">
+        <h2>5. Dari deka Hertz ke resolusi &asymp;&nbsp;50&nbsp;m</h2>
+        <p class="kicker">Mengapa pita deka Hertz memungkinkan heterogenitas dimodelkan.</p>
+        <p>Panjang gelombang &lambda;&nbsp;=&nbsp;V/f. Dengan kecepatan kasar V&nbsp;&asymp;&nbsp;5&nbsp;km/s:</p>
+        <table class="t">
+          <tr><th>Frekuensi</th><th>Panjang gelombang</th><th>Keterangan</th></tr>
+          <tr><td class="k">1 kHz</td><td>&asymp; 5 m</td><td>Emisi sumber; tidak sampai ke sensor permukaan</td></tr>
+          <tr><td class="k">100 Hz</td><td>&asymp; 50 m</td><td>Ujung atas pita deka Hertz</td></tr>
+          <tr><td class="k">30 Hz</td><td>&asymp; 170 m</td><td>Dekat rata-rata geometrik &asymp; 160 m</td></tr>
+          <tr><td class="k">10 Hz</td><td>&asymp; 500 m</td><td>Ujung bawah pita</td></tr>
+        </table>
+        <p>Hamburan paling kuat terjadi ketika skala heterogenitas sebanding dengan panjang gelombang. Karena itu sisa hamburan di pita deka Hertz (10&ndash;100&nbsp;Hz) membawa informasi heterogenitas pada skala 50&ndash;500&nbsp;m. Bila heterogenitas itu dapat dimodelkan &mdash; misalnya dengan model kecepatan berspektrum pink yang dikalibrasi pada pita tersebut &mdash; resolusi model bawah permukaan <b>sekitar 50&nbsp;m</b> menjadi target yang masuk akal. (Vp batuan dasar Helsinki terukur 6,39&nbsp;km/s, sehingga nilai &lambda; bergeser sekitar seperempat.)</p>
+        <div class="callout warn">
+          <p><strong>Syarat dan batas.</strong> Resolusi bergantung pada pita frekuensi, geometri sensor, rasio sinyal-derau, dan akurasi model kecepatan. Angka &asymp;&nbsp;50&nbsp;m adalah <em>target yang harus divalidasi</em>, bukan hasil yang sudah terbukti.</p>
+        </div>
+      </section>
+
+      <section class="block prose" aria-label="Data terbuka">
+        <h2>6. Data terbuka untuk berlatih</h2>
+        <p class="kicker">Status akses dan DOI perlu diperiksa pada halaman dataset sebelum dipakai.</p>
+        <table class="t">
+          <tr><th>Sumber</th><th>Data</th></tr>
+          <tr><td class="k">Utah FORGE (Geothermal Data Repository)</td><td>Katalog Meq stimulasi 2022 sumur 16A(78)-32 (ISC, doi:10.31905/52CC4QZB; GDR 1558); DAS 2022 sumur 78-32 dan 78B-32 (GDR 1393); DAS rekaman event Meq uji sirkulasi Juli 2023 (GDR 1747); DAS April 2024, termasuk set Neubrex 10 kS/s (GDR 1680) dan set frekuensi rendah (GDR 1749)</td></tr>
+          <tr><td class="k">St1 Deep Heat (GFZ Data Services)</td><td>Katalog terlokasi ulang beserta parameter sumber, 4.580 event (doi:10.5880/GFZ.4.2.2019.001); katalog resolusi tinggi (Leonhardt dkk., 2021); waveform stasiun GIPP untuk stimulasi 2018 (doi:10.5880/GIPP.201802.1) dan 2020 (doi:10.5880/GIPP.201925.1). Array 12 level OTN-2 (2 kHz) belum terkonfirmasi sebagai data terbuka.</td></tr>
+        </table>
+      </section>
+
+      <section class="block prose" aria-label="Yang belum terbukti">
+        <h2>7. Yang belum terbukti</h2>
+        <ul class="points">
+          <li><b>Mekanisme event.</b> Slip sesar dan event terkait aliran harus dibedakan lewat waveform, statistik, dan waktu terhadap aliran fluida.</li>
+          <li><b>Solusi tidak unik.</b> Kecocokan waktu tempuh tidak berarti kerak sebenarnya pulih; klaim dibatasi pada ekuivalensi waktu tempuh.</li>
+          <li><b>Proksi, bukan nilai absolut.</b> Peta memeringkat struktur aliran aktif; permeabilitas absolut memerlukan kalibrasi independen.</li>
+          <li><b>Resolusi &asymp;&nbsp;50&nbsp;m.</b> Target yang bergantung pada pita frekuensi, geometri sensor, dan model kecepatan; belum divalidasi terhadap feed zone.</li>
+          <li><b>Generalisasi.</b> Data berasal dari stimulasi EGS (Utah, Helsinki); lapangan vulkanik hidrotermal harus diuji tersendiri.</li>
+        </ul>
+      </section>
+
+      <section class="block prose" aria-label="Latihan dan diskusi">
+        <h2>8. Latihan dan pertanyaan diskusi</h2>
+        <p class="kicker">Klik tiap latihan untuk melihat jawaban singkat.</p>
+        <details>
+          <summary>Latihan 1 &mdash; Panjang gelombang</summary>
+          <div>Hitung &lambda; untuk f = 10, 30, dan 100&nbsp;Hz pada V = 5 dan 6,39&nbsp;km/s. <br><b>Jawaban:</b> V = 5&nbsp;km/s: 500, 167, 50&nbsp;m. V = 6,39&nbsp;km/s: 639, 213, 64&nbsp;m.</div>
+        </details>
+        <details>
+          <summary>Latihan 2 &mdash; Permeabilitas ke konduktivitas hidrolik</summary>
+          <div>Ubah k = 10<sup>&minus;17</sup>&nbsp;m&sup2; menjadi K (m/s) untuk air 120&nbsp;&deg;C (&rho; &asymp; 943&nbsp;kg/m&sup3;, &mu; &asymp; 0,23&nbsp;mPa&middot;s) dengan K = k&rho;g/&mu;. <br><b>Jawaban:</b> K &asymp; 10<sup>&minus;17</sup> &times; 943 &times; 9,81 / 2,3&times;10<sup>&minus;4</sup> &asymp; 4&times;10<sup>&minus;10</sup>&nbsp;m/s, tepat di rentang alami Otaniemi.</div>
+        </details>
+        <details>
+          <summary>Latihan 3 &mdash; Kurva belajar sumur</summary>
+          <div>Jika rata-rata keberhasilan lima sumur pertama 59% dan sumur pertama 50%, berapa rata-rata keberhasilan sumur ke-2 sampai ke-5? <br><b>Jawaban:</b> Lima sumur &times; 0,59 &asymp; 2,95 sukses; kurangi 0,5 untuk sumur pertama, sisa &asymp; 2,45 dari empat sumur, atau &asymp; 61%.</div>
+        </details>
+        <details>
+          <summary>Latihan 4 &mdash; Data terbuka</summary>
+          <div>Unduh katalog Utah FORGE 2022 (ISC) dan hitung korelasi dua titik G(r) ~ r<sup>&minus;p</sup> per tahap stimulasi. Periksa kelengkapan magnitudo dan filter kualitas lokasi terhadap hasilnya, lalu diskusikan apakah p mendekati 1.</div>
+        </details>
+        <h3>Pertanyaan diskusi</h3>
+        <ul class="points">
+          <li>Mengapa dua sumur yang berdekatan belum tentu terhubung? Sebutkan dua faktor geologi dan satu faktor reservoir engineering.</li>
+          <li>Bukti apa yang paling meyakinkan untuk membedakan event slip sesar dari event terkait aliran?</li>
+          <li>Apa implikasi koda hiperbolik bagi pemodelan hamburan di lapangan vulkanik hidrotermal?</li>
+          <li>Jika resolusi &asymp;&nbsp;50&nbsp;m tercapai, uji validasi apa yang paling meyakinkan dari sudut geokimia dan reservoir engineering?</li>
+        </ul>
+      </section>
+
+      <section class="block" aria-label="Data dan sumber">
+        <h2>Data &amp; sumber</h2>
+        <div class="callout">
+          <p><strong>Finlandia.</strong> Angka stimulasi, seismisitas, tegangan, dan katalog: Kwiatek dkk. (2019). Angka konduktivitas hidrolik dikutip dari abstrak Kukkonen dkk. (2023). Status 2024: rilis St1.</p>
+          <p><strong>Waveform dan spektrum.</strong> Leary dkk. (2024), Fig. 1&ndash;4, 6, 7 dan 12; data Utah FORGE dari Whidden dkk. (2023) dan data St1 Deep Heat. Gambar dikutip untuk keperluan pengajaran; hak cipta ada pada penulis aslinya.</p>
+          <p><strong>Lisensi gambar.</strong> Gambar Kwiatek dkk. (2019) berlisensi CC BY-NC 4.0 dan dipotong dari aslinya. Ilustrasi model kerak dan analisis produksi minyak adalah karya penulis.</p>
+        </div>
+        <p class="source-note">Catatan: materi ini merangkum hipotesis GeoFlow Imaging yang masih diuji, bukan konsensus. Angka resolusi &asymp;&nbsp;50&nbsp;m adalah target, bukan hasil terbukti. Disiapkan untuk keperluan pendidikan.</p>
+
+        <h3>Rujukan</h3>
+        <ol class="refs">
+          <li>Kwiatek, G. dkk. (2019). Controlling fluid-induced seismicity during a 6.1-km-deep geothermal stimulation in Finland. <i>Science Advances</i> 5, eaav7224. doi:10.1126/sciadv.aav7224</li>
+          <li>Kukkonen, I. T. dkk. (2023). Hydraulic conductivity of the crystalline crust: insights from hydraulic stimulation and induced seismicity of an enhanced geothermal system pilot reservoir at 6 km depth, Espoo, southern Finland. <i>Geothermics</i>.</li>
+          <li>Leary, P., Malin, P., Geiser, P., Sicking, C. (2024). Deep seismic sensor stimulation wavefield empirics for ambient crust surface seismic flow imaging. <i>Proc. 49th Workshop on Geothermal Reservoir Engineering</i>, Stanford University.</li>
+          <li>Leary, P., Malin, P. (2022). Observation of Meq hHz coda in the ambient crust &mdash; implications for surface seismic array flow imaging. <i>Proc. 47th Workshop on Geothermal Reservoir Engineering</i>, SGP-TR-223.</li>
+          <li>Whidden, K., Petersen, G., Pankow, K. (2023). Seismic monitoring of the 2022 Utah FORGE stimulation (dikutip pada Leary dkk., 2024).</li>
+          <li>Dyer, B., Karvounis, D., Bethmann, F. (2023). Microseismic event catalogues from the well 16A(78)-32 stimulation in April 2022, Utah FORGE. ISC Dataset Repository. doi:10.31905/52CC4QZB</li>
+          <li>IFC (2013). <i>Success of Geothermal Wells: A Global Study</i>. International Finance Corporation.</li>
+          <li>Arps, J. J. (1945). Analysis of decline curves. <i>Transactions of the AIME</i> 160, 228&ndash;247.</li>
+        </ol>
+      </section>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Geoscience Research Group, Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
