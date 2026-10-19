@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ketidakpastian Inversi Vs dari HVSR dan SPAC — Pelatihan Pegawai BRIN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0}
+  html,body{height:100%;background:#0d151b;font-family:'Montserrat',sans-serif;overflow:hidden}
+  #stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;
+    transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center center}
+  #stage>section{position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box}
+  #stage>section.off{display:none!important}
+  #stage section *{margin:0}
+  #stage section table{border-collapse:collapse;width:100%}
+  #stage section th,#stage section td{padding:.35em .6em;text-align:left;border-bottom:1px solid #d6cfbc;vertical-align:top}
+  #stage section th{font-weight:600}
+  #stage section ul{padding-left:1.15em}
+  #stage section li{margin-bottom:.35em}
+  #stage section hr{border:0}
+  #stage section img{display:block}
+  .ui{position:fixed;left:0;right:0;bottom:10px;display:flex;justify-content:center;align-items:center;gap:14px;
+    font:500 13px/1 'Montserrat',sans-serif;color:#b9c4cb;pointer-events:none}
+  .ui button{pointer-events:auto;background:rgba(13,21,27,.6);color:#e9eef1;border:1px solid rgba(255,255,255,.25);
+    border-radius:4px;width:34px;height:28px;font:600 16px/1 'Montserrat',sans-serif;cursor:pointer}
+  .ui button:hover{background:rgba(13,21,27,.9)}
+  @page{size:1920px 1080px;margin:0}
+  @media print{
+    html,body{height:auto;overflow:visible;background:#fff}
+    #stage{position:static;transform:none;width:1920px;height:auto}
+    #stage>section.off{display:flex!important}
+    #stage>section{break-after:page;page-break-after:always;break-inside:avoid}
+    #stage>section:last-child{break-after:auto;page-break-after:auto}
+    .ui{display:none}
+  }
+</style>
+</head>
+<body>
+<main id="stage" aria-label="Presentasi">
+<section id="cover" data-transition="fade" style="background:#14212b;color:#f1ede4;font-family:'Montserrat', sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<p style="font-size:24px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:#e0925a">Pelatihan Pegawai BRIN</p>
+<div style="display:flex;flex-direction:column;gap:36px">
+<h1 style="font-family:'Montserrat', sans-serif;font-size:88px;font-weight:600;line-height:1.1;color:#f1ede4">Ketidakpastian Inversi Vs<br>dari HVSR dan SPAC</h1>
+<hr style="width:160px;border-top:6px solid #e0925a">
+<p style="font-size:36px;line-height:1.35;color:#a9b8c2;width:1300px">Prinsip, kasus Bantul, dan cara melaporkan model Vs beserta ketidakpastiannya</p>
+</div>
+<p style="font-size:28px;color:#a9b8c2">Ir. Wiwit Suryanto · Lab. Geofisika UGM · 27 Oktober 2026</p>
+</section>
+<section id="hook" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Pertanyaan pemantik</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Vs30 di IMO: 346 atau 620 m/s?</h2>
+</div>
+<div style="background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:16px">
+<img src="assets/prior-geologi-vs-generik.png" alt="Dua inversi data HVSR IMO yang sama: prior generik memberi Vs30 sekitar 620 m/s, prior dari log bor memberi sekitar 346 m/s" style="width:1632px;height:513px;object-fit:contain">
+</div>
+<p style="font-size:28px;line-height:1.4;color:#1c2a33">Satu rekaman HVSR nyata (IMO, 2006), dua prior berbeda, kecocokan data sama baik.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">02</p>
+</section>
+<section id="agenda" data-transition="fade" style="background:#ebe6da;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Pembuka</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Peta Presentasi</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#ffffff;border:1px solid #d6cfbc;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center">
+<p style="font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;color:#1f5fa8">1</p>
+<h3 style="font-size:34px;font-weight:600;line-height:1.15;color:#14212b">Data dan prinsip</h3>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#5b6a73">Apa yang diukur dan seberapa baik datanya</p>
+</div>
+<div style="background:#ffffff;border:1px solid #d6cfbc;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center">
+<p style="font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;color:#1f5fa8">2</p>
+<h3 style="font-size:34px;font-weight:600;line-height:1.15;color:#14212b">Forward model</h3>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#5b6a73">Dari model bumi 1D ke kurva HVSR</p>
+</div>
+<div style="background:#ffffff;border:1px solid #d6cfbc;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center">
+<p style="font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;color:#1f5fa8">3</p>
+<h3 style="font-size:34px;font-weight:600;line-height:1.15;color:#14212b">Parameterisasi dan prior</h3>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#5b6a73">Jumlah lapisan, batas Vs, peran geolog</p>
+</div>
+<div style="background:#ffffff;border:1px solid #d6cfbc;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center">
+<p style="font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;color:#1f5fa8">4</p>
+<h3 style="font-size:34px;font-weight:600;line-height:1.15;color:#14212b">Inversi dan non-unikness</h3>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#5b6a73">Satu data, banyak model; tambahan SPAC</p>
+</div>
+<div style="background:#ffffff;border:1px solid #d6cfbc;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center">
+<p style="font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;color:#1f5fa8">5</p>
+<h3 style="font-size:34px;font-weight:600;line-height:1.15;color:#14212b">Posterior dan Vs30</h3>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#5b6a73">Dari satu garis ke distribusi dan kelas SNI</p>
+</div>
+<div style="background:#ffffff;border:1px solid #d6cfbc;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center">
+<p style="font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;color:#1f5fa8">6</p>
+<h3 style="font-size:34px;font-weight:600;line-height:1.15;color:#14212b">Kasus dan pelaporan</h3>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#5b6a73">Validasi, keterbatasan, template laporan</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#1c2a33">Benang merah: data mikrotremor → model Vs → seberapa yakin kita → cara memakainya bersama geolog.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">03</p>
+</section>
+<section id="peta-ketidakpastian" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Kerangka</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Peta Sumber Ketidakpastian</h2>
+</div>
+<table style="font-family:'Montserrat', sans-serif;font-size:26px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:30%">Sumber</th><th style="width:38%">Contoh pada kasus Bantul</th><th style="width:32%">Cara menangani</th></tr>
+<tr><td>Noise data (aleatorik)</td><td>Antar-malam ±0,03–0,08 ln H/V</td><td>Error bar realistis</td></tr>
+<tr><td>Teori forward HVSR (epistemik)</td><td>Hanya ellipticity Rayleigh</td><td>Bandingkan teori, tambah σ_extra</td></tr>
+<tr><td>Parameterisasi (epistemik)</td><td>Halfspace 25–73 m untuk 2–5 lapisan</td><td>Multi-parameterisasi, trans-D</td></tr>
+<tr><td>Prior dan batas (subjektif)</td><td>Vs30 IMO 346 atau 620 m/s</td><td>Uji sensitivitas prior</td></tr>
+<tr><td>Asumsi medan SPAC (bias)</td><td>Mode dasar, sumber merata</td><td>Cek konsistensi, mode tinggi</td></tr>
+<tr><td>Picking dan numerik</td><td>AJ2 ditolak oleh QC</td><td>QC, replikasi analis, R-hat</td></tr>
+</table>
+<p style="font-size:26px;color:#5b6a73">Aleatorik: acak. Epistemik: keterbatasan asumsi dan pengetahuan.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">04</p>
+</section>
+<section id="data-kasus" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Data dan prinsip</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Data Studi Kasus</h2>
+</div>
+<table style="font-family:'Montserrat', sans-serif;font-size:28px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:26%">Bor</th><th style="width:32%">Stasiun terdekat</th><th style="width:14%">Jarak</th><th style="width:28%">Data</th></tr>
+<tr><td>1 Banyusumurup</td><td>IMO (2006)</td><td>0,8 km</td><td>9 malam</td></tr>
+<tr><td>5 Muntuk</td><td>WON (2006)</td><td>2,8 km</td><td>9 malam</td></tr>
+<tr><td>4 Kebosungu</td><td>PAL (2006), AI1 (2004)</td><td>3,7 km</td><td>10 dan 9 malam</td></tr>
+<tr><td>8 Purwosari</td><td>AJ2 (2004)</td><td>4,6 km</td><td>ditolak QC</td></tr>
+<tr><td>2, 3, 6, 7</td><td>tidak ada stasiun layak</td><td>-</td><td>-</td></tr>
+</table>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:row"><p style="font-size:24px;font-weight:600;letter-spacing:2px;color:#ffffff;background:#1f5fa8;padding:6px 16px;border-radius:20px">NYATA</p></div>
+<p style="font-size:26px;line-height:1.4">HVSR dari noise kontinu stasiun seismik temporer</p>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:row"><p style="font-size:24px;font-weight:600;letter-spacing:2px;color:#ffffff;background:#a8480f;padding:6px 16px;border-radius:20px">ASUMSI</p></div>
+<p style="font-size:26px;line-height:1.4">Vs per litologi dari log bor; log tidak memuat Vs</p>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:row"><p style="font-size:24px;font-weight:600;letter-spacing:2px;color:#ffffff;background:#5b6a73;padding:6px 16px;border-radius:20px">SINTETIK</p></div>
+<p style="font-size:26px;line-height:1.4">Dispersi SPAC; kebenaran ditetapkan dari litologi bor 1</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Stasiun tidak berada di titik bor (0,8–3,7 km): baca kesimpulan per titik dengan ini.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">05</p>
+</section>
+<section id="vs-sni" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Data dan prinsip</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Vs dan Klasifikasi Situs</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="width:904px">
+<table style="font-family:'Montserrat', sans-serif;font-size:28px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:14%">Kelas</th><th style="width:30%">Vs30 (m/s)</th><th style="width:56%">Material</th></tr>
+<tr><td>SA</td><td>lebih dari 1500</td><td>Batuan keras</td></tr>
+<tr><td>SB</td><td>750–1500</td><td>Batuan</td></tr>
+<tr><td>SC</td><td>350–750</td><td>Tanah sangat padat dan batuan lunak</td></tr>
+<tr><td>SD</td><td>175–350</td><td>Tanah sedang</td></tr>
+<tr><td>SE</td><td>kurang dari 175</td><td>Tanah lunak</td></tr>
+</table>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'Montserrat', sans-serif;font-size:40px;font-weight:600;color:#1f5fa8">Vs30 = 30 / Σ (hᵢ / Vsᵢ)</p>
+<p style="font-size:28px;line-height:1.4">Rata-rata harmonik: waktu tempuh gelombang geser di 30 m teratas.</p>
+<p style="font-size:28px;line-height:1.4;font-weight:600;color:#a8480f">Lapisan lambat yang dangkal mendominasi Vs30, dan itu bagian yang paling sulit dijangkau mikrotremor.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Klasifikasi situs SNI 1726:2019 (kelas SF, situs khusus, tidak ditampilkan)</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">06</p>
+</section>
+<section id="dua-jendela" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Data dan prinsip</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Dua Jendela ke Bawah Permukaan</h2>
+</div>
+<table style="font-family:'Montserrat', sans-serif;font-size:28px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:18%"></th><th style="width:41%">HVSR (satu stasiun)</th><th style="width:41%">SPAC (array)</th></tr>
+<tr><td>Mengukur</td><td>Frekuensi resonansi f₀ dan bentuk kurva</td><td>Kurva dispersi kecepatan fase</td></tr>
+<tr><td>Mengikat</td><td>Rasio Vs/H, bukan keduanya</td><td>Vs(z) pada kedalaman yang dijangkau</td></tr>
+<tr><td>Kelebihan</td><td>Murah, cepat, satu titik</td><td>Kuantitatif untuk Vs absolut</td></tr>
+<tr><td>Kelemahan</td><td>Trade-off Vs–H, bergantung teori</td><td>Butuh ruang dan array; jangkauan dibatasi aperture</td></tr>
+</table>
+<p style="font-family:'Montserrat', sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#1f5fa8">Bersama-sama, keduanya memisahkan Vs dari H.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">07</p>
+</section>
+<section id="vs-h-konsep" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Data dan prinsip</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Trade-off Vs dan Ketebalan</h2>
+</div>
+<p style="font-family:'Montserrat', sans-serif;font-size:96px;font-weight:600;line-height:1.1;color:#1f5fa8">f₀ ≈ Vs / 4H</p>
+<p style="font-size:28px;line-height:1.4;width:1500px;color:#1c2a33">Satu lapisan di atas halfspace dengan kontras impedansi cukup besar (kira-kira lebih dari 2–3).</p>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;color:#14212b">5 Hz</p>
+<p style="font-size:30px;color:#1c2a33">Vs = 150 m/s, H = 7,5 m</p>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;color:#14212b">5 Hz</p>
+<p style="font-size:30px;color:#1c2a33">Vs = 300 m/s, H = 15 m</p>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;color:#14212b">5 Hz</p>
+<p style="font-size:30px;color:#1c2a33">Vs = 600 m/s, H = 30 m</p>
+</div>
+</div>
+<p style="font-family:'Montserrat', sans-serif;font-size:40px;font-weight:600;color:#a8480f">Satu f₀, banyak pasangan (Vs, H).</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">08</p>
+</section>
+<section id="akuisisi-olah" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Data dan prinsip</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Akuisisi dan Pengolahan</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:40px;font-weight:600;color:#1f5fa8">HVSR</h3>
+<ul style="font-size:28px;line-height:1.4">
+<li>Durasi dan kopling sensor mengikuti pedoman SESAME</li>
+<li>Jendela, anti-trigger, smoothing Konno–Ohmachi</li>
+<li>Kriteria SESAME menilai puncak, bukan seluruh kurva</li>
+<li>Amplitudo puncak bukan faktor amplifikasi</li>
+</ul>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:40px;font-weight:600;color:#1f5fa8">SPAC</h3>
+<ul style="font-size:28px;line-height:1.4">
+<li>Aperture menentukan λ maksimum, spasi minimum menentukan λ minimum</li>
+<li>ρ(r, ω) = J₀(ωr / c(ω))</li>
+<li>Mengandaikan komponen vertikal, mode dasar Rayleigh, medan stasioner</li>
+<li>Pelanggaran asumsi memberi bias sistematik, bukan acak</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">09</p>
+</section>
+<section id="kualitas-data" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Data dan prinsip</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Kualitas Data HVSR</h2>
+</div>
+<div style="background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:16px">
+<img src="assets/hvsr-observasi.png" alt="HVSR observasi di lima stasiun: IMO, WON, PAL, AI1 stabil antar-malam, AJ2 sangat tersebar" style="width:1632px;height:367px;object-fit:contain">
+</div>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:28px">
+<p style="font-size:26px;line-height:1.4">IMO, WON, PAL, AI1: kurva stabil antar-malam (σ 0,03–0,08 ln).</p>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:28px">
+<p style="font-size:26px;line-height:1.4">AI1 (2004) dan PAL (2006), situs sama: puncak lemah yang sama sekitar 5 Hz.</p>
+</div>
+<div style="flex:1;background:#ffffff;border:2px solid #a8480f;border-radius:16px;padding:28px">
+<p style="font-size:26px;line-height:1.4">AJ2: kanal horizontal makin berisik sepanjang kampanye; dikeluarkan.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Noise malam (00–04 WIB), jendela 60 s, geometric mean horizontal; band abu-abu di bawah 1,3 Hz tidak dipakai.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">10</p>
+</section>
+<section id="galat-data" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Data dan prinsip</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Galat Data HVSR</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'Montserrat', sans-serif;font-size:96px;font-weight:600;line-height:1.1;color:#5b6a73">±0,24</p>
+<p style="font-size:28px;line-height:1.4">sebaran antar-jendela 60 s pada IMO</p>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'Montserrat', sans-serif;font-size:96px;font-weight:600;line-height:1.1;color:#a8480f">±0,004</p>
+<p style="font-size:28px;line-height:1.4">galat rata-rata bila 4.158 jendela dianggap independen</p>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'Montserrat', sans-serif;font-size:96px;font-weight:600;line-height:1.1;color:#1f5fa8">±0,084</p>
+<p style="font-size:28px;line-height:1.4">sebaran antar-malam (9 malam)</p>
+</div>
+</div>
+<p style="font-family:'Montserrat', sans-serif;font-size:40px;font-weight:600;line-height:1.25;color:#14212b">Jendela dalam satu malam tidak independen. Galat yang jujur adalah galat antar-malam, lebih dari 20 kali galat naif.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Satuan ln(H/V), median pada 1,3–25 Hz, stasiun IMO.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">11</p>
+</section>
+<section id="model-forward" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Forward model</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Model Forward dan Teori HVSR</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="width:640px;display:flex;flex-direction:column;gap:8px">
+<p style="background:#dbe7f3;color:#14212b;font-size:28px;padding:18px 24px;border-radius:8px">Lapisan 1: Vs₁, h₁</p>
+<p style="background:#a9c4e0;color:#14212b;font-size:28px;padding:18px 24px;border-radius:8px">Lapisan 2: Vs₂, h₂</p>
+<p style="background:#5f8fc4;color:#ffffff;font-size:28px;padding:18px 24px;border-radius:8px">Lapisan 3: Vs₃, h₃</p>
+<p style="background:#1f4a7e;color:#ffffff;font-size:28px;padding:18px 24px;border-radius:8px">Halfspace: Vs, ν, ρ</p>
+<p style="font-size:26px;line-height:1.4;color:#5b6a73">Data paling sensitif terhadap Vs dan h; Vp (ν) dan ρ jauh lebih lemah.</p>
+</div>
+<div style="flex:1">
+<table style="font-family:'Montserrat', sans-serif;font-size:26px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:28%">Teori</th><th style="width:36%">Asumsi</th><th style="width:36%">Catatan</th></tr>
+<tr><td>Ellipticity Rayleigh</td><td>Hanya Rayleigh mode dasar</td><td>Dipakai pada kasus ini</td></tr>
+<tr><td>SH transfer function</td><td>Gelombang SH vertikal</td><td>Proxy f₀, bukan HVSR noise</td></tr>
+<tr><td>Diffuse field (DFA)</td><td>Medan difus: Rayleigh, Love, gelombang badan</td><td>Amplitudo berbeda dari ellipticity</td></tr>
+</table>
+</div>
+</div>
+<p style="font-family:'Montserrat', sans-serif;font-size:36px;font-weight:600;line-height:1.25;color:#1f5fa8">Pilihan teori adalah asumsi, dan asumsi adalah sumber ketidakpastian epistemik.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">12</p>
+</section>
+<section id="jumlah-lapisan" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Parameterisasi dan prior</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Jumlah Lapisan</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="width:1120px;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:16px">
+<img src="assets/jumlah-lapisan-imo.png" alt="Inversi HVSR IMO dengan 2, 3, 4, dan 5 lapisan dan prior generik: Vs(z) dan Vs30" style="width:1088px;height:560px;object-fit:contain">
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Montserrat', sans-serif;font-size:34px;font-weight:600;color:#1f5fa8">591 / 602 / 623 / 592</p>
+<p style="font-size:26px;line-height:1.4">Vs30 median (m/s) untuk 2, 3, 4, 5 lapisan</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Montserrat', sans-serif;font-size:34px;font-weight:600;color:#a8480f">25 → 73 m</p>
+<p style="font-size:26px;line-height:1.4">kedalaman halfspace median, dari 2 hingga 5 lapisan</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Montserrat', sans-serif;font-size:34px;font-weight:600;color:#14212b">BIC −32, −34, −26, −23</p>
+<p style="font-size:26px;line-height:1.4">selisih kecil; BIC mengandaikan galat independen</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Data HVSR IMO sama; prior generik tanpa pengetahuan geologi.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">13</p>
+</section>
+<section id="param-bebas" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Parameterisasi dan prior</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Parameter Bebas dan Terkunci</h2>
+</div>
+<table style="font-family:'Montserrat', sans-serif;font-size:28px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:30%">Parameter</th><th style="width:28%">Sensitivitas data</th><th style="width:42%">Perlakuan di kasus ini</th></tr>
+<tr><td>Vs dan ketebalan h</td><td>Tinggi</td><td>Dicari dari data</td></tr>
+<tr><td>Vp (rasio Poisson ν)</td><td>Lemah, terasa di HVSR</td><td>Satu ν bersama, prior 0,30–0,49</td></tr>
+<tr><td>Densitas ρ</td><td>Sangat lemah</td><td>Relasi Gardner, tidak dicari</td></tr>
+<tr><td>Galat tambahan σ_extra</td><td>Tidak berlaku</td><td>Dicari dari data, prior 0–0,5 ln</td></tr>
+</table>
+<div style="background:#ffffff;border:2px solid #a8480f;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'Montserrat', sans-serif;font-size:36px;font-weight:600;line-height:1.2;color:#a8480f">Jangan mengunci diam-diam: uji sensitivitas terhadap ν, ρ, dan batas prior.</p>
+<p style="font-size:28px;line-height:1.4">Pada IMO, ν menempel batas bawah prior 0,30 (45% sampel): tanda teori atau prior tidak cocok dengan data.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">14</p>
+</section>
+<section id="prior-bor" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Parameterisasi dan prior</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Prior dari Log Bor</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:32px;font-weight:600;color:#14212b">Bor 1 · sedimen lunak</h3>
+<p style="font-size:24px;color:#5b6a73;margin:0">dipasangkan dengan IMO</p>
+<p style="font-size:26px;line-height:1.5;font-variant-numeric:tabular-nums">L1: h 2–8, Vs 80–220<br>L2: h 8–30, Vs 120–320<br>L3: h 15–50, Vs 180–500<br>L4: h 20–80, Vs 220–650<br>HS: Vs 300–1400</p>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:32px;font-weight:600;color:#14212b">Bor 5 · batu pasir, breksi</h3>
+<p style="font-size:24px;color:#5b6a73">dipasangkan dengan WON</p>
+<p style="font-size:26px;line-height:1.5;font-variant-numeric:tabular-nums">L1: h 1–5, Vs 80–250<br>L2: h 5–30, Vs 250–700<br>L3: h 15–80, Vs 500–1400<br>HS: Vs 700–2000</p>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:32px;font-weight:600;color:#14212b">Bor 4 · batugamping</h3>
+<p style="font-size:24px;color:#5b6a73">dipasangkan dengan PAL dan AI1</p>
+<p style="font-size:26px;line-height:1.5;font-variant-numeric:tabular-nums">L1: h 1–6, Vs 80–250<br>L2: h 5–30, Vs 250–800<br>L3: h 20–80, Vs 500–1500<br>HS: Vs 800–2200</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center">
+<p style="font-size:24px;font-weight:600;letter-spacing:2px;color:#ffffff;background:#a8480f;padding:6px 16px;border-radius:20px">ASUMSI</p>
+<p style="font-size:28px;line-height:1.4">Rentang dari litologi, bukan pengukuran. h dalam m, Vs dalam m/s.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketebalan log-seragam, Vs seragam; lapisan lebih lunak dari di atasnya diizinkan.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">15</p>
+</section>
+<section id="prediksi-litologi" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Parameterisasi dan prior</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Prediksi dari Litologi</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="width:832px;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:16px">
+<img src="assets/prediksi-litologi-vs-observasi.png" alt="HVSR IMO teramati dibandingkan prediksi dari model Vs berbasis litologi bor 1: prediksi memiliki puncak kuat sekitar 1,3 Hz yang tidak teramati" style="width:800px;height:560px;object-fit:contain">
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-family:'Montserrat', sans-serif;font-size:40px;font-weight:600;line-height:1.2;color:#14212b">Model dari log bor 1 tidak memprediksi HVSR IMO</h3>
+<p style="font-size:28px;line-height:1.4"><b>Prediksi:</b> puncak kuat sekitar 1,3 Hz, lalu H/V 0,45–0,85 pada 3–10 Hz.</p>
+<p style="font-size:28px;line-height:1.4"><b>Observasi:</b> tanpa puncak di 1,3 Hz, H/V 1,0–1,6 pada 3–10 Hz.</p>
+<p style="font-size:28px;line-height:1.4">Tiga kemungkinan: litologi berbeda dalam 0,8 km, prior Vs terlalu lunak, atau keterbatasan teori.</p>
+<p style="font-size:28px;line-height:1.4;font-weight:600;color:#a8480f">HVSR saja tidak memilah ketiganya.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Merah: model Vs dari litologi bor 1 (asumsi), ν 0,35–0,45. Hitam: IMO, 9 malam.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">16</p>
+</section>
+<section id="prior-batas" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Parameterisasi dan prior</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Prior dan Batas Pencarian</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="width:1016px;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:16px">
+<img src="assets/inversi-imo.png" alt="Inversi HVSR IMO dengan prior dari log bor 1: kecocokan data, Vs(z) posterior terhadap prior, resolusi per kedalaman, Vs30, dan peringatan menempel batas prior" style="width:984px;height:560px;object-fit:contain">
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;line-height:1.1;color:#a8480f">500 m/s</p>
+<p style="font-size:26px;line-height:1.4">Vs lapisan ke-3 menempel batas atas prior (53% sampel)</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;line-height:1.1;color:#1f5fa8">329–360</p>
+<p style="font-size:26px;line-height:1.4">Vs30 posterior (m/s), di luar rentang prior 149–300</p>
+</div>
+<p style="font-family:'Montserrat', sans-serif;font-size:36px;font-weight:600;line-height:1.2;color:#14212b">Lebar sempit berasal dari prior, bukan dari data.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">IMO 2006 dengan prior bor 1. Garis hijau: batas litologi bor. Posterior 5–95%.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">17</p>
+</section>
+<section id="pesan-prior" data-transition="fade" style="background:#b8501a;color:#ffffff;font-family:'Montserrat', sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:40px">
+<p style="font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#ffffff">Pesan kunci</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:96px;font-weight:600;line-height:1.1;color:#ffffff">Parameterisasi dan prior adalah hipotesis geologi yang diuji dengan data.</h2>
+<p style="font-size:36px;line-height:1.35;color:#ffffff">Libatkan geolog sejak awal, bukan sesudah inversi selesai.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#ffffff;text-align:right">18</p>
+</section>
+<section id="formulasi" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Inversi</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Formulasi Inversi</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:32px;font-weight:600;color:#14212b">Misfit dan galat</h3>
+<p style="font-family:'Montserrat', sans-serif;font-size:36px;font-weight:600;line-height:1.2;color:#1f5fa8">χ² = Σ ((d_obs − d_pred) / σ)²</p>
+<p style="font-family:'Montserrat', sans-serif;font-size:36px;font-weight:600;line-height:1.2;color:#1f5fa8">σ² = σ_data² + σ_extra²</p>
+<p style="font-size:28px;line-height:1.4">σ_data: galat antar-malam. σ_extra: dicari dari data, menyerap galat teori yang tak tercatat.</p>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:32px;font-weight:600;color:#14212b">Cara mencari</h3>
+<ul style="font-size:28px;line-height:1.4">
+<li>Lokal (linearisasi): cepat, bergantung model awal</li>
+<li>Global (NA, GA, PSO, SA): mencari model yang cocok</li>
+<li>MCMC: mengambil sampel distribusi posterior</li>
+</ul>
+<p style="font-size:28px;line-height:1.4;font-weight:600;color:#a8480f">Pencarian global saja bukan kuantifikasi ketidakpastian.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Di sini: DE-MC, 24–26 rantai dalam 4 ensemble independen per kasus.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">19</p>
+</section>
+<section id="ensemble-posterior" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Inversi</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Ensemble dan Posterior</h2>
+</div>
+<table style="font-family:'Montserrat', sans-serif;font-size:28px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:18%"></th><th style="width:41%">Ensemble "misfit di bawah ambang"</th><th style="width:41%">Posterior Bayes (MCMC)</th></tr>
+<tr><td>Isi</td><td>Model dengan misfit di bawah ambang</td><td>Distribusi peluang p(m | d)</td></tr>
+<tr><td>Hasil</td><td>Himpunan model, tanpa peluang</td><td>Median, interval kredibel, peluang kelas</td></tr>
+<tr><td>Bergantung</td><td>Ambang misfit, batas pencarian, iterasi</td><td>Prior, likelihood (galat), konvergensi</td></tr>
+<tr><td>Diperiksa</td><td>Sebaran bukan interval kredibel</td><td>R-hat, beberapa ensemble</td></tr>
+</table>
+<p style="font-family:'Montserrat', sans-serif;font-size:40px;font-weight:600;line-height:1.2;color:#a8480f">Sebaran ensemble bukan interval kredibel.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">NA-II (Sambridge 1999) dapat memberi penilaian Bayesian, tetapi jarang yang ditampilkan.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">20</p>
+</section>
+<section id="non-unik" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Inversi</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Non-unikness pada Data Nyata</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="width:733px;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:16px">
+<img src="assets/vs-h-tradeoff.png" alt="Sampel posterior IMO (2 lapisan) tersusun sepanjang garis f = Vs/4H: tebal total lapisan terhadap Vs rata-rata" style="width:701px;height:580px;object-fit:contain">
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<h3 style="font-family:'Montserrat', sans-serif;font-size:40px;font-weight:600;line-height:1.2;color:#14212b">Posterior IMO tersusun sepanjang garis f = Vs/4H</h3>
+<p style="font-size:28px;line-height:1.4">Tebal 15–31 m dengan Vs rata-rata 310–670 m/s sama-sama cocok dengan data.</p>
+<p style="font-size:28px;line-height:1.4">Semuanya memberi f = Vs/4H sekitar 5,0–5,7 Hz, mendekati puncak 6 Hz yang teramati.</p>
+<p style="font-size:28px;line-height:1.4;font-weight:600;color:#a8480f">Inversi tidak menemukan satu model; ia menemukan punggung kesesuaian.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">IMO 2006, 2 lapisan, prior generik. Warna: ln-likelihood. Angka: persentil 5–95%.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">21</p>
+</section>
+<section id="gabungan-sintetik" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Inversi</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Inversi Gabungan HVSR dan SPAC</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="width:930px;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:16px">
+<img src="assets/sintetik-gabungan.png" alt="Inversi sintetik dari log bor 1: hanya HVSR, hanya SPAC, dan gabungan, dibandingkan dengan model sebenarnya" style="width:898px;height:590px;object-fit:contain">
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:row"><p style="font-size:24px;font-weight:600;letter-spacing:2px;color:#ffffff;background:#5b6a73;padding:6px 16px;border-radius:20px">SINTETIK</p></div>
+<table style="font-family:'Montserrat', sans-serif;font-size:28px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:50%">Data</th><th style="width:50%">Vs30 P5–P95</th></tr>
+<tr><td>HVSR saja</td><td>147–266</td></tr>
+<tr><td>SPAC saja</td><td>171–188</td></tr>
+<tr><td>Gabungan</td><td>174–182</td></tr>
+<tr><td>Kebenaran</td><td>176</td></tr>
+</table>
+<p style="font-size:26px;line-height:1.4">Noise acak sama dengan galat yang diasumsikan: skenario terbaik. Rentang gabungan masih melintasi batas SE/SD di 175.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Sintetik dari log bor 1; Vs ditetapkan dari litologi, bukan terukur. Satuan m/s.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">22</p>
+</section>
+<section id="pembobotan" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Inversi</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Pembobotan Data Gabungan</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="width:760px;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:row"><p style="font-size:24px;font-weight:600;letter-spacing:2px;color:#ffffff;background:#5b6a73;padding:6px 16px;border-radius:20px">SINTETIK</p></div>
+<table style="font-family:'Montserrat', sans-serif;font-size:28px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:36%">Bobot HVSR</th><th style="width:64%">Vs30 P5 / P50 / P95 (m/s)</th></tr>
+<tr><td>0,3</td><td>174 / 177 / 184</td></tr>
+<tr><td>1</td><td>174 / 177 / 182</td></tr>
+<tr><td>3</td><td>173 / 177 / 180</td></tr>
+</table>
+<p style="font-size:26px;line-height:1.4;color:#5b6a73">Kebenaran 176 m/s. Data konsisten: bobot hampir tidak berpengaruh.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#a8480f">Presisi bukan akurasi.</p>
+<p style="font-size:28px;line-height:1.4">Bila data tidak konsisten (footprint HVSR dan SPAC berbeda, struktur lateral), satu data bisa mendominasi: posterior sempit tetapi bias.</p>
+<p style="font-size:28px;line-height:1.4;font-weight:600">Periksa: invert tiap data sendiri dulu, lihat tumpang tindih posteriornya.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">23</p>
+</section>
+<section id="bayes-konvergensi" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Posterior dan Vs30</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Dari Satu Model ke Distribusi</h2>
+</div>
+<p style="font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;line-height:1.1;color:#1f5fa8">p(m | d) ∝ p(d | m) · p(m)</p>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:center">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Montserrat', sans-serif;font-size:40px;font-weight:600;color:#14212b">Prior</p>
+<p style="font-size:28px;line-height:1.4">pengetahuan geologi sebelum mengukur</p>
+</div>
+<p style="font-family:'Montserrat', sans-serif;font-size:64px;color:#5b6a73">×</p>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Montserrat', sans-serif;font-size:40px;font-weight:600;color:#14212b">Likelihood</p>
+<p style="font-size:28px;line-height:1.4">data dan galatnya</p>
+</div>
+<p style="font-family:'Montserrat', sans-serif;font-size:64px;color:#5b6a73">=</p>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Montserrat', sans-serif;font-size:40px;font-weight:600;color:#1f5fa8">Posterior</p>
+<p style="font-size:28px;line-height:1.4">pengetahuan kita setelah mengukur</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.4"><b>Konvergensi:</b> R-hat 1,00–1,02 untuk Vs30 dan lnL pada semua 15 run, dari 4 ensemble independen per run.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">DE-MC (ter Braak 2006), burn-in 50%, 24–26 rantai per ensemble.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">24</p>
+</section>
+<section id="baca-posterior" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Posterior dan Vs30</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Membaca Posterior</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="width:1016px;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:16px">
+<img src="assets/inversi-won.png" alt="Inversi HVSR WON dengan prior bor 5: kecocokan, Vs(z) posterior terhadap prior, resolusi per kedalaman, Vs30, dan interface terkuat" style="width:984px;height:560px;object-fit:contain">
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;line-height:1.1;color:#1f5fa8">2–3 m</p>
+<p style="font-size:26px;line-height:1.4">interface terkuat di WON; topsoil bor 5 setebal 2,2 m (jarak 2,8 km)</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;line-height:1.1;color:#a8480f">0,35–0,65</p>
+<p style="font-size:26px;line-height:1.4">rasio lebar interval posterior terhadap prior di bawah 40 m: informasi data di sana terbatas</p>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#5b6a73">Baca: densitas Vs(z) terhadap prior (b), rasio lebar (c), interface terkuat (e).</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">WON 2006 dengan prior bor 5. Vs30 P5/P50/P95: 423 / 564 / 647 m/s (prior 310–721).</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">25</p>
+</section>
+<section id="reproduksi" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Posterior dan Vs30</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Reproduksi Antar-Kampanye</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="width:1016px;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:16px">
+<img src="assets/inversi-pal.png" alt="Inversi HVSR PAL 2006 dengan prior bor 4: kecocokan, Vs(z) posterior terhadap prior, resolusi, Vs30, interface terkuat" style="width:984px;height:560px;object-fit:contain">
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<table style="font-family:'Montserrat', sans-serif;font-size:26px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:38%"></th><th style="width:31%">PAL 2006</th><th style="width:31%">AI1 2004</th></tr>
+<tr><td>Vs30 P50</td><td>448</td><td>424</td></tr>
+<tr><td>Vs30 P5–P95</td><td>391–606</td><td>398–729</td></tr>
+<tr><td>Interface terkuat</td><td>15 m</td><td>13 m</td></tr>
+<tr><td>Kelas SC</td><td>0,98</td><td>0,97</td></tr>
+</table>
+<p style="font-size:28px;line-height:1.4">Situs sama, dua tahun berselang: median Vs30 berbeda 24 m/s (5%).</p>
+<p style="font-size:26px;line-height:1.4;color:#5b6a73">AI1 punya ekor atas lebih panjang dan Vs halfspace menempel batas bawah prior.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Figur: PAL 2006 dengan prior bor 4. Vs30 dalam m/s; interface: kontras Vs terkuat.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">26</p>
+</section>
+<section id="vs30-kelas" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Posterior dan Vs30</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Vs30 dan Kelas SNI</h2>
+</div>
+<table style="font-family:'Montserrat', sans-serif;font-size:28px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:34%">Kasus</th><th style="width:20%">Vs30 P5–P95</th><th style="width:11.5%">SE</th><th style="width:11.5%">SD</th><th style="width:11.5%">SC</th><th style="width:11.5%">SB</th></tr>
+<tr><td>IMO, prior geologi</td><td>329–360</td><td>0</td><td>0,73</td><td>0,27</td><td>0</td></tr>
+<tr><td>IMO, prior generik</td><td>514–709</td><td>0,01</td><td>0</td><td>0,97</td><td>0,02</td></tr>
+<tr><td>WON, prior bor 5</td><td>423–647</td><td>0</td><td>0</td><td>0,98</td><td>0,02</td></tr>
+<tr><td>PAL 2006, prior bor 4</td><td>391–606</td><td>0</td><td>0</td><td>0,98</td><td>0,02</td></tr>
+<tr><td>AI1 2004, prior bor 4</td><td>398–729</td><td>0</td><td>0</td><td>0,97</td><td>0,03</td></tr>
+<tr><td>Sintetik gabungan (176)</td><td>174–182</td><td>0,12</td><td>0,88</td><td>0</td><td>0</td></tr>
+</table>
+<p style="font-family:'Montserrat', sans-serif;font-size:40px;font-weight:600;line-height:1.2;color:#a8480f">Laporkan distribusi dan peluang kelas, bukan satu angka.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Kolom SE–SB: peluang posterior kelas SNI 1726:2019. Vs30 dalam m/s. Hasil nyata bergantung prior.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">27</p>
+</section>
+<section id="rangkuman-sumber" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Posterior dan Vs30</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Rangkuman Sumber Ketidakpastian</h2>
+</div>
+<table style="font-family:'Montserrat', sans-serif;font-size:26px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:26%">Sumber</th><th style="width:46%">Bukti dari kasus kita</th><th style="width:28%">Tindakan</th></tr>
+<tr><td>Data</td><td>Galat naif 0,004 vs antar-malam 0,084</td><td>Galat antar-malam</td></tr>
+<tr><td>Teori forward</td><td>IMO: ν di batas 0,30; prediksi litologi meleset</td><td>Bandingkan teori</td></tr>
+<tr><td>Parameterisasi</td><td>Halfspace median 25–73 m untuk 2–5 lapisan</td><td>Multi-parameterisasi</td></tr>
+<tr><td>Prior dan batas</td><td>Vs30 IMO 346 atau 620 m/s</td><td>Uji sensitivitas</td></tr>
+<tr><td>Asumsi SPAC</td><td>Belum diuji: SPAC sintetik</td><td>Cek mode dan bias</td></tr>
+<tr><td>QC dan subjektif</td><td>AJ2 ditolak: horizontal makin berisik</td><td>QC, replikasi</td></tr>
+</table>
+<p style="font-family:'Montserrat', sans-serif;font-size:40px;font-weight:600;line-height:1.2;color:#1f5fa8">Sebagian besar bersifat epistemik: tidak hilang dengan merekam lebih lama.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">28</p>
+</section>
+<section id="validasi-log" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Kasus dan keterbatasan</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Validasi terhadap Log Bor</h2>
+</div>
+<table style="font-family:'Montserrat', sans-serif;font-size:26px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:30%">Pasangan</th><th style="width:42%">Hasil</th><th style="width:28%">Penilaian</th></tr>
+<tr><td>WON dan bor 5 (2,8 km)</td><td>Interface terkuat 2–3 m; topsoil bor 2,2 m</td><td>Sejalan</td></tr>
+<tr><td>PAL, AI1 dan bor 4 (3,7 km)</td><td>Interface 13–15 m; batas litologi bor di 13 m</td><td>Kebetulan sejalan, belum bukti</td></tr>
+<tr><td>IMO dan bor 1 (0,8 km)</td><td>Model litologi tidak memprediksi HVSR</td><td>Tidak sejalan, penyebab belum terpisah</td></tr>
+</table>
+<div style="background:#ffffff;border:2px solid #a8480f;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-size:26px;line-height:1.4">Log tidak memuat Vs atau N-SPT, dan bor 1, 5, 4 tidak mencapai basement: validasi hanya kualitatif.</p>
+<p style="font-size:26px;line-height:1.4;font-weight:600;color:#a8480f">Batas litologi belum tentu kontras Vs.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">29</p>
+</section>
+<section id="titik-ke-peta" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Kasus dan keterbatasan</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Dari Titik ke Peta</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:28px">
+<p style="font-size:30px;line-height:1.35;font-weight:600">Banyak titik HVSR</p>
+</div>
+<svg viewBox="0 0 64 36" style="width:64px;height:36px;flex:none" aria-hidden="true"><polygon points="0,11 38,11 38,0 64,18 38,36 38,25 0,25" fill="#a8480f"/></svg>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:28px">
+<p style="font-size:30px;line-height:1.35;font-weight:600">Peta f₀</p>
+</div>
+<svg viewBox="0 0 64 36" style="width:64px;height:36px;flex:none" aria-hidden="true"><polygon points="0,11 38,11 38,0 64,18 38,36 38,25 0,25" fill="#a8480f"/></svg>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:28px">
+<p style="font-size:30px;line-height:1.35;font-weight:600">Peta kedalaman sedimen atau bedrock, dikalibrasi dengan array</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-size:32px;font-weight:600;color:#1f5fa8">OpenHVSR-Inversion</h3>
+<ul style="font-size:26px;line-height:1.4">
+<li>MATLAB, GPL-3.0, v4.0.2 (Agustus 2023)</li>
+<li>Memodelkan dan menginversi banyak HVSR sekaligus untuk model 2D/3D</li>
+<li>Contoh data sintetik dan nyata tersedia</li>
+</ul>
+</div>
+<div style="flex:1;background:#ffffff;border:2px solid #a8480f;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-size:32px;font-weight:600;color:#a8480f">Catatan</h3>
+<ul style="font-size:26px;line-height:1.4">
+<li>HVSR saja membawa trade-off Vs–H ke seluruh peta</li>
+<li>Butuh lisensi MATLAB</li>
+<li>Periksa teori forward dan penanganan ketidakpastian di manualnya</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">github.com/sedysen/OpenHVSR-Inversion. Ringkasan dari README dan daftar file; manual belum ditinjau.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">30</p>
+</section>
+<section id="keterbatasan" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Kasus dan keterbatasan</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Keterbatasan dan Jebakan</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:30px;font-weight:600;line-height:1.2;color:#14212b">Struktur 2D dan 3D</h3>
+<p style="font-size:26px;line-height:1.4">Tepi cekungan dan lereng melanggar asumsi 1D.</p>
+</div>
+<div style="background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:30px;font-weight:600;line-height:1.2;color:#14212b">Puncak non-geologis</h3>
+<p style="font-size:26px;line-height:1.4">Sumber industri dapat menghasilkan puncak HVSR.</p>
+</div>
+<div style="background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:30px;font-weight:600;line-height:1.2;color:#14212b">Lapisan lunak tersembunyi</h3>
+<p style="font-size:26px;line-height:1.4">Velocity reversal sering tak terdeteksi.</p>
+</div>
+<div style="background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:30px;font-weight:600;line-height:1.2;color:#14212b">Pita sensor</h3>
+<p style="font-size:26px;line-height:1.4">Sensor 1 Hz: data dipakai di atas 1,3 Hz; resonansi sedimen tebal tidak terlihat.</p>
+</div>
+<div style="background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:30px;font-weight:600;line-height:1.2;color:#14212b">Prior adalah asumsi</h3>
+<p style="font-size:26px;line-height:1.4">Rentang Vs per litologi mengubah jawaban, seperti pada IMO.</p>
+</div>
+<div style="background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:30px;font-weight:600;line-height:1.2;color:#14212b">Satu model tanpa ketidakpastian</h3>
+<p style="font-size:26px;line-height:1.4">Garis median menyembunyikan trade-off dan peran prior.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">31</p>
+</section>
+<section id="pesan-penutup" data-transition="fade" style="background:#14212b;color:#f1ede4;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#e0925a">Penutup</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#f1ede4">Pesan Penutup</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:40px 48px">
+<div style="display:flex;flex-direction:row;gap:20px;align-items:flex-start">
+<p style="width:56px;font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;line-height:1;color:#e0925a">1</p>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#f1ede4">HVSR dan SPAC saling melengkapi; gabungkan bila bisa.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:flex-start">
+<p style="width:56px;font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;line-height:1;color:#e0925a">2</p>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#f1ede4">Kualitas data membatasi kualitas model.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:flex-start">
+<p style="width:56px;font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;line-height:1;color:#e0925a">3</p>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#f1ede4">Parameterisasi dan prior adalah hipotesis geologi: libatkan geolog sejak awal.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:flex-start">
+<p style="width:56px;font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;line-height:1;color:#e0925a">4</p>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#f1ede4">Posterior sempit belum tentu ditentukan data; periksa batas prior.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:flex-start">
+<p style="width:56px;font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;line-height:1;color:#e0925a">5</p>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#f1ede4">Laporkan Vs beserta ketidakpastiannya, bukan satu garis.</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:flex-start">
+<p style="width:56px;font-family:'Montserrat', sans-serif;font-size:56px;font-weight:600;line-height:1;color:#e0925a">6</p>
+<p style="flex:1;font-size:30px;line-height:1.35;color:#f1ede4">Gunakan distribusi Vs30 dan peluang kelas untuk keputusan.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#a9b8c2">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#a9b8c2;text-align:right">32</p>
+</section>
+<section id="template-lapor" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Penutup</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Template Pelaporan Vs</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-size:36px;font-weight:600;color:#1f5fa8">Laporkan</h3>
+<ul style="font-size:28px;line-height:1.4">
+<li>Prior dan batas pencarian</li>
+<li>Galat data dan cara menghitungnya</li>
+<li>Parameterisasi dan alasannya</li>
+<li>Jumlah run, iterasi, kriteria misfit</li>
+<li>Konvergensi (R-hat)</li>
+<li>P5/P50/P95: Vs(z), interface, Vs30</li>
+<li>Tes sintetik dan uji sensitivitas</li>
+</ul>
+</div>
+<div style="flex:1;background:#ffffff;border:2px solid #a8480f;border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-size:36px;font-weight:600;color:#a8480f">Tanda bahaya saat mereview</h3>
+<ul style="font-size:28px;line-height:1.4">
+<li>Satu garis Vs tanpa pita ketidakpastian</li>
+<li>Tanpa prior atau galat data</li>
+<li>Jumlah lapisan dipilih sembarang</li>
+<li>Amplitudo puncak HVSR dibaca sebagai amplifikasi</li>
+<li>Posterior sempit menempel batas prior</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5b6a73">Ketidakpastian inversi Vs · HVSR dan SPAC</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">33</p>
+</section>
+<section id="perangkat-lunak" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Penutup</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Perangkat Lunak</h2>
+</div>
+<table style="font-family:'Montserrat', sans-serif;font-size:26px;color:#1c2a33">
+<tr style="background:#e7e0cf"><th style="width:26%">Alat</th><th style="width:44%">Fungsi</th><th style="width:30%">Catatan</th></tr>
+<tr><td>Geopsy dan Dinver</td><td>Pengolahan HVSR dan array; inversi NA</td><td>Ensemble, bukan posterior penuh</td></tr>
+<tr><td>hvsrpy</td><td>Pengolahan HVSR dengan statistik</td><td>Python</td></tr>
+<tr><td>swprocess</td><td>Pemrosesan MASW; statistik dispersi</td><td>Python; cek lisensi</td></tr>
+<tr><td>SWinvert</td><td>Inversi dispersi multi-parameterisasi</td><td>Python</td></tr>
+<tr><td>HV-Inv</td><td>Inversi HVSR dengan diffuse field</td><td>García-Jerez dkk. 2016</td></tr>
+<tr><td>OpenHVSR-Inversion</td><td>HVSR banyak titik, model 2D/3D</td><td>MATLAB, GPL-3.0</td></tr>
+<tr><td>disba + DE-MC</td><td>Forward model dan sampler kasus ini</td><td>Skrip penulis, belum dipublikasikan</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Periksa versi dan lisensi sebelum dipakai. Hands-on dilanjutkan oleh Mas Kaka.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">34</p>
+</section>
+<section id="diskusi" data-transition="fade" style="background:#14212b;color:#f1ede4;font-family:'Montserrat', sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<p style="font-size:24px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:#e0925a">Diskusi</p>
+<div style="display:flex;flex-direction:column;gap:48px">
+<h1 style="font-family:'Montserrat', sans-serif;font-size:104px;font-weight:600;line-height:1.05;color:#f1ede4">Bawa data riset Anda</h1>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;background:#1d2f3c;border:1px solid #2f4757;border-radius:16px;padding:32px">
+<p style="font-size:34px;line-height:1.3;color:#f1ede4">Apa prior geologi data Anda?</p>
+</div>
+<div style="flex:1;background:#1d2f3c;border:1px solid #2f4757;border-radius:16px;padding:32px">
+<p style="font-size:34px;line-height:1.3;color:#f1ede4">Berapa galat data, dan dihitung dari apa?</p>
+</div>
+<div style="flex:1;background:#1d2f3c;border:1px solid #2f4757;border-radius:16px;padding:32px">
+<p style="font-size:34px;line-height:1.3;color:#f1ede4">Parameterisasi apa yang dipilih, dan mengapa?</p>
+</div>
+</div>
+</div>
+<p style="font-size:28px;color:#a9b8c2">Terima kasih.</p>
+</section>
+<section id="bacaan" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Lampiran</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Bacaan Lanjut</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:14px">
+<h3 style="font-size:30px;font-weight:600;color:#1f5fa8">HVSR, SPAC, dan teori</h3>
+<ul style="font-size:24px;line-height:1.35">
+<li>SESAME (2004). Guidelines for the implementation of the H/V technique on ambient vibrations.</li>
+<li>Aki (1957). Space and time spectra of stationary stochastic waves (SPAC).</li>
+<li>Okada (2003). The Microtremor Survey Method.</li>
+<li>Sánchez-Sesma dkk. (2011). A theory for microtremor H/V spectral ratio.</li>
+<li>Piña-Flores dkk. (2017). Inversion of H/V in a layered system using the diffuse field assumption.</li>
+<li>García-Jerez dkk. (2016). Code for forward calculation and inversion of H/V (DFA).</li>
+</ul>
+</div>
+<div style="flex:1;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:14px">
+<h3 style="font-size:30px;font-weight:600;color:#1f5fa8">Inversi dan ketidakpastian</h3>
+<ul style="font-size:24px;line-height:1.35">
+<li>Sambridge (1999). Geophysical inversion with a neighbourhood algorithm, I dan II.</li>
+<li>Bodin dkk. (2012). Transdimensional inversion of receiver functions and surface wave dispersion.</li>
+<li>Arai dan Tokimatsu (2005). Joint inversion of microtremor dispersion curve and H/V spectrum.</li>
+<li>Cox dan Teague (2016). Layering ratios for surface wave inversion without a priori information.</li>
+<li>Vantassel dan Cox (2022). SWprocess: robust estimates of surface wave dispersion uncertainty.</li>
+<li>ter Braak (2006). A Markov chain Monte Carlo version of Differential Evolution.</li>
+<li>Molnar dkk. (2022). Microtremor HVSR for site characterization: state of the art.</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">Daftar disusun dari ingatan: periksa detail bibliografi sebelum dikutip.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">36</p>
+</section>
+<section id="lampiran-galat" data-transition="fade" style="background:#f6f3ec;color:#1c2a33;font-family:'Montserrat', sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#a8480f">Lampiran</p>
+<h2 style="font-family:'Montserrat', sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#14212b">Model Galat Data pada IMO</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px">
+<div style="width:1332px;background:#ffffff;border:1px solid #ddd6c6;border-radius:16px;padding:16px">
+<img src="assets/model-galat-imo.png" alt="Tiga model galat data pada inversi IMO: hierarkis, sigma antar-malam saja, sigma antar-jendela saja; kecocokan, Vs30, dan profil Vs" style="width:1300px;height:409px;object-fit:contain">
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'Montserrat', sans-serif;font-size:34px;font-weight:600;line-height:1.1;color:#1f5fa8">23 / 31 / 56</p>
+<p style="font-size:24px;line-height:1.4">lebar Vs30 90% (m/s): σ kecil, hierarkis, σ besar</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.4">Efek model galat kecil di sini, karena lebar posterior IMO didominasi batas prior.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1450px;font-size:24px;color:#5b6a73">IMO 2006 dengan prior bor 1; data dan prior sama pada ketiga inversi.</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;color:#5b6a73;text-align:right">37</p>
+</section>
+</main>
+<div class="ui" role="group" aria-label="Navigasi slide">
+  <button type="button" id="prev" aria-label="Slide sebelumnya">&#8249;</button>
+  <span id="ctr">1 / 37</span>
+  <button type="button" id="next" aria-label="Slide berikutnya">&#8250;</button>
+</div>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('#stage>section'));
+  var stage=document.getElementById('stage'),ctr=document.getElementById('ctr'),i=0;
+  function fit(){stage.style.setProperty('--s',Math.min(innerWidth/1920,innerHeight/1080))}
+  function show(k){
+    i=Math.max(0,Math.min(slides.length-1,k));
+    slides.forEach(function(el,j){el.classList.toggle('off',j!==i)});
+    ctr.textContent=(i+1)+' / '+slides.length;
+    try{history.replaceState(null,'','#'+(i+1))}catch(e){}
+  }
+  function next(){show(i+1)} function prev(){show(i-1)}
+  addEventListener('resize',fit);fit();
+  var h=parseInt((location.hash||'').slice(1),10);show(isNaN(h)?0:h-1);
+  addEventListener('keydown',function(e){
+    var k=e.key;
+    if(k==='ArrowRight'||k===' '||k==='PageDown'||k==='Enter'){e.preventDefault();next()}
+    else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){e.preventDefault();prev()}
+    else if(k==='Home'){show(0)} else if(k==='End'){show(slides.length-1)}
+    else if(k==='f'||k==='F'){var d=document.documentElement;
+      if(document.fullscreenElement){document.exitFullscreen()}else if(d.requestFullscreen){d.requestFullscreen()}}
+    else if(k==='p'||k==='P'){window.print()}
+  });
+  stage.addEventListener('click',function(e){(e.clientX<innerWidth*0.3)?prev():next()});
+  document.getElementById('prev').addEventListener('click',prev);
+  document.getElementById('next').addEventListener('click',next);
+  var x0=null;
+  addEventListener('touchstart',function(e){x0=e.changedTouches[0].clientX},{passive:true});
+  addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>50){dx<0?next():prev()} x0=null},{passive:true});
+})();
+</script>
+</body>
+</html>
