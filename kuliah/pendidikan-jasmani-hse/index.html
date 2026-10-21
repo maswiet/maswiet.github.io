@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pendidikan Jasmani &amp; HSE Geofisika — Wiwit Suryanto</title>
+  <meta name="description" content="Materi kuliah Pendidikan Jasmani &amp; HSE Geofisika (Sarjana Geofisika UGM): K3 lapangan, profil bahaya metode survei geofisika, dan kesiapan fisik geofisikawan. Tujuh pertemuan.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);
+      font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;
+      border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);
+      font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;
+      font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:46px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;
+      font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 0}
+    .button{display:inline-flex;align-items:center;gap:8px;min-height:44px;border-radius:4px;
+      border:1px solid var(--border);padding:11px 16px;font-family:var(--sans);font-size:15px;
+      font-weight:600;line-height:1.3;color:var(--text);text-decoration:none;background:var(--surface)}
+    .button.primary{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
+    .button.primary:hover{color:var(--on-accent);background:var(--accent-hover);border-color:var(--accent-hover)}
+    .button:hover{color:var(--accent);border-color:var(--accent)}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    .kicker{margin:0 0 22px;color:var(--text-muted);font-family:var(--sans);font-size:15px;line-height:1.55}
+
+    .deck-embed{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--border);
+      border-radius:6px;overflow:hidden;background:var(--surface)}
+    .deck-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .deck-hint{margin:10px 0 0;font-family:var(--sans);font-size:13px;color:var(--text-muted)}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);
+      border-radius:6px;overflow:hidden}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);
+      padding:10px 16px;border-top:1px solid var(--border)}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;
+      background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;
+      padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55}
+    .callout p:last-child{margin-bottom:0}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);
+      color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:36px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:30px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .actions .button{justify-content:center;width:100%}
+    }
+  
+    .toc{font-family:var(--sans);font-size:15px;columns:2;column-gap:32px;margin:28px 0 0;padding:20px 24px;
+      background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:2px 0;break-inside:avoid}
+    table.data{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;line-height:1.5;margin:0 0 20px;
+      background:var(--surface);border:1px solid var(--border)}
+    table.data th,table.data td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+    table.data th{background:var(--surface-muted);font-weight:600}
+    .figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:8px 0 20px}
+    .stage-fig{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px}
+    .stage-fig svg{width:100%;height:auto;display:block}
+    .stage-fig p{margin:10px 0 0;font-family:var(--sans);font-size:14px;line-height:1.45;color:var(--text-muted)}
+    .stage-fig p b{color:var(--text)}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    main h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:28px 0 8px}
+    details{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px 16px;margin:0 0 16px;
+      font-family:var(--sans);font-size:15px}
+    details summary{cursor:pointer;font-weight:600}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+
+    ol.meetings{list-style:none;margin:0;padding:0;font-family:var(--sans);font-size:16px;line-height:1.5;
+      border-top:1px solid var(--border)}
+    ol.meetings li{display:grid;grid-template-columns:132px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--border)}
+    ol.meetings .num{color:var(--support);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding-top:2px;white-space:nowrap}
+    ol.meetings .title{margin:0;font-weight:600}
+    ol.meetings .meta{margin:2px 0 0;color:var(--text-muted);font-size:14px}
+    ol.meetings li.pending .title{color:var(--text-muted);font-weight:500}
+    @media (max-width:560px){ol.meetings li{grid-template-columns:1fr;gap:2px}}
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; Pendidikan Jasmani &amp; HSE Geofisika</p>
+      <p class="eyebrow">Pendidikan Jasmani &amp; HSE Geofisika &middot; Program Sarjana</p>
+      <h1>Pendidikan Jasmani &amp; HSE Geofisika</h1>
+      <p class="lede">Data geofisika yang baik diambil dari lereng gunung api, hutan, area sesar terpencil, dan lokasi industri migas dan panas bumi. Mata kuliah ini membekali mahasiswa untuk mengenali bahaya di setiap metode survei, menilai risikonya, dan menyiapkan tubuh sebagai lapis pertama keselamatan kerja di lapangan.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Pendidikan Jasmani &amp; HSE Geofisika (Sarjana Geofisika)</dd>
+        <dt>Jumlah pertemuan</dt><dd>7 pertemuan &times; 90 menit</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Geoscience Research Group, Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <section class="block" aria-labelledby="pertemuan-heading">
+        <h2 id="pertemuan-heading">Daftar pertemuan</h2>
+        <p class="kicker">Materi diunggah bertahap sesuai jadwal perkuliahan.</p>
+        <ol class="meetings">
+          <li>
+            <span class="num">Pertemuan 1</span>
+            <div>
+              <p class="title"><a href="#pertemuan-1">Pengantar K3 Lapangan &amp; Kesiapan Fisik Geofisikawan</a></p>
+              <p class="meta">Profil bahaya metode geofisika, hazard vs risk, kebugaran sebagai APD internal, studi kasus</p>
+            </div>
+          </li>
+          <li class="pending"><span class="num">Pertemuan 2</span><div><p class="title">Materi akan tersedia</p></div></li>
+          <li class="pending"><span class="num">Pertemuan 3</span><div><p class="title">Materi akan tersedia</p></div></li>
+          <li class="pending"><span class="num">Pertemuan 4</span><div><p class="title">Materi akan tersedia</p></div></li>
+          <li class="pending"><span class="num">Pertemuan 5</span><div><p class="title">Materi akan tersedia</p></div></li>
+          <li class="pending"><span class="num">Pertemuan 6</span><div><p class="title">Materi akan tersedia</p></div></li>
+          <li class="pending"><span class="num">Pertemuan 7</span><div><p class="title">Materi akan tersedia</p></div></li>
+        </ol>
+      </section>
+
+      <section class="block" id="pertemuan-1">
+        <h2>Pertemuan 1 &mdash; Pengantar K3 Lapangan &amp; Kesiapan Fisik Geofisikawan</h2>
+        <p class="kicker">Mengenali bahaya pada survei geofisika, dan mengapa tubuh yang bugar adalah lapis pertama keselamatan. 24 slide, 90 menit.</p>
+
+        <div class="callout">
+          <p><strong>Capaian pembelajaran.</strong> Mahasiswa mampu mengidentifikasi bahaya spesifik pada berbagai metode survei geofisika, dan memahami korelasi langsung antara kebugaran fisik dengan pencegahan kecelakaan kerja di lapangan.</p>
+        </div>
+
+        <h3>Alur pertemuan</h3>
+        <table class="data">
+          <thead><tr><th>Menit</th><th>Kegiatan</th></tr></thead>
+          <tbody>
+            <tr><td>00&ndash;15</td><td>Ice breaking &amp; pengantar: realitas lapangan vs ekspektasi</td></tr>
+            <tr><td>15&ndash;45</td><td>Materi inti 1: profil risiko &amp; bahaya pada metode geofisika</td></tr>
+            <tr><td>45&ndash;65</td><td>Materi inti 2: fisiologi kerja lapangan &amp; kesiapan fisik</td></tr>
+            <tr><td>65&ndash;85</td><td>Studi kasus &amp; diskusi kelompok (hazard identification)</td></tr>
+            <tr><td>85&ndash;90</td><td>Kesimpulan &amp; tugas mandiri</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Pokok bahasan</h3>
+        <ul class="points">
+          <li><b>Prinsip utama HSE lapangan.</b> Tidak ada satu pun titik data yang seharga dengan nyawa atau keselamatan anggota tim. Station, sounding, atau lintasan bisa diulang; nyawa tidak.</li>
+          <li><b>Profil bahaya per metode.</b> Seismik (refraksi, MASW, mikrotremor), geolistrik &amp; IP, gaya berat &amp; geomagnet, serta pengamatan gunung api &amp; geotermal: beban fisik, bahaya spesifik, dan mitigasi dasar.</li>
+          <li><b>Hazard vs risk.</b> Risk = Likelihood &times; Severity, dibaca dengan matriks risiko 5&times;5.</li>
+          <li><b>Kesiapan fisik sebagai APD internal.</b> Tiga pilar kebugaran lapangan: kardiorespirasi, kekuatan otot, serta mobilitas &amp; keseimbangan.</li>
+          <li><b>Rantai kecelakaan.</b> Kurang latihan &rarr; cepat lelah &rarr; fokus menurun &rarr; jalan pintas &rarr; insiden. Rantai paling mudah diputus di mata rantai pertama.</li>
+        </ul>
+
+        <h3>Presentasi</h3>
+        <div class="actions" style="margin-top:0;margin-bottom:16px">
+          <a class="button primary" href="pertemuan-1/deck.html" target="_blank" rel="noopener">Buka presentasi &nearr;</a>
+        </div>
+        <div class="deck-embed"><iframe src="pertemuan-1/deck.html" title="Slide: Pengantar K3 Lapangan &amp; Kesiapan Fisik Geofisikawan" loading="lazy"></iframe></div>
+        <p class="deck-hint">File presentasi berukuran sekitar 28 MB karena memuat foto lapangan; tunggu sebentar hingga slide terbuka. Gunakan &larr;/&rarr; untuk berpindah slide.</p>
+
+        <h3>Studi kasus &amp; diskusi kelompok</h3>
+        <p>Kelompok 3&ndash;4 orang, 10 menit diskusi dan 10 menit paparan. Skenario: akuisisi geolistrik Wenner-Schlumberger dengan bentangan 400 m di perbukitan kapur pukul 13.00. Mahasiswa yang memindahkan elektroda arus berlari di lereng berbatu tanpa minum sejak pagi; saat ia memegang elektroda untuk dicabut, operator yang tidak melihatnya dan memakai walkie-talkie low-battery menginjeksikan arus.</p>
+        <ol>
+          <li>Sebutkan minimal 4 hazard dari aspek fisik, lingkungan, dan peralatan.</li>
+          <li>Apa kegagalan prosedur K3 paling fatal yang terjadi?</li>
+          <li>Bagaimana kelelahan dan hidrasi ikut memicu situasi berbahaya ini?</li>
+          <li>Rumuskan 3 aturan wajib agar kejadian ini tidak terulang saat Field Camp.</li>
+        </ol>
+
+        <h3>Tugas mandiri (dikumpulkan minggu depan)</h3>
+        <ol>
+          <li><b>Self-assessment kebugaran.</b> Hitung resting heart rate saat bangun tidur. Lakukan jalan cepat atau jogging 12 menit (Cooper Test sederhana) dengan aplikasi olahraga untuk estimasi VO&#8322; max awal.</li>
+          <li><b>Observasi alat laboratorium.</b> Potret 1 alat survei geofisika beserta kotaknya. Taksir beratnya, lalu tuliskan potensi cedera bila alat diangkat dengan posisi yang salah.</li>
+        </ol>
+      </section>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Geoscience Research Group, Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
