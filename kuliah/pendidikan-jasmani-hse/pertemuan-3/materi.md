@@ -43,6 +43,8 @@ Catatan pengajar: 6–10 menit. Hubungkan dengan fisiologi dan ergonomi pertemua
 
 ## Kelelahan memiliki banyak sumber
 
+Visual: Beberapa sumber kelelahan bertemu dan dapat memengaruhi perhatian serta keputusan.
+
 - Kurang tidur dan jadwal yang mengganggu tidur.
 - Tuntutan fisik atau mental, panas, serta stres.
 - Dampaknya dapat berupa respons melambat dan keputusan memburuk.
@@ -52,6 +54,8 @@ Catatan pengajar: 10–13 menit. ODP slide 26–42 dan 55–59. Bahas kelelahan 
 - [NIOSH — Fatigue and Work (2026)](https://www.cdc.gov/niosh/fatigue/about/index.html)
 
 ## Ritme sirkadian
+
+Visual: Siklus konseptual sekitar 24 jam terbagi fase terang dan gelap, tanpa menentukan waktu tidur universal.
 
 - Jam biologis mengatur pola sekitar 24 jam.
 - Cahaya dan jadwal aktivitas membantu menyelaraskan ritme.
@@ -63,6 +67,8 @@ Catatan pengajar: 13–16 menit. ODP slide 27–31. Jam dan besarnya perubahan s
 - [NIOSH — Fatigue and Work (2026)](https://www.cdc.gov/niosh/fatigue/about/index.html)
 
 ## Tahap tidur dalam materi mutakhir
+
+Visual: Peta fase tidur yang membedakan NREM dengan tiga tahap N1 N2 N3, serta REM sebagai fase lain.
 
 | Tahap | Gambaran ringkas |
 | --- | --- |
@@ -76,6 +82,8 @@ Catatan pengajar: 16–19 menit. Memperbarui tabel ODP slide 32–34 yang menggu
 - [NHLBI — Sleep Phases and Stages](https://www.nhlbi.nih.gov/health/sleep/stages-of-sleep)
 
 ## Kebutuhan tidur dewasa
+
+Visual: Sleeping Man — Imogenisla; CC BY-SA 3.0. Sumber: https://commons.wikimedia.org/wiki/File:Sleeping_Man.jpg Lisensi: https://creativecommons.org/licenses/by-sa/3.0/ Ditampilkan utuh dengan perubahan ukuran, tanpa pemotongan.
 
 - Usia 18–60 tahun: rekomendasi umum sedikitnya 7 jam per malam.
 - Kualitas tidur dan kondisi saat terjaga juga perlu diperhatikan.
@@ -107,6 +115,8 @@ Catatan pengajar: 25–28 menit. Hindari menjadikan laporan diri sebagai satu-sa
 
 ## Waktu kerja mencakup seluruh perjalanan
 
+Visual: Linimasa pekerjaan lengkap dari persiapan, akses, akuisisi, pembongkaran, hingga perjalanan pulang.
+
 - Masukkan persiapan, akses, akuisisi, dan pembongkaran.
 - Tambahkan perjalanan pulang serta kesempatan pemulihan.
 - Kopi atau tekad menyelesaikan target tidak menggantikan tidur.
@@ -116,6 +126,8 @@ Catatan pengajar: 28–30 menit. Kasus pukul 23.00. Tidak menghitung batas aman 
 - [NIOSH — Basic Information about Sleep and Fatigue](https://archive.cdc.gov/www_cdc_gov/niosh/emres/longhourstraining/sleepfatigue.html)
 
 ## Kerja malam perlu alasan dan dukungan
+
+Visual: BGP Camp 8652, Night View — Gyan Bahadur Khattri; CC BY-SA 4.0. Sumber: https://commons.wikimedia.org/wiki/File:BGP_Camp_8652,_Night_View.jpg Lisensi: https://creativecommons.org/licenses/by-sa/4.0/ Versi 1280 piksel dari Wikimedia Commons; utuh, tanpa pemotongan.
 
 - Sebagian pengukuran pasif memerlukan kondisi kebisingan tertentu.
 - Pertimbangkan alternatif waktu atau metode sebelum memilih malam.
@@ -127,6 +139,8 @@ Catatan pengajar: 30–33 menit. Contoh konteks geofisika, bukan klaim bahwa mik
 
 ## Panas menambah tuntutan fisiologis
 
+Visual: Diagram beban panas dengan kontribusi panas lingkungan dan panas metabolik dari aktivitas tubuh.
+
 - Beban panas berasal dari lingkungan dan aktivitas tubuh.
 - Pakaian serta APD dapat memengaruhi pelepasan panas.
 - Kebugaran tidak menghilangkan kebutuhan pengendalian paparan.
@@ -137,6 +151,8 @@ Catatan pengajar: 33–35 menit. Hubungkan metabolisme pertemuan kedua dengan ke
 
 ## Aklimatisasi berlangsung bertahap
 
+Visual: Skema tahapan peningkatan paparan panas selama masa aklimatisasi, tanpa persentase paparan.
+
 - NIOSH menganjurkan peningkatan paparan panas secara bertahap selama 7–14 hari.
 - Mahasiswa yang baru datang ke lokasi perlu rencana penyesuaian.
 - Rencana juga perlu ditinjau setelah jeda paparan.
@@ -146,6 +162,8 @@ Catatan pengajar: 35–37 menit. Rekomendasi internasional untuk perencanaan, bu
 - [NIOSH — Acclimatization](https://www.cdc.gov/niosh/heat-stress/recommendations/acclimatization.html)
 
 ## Pemulihan dalam panas
+
+Visual: Tiga dukungan yang berjalan bersama untuk kerja dalam panas: air minum, tempat pulih, dan penyesuaian paparan.
 
 - Sediakan air minum yang mudah dijangkau.
 - Sediakan kesempatan istirahat di tempat lebih sejuk atau teduh.
@@ -188,6 +206,8 @@ Catatan pengajar: 45–48 menit. Pertahankan pembedaan dari topik kedua lama. Ke
 - [OSHA — Job Hazard Analysis](https://www.osha.gov/sites/default/files/activities_safety_in_5_jha.pdf)
 
 ## JSA menghubungkan rencana dengan bukti
+
+Visual: Enam unsur JSA yang menghubungkan langkah pekerjaan dengan bahaya, kejadian, kendali, penanggung jawab, dan verifikasi.
 
 - Langkah pekerjaan dan sumber bahaya.
 - Kejadian, akibat, serta pengendalian yang sesuai.
@@ -236,6 +256,8 @@ Catatan pengajar: 57–60 menit. Tidak ada praktik listrik aktif di kelas. Diamn
 - [OSHA — Job Hazard Analysis](https://www.osha.gov/sites/default/files/activities_safety_in_5_jha.pdf)
 
 ## Kondisi berhenti dan mulai kembali
+
+Visual: Alur penghentian pekerjaan dan mulai kembali: hentikan, amankan, nilai ulang, dan konfirmasi.
 
 - Berhenti bila kendali kritis gagal atau kondisi tidak lagi sesuai rencana.
 - Amankan pekerjaan dan laporkan kepada penanggung jawab.

@@ -1,0 +1,164 @@
+{
+  "verified": "2026-10-28",
+  "photos": {
+    "survey": {
+      "file": "survey-team.jpg",
+      "title": "Seismic Survey Party",
+      "author": "Wsx2",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Seismic_Survey_Party.jpeg",
+      "alt": "Tim survei berjalan di medan berbatu sambil membawa perangkat GNSS.",
+      "caption": "Foto konteks survei; bukan contoh SOP atau penilaian pekerja.",
+      "changes": "Ditampilkan utuh dengan perubahan ukuran, tanpa pemotongan."
+    },
+    "pulse": {
+      "file": "radial-pulse.jpg",
+      "title": "Radial pulse",
+      "author": "U.S. Air Force / Staff Sgt. Jeanette Copeland",
+      "license": "Domain publik",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Air_Force",
+      "page": "https://commons.wikimedia.org/wiki/File:Radial_pulse.jpg",
+      "alt": "Pemeriksaan denyut pada pergelangan tangan dengan monitor di latar belakang.",
+      "caption": "Pengamatan denyut memerlukan konteks aktivitas dan kondisi.",
+      "changes": "Ditampilkan utuh dengan perubahan ukuran, tanpa pemotongan."
+    },
+    "truck": {
+      "file": "hand-truck.jpg",
+      "title": "Sackkarre",
+      "author": "Priwo",
+      "license": "Domain publik (PD-self)",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Template:PD-self",
+      "page": "https://commons.wikimedia.org/wiki/File:Sackkarre.jpg",
+      "alt": "Troli angkut dua roda dengan pegangan dan alas beban.",
+      "caption": "Alat bantu dipilih sesuai tugas, kapasitas, dan medan.",
+      "changes": "Ditampilkan utuh dengan perubahan ukuran, tanpa pemotongan."
+    },
+    "sleep": {
+      "file": "sleep.jpg",
+      "title": "Sleeping Man",
+      "author": "Imogenisla",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:Sleeping_Man.jpg",
+      "alt": "Seorang dewasa sedang tidur dengan kepala di atas bantal.",
+      "caption": "Ilustrasi tidur; tidak menyatakan diagnosis atau kondisi orang pada foto.",
+      "changes": "Ditampilkan utuh dengan perubahan ukuran, tanpa pemotongan."
+    },
+    "night": {
+      "file": "night-camp.jpg",
+      "title": "BGP Camp 8652, Night View",
+      "author": "Gyan Bahadur Khattri",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "page": "https://commons.wikimedia.org/wiki/File:BGP_Camp_8652,_Night_View.jpg",
+      "alt": "Panorama malam kamp pekerja kru survei seismik di Kuwait.",
+      "caption": "Kamp kru survei di Kuwait; ilustrasi konteks kerja malam.",
+      "changes": "Versi 1280 piksel dari Wikimedia Commons; utuh, tanpa pemotongan."
+    }
+  },
+  "diagrams": [
+    {
+      "slide": "2-4",
+      "file": "diagram-2-4.svg",
+      "description": "Aliran oksigen dari paru-paru melalui sirkulasi ke otot, dengan keluaran kerja dan panas.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "2-6",
+      "file": "diagram-2-6.svg",
+      "description": "Kurva konseptual respons tubuh yang naik saat aktivitas lalu turun bertahap selama pemulihan.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "2-10",
+      "file": "diagram-2-10.svg",
+      "description": "Perbandingan angka simulasi denyut sebelum aktivitas 72 dan saat aktivitas ringan 96, berselisih 24 denyut per menit.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "2-15",
+      "file": "diagram-2-15.svg",
+      "description": "Enam dimensi NASA-TLX terhubung pada pusat beban tugas: mental, fisik, waktu, kinerja, usaha, dan frustrasi.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "2-16",
+      "file": "diagram-2-16.svg",
+      "description": "Diagram dua pilihan tinggi permukaan kerja dengan penanda penyesuaian tinggi dan posisi, tanpa angka antropometri baku.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "2-19",
+      "file": "diagram-2-19.svg",
+      "description": "Dua diagram lengan momen dengan massa sama 10 kg. Jarak digandakan dari 0,20 ke 0,40 meter sehingga momennya dua kali lipat.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "2-20",
+      "file": "diagram-2-20.svg",
+      "description": "Lima tingkat hierarki pengendalian dari eliminasi, substitusi, rekayasa, administratif, hingga APD.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "2-21",
+      "file": "diagram-2-21.svg",
+      "description": "Alur tiga tahap praktik ringan: memeriksa, menyepakati metode, lalu melakukan atau mengamati.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "3-4",
+      "file": "diagram-3-4.svg",
+      "description": "Beberapa sumber kelelahan bertemu dan dapat memengaruhi perhatian serta keputusan.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "3-5",
+      "file": "diagram-3-5.svg",
+      "description": "Siklus konseptual sekitar 24 jam terbagi fase terang dan gelap, tanpa menentukan waktu tidur universal.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "3-6",
+      "file": "diagram-3-6.svg",
+      "description": "Peta fase tidur yang membedakan NREM dengan tiga tahap N1 N2 N3, serta REM sebagai fase lain.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "3-10",
+      "file": "diagram-3-10.svg",
+      "description": "Linimasa pekerjaan lengkap dari persiapan, akses, akuisisi, pembongkaran, hingga perjalanan pulang.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "3-12",
+      "file": "diagram-3-12.svg",
+      "description": "Diagram beban panas dengan kontribusi panas lingkungan dan panas metabolik dari aktivitas tubuh.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "3-13",
+      "file": "diagram-3-13.svg",
+      "description": "Skema tahapan peningkatan paparan panas selama masa aklimatisasi, tanpa persentase paparan.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "3-14",
+      "file": "diagram-3-14.svg",
+      "description": "Tiga dukungan yang berjalan bersama untuk kerja dalam panas: air minum, tempat pulih, dan penyesuaian paparan.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "3-18",
+      "file": "diagram-3-18.svg",
+      "description": "Enam unsur JSA yang menghubungkan langkah pekerjaan dengan bahaya, kejadian, kendali, penanggung jawab, dan verifikasi.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    },
+    {
+      "slide": "3-22",
+      "file": "diagram-3-22.svg",
+      "description": "Alur penghentian pekerjaan dan mulai kembali: hentikan, amankan, nilai ulang, dan konfirmasi.",
+      "origin": "Diagram orisinal yang disusun khusus untuk materi kuliah, bukan reproduksi diagram sumber."
+    }
+  ]
+}

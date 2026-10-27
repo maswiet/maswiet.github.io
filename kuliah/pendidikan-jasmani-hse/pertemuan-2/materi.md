@@ -23,6 +23,8 @@ Materi pembelajaran ini mengikuti SOP UGM, manual instrumen, aturan lokasi, dan 
 
 ## Satu alat, dua pengalaman
 
+Visual: Seismic Survey Party — Wsx2; CC BY-SA 3.0. Sumber: https://commons.wikimedia.org/wiki/File:Seismic_Survey_Party.jpeg Lisensi: https://creativecommons.org/licenses/by-sa/3.0/ Ditampilkan utuh dengan perubahan ukuran, tanpa pemotongan.
+
 - Dua mahasiswa membawa kotak yang sama di rute berbeda.
 - Yang satu melewati jalan datar, yang lain menanjak di bawah matahari.
 - Data apa yang dibutuhkan untuk membandingkan beban kerjanya?
@@ -42,6 +44,8 @@ Catatan pengajar: 6–10 menit. Bukti belajar berupa lembar observasi, usulan pe
 
 
 ## Kebutuhan energi saat bekerja
+
+Visual: Aliran oksigen dari paru-paru melalui sirkulasi ke otot, dengan keluaran kerja dan panas.
 
 - Otot membutuhkan ATP untuk berkontraksi.
 - Pernapasan dan sirkulasi mendukung pasokan oksigen serta zat gizi.
@@ -64,6 +68,8 @@ Catatan pengajar: 13–16 menit. Materi sumber slide 4, 19–22, 53. Kerja stati
 
 
 ## Respons awal dan pemulihan
+
+Visual: Kurva konseptual respons tubuh yang naik saat aktivitas lalu turun bertahap selama pemulihan.
 
 - Saat aktivitas dimulai, kebutuhan energi meningkat.
 - Denyut dan pernapasan menyesuaikan selama aktivitas.
@@ -98,6 +104,8 @@ Catatan pengajar: 20–23 menit. Sumber ODP slide 12–18, 44–45; CDC intensit
 
 ## Denyut jantung dalam konteks
 
+Visual: Radial pulse — U.S. Air Force / Staff Sgt. Jeanette Copeland; Domain publik. Sumber: https://commons.wikimedia.org/wiki/File:Radial_pulse.jpg Lisensi: https://commons.wikimedia.org/wiki/Template:PD-USGov-Military-Air_Force Ditampilkan utuh dengan perubahan ukuran, tanpa pemotongan.
+
 - Catat aktivitas, durasi, lingkungan, dan waktu pengamatan.
 - Bandingkan respons seseorang pada kondisi yang sebanding.
 - Rumus denyut maksimal berbasis usia hanya memberikan perkiraan.
@@ -107,6 +115,8 @@ Catatan pengajar: 23–25 menit. ODP memuat beberapa persamaan denyut maksimal y
 
 
 ## Contoh selisih denyut
+
+Visual: Perbandingan angka simulasi denyut sebelum aktivitas 72 dan saat aktivitas ringan 96, berselisih 24 denyut per menit.
 
 - Sebelum aktivitas: 72 denyut/menit.
 - Saat aktivitas ringan: 96 denyut/menit.
@@ -161,6 +171,8 @@ Catatan pengajar: 38–45 menit. Diskusi berpasangan lalu dua tanggapan kelas. C
 
 ## Beban tugas juga memerlukan perhatian
 
+Visual: Enam dimensi NASA-TLX terhubung pada pusat beban tugas: mental, fisik, waktu, kinerja, usaha, dan frustrasi.
+
 - NASA-TLX mencakup tuntutan mental, fisik, dan waktu.
 - Dimensi lainnya adalah kinerja, usaha, dan frustrasi.
 - Operator pencatat data dapat terbebani meskipun duduk.
@@ -170,6 +182,8 @@ Catatan pengajar: 45–48 menit. ODP slide 17–18. NASA-TLX adalah alat penilai
 - [NASA — Task Load Index](https://www.nasa.gov/human-systems-integration-division/nasa-task-load-index-tlx/)
 
 ## Antropometri untuk desain kerja
+
+Visual: Diagram dua pilihan tinggi permukaan kerja dengan penanda penyesuaian tinggi dan posisi, tanpa angka antropometri baku.
 
 - Sesuaikan tinggi meja, jangkauan, dan pegangan dengan pengguna.
 - Pertimbangkan variasi ukuran tubuh dalam satu tim.
@@ -195,6 +209,8 @@ Catatan pengajar: 51–54 menit. Sambungkan dengan materi situs lama tentang pem
 
 ## Lingkup persamaan angkat NIOSH
 
+Visual: Sackkarre — Priwo; Domain publik (PD-self). Sumber: https://commons.wikimedia.org/wiki/File:Sackkarre.jpg Lisensi: https://commons.wikimedia.org/wiki/Template:PD-self Ditampilkan utuh dengan perubahan ukuran, tanpa pemotongan.
+
 - RNLE menilai tugas angkat manual dengan dua tangan dalam lingkup tertentu.
 - Variabelnya mencakup posisi tangan, frekuensi, durasi, dan kualitas pegangan.
 - Membawa kotak di lereng licin memerlukan penilaian yang lebih luas.
@@ -206,6 +222,8 @@ Catatan pengajar: 54–56 menit. Jelaskan bahwa hasil RNLE bukan sertifikat aman
 
 ## Jarak beban dan momen gaya
 
+Visual: Dua diagram lengan momen dengan massa sama 10 kg. Jarak digandakan dari 0,20 ke 0,40 meter sehingga momennya dua kali lipat.
+
 - Contoh ideal: massa 10 kg, g = 9,81 m/s².
 - Pada jarak 0,20 m: momen ≈ 19,6 N·m.
 - Pada jarak 0,40 m: momen ≈ 39,2 N·m.
@@ -215,6 +233,8 @@ Catatan pengajar: 56–60 menit. Model statika sederhana M=m g d terhadap titik 
 
 
 ## Pilihan pengendalian
+
+Visual: Lima tingkat hierarki pengendalian dari eliminasi, substitusi, rekayasa, administratif, hingga APD.
 
 | Prioritas | Contoh perubahan pekerjaan |
 | --- | --- |
@@ -229,6 +249,8 @@ Catatan pengajar: 60–63 menit. Hierarki lama dipertahankan. Roda atau troli ti
 - [OSHA — Hazard Prevention and Control](https://www.osha.gov/safety-management/hazard-prevention)
 
 ## Praktik pemindahan kotak ringan
+
+Visual: Alur tiga tahap praktik ringan: memeriksa, menyepakati metode, lalu melakukan atau mengamati.
 
 - Periksa kotak kosong, jalur, dan tempat peletakan.
 - Sepakati metode, bantuan, dan aba-aba.
