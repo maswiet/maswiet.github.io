@@ -1,174 +1,296 @@
-# Pertemuan 2 — Dari Mengenali Bahaya ke Merancang Kerja Aman
+# Pertemuan 2 — Fisiologi kerja dan ergonomi lapangan
 
-**Pendidikan Jasmani & HSE Geofisika · Sarjana Geofisika UGM**  
-**Durasi: 90 menit · Format: penjelasan, demonstrasi ringan, simulasi keputusan.**
+Beban fisik, pengamatan respons tubuh, dan pemindahan alat geofisika
 
-> Pertemuan 1: “Apa yang bisa mencederai kita?” Pertemuan 2: “Apa yang harus kita ubah sebelum pekerjaan dimulai?”
+90 menit · 26 slide · S1 Geofisika UGM · 28 Oktober 2026
 
-Materi ini merupakan usulan kelanjutan pertemuan pertama, bukan pengganti SOP laboratorium, manual instrumen, atau prosedur keselamatan kegiatan lapangan UGM.
+## Capaian
 
-## Capaian yang dapat diamati
-
-Pada akhir kelas, mahasiswa mampu:
-
-1. Membedakan bahaya, kejadian berbahaya, dan akibat pada sedikitnya 4 dari 5 contoh.
-2. Memecah satu pekerjaan survei menjadi 4–6 langkah dan menyusun Job Safety Analysis (JSA).
-3. Memilih pengendalian sesuai hierarki, termasuk sedikitnya satu perubahan desain kerja yang mengurangi ketergantungan pada kewaspadaan pekerja.
-4. Memperagakan perencanaan pemindahan kotak alat ringan: memeriksa beban, jalur, pegangan, koordinasi, dan tempat peletakan.
-5. Menyatakan keputusan lanjut/tunda/berhenti beserta syarat mulai kembali pada satu perubahan kondisi lapangan.
-
-**Bukti belajar:** JSA kelompok, demonstrasi berpasangan, dan exit ticket individu. Kerapian laporan berbantuan AI tidak menggantikan penjelasan langsung.
+- Menjelaskan hubungan aktivitas, kebutuhan oksigen, respons tubuh, dan pemulihan.
+- Membedakan indikator beban fisik, persepsi usaha, dan beban tugas.
+- Mengusulkan perubahan pemindahan alat berdasarkan kondisi orang, alat, dan medan.
 
 ## Alur 90 menit
 
-| Menit | Kegiatan | Bukti belajar |
-|---|---|---|
-| 0–10 | Membahas foto alat dari tugas pertemuan 1 | Satu bahaya spesifik per mahasiswa |
-| 10–25 | Bahaya → kejadian → akibat; hierarki pengendalian | Klasifikasi contoh |
-| 25–40 | Contoh JSA pemindahan alat dan geolistrik | Alasan pemilihan kendali |
-| 40–55 | Praktik gerak ringan dan pemindahan kotak | Checklist pengamatan pasangan |
-| 55–75 | Kelompok menyusun JSA dan menerima kartu perubahan | Revisi keputusan di tempat |
-| 75–85 | Toolbox talk dan verifikasi individu | Penjelasan tanpa AI |
-| 85–90 | Exit ticket dan tugas lanjutan | Keputusan dan alasan tertulis |
+- 0–10 menit: Kasus pembuka dan capaian
+- 10–30 menit: Fisiologi kerja dan batas interpretasi indikator
+- 30–45 menit: Observasi gerak ringan dan refleksi
+- 45–60 menit: Ergonomi, antropometri, dan contoh hitungan
+- 60–80 menit: Praktik kotak ringan dan rancangan kelompok
+- 80–90 menit: Exit ticket dan tugas penghubung
 
-## 1. Pembuka — “Alat ini sudah pernah kalian angkat?”
+Materi pembelajaran ini mengikuti SOP UGM, manual instrumen, aturan lokasi, dan pengarahan petugas kompeten untuk kegiatan nyata. Latihan kelas memakai gerak ringan atau kotak kosong; mahasiswa dapat memilih peran pengamat.
 
-Minta dua mahasiswa menampilkan foto alat beserta kotaknya dari tugas sebelumnya. Jangan langsung menanyakan “berapa kilogram?”. Tanyakan:
+## Satu alat, dua pengalaman
 
-- Adakah label berat, atau beratnya baru perkiraan?
-- Siapa yang memindahkannya, dari mana, dan sejauh apa?
-- Apakah ada tangga, lereng, kabel, atau tanah licin?
-- Bisakah pekerjaan diubah agar alat tidak perlu dipanggul sejauh itu?
+- Dua mahasiswa membawa kotak yang sama di rute berbeda.
+- Yang satu melewati jalan datar, yang lain menanjak di bawah matahari.
+- Data apa yang dibutuhkan untuk membandingkan beban kerjanya?
 
-**Pesan:** angka berat belum cukup untuk menyimpulkan pekerjaan aman. Jarak beban dari tubuh, tinggi awal/akhir, pengulangan, pegangan, medan, dan kondisi orang ikut menentukan. Tidak ada satu batas kilogram universal untuk seluruh kegiatan lapangan. Persamaan angkat NIOSH juga memiliki lingkup penerapan; bukan kalkulator universal untuk membawa alat di lereng.
+Catatan pengajar: 2–6 menit. Gunakan foto kotak instrumen mahasiswa. Kumpulkan jawaban tentang rute, durasi, pegangan, lingkungan, kecepatan, dan kondisi individu. Jangan meminta pengungkapan kondisi medis.
 
-Data denyut istirahat atau hasil latihan pertemuan pertama boleh direfleksikan secara pribadi. Jangan diumumkan, dipakai merangking, atau dijadikan izin bekerja. Kebugaran membantu, tetapi tidak menggantikan pengendalian bahaya; istilah “APD internal” hanyalah analogi pembelajaran.
 
-## 2. Bahaya bukan akibat
 
-| Bahaya/sumber | Kejadian yang mungkin terjadi | Akibat |
-|---|---|---|
-| Kabel melintang jalur | Kaki tersangkut saat membawa kotak | Jatuh, cedera, alat rusak |
-| Energi listrik saat injeksi | Seseorang menyentuh bagian berbahaya | Sengatan atau cedera serius |
-| Kotak besar tanpa pegangan baik | Beban bergeser atau terlepas | Cedera otot, kaki tertimpa |
-| Panas dan aktivitas fisik | Tubuh tidak mampu membuang panas dengan memadai | Gangguan kesehatan terkait panas |
-| Lereng berkerikil | Pijakan kehilangan traksi | Tergelincir dan jatuh |
+## Capaian pertemuan
 
-**Latihan 2 menit:** “Kurang hati-hati” bukan uraian bahaya yang memadai. Ganti dengan kondisi teramati, misalnya “operator tidak mempunyai konfirmasi bahwa seluruh anggota keluar dari zona elektroda”.
+- Menjelaskan respons tubuh selama kerja dan pemulihan.
+- Membaca indikator dengan mengetahui keterbatasannya.
+- Merancang pemindahan alat dengan paparan yang lebih rendah.
 
-```mermaid
-flowchart LR
- A[Sumber bahaya] --> B[Paparan / kejadian]
- B --> C[Akibat]
- D[Pengendalian] -->|memutus jalur| B
-```
+Catatan pengajar: 6–10 menit. Bukti belajar berupa lembar observasi, usulan perubahan kerja, dan exit ticket. Durasi 90 menit mencakup aktivitas, bukan ceramah terus-menerus.
 
-## 3. Mengapa APD bukan jawaban pertama
 
-Hierarki membantu memilih perlindungan yang lebih sedikit bergantung pada tindakan sempurna setiap orang. Gunakan kombinasi bila diperlukan.
 
-| Urutan | Pertanyaan praktis | Contoh pada survei |
-|---|---|---|
-| Eliminasi | Bisakah paparan dihilangkan? | Batalkan titik yang tidak mempunyai akses aman; evaluasi dampaknya pada desain survei |
-| Substitusi | Bisakah cara/bahan diganti dengan yang lebih rendah bahayanya? | Pilih alat yang lebih ringan bila tetap memenuhi kebutuhan dan risiko barunya dinilai |
-| Rekayasa | Bisakah manusia dipisahkan dari bahaya secara fisik? | Alat bantu angkut yang sesuai medan, pembatas zona, pelindung kabel |
-| Administratif | Siapa melakukan apa, dengan syarat apa? | SOP, pembagian peran, komunikasi tertutup, jadwal kerja-istirahat |
-| APD | Perlindungan pribadi apa yang sesuai? | Sepatu dan perlindungan lain berdasarkan penilaian bahaya serta SOP |
+## Kebutuhan energi saat bekerja
 
-**Jangan berhenti pada “pakai sarung tangan”.** Sarung tangan umum bukan jaminan perlindungan listrik. Pengamanan energi, pengendalian akses, kompetensi operator, dan manual instrumen tetap menentukan.
+- Otot membutuhkan ATP untuk berkontraksi.
+- Pernapasan dan sirkulasi mendukung pasokan oksigen serta zat gizi.
+- Energi metabolik juga menghasilkan panas yang perlu dilepaskan.
 
-Sumber konsep: [OSHA—Hazard Prevention and Control](https://www.osha.gov/safety-management/hazard-prevention).
+Catatan pengajar: 10–13 menit. Materi sumber ODP slide 2–4 dan 52. Bedakan kerja mekanik eksternal dengan energi metabolik. Kedua jalur energi aerobik dan anaerobik berkontribusi, dengan proporsi bergantung intensitas dan durasi.
 
-## 4. JSA: rencana kerja yang bisa diperiksa
 
-JSA menghubungkan **langkah → bahaya → kejadian → kendali → penanggung jawab → bukti verifikasi**. Tulis tindakan yang dapat diamati, bukan “hati-hati”, “fokus”, atau “gunakan APD”.
 
-### Contoh: memindahkan alat menuju lintasan
+## Kerja dinamis dan kerja statis
 
-| Langkah | Bahaya dan kejadian | Kendali sebelum bekerja | PIC dan verifikasi |
-|---|---|---|---|
-| Menentukan rute | Lereng licin; pembawa jatuh | Tinjau rute, pilih akses lebih aman; tunda bila akses tidak layak | Ketua tim menunjukkan rute dan titik istirahat |
-| Menyiapkan alat | Berat/pegangan belum diketahui; beban terlepas | Periksa label/manual, kondisi kotak, isi lepas dan pegangan; pilih bantuan yang sesuai | Penanggung jawab alat memastikan kondisi dan metode angkut |
-| Mengangkat dan membawa | Beban jauh dari tubuh, pandangan tertutup, kelelahan | Gunakan alat bantu bila sesuai; koordinasikan bantuan; jalur dan pandangan harus jelas | Pembawa melakukan pemeriksaan awal dan menyepakati aba-aba |
-| Meletakkan alat | Jari terjepit, tanah tidak stabil | Siapkan tempat stabil, komunikasikan penurunan, jauhkan tangan dari titik jepit | Pemimpin pemindahan memberi aba-aba |
-| Menyiapkan pengukuran | Orang masuk zona saat energi aktif | Terapkan prosedur pengamanan energi dan komunikasi sesuai instrumen/SOP | Operator memverifikasi persyaratan; tidak mulai jika konfirmasi gagal |
+| Pola kerja | Contoh geofisika | Implikasi desain |
+| --- | --- | --- |
+| Dinamis | Berjalan membawa kabel | Kurangi jarak dan pengulangan |
+| Statis | Menahan alat pada posisi tetap | Sediakan penopang atau ubah posisi |
+| Gabungan | Membungkuk saat memasang sensor | Ubah tinggi kerja dan urutan tugas |
 
-**Contoh geolistrik:** sebelum injeksi, seluruh syarat aman menurut SOP harus terpenuhi. Saat pemindahan atau penanganan elektroda, terapkan prosedur penghentian dan pengamanan energi sesuai manual, termasuk energi tersimpan bila relevan. Diamnya radio bukan konfirmasi aman. Materi kelas tidak mengizinkan praktik listrik aktif.
+Catatan pengajar: 13–16 menit. Materi sumber slide 4, 19–22, 53. Kerja statis dapat melelahkan meskipun perpindahan mekaniknya kecil. Contoh merupakan penerapan pengajaran, bukan hasil pengukuran lapangan.
 
-### Tentang matriks risiko
 
-Skor kemungkinan × keparahan adalah alat bantu diskusi, bukan probabilitas kecelakaan yang terukur. Jika memakai matriks 5×5 dari pertemuan pertama, pakai definisi kategori yang sama dan tuliskan alasannya. Pengurangan skor residual harus didukung kendali yang sudah diverifikasi. Skor rendah tidak mengesahkan pelanggaran SOP atau bahaya fatal yang belum terkendali.
 
-Sumber: [OSHA—Job Hazard Analysis](https://www.osha.gov/sites/default/files/activities_safety_in_5_jha.pdf).
+## Respons awal dan pemulihan
 
-## 5. Praktik jasmani dan ergonomi — 15 menit
+- Saat aktivitas dimulai, kebutuhan energi meningkat.
+- Denyut dan pernapasan menyesuaikan selama aktivitas.
+- Setelah berhenti, pemulihan berlangsung bertahap.
 
-**Tujuan:** melatih koordinasi, penilaian diri, dan perencanaan gerak; bukan lomba kekuatan atau tes ketahanan maksimal.
+Catatan pengajar: 16–18 menit. Sumber ODP slide 6 dan 8–9. Kurva lama merupakan skema konsep; jangan memperlakukan bentuk dan angkanya sebagai data mahasiswa. Istilah oxygen debt historis tidak menjelaskan seluruh fisiologi pemulihan.
 
-Gunakan kotak kosong atau benda sangat ringan, ruang datar, dan jalur bebas hambatan. Tidak memakai aki, palu seismik, atau perangkat berenergi. Mahasiswa dapat menjadi pengamat bila tidak nyaman atau membutuhkan penyesuaian. Hentikan aktivitas bila timbul keluhan.
 
-1. **3 menit — kesiapan gerak:** berjalan santai di tempat dan gerakkan sendi dalam rentang nyaman. Jangan memaksakan peregangan atau menahan napas.
-2. **4 menit — rencana sebelum menyentuh:** inspeksi kotak dan jalur, tentukan tujuan, pertimbangkan apakah perlu memindahkannya sama sekali.
-3. **5 menit — simulasi berpasangan:** dekati kotak, gunakan pijakan stabil dan pegangan yang baik, dekatkan beban sesuai kenyamanan, bergerak terkendali; ubah arah dengan langkah, hindari memutar badan sambil menahan beban. Bergantian menjadi pengamat.
-4. **3 menit — refleksi:** bagian mana yang membatasi: pegangan, pandangan, keseimbangan, atau koordinasi? Usulkan perubahan pekerjaan sebelum meminta orang “lebih kuat”.
 
-Tidak ada satu teknik postur yang membuat semua beban aman. Alat bantu, desain tugas, dan pengurangan paparan tetap prioritas. Rujukan: [NIOSH—Ergonomic Controls](https://www.cdc.gov/niosh/ergonomics/ergo-programs/implement.html), [NIOSH—Lifting Equation](https://www.cdc.gov/niosh/ergonomics/about/rnle.html).
+## Kapasitas aerobik dan VO₂max
 
-### Checklist pengamat (0/1 per butir)
+- VO₂max menggambarkan kapasitas maksimal penggunaan oksigen.
+- Nilainya berbeda dari kebutuhan oksigen pada satu tugas tertentu.
+- Pengukuran maksimal memerlukan prosedur dan pengawasan yang sesuai.
 
-- Memeriksa beban dan pegangan sebelum memindahkan.
-- Memeriksa rute dan tempat peletakan.
-- Memilih metode/bantuan berdasarkan kondisi, bukan gengsi.
-- Menjaga pandangan, komunikasi, dan gerak terkendali.
-- Menghentikan atau mengubah tindakan ketika kondisi tidak aman.
+Catatan pengajar: 18–20 menit. Materi ODP slide 13, 23–24. Kapasitas aerobik tidak sama dengan seluruh kapasitas kerja atau kekuatan otot. Tidak ada tes maksimal pada kelas ini. Nilai VO₂max bukan izin bekerja di lereng, dekat listrik, atau dalam panas.
 
-Target latihan: **minimal 4/5**, lalu ulangi butir yang belum tercapai. Ini indikator belajar, bukan sertifikasi layak mengangkat beban nyata.
 
-## 6. Simulasi kelompok — keputusan yang berubah bersama kondisi
 
-**Kelompok 3–4 orang.** Survei geolistrik di perbukitan, bentangan 400 m, akses berbatu, satu kotak alat dan kabel. Berat belum diverifikasi. Tim mengejar penyelesaian sebelum sore. Susun JSA 4–6 langkah.
+## Indikator menjawab pertanyaan berbeda
 
-Pada menit ke-10 diskusi, pengajar membagikan satu kartu:
+| Indikator | Kegunaan | Batas interpretasi |
+| --- | --- | --- |
+| Denyut jantung | Respons sirkulasi | Dipengaruhi panas, stres, dan faktor lain |
+| Persepsi usaha | Pengalaman intensitas | Subjektif dan perlu instruksi konsisten |
+| Observasi tugas | Paparan pekerjaan | Butuh konteks rute dan durasi |
+| VO₂ | Kebutuhan metabolik | Memerlukan alat dan protokol |
 
-| Kartu perubahan | Pertanyaan yang wajib dijawab |
-|---|---|
-| Radio tidak berfungsi | Tahap apa dihentikan? Apa syarat komunikasi sebelum mulai kembali? |
-| Hujan membuat akses licin | Apakah rute masih layak? Siapa memeriksa ulang? |
-| Satu anggota melaporkan kelelahan | Bagaimana tugas, bantuan, dan waktu istirahat diubah tanpa menyalahkan orangnya? |
-| Pemilik lokasi menolak satu titik | Bagaimana akses dan desain survei disesuaikan tanpa memaksakan pekerjaan? |
+Catatan pengajar: 20–23 menit. Sumber ODP slide 12–18, 44–45; CDC intensitas. Gunakan beberapa indikator sebagai informasi pelengkap, bukan satu angka untuk mengesahkan keselamatan.
 
-Untuk kerja di panas, akses air, kesempatan istirahat, tempat sejuk/teduh, dan penyesuaian beban perlu direncanakan; jangan mengandalkan rasa haus atau kebugaran semata. Jadwalnya disesuaikan kondisi dan prosedur setempat, bukan satu angka untuk semua situasi. [OSHA—Water, Rest, Shade](https://www.osha.gov/heat-exposure/water-rest-shade).
+- [CDC — Intensitas aktivitas fisik (2025)](https://www.cdc.gov/physical-activity-basics/measuring/index.html)
 
-Setiap kelompok menyebutkan **keputusan**, **alasan**, **PIC**, dan **syarat mulai kembali**. “Berhenti” tanpa rencana evaluasi ulang belum lengkap; “lanjut karena tinggal sedikit” bukan alasan keselamatan.
+## Denyut jantung dalam konteks
 
-## 7. Toolbox talk 60 detik
+- Catat aktivitas, durasi, lingkungan, dan waktu pengamatan.
+- Bandingkan respons seseorang pada kondisi yang sebanding.
+- Rumus denyut maksimal berbasis usia hanya memberikan perkiraan.
 
-> “Pekerjaan kita … Bahaya utama … Kendali yang sudah diperiksa … Pembagian peran … Cara konfirmasi … Kita berhenti bila … Titik kumpul dan cara meminta bantuan … Sebelum mulai, adakah kondisi yang belum aman?”
+Catatan pengajar: 23–25 menit. ODP memuat beberapa persamaan denyut maksimal yang berbeda. Jangan memilih salah satunya sebagai batas penghentian universal. Data jam tangan dapat mengandung galat gerak. Gejala dan SOP tetap harus ditindaklanjuti.
 
-Pengajar mengubah satu kondisi setelah paparan, lalu meminta anggota yang dipilih acak menjelaskan akibatnya. Semua anggota harus memahami JSA, bukan hanya penulisnya.
 
-## 8. Penilaian formatif
 
-| Bukti | Bobot usulan | Kriteria |
-|---|---:|---|
-| JSA kelompok | 40% | Langkah spesifik 10; hubungan bahaya–kejadian–akibat 10; kendali relevan 10; PIC/verifikasi 10 |
-| Demonstrasi/pengamatan individu | 30% | Checklist 5 butir, masing-masing 6 poin; peran pengamat dan penyesuaian aktivitas setara |
-| Exit ticket individu | 30% | Tiga jawaban beralasan, masing-masing 10 poin |
+## Contoh selisih denyut
 
-AI boleh membantu draf JSA dan membandingkan opsi. Mahasiswa wajib memeriksa hasilnya dengan sumber/SOP; jangan memasukkan data kesehatan pribadi ke layanan AI. Verifikasi individu dilakukan langsung. Salah mengidentifikasi kendali keselamatan kritis harus dikoreksi dan diperagakan ulang, walaupun nilai totalnya tinggi.
+- Sebelum aktivitas: 72 denyut/menit.
+- Saat aktivitas ringan: 96 denyut/menit.
+- Selisih: 24 denyut/menit. Apa yang belum diketahui?
 
-**Exit ticket:** (1) Ubah “hati-hati mengangkat” menjadi kendali yang dapat diperiksa. (2) Mengapa sepatu dan sarung tangan tidak cukup untuk skenario geolistrik? (3) Sebut kondisi penghentian beserta syarat mulai kembali.
+Catatan pengajar: 25–27 menit. Angka simulasi untuk aritmetika, bukan target mahasiswa. Jawaban: jenis aktivitas, waktu ukur, suhu, faktor individu, kualitas alat. Selisih tidak langsung menjadi kalori, diagnosis, atau keputusan layak bekerja.
 
-## 9. Tugas menuju pertemuan berikutnya
 
-Gunakan foto alat dari pertemuan 1. Buat JSA satu halaman untuk pemindahannya: 4–6 langkah, kendali, PIC, verifikasi, serta kondisi penghentian. Tandai informasi yang belum diketahui—jangan mengarang berat atau kemampuan alat bantu. Sertakan satu perubahan desain kerja dan catatan penggunaan AI.
 
-Tidak perlu mengangkat alat sungguhan, menjalankan instrumen, atau melakukan latihan maksimal untuk tugas ini.
+## Skala persepsi usaha
 
-**Kunci pengajar:** jawaban yang baik menyebut tindakan teramati dan kendali yang cocok dengan kejadian, bukan daftar APD. Pada kasus radio gagal, tahap yang bergantung pada konfirmasi keselamatan tidak dimulai/dilanjutkan sampai komunikasi dan syarat aman dipulihkan sesuai SOP.
+| Skala | Penggunaan yang tepat |
+| --- | --- |
+| Borg RPE 6–20 | Gunakan instruksi skala aslinya secara konsisten |
+| Borg CR10 | Skala tersendiri dengan instruksi dan jangkar khusus |
+| Skala usaha umum 0–10 | Dapat dipakai untuk refleksi kelas, dengan jangkar dijelaskan |
 
-## Referensi dan posisi materi
+Catatan pengajar: 27–29 menit. ODP slide 14–16. Jangan mencampur skor dari skala yang berbeda. RPE dikali 10 bukan konversi denyut jantung yang berlaku pada setiap individu. Skala refleksi 0–10 kelas ini bukan administrasi instrumen Borg tervalidasi.
 
-- [Pertemuan 1—halaman mata kuliah](https://maswiet.github.io/kuliah/pendidikan-jasmani-hse/#pertemuan-1): dasar kesinambungan, durasi, dan tugas observasi alat.
-- OSHA dan NIOSH pada tautan di atas: acuan pembelajaran internasional, bukan klaim kepatuhan terhadap ketentuan Indonesia.
-- SOP UGM, aturan lokasi, manual instrumen, dan pengarahan petugas kompeten: acuan operasional kegiatan nyata yang harus ditambahkan pengampu sebelum praktik lapangan.
+- [CDC — Intensitas aktivitas fisik (2025)](https://www.cdc.gov/physical-activity-basics/measuring/index.html)
+- [Borg Perception — RPE dan CR scales](https://borgperception.se/wp-content/uploads/2019/10/The-Borg-CR-Scales-Folder.pdf)
+- [Studi RPE dan denyut pada tugas kerja simulasi](https://pubmed.ncbi.nlm.nih.gov/10327895/)
+
+## Talk test
+
+- Pada intensitas sedang, orang umumnya masih dapat berbicara, tetapi sulit bernyanyi.
+- Pada intensitas berat, orang umumnya hanya dapat mengucapkan beberapa kata sebelum mengambil napas.
+
+Catatan pengajar: 29–30 menit. Gunakan sebagai petunjuk intensitas aktivitas aerobik sesuai CDC, bukan tes keselamatan seluruh pekerjaan. Praktik tetap ringan; tidak perlu mencapai intensitas sedang atau berat.
+
+- [CDC — Intensitas aktivitas fisik (2025)](https://www.cdc.gov/physical-activity-basics/measuring/index.html)
+
+## Observasi gerak ringan
+
+- Jalan santai di tempat selama sekitar satu menit, bila nyaman.
+- Amati perubahan napas dan persepsi usaha sebelum serta sesudahnya.
+- Berhenti bila muncul keluhan. Peran pengamat memiliki nilai belajar setara.
+
+Catatan pengajar: 30–38 menit. Pilihan sukarela di ruang datar bebas hambatan, tanpa beban dan tanpa target denyut. Sediakan peran pengamat. Tidak melakukan tes maksimal atau memaksa peningkatan intensitas. Pengajar memberi waktu untuk pulih dan mengisi lembar kerja.
+
+
+
+## Refleksi pengamatan
+
+- Apa yang berubah, dan apa yang tetap?
+- Faktor apa yang membuat perbandingan antarorang kurang tepat?
+- Bagaimana informasi ini membantu merancang tugas lapangan?
+
+Catatan pengajar: 38–45 menit. Diskusi berpasangan lalu dua tanggapan kelas. Catatan tubuh disimpan pribadi; kelompok boleh menggunakan data simulasi. Hubungkan dengan perubahan ritme, rute, dan pemulihan.
+
+
+
+## Beban tugas juga memerlukan perhatian
+
+- NASA-TLX mencakup tuntutan mental, fisik, dan waktu.
+- Dimensi lainnya adalah kinerja, usaha, dan frustrasi.
+- Operator pencatat data dapat terbebani meskipun duduk.
+
+Catatan pengajar: 45–48 menit. ODP slide 17–18. NASA-TLX adalah alat penilaian subjektif beban tugas. Pengenalan dimensi bukan pelaksanaan skor NASA-TLX resmi. Gunakan prosedur asli bila ingin menerapkannya sebagai instrumen.
+
+- [NASA — Task Load Index](https://www.nasa.gov/human-systems-integration-division/nasa-task-load-index-tlx/)
+
+## Antropometri untuk desain kerja
+
+- Sesuaikan tinggi meja, jangkauan, dan pegangan dengan pengguna.
+- Pertimbangkan variasi ukuran tubuh dalam satu tim.
+- Pengaturan yang dapat disesuaikan membantu lebih banyak pengguna.
+
+Catatan pengajar: 48–51 menit. ODP slide 19–20. Jangan menyalin tinggi meja historis berdasarkan laki-laki/perempuan menjadi ketentuan semua mahasiswa. Gunakan kebutuhan tugas dan pengukuran yang relevan, dengan persetujuan pengguna.
+
+
+
+## Risiko pemindahan alat
+
+| Faktor | Pertanyaan sebelum mulai |
+| --- | --- |
+| Beban | Berat, isi, pegangan, dan stabilitasnya diketahui? |
+| Tugas | Seberapa jauh, tinggi, sering, dan lama? |
+| Lingkungan | Ada lereng, tangga, kabel, atau permukaan licin? |
+| Pengguna | Bantuan dan penyesuaian apa yang diperlukan? |
+
+Catatan pengajar: 51–54 menit. Sambungkan dengan materi situs lama tentang pemindahan alat. Tidak ada satu batas kilogram yang menjamin semua tugas aman. Jangan menilai kemampuan hanya dari jenis kelamin, usia, atau penampilan.
+
+- [NIOSH — Revised NIOSH Lifting Equation](https://www.cdc.gov/niosh/ergonomics/about/rnle.html)
+- [CCOHS — Lingkup persamaan angkat NIOSH](https://www.ccohs.ca/oshanswers/ergonomics/niosh/assessing.html)
+
+## Lingkup persamaan angkat NIOSH
+
+- RNLE menilai tugas angkat manual dengan dua tangan dalam lingkup tertentu.
+- Variabelnya mencakup posisi tangan, frekuensi, durasi, dan kualitas pegangan.
+- Membawa kotak di lereng licin memerlukan penilaian yang lebih luas.
+
+Catatan pengajar: 54–56 menit. Jelaskan bahwa hasil RNLE bukan sertifikat aman. Tidak menerapkan kalkulator RNLE pada tugas membawa, mendorong, atau kondisi pijakan buruk yang berada di luar lingkupnya.
+
+- [NIOSH — Revised NIOSH Lifting Equation](https://www.cdc.gov/niosh/ergonomics/about/rnle.html)
+- [CCOHS — Lingkup persamaan angkat NIOSH](https://www.ccohs.ca/oshanswers/ergonomics/niosh/assessing.html)
+
+## Jarak beban dan momen gaya
+
+- Contoh ideal: massa 10 kg, g = 9,81 m/s².
+- Pada jarak 0,20 m: momen ≈ 19,6 N·m.
+- Pada jarak 0,40 m: momen ≈ 39,2 N·m.
+
+Catatan pengajar: 56–60 menit. Model statika sederhana M=m g d terhadap titik acuan yang sama. Menggandakan lengan momen menggandakan momen beban. Ini bukan estimasi gaya tulang belakang, beban aman, atau tugas angkat nyata.
+
+
+
+## Pilihan pengendalian
+
+| Prioritas | Contoh perubahan pekerjaan |
+| --- | --- |
+| Eliminasi | Kurangi kebutuhan memindahkan alat |
+| Substitusi | Pilih unit lebih ringan setelah menilai risiko baru |
+| Rekayasa | Gunakan alat bantu yang sesuai medan |
+| Administratif | Atur peran, rute, komunikasi, dan pemulihan |
+| APD | Pilih berdasarkan bahaya dan SOP |
+
+Catatan pengajar: 60–63 menit. Hierarki lama dipertahankan. Roda atau troli tidak selalu cocok di lereng. Pelatihan mengangkat dan kebugaran tidak menggantikan perubahan tugas.
+
+- [OSHA — Hazard Prevention and Control](https://www.osha.gov/safety-management/hazard-prevention)
+
+## Praktik pemindahan kotak ringan
+
+- Periksa kotak kosong, jalur, dan tempat peletakan.
+- Sepakati metode, bantuan, dan aba-aba.
+- Lakukan gerak terkendali atau pilih mengamati.
+
+Catatan pengajar: 63–73 menit. Dua menit pengarahan, lima menit praktik bergantian, tiga menit refleksi. Ruang datar, kotak kosong/sangat ringan, tanpa aki atau instrumen aktif. Hindari titik jepit dan memutar badan sambil menahan beban. Hentikan bila ada keluhan.
+
+
+
+## Rancangan kelompok
+
+- Gunakan foto alat dari pertemuan pertama.
+- Tuliskan informasi yang sudah diketahui dan yang masih perlu diverifikasi.
+- Usulkan satu perubahan desain serta satu cara memeriksa hasilnya.
+
+Catatan pengajar: 73–80 menit. Kelompok 3–4 orang. Kumpulkan satu lembar rencana. Contoh jawaban: menurunkan frekuensi angkut dengan perubahan titik bongkar, lalu memeriksa kelayakan akses dan dampaknya pada survei.
+
+
+
+## Exit ticket
+
+- Mengapa denyut saja belum cukup untuk menilai beban kerja?
+- Apa perbedaan kapasitas aerobik dan tuntutan tugas?
+- Perubahan apa yang paling membantu pada kasus kotak alat Anda?
+
+Catatan pengajar: 80–87 menit. Setiap jawaban harus memberi alasan. Kunci: konteks dan keterbatasan indikator; kemampuan individu versus kebutuhan tugas; kendali yang spesifik dan dapat diperiksa. Kesalahan kritis dibahas kembali.
+
+
+
+## Tugas penghubung
+
+- Buat profil pekerjaan satu halaman berdasarkan foto alat.
+- Cantumkan tugas, rute, paparan, informasi yang belum diketahui, dan usulan kendali.
+- Bawa profil ini untuk menyusun JSA pada pertemuan ke-3.
+
+Catatan pengajar: 87–90 menit. Tanpa praktik alat sungguhan atau pengukuran kesehatan wajib. Penilaian usulan: ketepatan konsep 30%, alasan rancangan 40%, verifikasi 30%. AI boleh membantu draf; mahasiswa harus mampu menjelaskan sendiri.
+
+
+
+## Bacaan utama
+
+- CDC: intensitas aktivitas dan talk test.
+- NIOSH dan CCOHS: lingkup penilaian angkat.
+- NASA: NASA-TLX. OSHA: hierarki pengendalian.
+
+Catatan pengajar: Referensi lengkap tersedia pada materi daring dan catatan slide. Materi dasar: berkas ODP “Fisiologi manusia kerja”, April 2025, diberikan pengampu. Kutipan gambar tabel lama tidak dipakai sebagai batas operasional.
+
+- [CDC — Intensitas aktivitas fisik (2025)](https://www.cdc.gov/physical-activity-basics/measuring/index.html)
+- [NIOSH — Revised NIOSH Lifting Equation](https://www.cdc.gov/niosh/ergonomics/about/rnle.html)
+- [CCOHS — Lingkup persamaan angkat NIOSH](https://www.ccohs.ca/oshanswers/ergonomics/niosh/assessing.html)
+- [NASA — Task Load Index](https://www.nasa.gov/human-systems-integration-division/nasa-task-load-index-tlx/)
+- [OSHA — Hazard Prevention and Control](https://www.osha.gov/safety-management/hazard-prevention)
+
+## Pertemuan berikutnya
+
+- Kelelahan, tidur, dan kerja dalam panas.
+- Profil pekerjaan menjadi JSA dengan kendali, PIC, dan verifikasi.
+
+Catatan pengajar: Jembatan ke pertemuan ke-3. Seluruh kegiatan lapangan nyata mengikuti SOP UGM, manual instrumen, aturan lokasi, dan pengarahan petugas kompeten.
+
+
+
+## Sumber dasar
+
+Materi dasar: “Fisiologi manusia kerja”, berkas ODP April 2025 yang diberikan pengampu. Penyesuaian untuk S1 Geofisika dan peninjauan sumber: 28 Oktober 2026.
