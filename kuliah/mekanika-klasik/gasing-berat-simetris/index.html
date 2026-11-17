@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gasing Berat Simetris — Mekanika Klasik — Wiwit Suryanto</title>
+  <meta name="description" content="Materi kuliah Mekanika Klasik (Program Magister Fisika UGM), Goldstein §5.7: gasing berat simetris bertumpu satu titik. Sudut Euler, dua momentum siklik, potensial efektif, nutasi, presesi semu-teratur, gasing tidur, dan giroskop — penurunan analitik yang disederhanakan.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);
+      font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;
+      border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);
+      font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;
+      font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:44px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;
+      font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    .kicker{margin:0 0 22px;color:var(--text-muted);font-family:var(--sans);font-size:15px;line-height:1.55}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);
+      border-radius:6px;overflow:hidden}
+    figure.fig > div{padding:18px 16px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);
+      padding:10px 16px;border-top:1px solid var(--border)}
+    figure.fig figcaption b{color:var(--text);font-weight:600}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;
+      background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+    ol.steps{font-family:var(--sans);font-size:16px;line-height:1.55;padding-left:22px;margin:16px 0}
+    ol.steps li{margin:0 0 10px}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;
+      padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:22px 0}
+    .callout p:first-child{margin-top:0}
+    .callout p:last-child{margin-bottom:0}
+    .callout.support{background:#EDF3F2;border-color:#C7DAD6}
+    .callout.try{background:#FBF1EC;border-color:#E6C9BB}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);
+      color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    .seq-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:40px 0 0;font-family:var(--sans)}
+    .seq-nav a{display:block;border:1px solid var(--border);border-radius:6px;padding:14px 16px;
+      text-decoration:none;background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+    .seq-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    .seq-nav .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .seq-nav a:hover .lbl{color:var(--accent)}
+    .seq-nav .nx{text-align:right}
+    @media (max-width:560px){ .seq-nav{grid-template-columns:1fr} .seq-nav .nx{text-align:left} }
+
+    .toc{font-family:var(--sans);font-size:15px;columns:2;column-gap:32px;margin:28px 0 0;padding:20px 24px;
+      background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:2px 0;break-inside:avoid}
+    .toc a{text-decoration:none}
+    table.data{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;line-height:1.5;margin:0 0 20px;
+      background:var(--surface);border:1px solid var(--border)}
+    table.data th,table.data td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+    table.data th{background:var(--surface-muted);font-weight:600}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    main h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:28px 0 8px}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+
+    .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
+    text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
+    text.dlm{font-family:var(--sans);font-size:12px;fill:#5F625C}
+    .figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin:8px 0 20px}
+    .stage-fig{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px}
+    .stage-fig svg{width:100%;height:auto;display:block}
+    .stage-fig p{margin:10px 0 0;font-family:var(--sans);font-size:13.5px;line-height:1.45;color:var(--text-muted)}
+    .stage-fig p b{color:var(--text)}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:34px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:29px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .toc{columns:1}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; <a href="/kuliah/mekanika-klasik/">Mekanika Klasik</a> &nbsp;/&nbsp; Gasing Berat Simetris</p>
+      <p class="eyebrow">Mekanika Klasik &middot; Program Magister</p>
+      <h1>Gasing Berat Simetris Bertumpu Satu Titik</h1>
+      <p class="lede">Gasing mainan yang berputar kencang tidak jatuh &mdash; ia malah berpresesi. Di sini kita bongkar gerak itu secara analitik tetapi tetap mudah diikuti: tiga sudut Euler, dua momentum kekal, dan satu trik yang mengubah masalah rumit menjadi gerak satu dimensi dalam sudut \(\theta\). Mengikuti Goldstein, <i>Classical Mechanics</i>, &sect;5.7.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Mekanika Klasik (Program Magister Fisika)</dd>
+        <dt>Rujukan utama</dt><dd>Goldstein, Poole &amp; Safko (2002), edisi ke-3, &sect;5.7, hlm. 208&ndash;222</dd>
+        <dt>Prasyarat</dt><dd>Persamaan Lagrange, koordinat siklik, dan gerak bebas torka (&sect;5.6)</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <nav class="toc" aria-label="Daftar isi"><ol>
+        <li><a href="#setup">Dari benda bebas ke gasing berat</a></li>
+        <li><a href="#euler">Tiga sudut Euler: spin, presesi, nutasi</a></li>
+        <li><a href="#lagrangian">Lagrangian dan tiga besaran kekal</a></li>
+        <li><a href="#reduksi">Trik reduksi: masalah 1-D dalam &theta;</a></li>
+        <li><a href="#kubik">Substitusi u = cos&theta; dan kubik f(u)</a></li>
+        <li><a href="#lokus">Tiga wajah gerak sumbu gasing</a></li>
+        <li><a href="#jatuh">Gasing dilepas dari diam: selalu jatuh dulu</a></li>
+        <li><a href="#cepat">Gasing cepat: presesi semu-teratur</a></li>
+        <li><a href="#tetap">Presesi tetap dan gasing tidur</a></li>
+        <li><a href="#giroskop">Rumus giroskop dasar</a></li>
+        <li><a href="#rangkuman">Rangkuman &amp; rumus kunci</a></li>
+        <li><a href="#rujukan">Rujukan</a></li>
+      </ol></nav>
+
+      <section class="block" id="setup">
+        <h2>1. Dari benda bebas ke gasing berat</h2>
+        <p>Di <a href="/kuliah/mekanika-klasik/gerak-bebas-torka/">&sect;5.6</a> benda tidak mengalami torka. Sekarang kita tambahkan satu hal: <b>gravitasi</b>, dan satu <b>titik tumpu yang tetap</b> (ujung gasing di lantai, atau titik gantung giroskop). Gravitasi kini memberi torka terhadap titik tumpu, sehingga momentum sudut tidak lagi kekal seutuhnya. Benda yang kita tinjau <b>simetris</b>: dua momen inersia sama, \(I_1=I_2\neq I_3\), seperti gasing betulan.</p>
+        <p>Inilah model <i>gasing simetris berat</i> &mdash; mencakup gasing mainan, giroskop, kompas giro, bahkan Bumi (yang sumbunya berpresesi karena torka Matahari dan Bulan). Pertanyaan utamanya sederhana: kalau gravitasi menariknya ke bawah, kenapa gasing yang berputar kencang tidak tumbang?</p>
+        <div class="callout"><p><b>Strategi bab ini.</b> Kita <i>tidak</i> menyelesaikan persamaan gerak penuh (hasilnya fungsi eliptik yang tidak mencerahkan). Sebaliknya, tiga besaran kekal akan memampatkan masalah tiga sudut menjadi <b>gerak satu dimensi dalam \(\theta\) saja</b> &mdash; sama persis dengan trik potensial efektif pada gerak gaya sentral. Dari situ seluruh wataknya terbaca.</p></div>
+      </section>
+
+      <section class="block" id="euler">
+        <h2>2. Tiga sudut Euler: spin, presesi, nutasi</h2>
+        <p>Karena satu titik tetap, orientasi gasing ditentukan penuh oleh tiga sudut Euler \((\phi,\theta,\psi)\). Laju perubahannya punya nama dan arti fisis yang sangat konkret:</p>
+        <ul class="points">
+          <li>\(\dot{\psi}\) &mdash; <b>spin</b>: putaran gasing terhadap sumbu figurnya sendiri (sumbu \(z\) badan). Inilah &ldquo;putaran cepat&rdquo; yang Anda beri saat memuntir gasing.</li>
+          <li>\(\dot{\phi}\) &mdash; <b>presesi</b>: perputaran sumbu figur mengelilingi sumbu tegak (vertikal) \(z'\). Inilah gerak &ldquo;berputar pelan&rdquo; sumbu gasing yang kita lihat.</li>
+          <li>\(\dot{\theta}\) &mdash; <b>nutasi</b>: naik-turunnya sumbu figur, yakni perubahan sudut miring \(\theta\) terhadap vertikal. Gerak &ldquo;mengangguk&rdquo;.</li>
+        </ul>
+        <p>\(l\) adalah jarak pusat massa dari titik tumpu (di sepanjang sumbu figur). Untuk kebanyakan gasing dan giroskop, \(\dot{\psi}\gg\dot{\phi}\gg\dot{\theta}\): spin paling cepat, presesi lebih pelan, nutasi paling halus.</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 300" width="100%" height="auto" style="max-width:420px;margin:auto" aria-label="Tiga sudut Euler sebuah gasing: theta miring dari vertikal, phi presesi mengitari vertikal, psi spin mengitari sumbu figur">
+              <!-- fixed point -->
+              <circle cx="250" cy="250" r="4" fill="var(--d-axis)"/>
+              <text class="dlm" x="256" y="266">titik tumpu O</text>
+              <!-- vertical space axis -->
+              <line x1="250" y1="250" x2="250" y2="40" stroke="var(--d-axis)" stroke-width="1.5" stroke-dasharray="6 4"/>
+              <text class="dlm" x="256" y="46">vertikal z&#8242;</text>
+              <!-- figure axis tilted by theta -->
+              <g transform="rotate(26 250 250)">
+                <line x1="250" y1="250" x2="250" y2="62" stroke="var(--d-blue)" stroke-width="2.5" marker-end="url(#g-blue)"/>
+                <!-- top body along figure axis -->
+                <ellipse cx="250" cy="150" rx="30" ry="46" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.5"/>
+                <!-- center of gravity + weight -->
+                <circle cx="250" cy="150" r="3" fill="var(--d-axis)"/>
+                <line x1="250" y1="150" x2="250" y2="196" stroke="var(--d-rust)" stroke-width="2" marker-end="url(#g-rust)"/>
+                <text class="dlm" x="258" y="184">Mg</text>
+                <!-- spin arrow psi around figure axis -->
+                <path d="M 226 92 A 24 9 0 1 0 274 92" fill="none" stroke="var(--d-rust)" stroke-width="2" marker-end="url(#g-rust)"/>
+                <text class="dl" x="276" y="92" font-weight="700" fill="var(--d-rust)">&#968;</text>
+              </g>
+              <text class="dl" x="300" y="70" font-weight="700" fill="var(--d-blue)">sumbu figur z</text>
+              <!-- theta arc -->
+              <path d="M 250 120 A 130 130 0 0 1 307 134" fill="none" stroke="var(--d-axis)" stroke-width="1.3"/>
+              <text class="dl" x="268" y="116" font-weight="700">&#952;</text>
+              <!-- precession phi around vertical (ellipse at base) -->
+              <ellipse cx="250" cy="250" rx="86" ry="22" fill="none" stroke="var(--d-axis)" stroke-width="1.3" stroke-dasharray="5 4"/>
+              <path d="M 336 250 A 86 22 0 0 1 300 268" fill="none" stroke="var(--d-axis)" stroke-width="1.6" marker-end="url(#g-ax)"/>
+              <text class="dl" x="340" y="246" font-weight="700">&#966;</text>
+              <defs>
+                <marker id="g-blue" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-blue)"/></marker>
+                <marker id="g-rust" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker>
+                <marker id="g-ax" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-axis)"/></marker>
+              </defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 1. Tiga sudut Euler.</b> \(\theta\) memiringkan sumbu figur dari vertikal (nutasi), \(\dot{\phi}\) memutar sumbu figur mengelilingi vertikal (presesi), dan \(\dot{\psi}\) adalah spin gasing terhadap sumbunya sendiri. Berat \(Mg\) bekerja di pusat massa sejauh \(l\) dari titik tumpu.</figcaption>
+        </figure>
+      </section>
+
+      <section class="block" id="lagrangian">
+        <h2>3. Lagrangian dan tiga besaran kekal</h2>
+        <p>Dengan \(I_1=I_2\), energi kinetik dan potensial memberi Lagrangian (Goldstein 5.52):</p>
+        <div class="eq">$$ L=\frac{I_1}{2}\left(\dot{\theta}^2+\dot{\phi}^2\sin^2\theta\right)+\frac{I_3}{2}\left(\dot{\psi}+\dot{\phi}\cos\theta\right)^2-Mgl\cos\theta. $$</div>
+        <p>Sekarang amati: \(\phi\) dan \(\psi\) <b>tidak muncul</b> di dalam \(L\) &mdash; hanya laju perubahannya yang muncul. Keduanya <b>koordinat siklik</b>, sehingga momentum konjugatnya kekal. Secara fisis, keduanya adalah komponen momentum sudut sepanjang dua sumbu yang tidak dikenai torka gravitasi (torka gravitasi searah garis simpul, tegak lurus terhadap keduanya):</p>
+        <div class="eq">$$ p_\psi=\frac{\partial L}{\partial\dot{\psi}}=I_3(\dot{\psi}+\dot{\phi}\cos\theta)=I_3\omega_3=I_1 a=\text{tetap}, \tag{5.53}$$</div>
+        <div class="eq">$$ p_\phi=\frac{\partial L}{\partial\dot{\phi}}=(I_1\sin^2\theta+I_3\cos^2\theta)\dot{\phi}+I_3\dot{\psi}\cos\theta=I_1 b=\text{tetap}. \tag{5.54}$$</div>
+        <p>Karena sistem konservatif, energi total juga kekal:</p>
+        <div class="eq">$$ E=T+V=\frac{I_1}{2}\left(\dot{\theta}^2+\dot{\phi}^2\sin^2\theta\right)+\frac{I_3}{2}\omega_3^2+Mgl\cos\theta. \tag{5.55}$$</div>
+        <div class="callout support"><p><b>Mengapa ini penting.</b> Persamaan (5.53) menyatakan \(\omega_3\) &mdash; spin terhadap sumbu figur &mdash; <i>konstan</i>. Jadi dari tiga derajat kebebasan, dua (\(\phi,\psi\)) sudah &ldquo;terkunci&rdquo; oleh dua konstanta \(a\) dan \(b\). Tersisa satu derajat kebebasan nyata: sudut miring \(\theta\). Di sinilah seluruh dinamika yang menarik berada.</p></div>
+        <p>Konstanta \(a=p_\psi/I_1\) dan \(b=p_\phi/I_1\) adalah &ldquo;penyimpan&rdquo; kedua spin itu. Dari (5.53) dan (5.54) kita bisa menyatakan presesi langsung dalam \(\theta\):</p>
+        <div class="eq">$$ \dot{\phi}=\frac{b-a\cos\theta}{\sin^2\theta}. \tag{5.57}$$</div>
+        <p>Ini kunci yang akan kita pakai berulang: <b>jika \(\theta(t)\) diketahui, presesi \(\dot{\phi}\) langsung ikut.</b> Tinggal mencari \(\theta(t)\).</p>
+      </section>
+
+      <section class="block" id="reduksi">
+        <h2>4. Trik reduksi: masalah satu dimensi dalam &theta;</h2>
+        <p>Karena \(\omega_3\) konstan, besaran \(E'=E-\tfrac12 I_3\omega_3^2\) juga konstan. Substitusikan (5.57) ke (5.55), dan energi menjadi hanya tentang \(\theta\):</p>
+        <div class="eq">$$ E'=\frac{I_1\dot{\theta}^2}{2}+\underbrace{\frac{I_1}{2}\frac{(b-a\cos\theta)^2}{\sin^2\theta}+Mgl\cos\theta}_{\displaystyle V'(\theta)}. \tag{5.59}$$</div>
+        <p>Bentuk ini <b>persis</b> seperti energi sebuah partikel yang bergerak dalam satu dimensi: suku \(\tfrac12 I_1\dot{\theta}^2\) berlaku seperti energi kinetik, dan sisanya adalah <b>potensial efektif</b></p>
+        <div class="eq">$$ V'(\theta)=Mgl\cos\theta+\frac{I_1}{2}\left(\frac{b-a\cos\theta}{\sin\theta}\right)^2. \tag{5.60}$$</div>
+        <p>Ini analogi langsung dengan potensial efektif pada gerak gaya sentral: suku pertama adalah tarikan gravitasi, suku kedua adalah &ldquo;dinding sentrifugal&rdquo; dari presesi yang menolak \(\theta\) mendekati \(0\) atau \(\pi\). Hasilnya sebuah <b>sumur potensial</b>: \(\theta\) terperangkap berosilasi antara dua titik balik \(\theta_1\) dan \(\theta_2\). <b>Osilasi inilah nutasi.</b></p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 300" width="100%" height="auto" style="max-width:480px;margin:auto" aria-label="Potensial efektif V'(theta) berbentuk sumur; garis energi E' memotong di theta1 dan theta2">
+              <!-- axes -->
+              <line x1="60" y1="250" x2="470" y2="250" stroke="var(--d-axis)" stroke-width="1.5"/>
+              <line x1="60" y1="250" x2="60" y2="40" stroke="var(--d-axis)" stroke-width="1.5"/>
+              <text class="dlm" x="462" y="270">&#952;</text>
+              <text class="dlm" x="30" y="48">V&#8242;(&#952;)</text>
+              <!-- potential well curve -->
+              <path d="M 92 60 C 150 230, 210 250, 265 250 C 320 250, 380 230, 438 60" fill="none" stroke="var(--d-blue)" stroke-width="2.5"/>
+              <!-- energy line E' -->
+              <line x1="120" y1="150" x2="410" y2="150" stroke="var(--d-rust)" stroke-width="2" stroke-dasharray="6 4"/>
+              <text class="dl" x="414" y="154" font-weight="700" fill="var(--d-rust)">E&#8242;</text>
+              <!-- turning points -->
+              <circle cx="150" cy="150" r="4" fill="var(--d-rust)"/>
+              <circle cx="380" cy="150" r="4" fill="var(--d-rust)"/>
+              <line x1="150" y1="150" x2="150" y2="250" stroke="var(--d-axis)" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="380" y1="150" x2="380" y2="250" stroke="var(--d-axis)" stroke-width="1" stroke-dasharray="3 3"/>
+              <text class="dl" x="138" y="268" font-weight="700">&#952;&#8321;</text>
+              <text class="dl" x="368" y="268" font-weight="700">&#952;&#8322;</text>
+              <!-- nutation span -->
+              <path d="M 150 128 L 380 128" stroke="var(--d-rust)" stroke-width="1.4" marker-start="url(#g-rust2)" marker-end="url(#g-rust2)"/>
+              <text class="dlm" x="222" y="120" fill="var(--d-rust)">nutasi: &theta; berosilasi</text>
+              <defs><marker id="g-rust2" markerWidth="9" markerHeight="9" refX="4" refY="3" orient="auto"><path d="M7,0 L0,3 L7,6 Z" fill="var(--d-rust)"/></marker></defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 2. Potensial efektif.</b> \(V'(\theta)\) berbentuk sumur dengan dinding curam di \(\theta\to 0\) dan \(\theta\to\pi\). Garis energi \(E'\) memotong sumur di dua titik balik \(\theta_1,\theta_2\); di antaranya \(\dot{\theta}^2&gt;0\) sehingga \(\theta\) berosilasi &mdash; itulah nutasi. Jika \(E'\) menyentuh dasar sumur, nutasi lenyap dan presesinya tetap.</figcaption>
+        </figure>
+      </section>
+
+      <section class="block" id="kubik">
+        <h2>5. Substitusi u = cos&theta; dan kubik f(u)</h2>
+        <p>Dengan empat konstanta ternormalisasi (Goldstein 5.61)</p>
+        <div class="eq">$$ \alpha=\frac{2E-I_3\omega_3^2}{I_1},\quad \beta=\frac{2Mgl}{I_1},\quad a=\frac{p_\psi}{I_1},\quad b=\frac{p_\phi}{I_1}, $$</div>
+        <p>persamaan energi menjadi \(\alpha=\dot{\theta}^2+(b-a\cos\theta)^2/\sin^2\theta+\beta\cos\theta\). Substitusi \(u=\cos\theta\) (sama seperti trik pada gaya sentral) merapikannya menjadi:</p>
+        <div class="eq">$$ \dot{u}^2=(1-u^2)(\alpha-\beta u)-(b-au)^2 \;\equiv\; f(u). \tag{5.62$'$}$$</div>
+        <p>Ruas kanan \(f(u)\) adalah <b>polinomial kubik</b>. Gerak nyata hanya terjadi saat \(\dot{u}^2\ge 0\), yaitu \(f(u)\ge 0\). Akar-akar \(f(u)=0\) adalah <b>titik balik</b> &mdash; sudut tempat \(\dot{\theta}\) berganti tanda.</p>
+        <div class="eq">$$ f(u)=\beta u^3-(\alpha+a^2)u^2+(2ab-\beta)u+(\alpha-b^2). $$</div>
+        <p>Karena \(\beta&gt;0\), \(f(u)\to+\infty\) untuk \(u\) besar, dan di \(u=\pm1\) nilainya \(-(b\mp a)^2\le 0\). Maka untuk gasing nyata selalu ada <b>dua akar \(u_1,u_2\) di dalam \((-1,1)\)</b> dan satu akar \(u_3&gt;1\) yang tak berarti fisis. \(\cos\theta\) berayun antara \(u_1\) dan \(u_2\) &mdash; inilah nutasi yang kita lihat di sumur potensial tadi.</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 240" width="100%" height="auto" style="max-width:480px;margin:auto" aria-label="Kubik f(u) memotong sumbu di u1 dan u2 dalam (-1,1) dan u3 di atas 1">
+              <line x1="40" y1="150" x2="480" y2="150" stroke="var(--d-axis)" stroke-width="1.5"/>
+              <text class="dlm" x="470" y="168">u</text>
+              <!-- u = -1 and +1 markers -->
+              <line x1="95" y1="142" x2="95" y2="158" stroke="var(--d-axis)" stroke-width="1.5"/>
+              <text class="dlm" x="82" y="134">u=&minus;1</text>
+              <line x1="360" y1="142" x2="360" y2="158" stroke="var(--d-axis)" stroke-width="1.5"/>
+              <text class="dlm" x="348" y="134">u=+1</text>
+              <!-- cubic curve -->
+              <path d="M 55 210 C 120 120, 150 150, 185 170 C 215 188, 250 188, 285 168 C 330 140, 360 160, 430 60" fill="none" stroke="var(--d-blue)" stroke-width="2.5"/>
+              <!-- roots u1,u2,u3 -->
+              <circle cx="168" cy="150" r="4.5" fill="var(--d-rust)"/>
+              <circle cx="300" cy="150" r="4.5" fill="var(--d-rust)"/>
+              <circle cx="405" cy="150" r="4.5" fill="var(--d-axis)"/>
+              <text class="dl" x="158" y="140" font-weight="700" fill="var(--d-rust)">u&#8321;</text>
+              <text class="dl" x="296" y="140" font-weight="700" fill="var(--d-rust)">u&#8322;</text>
+              <text class="dl" x="398" y="140" font-weight="700">u&#8323;&gt;1</text>
+              <!-- allowed band -->
+              <rect x="168" y="150" width="132" height="54" fill="var(--d-rust)" opacity="0.08"/>
+              <text class="dlm" x="190" y="196" fill="var(--d-rust)">daerah gerak (f&#8805;0)</text>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 3. Kubik \(f(u)\).</b> Dua akar fisis \(u_1,u_2\) terletak di \((-1,1)\); \(\cos\theta\) hanya boleh berada di antaranya (\(f\ge 0\)). Akar ketiga \(u_3&gt;1\) tidak bersesuaian dengan sudut nyata. Jarak \(u_1\) ke \(u_2\) menentukan lebar nutasi.</figcaption>
+        </figure>
+        <p>Secara prinsip, \(t=\int \mathrm{d}u/\sqrt{f(u)}\) menyelesaikan masalah lewat integral eliptik &mdash; tetapi watak geraknya sudah bisa dibaca tanpa integrasi, hanya dari letak akar.</p>
+      </section>
+
+      <section class="block" id="lokus">
+        <h2>6. Tiga wajah gerak sumbu gasing</h2>
+        <p>Biasanya gerak digambar sebagai jejak sumbu figur pada bola satuan &mdash; <b>lokus</b> sumbu gasing &mdash; terkurung di antara dua lingkaran lintang \(\theta_1\) dan \(\theta_2\). Bentuk jejaknya ditentukan oleh di mana letak \(u'=b/a\) (nilai \(\cos\theta\) tempat presesi \(\dot{\phi}\) berganti tanda, lihat (5.57)) relatif terhadap \(u_1,u_2\):</p>
+
+        <div class="figrow">
+          <div class="stage-fig">
+            <svg class="dg" viewBox="0 0 170 180" aria-label="Lokus bergelombang">
+              <circle cx="85" cy="95" r="62" fill="none" stroke="var(--d-bodyline)" stroke-width="1.3"/>
+              <line x1="85" y1="20" x2="85" y2="33" stroke="var(--d-axis)" stroke-width="1.3"/>
+              <ellipse cx="85" cy="62" rx="52" ry="12" fill="none" stroke="var(--d-axis)" stroke-width="1"/>
+              <ellipse cx="85" cy="92" rx="61" ry="15" fill="none" stroke="var(--d-axis)" stroke-width="1"/>
+              <path d="M40 66 Q 52 90 64 66 Q 76 90 88 66 Q 100 90 112 66 Q 124 90 130 70" fill="none" stroke="var(--d-rust)" stroke-width="1.8"/>
+              <text class="dlm" x="118" y="58">&#952;&#8322;</text><text class="dlm" x="130" y="98">&#952;&#8321;</text>
+            </svg>
+            <p><b>(a) Bergelombang.</b> \(u'\) di luar \([u_1,u_2]\): presesi \(\dot{\phi}\) selalu searah; sumbu mengangguk tapi terus maju.</p>
+          </div>
+          <div class="stage-fig">
+            <svg class="dg" viewBox="0 0 170 180" aria-label="Lokus berjerat">
+              <circle cx="85" cy="95" r="62" fill="none" stroke="var(--d-bodyline)" stroke-width="1.3"/>
+              <line x1="85" y1="20" x2="85" y2="33" stroke="var(--d-axis)" stroke-width="1.3"/>
+              <ellipse cx="85" cy="62" rx="52" ry="12" fill="none" stroke="var(--d-axis)" stroke-width="1"/>
+              <ellipse cx="85" cy="92" rx="61" ry="15" fill="none" stroke="var(--d-axis)" stroke-width="1"/>
+              <path d="M44 70 C 52 50 64 50 60 72 C 70 92 74 92 80 70 C 88 50 100 50 96 72 C 106 92 110 92 120 68" fill="none" stroke="var(--d-rust)" stroke-width="1.8"/>
+              <text class="dlm" x="118" y="58">&#952;&#8322;</text><text class="dlm" x="130" y="98">&#952;&#8321;</text>
+            </svg>
+            <p><b>(b) Berjerat.</b> \(u'\) di antara \(u_1,u_2\): \(\dot{\phi}\) berganti tanda, sumbu membentuk simpul-simpul kecil.</p>
+          </div>
+          <div class="stage-fig">
+            <svg class="dg" viewBox="0 0 170 180" aria-label="Lokus runcing">
+              <circle cx="85" cy="95" r="62" fill="none" stroke="var(--d-bodyline)" stroke-width="1.3"/>
+              <line x1="85" y1="20" x2="85" y2="33" stroke="var(--d-axis)" stroke-width="1.3"/>
+              <ellipse cx="85" cy="62" rx="52" ry="12" fill="none" stroke="var(--d-axis)" stroke-width="1"/>
+              <ellipse cx="85" cy="92" rx="61" ry="15" fill="none" stroke="var(--d-axis)" stroke-width="1"/>
+              <path d="M48 62 Q 56 90 64 62 M64 62 Q 72 90 80 62 M80 62 Q 88 90 96 62 M96 62 Q 104 90 112 62" fill="none" stroke="var(--d-rust)" stroke-width="1.8"/>
+              <text class="dlm" x="118" y="58">&#952;&#8322;</text><text class="dlm" x="130" y="98">&#952;&#8321;</text>
+            </svg>
+            <p><b>(c) Runcing (cusp).</b> \(u'=u_2\): di lingkaran atas \(\dot{\phi}=\dot{\theta}=0\), jejaknya membentuk titik-titik runcing.</p>
+          </div>
+        </div>
+        <figcaption style="font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:-8px 0 0">
+          <b>Gambar 4.</b> Tiga kemungkinan bentuk lokus sumbu figur pada bola satuan (bandingkan Goldstein Gambar 5.9).</figcaption>
+      </section>
+
+      <section class="block" id="jatuh">
+        <h2>7. Gasing dilepas dari diam: selalu jatuh dulu</h2>
+        <p>Kasus (c) justru yang paling lazim di kelas: gasing diputar terhadap sumbu figur, ditahan miring pada sudut \(\theta_0\), lalu <b>dilepas</b> dengan \(\dot{\theta}=\dot{\phi}=0\). Maka \(u_0=\cos\theta_0\) adalah salah satu akar \(f(u)\), tepatnya lingkaran atas: \(u_0=u_2=u'=b/a\).</p>
+        <div class="callout"><p><b>Buktinya intuitif.</b> Pada saat dilepas, \(E'=Mgl\cos\theta_0\). Karena suku energi kinetik tak pernah negatif, energi hanya bisa kekal bila \(Mgl\cos\theta\) <i>berkurang</i> &mdash; artinya \(\theta\) <i>bertambah</i>. Jadi \(\theta_0\) adalah nilai \(\theta\) terkecil: <b>gasing selalu mulai dengan jatuh</b>, lalu berpresesi, lalu naik lagi ke \(\theta_0\), begitu seterusnya. Inilah asal titik-titik runcing di Gambar 4(c).</p></div>
+        <p>Jadi gasing yang dilepas tidak langsung berpresesi mulus &mdash; ia menukik dulu, baru bergerak menyamping. Pengamatan sehari-hari (gasing &ldquo;seakan&rdquo; langsung berpresesi) adalah hasil kasus cepat yang kita bahas berikut.</p>
+      </section>
+
+      <section class="block" id="cepat">
+        <h2>8. Gasing cepat: presesi semu-teratur</h2>
+        <p>Pada gasing cepat, energi spin jauh melampaui perubahan energi potensial maksimum:</p>
+        <div class="eq">$$ \tfrac12 I_3\omega_3^2 \gg 2Mgl. \tag{5.66}$$</div>
+        <p>Dengan syarat ini, torka gravitasi hanya mengganggu sedikit rotasi dominan. Tiga hasil kuantitatif menyusul, dan ketiganya terukur di laboratorium:</p>
+        <ul class="points">
+          <li><b>Lebar nutasi</b> menyusut seperti \(1/\omega_3^2\): $$ u_0-u_1=\frac{I_1}{I_3}\,\frac{2Mgl}{I_3\omega_3^2}\,\sin^2\theta_0. \tag{5.70}$$ Makin cepat diputar, makin kecil anggukannya.</li>
+          <li><b>Frekuensi nutasi</b> justru naik dengan spin: $$ a=\frac{I_3}{I_1}\,\omega_3. \tag{5.72}$$</li>
+          <li><b>Laju presesi rata-rata</b> melambat dengan spin: $$ \overline{\dot{\phi}}=\frac{\beta}{2a}=\frac{Mgl}{I_3\omega_3}. \tag{5.74}$$</li>
+        </ul>
+        <p>Dengan kata lain, presesi \(\dot{\phi}=\dfrac{\beta}{2a}(1-\cos at)\) berdenyut harmonik seiring nutasi. Untuk gasing yang cukup cepat, nutasi segera diredam oleh gesekan di tumpuan sehingga tak teramati, dan gasing <i>tampak</i> berpresesi mulus. Klein dan Sommerfeld menyebutnya <b>presesi semu-teratur</b> (<i>pseudoregular</i>).</p>
+        <div class="callout support"><p><b>Memecahkan paradoks.</b> Penjelasan dasar yang mengabaikan nutasi seolah mengatakan gasing <i>langsung</i> berpresesi mulus &mdash; gerak yang arahnya tegak lurus gravitasi, padahal gravitasi penyebabnya. Gambaran lengkap menyelesaikan paradoks ini: presesi tumbuh <i>bertahap</i> dari nol tanpa percepatan tak hingga, dan kecenderungan awal gasing memang <b>jatuh</b> searah gravitasi. Yang terlihat mulus hanyalah rata-ratanya.</p></div>
+      </section>
+
+      <section class="block" id="tetap">
+        <h2>9. Presesi tetap dan gasing tidur</h2>
+        <h3>Presesi tetap (regular)</h3>
+        <p>Kapan \(\theta\) tetap persis di \(\theta_0\) (tanpa nutasi)? Saat \(f(u)\) punya akar ganda di \(u_0\). Syarat ini memberi persamaan kuadrat untuk \(\dot{\phi}\):</p>
+        <div class="eq">$$ Mgl=\dot{\phi}\,(I_3\omega_3-I_1\dot{\phi}\cos\theta_0). \tag{5.77}$$</div>
+        <p>Karena kuadrat, umumnya ada <b>dua</b> laju presesi tetap untuk spin yang sama: presesi <b>lambat</b> dan <b>cepat</b>. Agar \(\dot{\phi}\) riil, diskriminannya harus positif:</p>
+        <div class="eq">$$ I_3^2\omega_3^2 > 4MglI_1\cos\theta_0. \tag{5.78}$$</div>
+        <p>Untuk \(\theta_0&lt;\pi/2\) ini menuntut spin minimum:</p>
+        <div class="eq">$$ \omega_3 > \omega_3'=\frac{2}{I_3}\sqrt{MglI_1\cos\theta_0}. \tag{5.79}$$</div>
+        <p>Dua akar itu, dalam batas yang sesuai, adalah</p>
+        <div class="eq">$$ \dot{\phi}_{\text{lambat}}\approx\frac{Mgl}{I_3\omega_3}, \qquad \dot{\phi}_{\text{cepat}}=\frac{I_3\omega_3}{I_1\cos\theta_0}. $$</div>
+        <p>Presesi lambat itulah yang biasa kita lihat (dan cocok dengan rata-rata (5.74)); presesi cepat praktis bebas dari gravitasi dan terkait presesi benda bebas di &sect;5.6. Perhatikan: \(\dot{\phi}=0\) tak pernah memenuhi (5.77) untuk spin berhingga &mdash; <b>untuk presesi tetap, gasing harus diberi dorongan awal yang pas</b>; tanpa itu yang didapat hanyalah presesi semu-teratur.</p>
+
+        <h3>Gasing tidur (<i>sleeping top</i>)</h3>
+        <p>Kasus istimewa: sumbu figur <b>tegak lurus</b> (\(\theta_0=0\), \(b=a\)). Gasing berdiri tegak dan diam-diam berputar. Ada kecepatan sudut kritis:</p>
+        <div class="eq">$$ \omega'^2=\frac{4MglI_1}{I_3^2}. \tag{5.80}$$</div>
+        <p>Jika \(\omega_3&gt;\omega'\), posisi tegak <b>stabil</b> &mdash; gasing &ldquo;tertidur&rdquo;, berputar tenang tanpa oleng. Begitu gesekan memperlambatnya di bawah \(\omega'\), posisi tegak menjadi tak stabil: gasing mulai oleng makin lebar lalu tumbang. Itulah mengapa gasing yang tadinya tegak sempurna tiba-tiba &ldquo;bangun&rdquo; dan limbung saat melambat.</p>
+        <div class="callout try"><p><b>Amati sendiri.</b> Putar gasing sekuat mungkin di lantai keras hingga ia berdiri tegak dan nyaris diam &mdash; itulah gasing tidur (\(\omega_3&gt;\omega'\)). Perhatikan: saat putaran melambat melewati ambang kritis, gasing mulai menggambar kerucut makin besar lalu jatuh. Fenomena terkait yang lebih ekstrem adalah <i>tippie-top</i> &mdash; gasing setengah bola yang membalik berdiri di tangkainya, akibat torka gesekan.</p></div>
+      </section>
+
+      <section class="block" id="giroskop">
+        <h2>10. Rumus giroskop dasar</h2>
+        <p>Pada giroskop, syarat gasing cepat (5.66) terpenuhi berlimpah dan nutasi diredam oleh tumpuannya, sehingga yang tersisa hanyalah presesi &mdash; dan matematikanya menyederhana drastis. Jika \(\mathbf{R}\) adalah vektor sepanjang sumbu figur dari titik tumpu ke pusat massa, torka gravitasi adalah \(\mathbf{N}=\mathbf{R}\times M\mathbf{g}\). Dengan \(\mathbf{L}_3\) momentum sudut sepanjang sumbu figur dan \(\boldsymbol{\omega}_p\) vektor presesi (sepanjang vertikal, besarnya \(\overline{\dot{\phi}}\)):</p>
+        <div class="eq">$$ \boldsymbol{\omega}_p\times\mathbf{L}_3=\mathbf{N}. \tag{5.82}$$</div>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 250" width="100%" height="auto" style="max-width:460px;margin:auto" aria-label="Giroskop: torka N tegak lurus, momentum sudut L3 mendatar, presesi omega-p vertikal">
+              <circle cx="120" cy="150" r="4" fill="var(--d-axis)"/>
+              <text class="dlm" x="98" y="170">tumpu</text>
+              <!-- figure axis horizontal with L3 -->
+              <line x1="120" y1="150" x2="330" y2="150" stroke="var(--d-blue)" stroke-width="2.5" marker-end="url(#gy-blue)"/>
+              <text class="dl" x="300" y="142" font-weight="700" fill="var(--d-blue)">L&#8323;</text>
+              <!-- flywheel -->
+              <ellipse cx="300" cy="150" rx="10" ry="40" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.5"/>
+              <!-- weight at CoG -->
+              <circle cx="235" cy="150" r="3" fill="var(--d-axis)"/>
+              <line x1="235" y1="150" x2="235" y2="206" stroke="var(--d-rust)" stroke-width="2" marker-end="url(#gy-rust)"/>
+              <text class="dlm" x="242" y="196">Mg (di R)</text>
+              <!-- precession axis vertical -->
+              <line x1="120" y1="150" x2="120" y2="36" stroke="var(--d-axis)" stroke-width="1.5" stroke-dasharray="6 4"/>
+              <path d="M 120 46 A 30 10 0 1 1 118 48" fill="none" stroke="var(--d-rust)" stroke-width="2" marker-end="url(#gy-rust)"/>
+              <text class="dl" x="128" y="40" font-weight="700" fill="var(--d-rust)">&#969;&#8346;</text>
+              <!-- torque N into page symbol -->
+              <circle cx="235" cy="100" r="12" fill="none" stroke="var(--d-axis)" stroke-width="1.6"/>
+              <circle cx="235" cy="100" r="2.5" fill="var(--d-axis)"/>
+              <text class="dl" x="252" y="104" font-weight="700">N</text>
+              <text class="dlm" x="200" y="86">(keluar bidang)</text>
+              <defs>
+                <marker id="gy-blue" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-blue)"/></marker>
+                <marker id="gy-rust" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker>
+              </defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 5. Giroskop.</b> Berat \(Mg\) menghasilkan torka \(\mathbf{N}=\mathbf{R}\times M\mathbf{g}\) yang <i>tegak lurus</i> \(\mathbf{L}_3\). Karena torka mengubah arah \(\mathbf{L}\) (bukan memperbesar), ujung \(\mathbf{L}_3\) bergerak menyamping &mdash; giroskop berpresesi, bukan jatuh. Besarnya mematuhi \(\boldsymbol{\omega}_p\times\mathbf{L}_3=\mathbf{N}\).</figcaption>
+        </figure>
+
+        <p>Inilah inti &ldquo;inersia giroskopik&rdquo;: torka tidak mempercepat jatuhnya sumbu, melainkan memutar arahnya &mdash; laju presesi sebanding torka. Bandingkan dengan benda tak-berputar, yang torkanya menghasilkan percepatan sudut (jatuh). Begitu torka hilang, sumbu giroskop tetap mempertahankan arahnya &mdash; dasar kompas giro, platform stabil, dan indikator sikap pesawat.</p>
+        <div class="callout support"><p><b>Jembatan ke &sect;5.8.</b> Bumi adalah gasing raksasa: tonjolan ekuatorialnya ditarik Matahari dan Bulan, menghasilkan torka yang membuat sumbu Bumi berpresesi mengitari normal ekliptika sekali tiap &plusmn;26.000 tahun &mdash; <i>presesi ekuinoks</i>. Teknik yang sama persis (potensial, \(\dot{\phi}=\frac{1}{I_3\omega_3}\partial V/\partial\cos\theta\)) yang menghitungnya. Ingat: ini berbeda dari goyangan Chandler di &sect;5.6 yang bebas torka.</p></div>
+      </section>
+
+      <section class="block" id="rangkuman">
+        <h2>11. Rangkuman dan rumus kunci</h2>
+        <h3>Alur penalaran</h3>
+        <ol class="steps">
+          <li>Tiga sudut Euler: \(\dot{\psi}\) spin, \(\dot{\phi}\) presesi, \(\dot{\theta}\) nutasi.</li>
+          <li>\(\phi,\psi\) siklik &rarr; dua momentum kekal \(p_\phi,p_\psi\); plus energi \(E\). \(\omega_3\) konstan.</li>
+          <li>Eliminasi \(\phi,\psi\) &rarr; masalah 1-D dalam \(\theta\) dengan potensial efektif \(V'(\theta)\).</li>
+          <li>Substitusi \(u=\cos\theta\) &rarr; kubik \(f(u)\); dua akar \(u_1,u_2\) membatasi nutasi.</li>
+          <li>Letak \(u'=b/a\) menentukan bentuk lokus: bergelombang, berjerat, atau runcing.</li>
+          <li>Gasing cepat: nutasi \(\sim 1/\omega_3^2\) teredam &rarr; presesi semu-teratur.</li>
+        </ol>
+        <h3>Kotak rumus</h3>
+        <div class="eq">$$ p_\psi=I_3\omega_3=\text{tetap},\qquad \dot{\phi}=\frac{b-a\cos\theta}{\sin^2\theta},\qquad V'(\theta)=Mgl\cos\theta+\frac{I_1}{2}\left(\frac{b-a\cos\theta}{\sin\theta}\right)^2 $$</div>
+        <div class="eq">$$ \overline{\dot{\phi}}=\frac{Mgl}{I_3\omega_3}\ (\text{presesi lambat}),\qquad \omega'^2=\frac{4MglI_1}{I_3^2}\ (\text{ambang gasing tidur}),\qquad \boldsymbol{\omega}_p\times\mathbf{L}_3=\mathbf{N} $$</div>
+        <div class="callout"><p><b>Satu kalimat.</b> Dua koordinat siklik memangkas masalah tiga sudut menjadi gerak satu dimensi dalam \(\theta\); dari sumur potensial itu terbaca semuanya &mdash; nutasi, tiga bentuk lokus, presesi semu-teratur, dan ambang gasing tidur &mdash; tanpa perlu benar-benar mengintegralkan fungsi eliptiknya.</p></div>
+      </section>
+
+      <section class="block" id="rujukan">
+        <h2>12. Rujukan</h2>
+        <ul class="points">
+          <li>Goldstein, H., Poole, C. P. &amp; Safko, J. L. (2002). <i>Classical Mechanics</i>, 3rd ed., &sect;5.7 &ldquo;The Heavy Symmetrical Top with One Point Fixed&rdquo;, hlm. 208&ndash;222. Addison-Wesley.</li>
+          <li>Landau, L. D. &amp; Lifshitz, E. M. (1976). <i>Mechanics</i>, 3rd ed., &sect;35 &ldquo;Motion of a symmetrical top&rdquo;. Pergamon.</li>
+          <li>Klein, F. &amp; Sommerfeld, A. (1897&ndash;1910). <i>&Uuml;ber die Theorie des Kreisels</i> &mdash; asal istilah presesi semu-teratur (<i>pseudoregular</i>).</li>
+          <li>Goldstein &sect;5.8 &mdash; presesi ekuinoks sebagai penerapan langsung teknik bab ini.</li>
+        </ul>
+        <p class="source-note">Bahan ini adalah penyederhanaan pedagogis. Penurunan penuh (integral eliptik, kasus akar di \(u=1\), dan analisis giroskop lengkap) ada di teks aslinya, Goldstein &sect;5.7.</p>
+      </section>
+
+      <nav class="seq-nav" aria-label="Navigasi topik">
+        <a href="/kuliah/mekanika-klasik/gerak-bebas-torka/"><span class="lbl">&larr; Sebelumnya &middot; &sect;5.6</span>Gerak Bebas Torka Benda Tegar</a>
+        <a class="nx" href="/kuliah/mekanika-klasik/"><span class="lbl">Daftar topik &uarr;</span>Mekanika Klasik</a>
+      </nav>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
