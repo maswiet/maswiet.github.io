@@ -113,6 +113,14 @@
     main h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:28px 0 8px}
     code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
 
+    .seq-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:40px 0 0;font-family:var(--sans)}
+    .seq-nav a{display:block;border:1px solid var(--border);border-radius:6px;padding:14px 16px;text-decoration:none;background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+    .seq-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    .seq-nav .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .seq-nav a:hover .lbl{color:var(--accent)}
+    .seq-nav .nx{text-align:right}
+    @media (max-width:560px){ .seq-nav{grid-template-columns:1fr} .seq-nav .nx{text-align:left} }
+
     /* inline SVG diagram palette (matches site figures) */
     .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
     text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
@@ -171,7 +179,7 @@
 
     <main>
 
-      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; Mekanika Klasik &nbsp;/&nbsp; Gerak Bebas Torka</p>
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; <a href="/kuliah/mekanika-klasik/">Mekanika Klasik</a> &nbsp;/&nbsp; Gerak Bebas Torka</p>
       <p class="eyebrow">Mekanika Klasik &middot; Program Magister</p>
       <h1>Gerak Bebas Torka Benda Tegar</h1>
       <p class="lede">Mengapa benda yang dilempar sambil berputar &ldquo;oleng&rdquo; padahal tidak ada gaya yang memutarnya? Dari dua besaran kekal saja lahir presesi bebas, goyangan kutub Bumi, dan efek raket tenis. Bahan ini mengikuti Goldstein, <i>Classical Mechanics</i>, &sect;5.6.</p>
@@ -437,6 +445,11 @@
         </ul>
         <p class="source-note">Bahan ini adalah penyederhanaan pedagogis untuk membangun gambaran fisis. Untuk penurunan lengkap dengan fungsi eliptik dan kasus gasing berat, gunakan teks aslinya (Goldstein &sect;5.6&ndash;5.7).</p>
       </section>
+
+      <nav class="seq-nav" aria-label="Navigasi topik">
+        <a href="/kuliah/mekanika-klasik/"><span class="lbl">Daftar topik &uarr;</span>Mekanika Klasik</a>
+        <a class="nx" href="/kuliah/mekanika-klasik/gasing-berat-simetris/"><span class="lbl">Selanjutnya &middot; &sect;5.7 &rarr;</span>Gasing Berat Simetris Bertumpu Satu Titik</a>
+      </nav>
 
       <footer class="footer">
         <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
