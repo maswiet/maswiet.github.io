@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerak Bebas Torka — Mekanika Klasik — Wiwit Suryanto</title>
+  <meta name="description" content="Materi kuliah Mekanika Klasik (Program Magister Fisika UGM), Goldstein §5.6: gerak bebas torka benda tegar. Persamaan Euler, konstruksi Poinsot, presesi bebas, goyangan Chandler Bumi, dan efek raket tenis — penjelasan intuitif dengan diagram.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);
+      font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;
+      border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);
+      font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;
+      font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:46px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;
+      font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    .kicker{margin:0 0 22px;color:var(--text-muted);font-family:var(--sans);font-size:15px;line-height:1.55}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);
+      border-radius:6px;overflow:hidden}
+    figure.fig > div{padding:18px 16px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);
+      padding:10px 16px;border-top:1px solid var(--border)}
+    figure.fig figcaption b{color:var(--text);font-weight:600}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;
+      background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;
+      padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:22px 0}
+    .callout p:first-child{margin-top:0}
+    .callout p:last-child{margin-bottom:0}
+    .callout.support{background:#EDF3F2;border-color:#C7DAD6}
+    .callout.try{background:#FBF1EC;border-color:#E6C9BB}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);
+      color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    .toc{font-family:var(--sans);font-size:15px;columns:2;column-gap:32px;margin:28px 0 0;padding:20px 24px;
+      background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:2px 0;break-inside:avoid}
+    .toc a{text-decoration:none}
+    table.data{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;line-height:1.5;margin:0 0 20px;
+      background:var(--surface);border:1px solid var(--border)}
+    table.data th,table.data td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+    table.data th{background:var(--surface-muted);font-weight:600}
+    .ok{color:#2F5D62;font-weight:700}
+    .no{color:#8A2D1F;font-weight:700}
+    .figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:8px 0 20px}
+    .stage-fig{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px}
+    .stage-fig svg{width:100%;height:auto;display:block}
+    .stage-fig p{margin:10px 0 0;font-family:var(--sans);font-size:14px;line-height:1.45;color:var(--text-muted)}
+    .stage-fig p b{color:var(--text)}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    main h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:28px 0 8px}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+
+    /* inline SVG diagram palette (matches site figures) */
+    .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
+    text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
+    text.dlm{font-family:var(--sans);font-size:12px;fill:#5F625C}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:36px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:30px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .toc{columns:1}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; Mekanika Klasik &nbsp;/&nbsp; Gerak Bebas Torka</p>
+      <p class="eyebrow">Mekanika Klasik &middot; Program Magister</p>
+      <h1>Gerak Bebas Torka Benda Tegar</h1>
+      <p class="lede">Mengapa benda yang dilempar sambil berputar &ldquo;oleng&rdquo; padahal tidak ada gaya yang memutarnya? Dari dua besaran kekal saja lahir presesi bebas, goyangan kutub Bumi, dan efek raket tenis. Bahan ini mengikuti Goldstein, <i>Classical Mechanics</i>, &sect;5.6.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Mekanika Klasik (Program Magister Fisika)</dd>
+        <dt>Rujukan utama</dt><dd>Goldstein, Poole &amp; Safko (2002), edisi ke-3, &sect;5.6, hlm. 200&ndash;208</dd>
+        <dt>Prasyarat</dt><dd>Tensor inersia, sumbu utama, dan persamaan Euler (&sect;5.1&ndash;5.5)</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <nav class="toc" aria-label="Daftar isi"><ol>
+        <li><a href="#apa">Apa artinya &ldquo;bebas torka&rdquo;?</a></li>
+        <li><a href="#jangkar">Dua jangkar: energi &amp; momentum sudut</a></li>
+        <li><a href="#euler">Mesin penggerak: persamaan Euler</a></li>
+        <li><a href="#poinsot">Gambaran Poinsot</a></li>
+        <li><a href="#simetris">Benda simetris: presesi bersih</a></li>
+        <li><a href="#bumi">Bumi sebagai gasing bebas</a></li>
+        <li><a href="#raket">Efek raket tenis</a></li>
+        <li><a href="#rangkuman">Rangkuman &amp; rumus kunci</a></li>
+        <li><a href="#rujukan">Rujukan</a></li>
+      </ol></nav>
+
+      <section class="block" id="apa">
+        <h2>1. Apa artinya &ldquo;bebas torka&rdquo;?</h2>
+        <p>Sebuah benda tegar bergerak <i>bebas torka</i> bila resultan gaya dan resultan torka yang bekerja padanya nol. Contohnya lebih banyak dari dugaan kita: kunci inggris yang melayang di stasiun antariksa, ponsel yang dilempar ke sofa sambil berputar, bola football Amerika yang dilempar spiral, frisbee, bahkan Bumi kita sendiri &mdash; torka dari Matahari dan Bulan terlalu kecil untuk memengaruhi gerak rotasi hariannya.</p>
+        <p>Karena resultan gaya nol, pusat massa bergerak lurus beraturan. Kita boleh &ldquo;menumpang&rdquo; di kerangka pusat massa itu, dan di sana benda hanya <b>berotasi</b>. Jadi seluruh bab ini adalah cerita tentang rotasi murni di sekitar pusat massa.</p>
+        <div class="callout"><p><b>Teka-teki yang akan kita pecahkan.</b> Kalau tidak ada torka, kenapa sumbu putarnya tampak bergoyang? Bukankah seharusnya benda berputar mulus mengelilingi satu sumbu tetap? Jawabannya adalah membedakan <b>sumbu putar</b> \(\boldsymbol{\omega}\) dari <b>momentum sudut</b> \(\mathbf{L}\).</p></div>
+      </section>
+
+      <section class="block" id="jangkar">
+        <h2>2. Dua jangkar: energi dan momentum sudut</h2>
+        <p>Tanpa menyelesaikan persamaan apa pun, kita sudah tahu <b>dua besaran yang kekal</b> selama gerak:</p>
+        <ul class="points">
+          <li><b>Energi kinetik rotasi</b> \(T\) &mdash; tetap, karena tidak ada torka yang melakukan kerja.</li>
+          <li><b>Vektor momentum sudut</b> \(\mathbf{L}\) &mdash; tetap <i>arah dan besarnya</i> di ruang, karena \(\mathrm{d}\mathbf{L}/\mathrm{d}t=\mathbf{N}=0\).</li>
+        </ul>
+        <p>Keduanya terhubung ke kecepatan sudut \(\boldsymbol{\omega}\) lewat <i>tensor inersia</i> \(\mathbf{I}\):</p>
+        <div class="eq">$$ \mathbf{L}=\mathbf{I}\cdot\boldsymbol{\omega}, \qquad T=\tfrac{1}{2}\,\boldsymbol{\omega}\cdot\mathbf{L}=\tfrac{1}{2}\,\boldsymbol{\omega}\cdot\mathbf{I}\cdot\boldsymbol{\omega}. $$</div>
+
+        <h3>Inti yang sering terlewat: \(\boldsymbol{\omega}\) tidak sejajar \(\mathbf{L}\)</h3>
+        <p>Pada gerak lurus, momentum \(\mathbf{p}=m\mathbf{v}\) selalu searah kecepatan, karena massa \(m\) hanya sebuah angka. Tetapi pada rotasi, &ldquo;massa&rdquo;-nya adalah tensor \(\mathbf{I}\): benda melawan rotasi secara berbeda di arah yang berbeda. Akibatnya <b>\(\mathbf{L}\) umumnya tidak searah \(\boldsymbol{\omega}\)</b>. Keduanya hanya sejajar bila benda kebetulan berputar tepat mengelilingi salah satu <i>sumbu utama</i>.</p>
+        <div class="callout support"><p><b>Analogi sederhana.</b> Bayangkan mendorong gerobak yang muatannya berat sebelah. Anda mendorong lurus ke depan (itu \(\boldsymbol{\omega}\)), tetapi gerobak &ldquo;ingin&rdquo; melenceng ke arah lain (itu \(\mathbf{L}\)). Arah yang Anda beri dan arah yang dituju benda tidak sama &mdash; persis karena distribusi massanya tidak seragam. Tensor inersia adalah pembukuan rapi dari &ldquo;berat sebelah&rdquo; itu.</p></div>
+        <p>Sekarang teka-teki tadi terjawab setengah: yang terkunci tetap di ruang adalah \(\mathbf{L}\), bukan \(\boldsymbol{\omega}\). Jadi <b>\(\boldsymbol{\omega}\) bebas bergerak</b> &mdash; ia berputar mengitari \(\mathbf{L}\). Gerakan \(\boldsymbol{\omega}\) itulah yang kita amati sebagai &ldquo;goyangan&rdquo;. Tinggal mencari bentuk lintasannya.</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 250" width="100%" height="auto" style="max-width:460px;margin:auto" aria-label="Momentum sudut L tegak tetap sementara sumbu simetri dan omega mengitarinya">
+              <line x1="260" y1="228" x2="260" y2="34" stroke="var(--d-blue)" stroke-width="2.5" marker-end="url(#mk-blue)"/>
+              <g transform="translate(260,150) rotate(22)">
+                <ellipse cx="0" cy="0" rx="44" ry="88" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.5"/>
+                <line x1="0" y1="92" x2="0" y2="-116" stroke="var(--d-axis)" stroke-width="1.5" stroke-dasharray="5 4"/>
+              </g>
+              <line x1="260" y1="150" x2="328" y2="56" stroke="var(--d-rust)" stroke-width="3" marker-end="url(#mk-rust)"/>
+              <path d="M 300 50 A 42 13 0 1 1 298 52" fill="none" stroke="var(--d-axis)" stroke-width="1.3" stroke-dasharray="4 4"/>
+              <defs>
+                <marker id="mk-blue" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-blue)"/></marker>
+                <marker id="mk-rust" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker>
+              </defs>
+              <text class="dl" x="268" y="40" font-weight="700" fill="var(--d-blue)">L</text>
+              <text class="dlm" x="196" y="34">tetap di ruang</text>
+              <text class="dl" x="334" y="54" font-weight="700" fill="var(--d-rust)">&#969;</text>
+              <text class="dlm" x="330" y="120" transform="rotate(22 330 120)">sumbu simetri</text>
+              <text class="dlm" x="298" y="96">mengitari L</text>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 1. L terkunci, &omega; yang bergerak.</b> Momentum sudut \(\mathbf{L}\) (biru) tetap tegak di ruang; sumbu putar \(\boldsymbol{\omega}\) (jingga) dan sumbu simetri benda justru mengitari \(\mathbf{L}\) &mdash; inilah &ldquo;goyangan&rdquo; yang kita amati.</figcaption>
+        </figure>
+      </section>
+
+      <section class="block" id="euler">
+        <h2>3. Mesin penggerak: persamaan Euler</h2>
+        <p>Untuk mengetahui bagaimana \(\boldsymbol{\omega}\) berubah, kita pakai persamaan Euler &mdash; yaitu hukum Newton rotasi \(\dot{\mathbf{L}}=\mathbf{N}\) yang ditulis dalam kerangka <i>badan</i> (ikut berputar bersama benda), di sepanjang sumbu-sumbu utama. Dengan \(\mathbf{N}=0\), Goldstein (5.40):</p>
+        <div class="eq">$$ \begin{aligned}
+        I_1\dot{\omega}_1 &= \omega_2\,\omega_3\,(I_2-I_3)\\
+        I_2\dot{\omega}_2 &= \omega_3\,\omega_1\,(I_3-I_1)\\
+        I_3\dot{\omega}_3 &= \omega_1\,\omega_2\,(I_1-I_2)
+        \end{aligned} $$</div>
+        <p>Perhatikan apa yang menggerakkan segalanya: di ruas kanan selalu muncul <b>selisih momen inersia</b> \((I_2-I_3)\), dan seterusnya. Dua pelajaran langsung:</p>
+        <ul class="points">
+          <li>Kalau ketiga momen inersia sama (bola pejal, kubus) &mdash; semua ruas kanan nol, \(\boldsymbol{\omega}\) tetap. Tidak ada goyangan.</li>
+          <li>Justru <b>ketidaksimetrian</b> benda (selisih \(I\) yang tak nol) yang menciptakan kopling antar-komponen \(\omega\) &mdash; dan dari situlah goyangan lahir.</li>
+        </ul>
+        <div class="callout"><p><b>Jangan takut dengan &ldquo;kerangka badan&rdquo;.</b> Kita menulis persamaan di kerangka yang ikut berputar bukan untuk menyulitkan, melainkan karena di kerangka itu tensor inersia \(\mathbf{I}\) <i>konstan</i> (ikut benda). Harganya: muncul suku \(\boldsymbol{\omega}\times\mathbf{L}\). Semua &ldquo;keanehan&rdquo; gerak gasing bersembunyi di perkalian silang itu.</p></div>
+      </section>
+
+      <section class="block" id="poinsot">
+        <h2>4. Gambaran Poinsot: ellipsoid yang menggelinding</h2>
+        <p>Menyelesaikan (5.40) secara penuh memerlukan fungsi eliptik &mdash; tidak mencerahkan. Untungnya Poinsot memberi gambaran <i>geometris</i> yang indah tanpa perlu menyelesaikan apa pun.</p>
+        <p>Bayangkan sebuah permukaan berbentuk telur yang menempel pada benda dan menggambarkan sebaran massanya: <b>ellipsoid inersia</b>. Arahnya mengikuti benda. Poinsot membuktikan bahwa gerak bebas torka setara dengan gambaran berikut:</p>
+        <div class="callout support"><p><b>Pernyataan Poinsot.</b> Ellipsoid inersia <b>menggelinding tanpa tergelincir</b> di atas sebuah bidang datar yang diam di ruang (<i>bidang invariabel</i>, tegak lurus \(\mathbf{L}\)), dengan pusat ellipsoid berada pada ketinggian tetap di atas bidang itu.</p></div>
+        <p>Mengapa &ldquo;tanpa tergelincir&rdquo;? Karena titik sentuh selalu terletak pada arah \(\boldsymbol{\omega}\) &mdash; yakni sumbu putar sesaat &mdash; dan titik di sumbu putar sesaat sedang <i>diam sesaat</i>. Jejak titik sentuh pada ellipsoid disebut <b>polhode</b>, jejaknya pada bidang disebut <b>herpolhode</b>. Ketinggian pusat yang tetap setara dengan kekekalan \(T\); arah bidang yang tetap setara dengan kekekalan \(\mathbf{L}\).</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 300" width="100%" height="auto" style="max-width:480px;margin:auto" aria-label="Ellipsoid inersia menggelinding pada bidang invariabel yang tegak lurus L">
+              <polygon points="70,212 410,212 470,252 130,252" fill="var(--surface-muted)" stroke="var(--d-axis)" stroke-width="1" opacity="0.7"/>
+              <text class="dlm" x="416" y="238">bidang invariabel</text>
+              <g transform="translate(265,150) rotate(-18)">
+                <ellipse cx="0" cy="0" rx="56" ry="90" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.6"/>
+                <ellipse cx="6" cy="68" rx="24" ry="9" fill="none" stroke="var(--d-rust)" stroke-width="2"/>
+              </g>
+              <text class="dlm" x="296" y="96" transform="rotate(-18 296 96)">ellipsoid inersia</text>
+              <circle cx="278" cy="214" r="3.5" fill="var(--d-rust)"/>
+              <path d="M 250 216 q 28 -10 52 2 q -24 12 -52 -2 z" fill="none" stroke="var(--d-rust)" stroke-width="2" stroke-dasharray="4 3"/>
+              <line x1="278" y1="150" x2="278" y2="280" stroke="var(--d-blue)" stroke-width="2.5" marker-end="url(#mk-blue2)"/>
+              <defs>
+                <marker id="mk-blue2" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-blue)"/></marker>
+              </defs>
+              <text class="dl" x="286" y="278" font-weight="700" fill="var(--d-blue)">L</text>
+              <text class="dlm" x="150" y="288" fill="var(--d-rust)">herpolhode (jejak di bidang)</text>
+              <text class="dlm" x="314" y="150" fill="var(--d-rust)">polhode</text>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 2. Konstruksi Poinsot.</b> Ellipsoid inersia (ikut benda) menggelinding di bidang invariabel yang diam (tegak lurus \(\mathbf{L}\)). Titik sentuh menggambar <i>polhode</i> pada ellipsoid dan <i>herpolhode</i> pada bidang.</figcaption>
+        </figure>
+
+        <div class="callout"><p><b>Cara membayangkannya.</b> Seperti kerikil berbentuk tak beraturan yang menggelinding di atas meja kaca &mdash; tetapi di sini <i>mejanya</i> yang diam di ruang, sementara <i>kerikilnya</i> (benda) berjungkir mengikuti. Pusat kerikil tak pernah naik-turun. Yang Anda lihat dari luar sebagai &ldquo;oleng&rdquo; sebenarnya hanya ellipsoid yang menggelinding rapi.</p></div>
+      </section>
+
+      <section class="block" id="simetris">
+        <h2>5. Benda simetris: presesi yang bersih</h2>
+        <p>Kebanyakan contoh nyata punya <b>sumbu simetri</b>: dua momen inersia sama, \(I_1=I_2\neq I_3\). Di sini ellipsoid inersia menjadi ellipsoid putar, polhode dan herpolhode menjadi <i>lingkaran</i>, dan gambaran Poinsot menyederhana menjadi <b>dua kerucut yang menggelinding</b>:</p>
+        <ul class="points">
+          <li><b>Kerucut benda</b> &mdash; dilihat pengamat yang ikut berputar; \(\boldsymbol{\omega}\) menyapu kerucut ini mengelilingi sumbu simetri.</li>
+          <li><b>Kerucut ruang</b> &mdash; dilihat pengamat diam; mengelilingi \(\mathbf{L}\) yang tetap.</li>
+        </ul>
+        <p>Gerak = kerucut benda menggelinding pada kerucut ruang. Bentuk benda menentukan susunannya:</p>
+
+        <div class="figrow">
+          <div class="stage-fig">
+            <svg class="dg" viewBox="0 0 240 230" aria-label="Benda prolat memanjang, omega berpresesi">
+              <line x1="120" y1="212" x2="120" y2="24" stroke="var(--d-axis)" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <text class="dlm" x="126" y="30">L</text>
+              <g transform="translate(120,130) rotate(20)"><ellipse cx="0" cy="0" rx="28" ry="76" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.5"/></g>
+              <ellipse cx="120" cy="54" rx="40" ry="11" fill="none" stroke="var(--d-axis)" stroke-width="1.3" stroke-dasharray="4 3"/>
+              <line x1="120" y1="130" x2="174" y2="48" stroke="var(--d-rust)" stroke-width="3" marker-end="url(#mk-rust3)"/>
+              <circle cx="120" cy="130" r="3" fill="var(--d-rust)"/>
+              <text class="dl" x="178" y="46" font-weight="700" fill="var(--d-rust)">&#969;</text>
+              <defs><marker id="mk-rust3" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker></defs>
+            </svg>
+            <p><b>Prolat</b> &mdash; football, rugby (\(I_3 &lt; I_1\)). Kerucut benda di luar kerucut ruang.</p>
+          </div>
+          <div class="stage-fig">
+            <svg class="dg" viewBox="0 0 240 230" aria-label="Benda oblat pipih, omega berpresesi">
+              <line x1="120" y1="212" x2="120" y2="24" stroke="var(--d-axis)" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <text class="dlm" x="126" y="30">L</text>
+              <g transform="translate(120,138) rotate(20)"><ellipse cx="0" cy="0" rx="80" ry="26" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.5"/></g>
+              <ellipse cx="120" cy="56" rx="26" ry="8" fill="none" stroke="var(--d-axis)" stroke-width="1.3" stroke-dasharray="4 3"/>
+              <line x1="120" y1="138" x2="150" y2="50" stroke="var(--d-rust)" stroke-width="3" marker-end="url(#mk-rust4)"/>
+              <circle cx="120" cy="138" r="3" fill="var(--d-rust)"/>
+              <text class="dl" x="154" y="48" font-weight="700" fill="var(--d-rust)">&#969;</text>
+              <defs><marker id="mk-rust4" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker></defs>
+            </svg>
+            <p><b>Oblat</b> &mdash; frisbee, koin (\(I_3 &gt; I_1\)). Kerucut benda menggelinding di dalam kerucut ruang.</p>
+          </div>
+        </div>
+
+        <h3>Solusinya ternyata mudah</h3>
+        <p>Dengan \(I_1=I_2\), persamaan ketiga memberi \(\dot{\omega}_3=0\): laju putar terhadap sumbu simetri <b>konstan</b>. Dua persamaan sisanya menjadi gerak harmonik:</p>
+        <div class="eq">$$ \omega_1=A\cos\Omega t,\qquad \omega_2=A\sin\Omega t,\qquad \Omega=\frac{I_3-I_1}{I_1}\,\omega_3. $$</div>
+        <p>Artinya vektor \(\omega_1\hat{\imath}+\omega_2\hat{\jmath}\) berputar dengan laju tetap \(\Omega\): <b>\(\boldsymbol{\omega}\) berpresesi mengelilingi sumbu simetri</b>, persis seperti ramalan Poinsot. Cara ringkasnya, \(\dot{\boldsymbol{\omega}}=\boldsymbol{\omega}\times\boldsymbol{\Omega}\). Makin dekat \(I_1\) ke \(I_3\) (benda makin &ldquo;bulat&rdquo;), makin lambat presesinya.</p>
+        <div class="callout try"><p><b>Lihat di lapangan.</b> Lemparan <b>football Amerika</b> yang kurang sempurna: hidung bola menggambar kerucut kecil di udara &mdash; itulah \(\boldsymbol{\omega}\) berpresesi mengelilingi sumbu simetri bola (benda prolat). <b>Frisbee</b> yang dilepas miring: piringannya goyang sebelum stabil &mdash; benda oblat dengan presesi yang sama. Lemparan yang baik justru menaruh \(\boldsymbol{\omega}\) tepat di sumbu simetri, sehingga tak ada kerucut yang tersapu.</p></div>
+      </section>
+
+      <section class="block" id="bumi">
+        <h2>6. Bumi sebagai gasing bebas</h2>
+        <p>Contoh paling megah ada di bawah kaki kita. Bumi hampir simetris terhadap sumbu kutub dan sedikit pepat (\(I_1 &lt; I_3\)). Torka luar pada rotasi hariannya dapat diabaikan, jadi Bumi praktis sebuah <i>gasing bebas</i>. Goldstein memberi angka:</p>
+        <div class="eq">$$ \frac{I_3-I_1}{I_1}=0{,}00327 \quad\Longrightarrow\quad \Omega=\frac{\omega_3}{305{,}81}\approx\frac{\omega_3}{306}. $$</div>
+        <p>Karena \(\omega_3\) hampir sama dengan laju putar harian, ini meramalkan periode presesi bebas <b>sekitar 306 hari (&plusmn;10 bulan)</b>: bila sumbu putar sesaat menyimpang dari sumbu geometri, ia akan berpresesi mengitari kutub sekali tiap &plusmn;10 bulan.</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 250" width="100%" height="auto" style="max-width:480px;margin:auto" aria-label="Bumi dengan sumbu geometri dan sumbu putar yang sedikit menyimpang, kutub menggambar lingkaran kecil">
+              <circle cx="180" cy="140" r="76" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.6"/>
+              <ellipse cx="180" cy="140" rx="76" ry="22" fill="none" stroke="var(--d-axis)" stroke-width="1" opacity="0.5"/>
+              <line x1="180" y1="228" x2="180" y2="44" stroke="var(--d-axis)" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <text class="dlm" x="186" y="52">sumbu geometri</text>
+              <line x1="180" y1="140" x2="202" y2="50" stroke="var(--d-rust)" stroke-width="2.5" marker-end="url(#mk-rust5)"/>
+              <text class="dl" x="206" y="48" font-weight="700" fill="var(--d-rust)">&#969;</text>
+              <ellipse cx="191" cy="60" rx="15" ry="6" fill="none" stroke="var(--d-rust)" stroke-width="2"/>
+              <defs><marker id="mk-rust5" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker></defs>
+              <g transform="translate(350,66)">
+                <circle cx="60" cy="60" r="56" fill="var(--surface-muted)" stroke="var(--d-axis)" stroke-width="1" opacity="0.85"/>
+                <ellipse cx="60" cy="60" rx="37" ry="37" fill="none" stroke="var(--d-rust)" stroke-width="2.5" stroke-dasharray="6 5"/>
+                <circle cx="97" cy="60" r="4" fill="var(--d-rust)"/>
+                <text class="dl" x="60" y="64" text-anchor="middle" font-weight="700">kutub</text>
+                <text class="dlm" x="60" y="134" text-anchor="middle">lingkaran &plusmn;10 m &middot; &plusmn;14 bulan</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 4. Goyangan kutub Bumi.</b> Sumbu putar sesaat \(\boldsymbol{\omega}\) menyimpang sedikit dari sumbu geometri, sehingga kutub utara menggambar lingkaran kecil berdiameter beberapa meter di permukaan.</figcaption>
+        </figure>
+
+        <p>Pengamatan selama seabad memang menemukan gerak ini &mdash; amplitudonya beberapa persepuluh detik busur, setara pergeseran kutub &plusmn;10 m di permukaan. Tetapi periodenya bukan 306 hari, melainkan sekitar <b>433 hari</b> (dikenal sebagai <i>goyangan Chandler</i>). Selisihnya bukan kesalahan teori:</p>
+        <div class="callout"><p><b>Mengapa 433, bukan 306?</b> Karena Bumi <b>tidak benar-benar tegar</b> &mdash; ia sedikit elastis. Sebagian massa Bumi &ldquo;mengikuti&rdquo; pergeseran sumbu, yang memperkecil selisih momen inersia efektif dan memperpanjang periode. (Andai Bumi cair sempurna, sumbu geometri langsung menyesuaikan diri dan tak ada presesi sama sekali.) Benda tegar ideal adalah titik awal; kelenturan nyata menggeser angkanya.</p></div>
+        <div class="callout support"><p><b>Jangan tertukar.</b> Presesi bebas &plusmn;14 bulan ini <b>berbeda</b> dari presesi ekuinoks yang &plusmn;26.000 tahun. Yang terakhir justru <i>didorong torka</i> gravitasi Matahari dan Bulan &mdash; bukan gerak bebas torka, dan dibahas di bab berikutnya (gasing berat).</p></div>
+      </section>
+
+      <section class="block" id="raket">
+        <h2>7. Efek raket tenis: ketakstabilan sumbu tengah</h2>
+        <p>Untuk benda <i>tak-simetris</i> (tiga momen inersia berbeda, \(I_3 &lt; I_2 &lt; I_1\)), rotasi mantap hanya mungkin mengelilingi salah satu sumbu utama. Tetapi &mdash; inilah kejutannya &mdash; tidak semua sumbu <b>stabil</b>:</p>
+        <table class="data">
+          <tr><th>Sumbu putar</th><th>Momen inersia</th><th>Kestabilan</th></tr>
+          <tr><td>Sumbu \(I\) terbesar</td><td>maksimum</td><td class="ok">Stabil</td></tr>
+          <tr><td>Sumbu \(I\) terkecil</td><td>minimum</td><td class="ok">Stabil</td></tr>
+          <tr><td>Sumbu \(I\) tengah</td><td>antara</td><td class="no">Tak stabil</td></tr>
+        </table>
+        <p>Putaran di sekitar sumbu tengah tidak bisa bertahan: gangguan sekecil apa pun membesar, dan benda <b>berjungkir-balik sendiri</b>. Inilah <i>teorema sumbu tengah</i> &mdash; juga disebut efek raket tenis atau efek Dzhanibekov (dari pengamatan kacang sayap yang berjungkir di stasiun antariksa).</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 240" width="100%" height="auto" style="max-width:480px;margin:auto" aria-label="Sebuah buku dengan tiga sumbu utama: terpanjang dan tertipis stabil, sumbu tengah tak stabil">
+              <polygon points="150,120 330,120 360,95 180,95" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.5"/>
+              <polygon points="150,120 330,120 330,170 150,170" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.5"/>
+              <polygon points="330,120 360,95 360,145 330,170" fill="#E2EAF2" stroke="var(--d-bodyline)" stroke-width="1.5"/>
+              <line x1="120" y1="145" x2="392" y2="145" stroke="var(--d-axis)" stroke-width="2" marker-end="url(#mk-ax)"/>
+              <text class="dl" x="398" y="149" font-weight="700">1</text>
+              <text class="dlm" x="116" y="190">terpanjang &middot; I min &middot; stabil</text>
+              <line x1="255" y1="200" x2="255" y2="58" stroke="var(--d-axis)" stroke-width="2" marker-end="url(#mk-ax)"/>
+              <text class="dl" x="248" y="54" font-weight="700">3</text>
+              <text class="dlm" x="262" y="214">tertipis &middot; I maks &middot; stabil</text>
+              <line x1="300" y1="178" x2="378" y2="110" stroke="var(--d-rust)" stroke-width="2.5" marker-end="url(#mk-rust6)"/>
+              <text class="dl" x="383" y="106" font-weight="700" fill="var(--d-rust)">2</text>
+              <text class="dlm" x="300" y="206" fill="var(--d-rust)">sumbu tengah &middot; tak stabil</text>
+              <defs>
+                <marker id="mk-ax" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-axis)"/></marker>
+                <marker id="mk-rust6" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker>
+              </defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 5. Tiga sumbu sebuah buku.</b> Diputar mengelilingi sisi terpanjang (1) atau arah tertipis (3): stabil. Diputar mengelilingi sumbu tengah (2): berjungkir setengah putaran berulang kali.</figcaption>
+        </figure>
+
+        <div class="callout try"><p><b>Coba sendiri sekarang.</b> Ambil sebuah <b>buku tebal</b>, ikat dengan karet agar tidak terbuka. Lemparkan ke atas sambil memutarnya mengelilingi tiga sumbu berbeda. Mengelilingi sisi terpanjang dan arah tertipis: putaran mulus. Mengelilingi sumbu tengah (jungkir ke depan seperti salto): buku <i>membalik sendiri</i> tiap setengah putaran. Ponsel juga bisa &mdash; tetapi lakukan di atas kasur.</p></div>
+
+        <p>Secara ringkas penyebabnya terlihat dari gambaran Binet (Goldstein Gambar 5.5): lintasan \(\mathbf{L}\) adalah perpotongan ellipsoid energi dengan bola \(|\mathbf{L}|=\) tetap. Di dekat sumbu terbesar dan terkecil, perpotongannya berupa lingkaran kecil yang mengurung sumbu &mdash; \(\mathbf{L}\) tak pernah jauh, jadi stabil. Di dekat sumbu tengah, kedua permukaan justru berpotongan menyilang, membuka lintasan panjang yang membawa \(\mathbf{L}\) jauh dari sumbu &mdash; itulah ketakstabilannya.</p>
+        <div class="callout"><p><b>Kenapa ini penting.</b> Satelit pertama Amerika, Explorer 1, dirancang berputar di sekitar sumbu memanjangnya (\(I\) minimum) dan ternyata mulai berjungkir. Dengan adanya disipasi energi (antena yang melentur), benda cenderung berakhir berputar di sumbu dengan \(I\) <i>terbesar</i> &mdash; energi terkecil untuk \(\mathbf{L}\) yang sama. Pelajaran mahal yang kini jadi prinsip desain wahana antariksa.</p></div>
+      </section>
+
+      <section class="block" id="rangkuman">
+        <h2>8. Rangkuman dan rumus kunci</h2>
+        <h3>Tiga ide yang harus melekat</h3>
+        <ul class="points">
+          <li>Yang terkunci di ruang adalah \(\mathbf{L}\), bukan \(\boldsymbol{\omega}\). Karena \(\mathbf{L}=\mathbf{I}\cdot\boldsymbol{\omega}\), keduanya tak sejajar kecuali di sumbu utama &mdash; dari sinilah &ldquo;goyangan&rdquo; berasal.</li>
+          <li>Gerak = <b>ellipsoid inersia menggelinding</b> pada bidang invariabel (Poinsot). Untuk benda simetris, ini menjadi <b>kerucut benda menggelinding pada kerucut ruang</b>.</li>
+          <li>Benda tak-simetris: putaran stabil di sumbu \(I\) <b>terbesar</b> dan <b>terkecil</b>, tetapi <b>tak stabil</b> di sumbu tengah (efek raket tenis).</li>
+        </ul>
+        <h3>Kotak rumus</h3>
+        <div class="eq">$$ I_i\dot{\omega}_i=\omega_j\omega_k\,(I_j-I_k)\quad\text{(Euler, tanpa torka)} $$</div>
+        <div class="eq">$$ \text{Simetris }(I_1=I_2):\quad \omega_3=\text{tetap},\quad \Omega=\frac{I_3-I_1}{I_1}\,\omega_3,\quad \dot{\boldsymbol{\omega}}=\boldsymbol{\omega}\times\boldsymbol{\Omega} $$</div>
+        <div class="eq">$$ \text{Bumi}:\quad \frac{I_3-I_1}{I_1}=0{,}00327,\quad \text{ramalan}\approx306\text{ hari},\quad \text{amatan (Chandler)}\approx433\text{ hari} $$</div>
+        <div class="callout"><p><b>Benang merahnya.</b> Seluruh bab bertumpu pada satu hal: dua besaran kekal (\(T\) dan \(\mathbf{L}\)) ditambah ketidaksimetrian benda sudah cukup untuk menjelaskan presesi bebas, goyangan Bumi, dan jungkir raket tenis. Tidak perlu fungsi eliptik untuk <i>memahami</i> fenomenanya &mdash; cukup untuk menghitung rinciannya.</p></div>
+      </section>
+
+      <section class="block" id="rujukan">
+        <h2>9. Rujukan</h2>
+        <ul class="points">
+          <li>Goldstein, H., Poole, C. P. &amp; Safko, J. L. (2002). <i>Classical Mechanics</i>, 3rd ed., &sect;5.6 &ldquo;Torque-Free Motion of a Rigid Body&rdquo;, hlm. 200&ndash;208. Addison-Wesley.</li>
+          <li>Landau, L. D. &amp; Lifshitz, E. M. (1976). <i>Mechanics</i>, 3rd ed., &sect;37 &ldquo;Motion of a symmetrical top&rdquo;. Pergamon.</li>
+          <li>Ashbaugh, M. S., Chicone, C. C. &amp; Cushman, R. H. (1991). The twisting tennis racket. <i>Journal of Dynamics and Differential Equations</i>, 3, 67&ndash;85.</li>
+          <li>Munk, W. H. &amp; MacDonald, G. J. F. (1960). <i>The Rotation of the Earth</i>. Cambridge University Press &mdash; goyangan Chandler dan elastisitas Bumi.</li>
+        </ul>
+        <p class="source-note">Bahan ini adalah penyederhanaan pedagogis untuk membangun gambaran fisis. Untuk penurunan lengkap dengan fungsi eliptik dan kasus gasing berat, gunakan teks aslinya (Goldstein &sect;5.6&ndash;5.7).</p>
+      </section>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
