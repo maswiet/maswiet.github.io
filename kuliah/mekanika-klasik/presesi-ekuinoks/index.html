@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presesi Ekuinoks &amp; Orbit Satelit — Mekanika Klasik — Wiwit Suryanto</title>
+  <meta name="description" content="Materi kuliah Mekanika Klasik (Program Magister Fisika UGM), Goldstein §5.8: presesi ekuinoks dan orbit satelit. Ekspansi multipol potensial, formula MacCullagh, laju presesi 26.000 tahun, dan regresi simpul orbit satelit (orbit sinkron-Matahari).">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:44px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    main h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:28px 0 8px}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);border-radius:6px;overflow:hidden}
+    figure.fig > div{padding:18px 16px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);padding:10px 16px;border-top:1px solid var(--border)}
+    figure.fig figcaption b{color:var(--text);font-weight:600}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+    ol.steps{font-family:var(--sans);font-size:16px;line-height:1.55;padding-left:22px;margin:16px 0}
+    ol.steps li{margin:0 0 10px}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:22px 0}
+    .callout p:first-child{margin-top:0}
+    .callout p:last-child{margin-bottom:0}
+    .callout.support{background:#EDF3F2;border-color:#C7DAD6}
+    .callout.try{background:#FBF1EC;border-color:#E6C9BB}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    .seq-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:40px 0 0;font-family:var(--sans)}
+    .seq-nav a{display:block;border:1px solid var(--border);border-radius:6px;padding:14px 16px;text-decoration:none;background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+    .seq-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    .seq-nav .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .seq-nav a:hover .lbl{color:var(--accent)}
+    .seq-nav .nx{text-align:right}
+    @media (max-width:560px){ .seq-nav{grid-template-columns:1fr} .seq-nav .nx{text-align:left} }
+
+    .toc{font-family:var(--sans);font-size:15px;columns:2;column-gap:32px;margin:28px 0 0;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:2px 0;break-inside:avoid}
+    .toc a{text-decoration:none}
+    table.data{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;line-height:1.5;margin:0 0 20px;background:var(--surface);border:1px solid var(--border)}
+    table.data th,table.data td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+    table.data th{background:var(--surface-muted);font-weight:600}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+
+    .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-teal:#2F5D62; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
+    text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
+    text.dlm{font-family:var(--sans);font-size:12px;fill:#5F625C}
+    .figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin:8px 0 20px}
+    .stage-fig{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px}
+    .stage-fig svg{width:100%;height:auto;display:block}
+    .stage-fig p{margin:10px 0 0;font-family:var(--sans);font-size:13.5px;line-height:1.45;color:var(--text-muted)}
+    .stage-fig p b{color:var(--text)}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:34px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:29px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .toc{columns:1}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; <a href="/kuliah/mekanika-klasik/">Mekanika Klasik</a> &nbsp;/&nbsp; Presesi Ekuinoks</p>
+      <p class="eyebrow">Mekanika Klasik &middot; Program Magister</p>
+      <h1>Presesi Ekuinoks dan Orbit Satelit</h1>
+      <p class="lede">Sumbu Bumi menyapu sebuah kerucut raksasa di langit sekali tiap 26.000 tahun, dan bidang orbit satelit penginderaan jauh berputar pelan mengitari kutub. Keduanya lahir dari hal yang sama: tonjolan ekuator Bumi ditarik secara tak simetris. Mengikuti Goldstein, <i>Classical Mechanics</i>, &sect;5.8.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Mekanika Klasik (Program Magister Fisika)</dd>
+        <dt>Rujukan utama</dt><dd>Goldstein, Poole &amp; Safko (2002), edisi ke-3, &sect;5.8, hlm. 223&ndash;228</dd>
+        <dt>Prasyarat</dt><dd>Gasing berat simetris (&sect;5.7) dan tensor inersia (&sect;5.3&ndash;5.4)</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <nav class="toc" aria-label="Daftar isi"><ol>
+        <li><a href="#gasing">Bumi sebagai gasing yang ditarik</a></li>
+        <li><a href="#potensial">Alat: potensial benda tak-bola</a></li>
+        <li><a href="#maccullagh">Formula MacCullagh dan suku pengganggu</a></li>
+        <li><a href="#rata">Rata-rata atas orbit</a></li>
+        <li><a href="#laju">Laju presesi: 26.000 tahun</a></li>
+        <li><a href="#satelit">Presesi orbit satelit</a></li>
+        <li><a href="#rangkuman">Rangkuman &amp; rumus kunci</a></li>
+        <li><a href="#rujukan">Rujukan</a></li>
+      </ol></nav>
+
+      <section class="block" id="gasing">
+        <h2>1. Bumi sebagai gasing yang ditarik</h2>
+        <p>Di <a href="/kuliah/mekanika-klasik/gerak-bebas-torka/">&sect;5.6</a> Bumi berpresesi bebas (goyangan Chandler, tanpa torka). Di <a href="/kuliah/mekanika-klasik/gasing-berat-simetris/">&sect;5.7</a> gasing berpresesi karena torka gravitasi. Sekarang keduanya bertemu: <b>Bumi adalah gasing raksasa yang diberi torka</b>. Kalau Bumi bola sempurna, tak ada anggota tata surya yang bisa memberi torka gravitasi padanya. Tetapi Bumi sedikit pepat &mdash; ada <b>tonjolan ekuator</b> &mdash; dan Matahari serta Bulan menarik tonjolan itu secara tak simetris. Torka nettonya membuat sumbu Bumi berpresesi, persis rumus gasing &sect;5.7.</p>
+        <p>Gerak ini dikenal astronom sebagai <b>presesi ekuinoks</b>: sumbu Bumi menyapu kerucut mengelilingi normal ekliptika (bidang orbit Bumi) sekali tiap &plusmn;26.000 tahun. Akibatnya bintang kutub berganti sepanjang milenia &mdash; dulu Thuban, kini Polaris, nanti Vega.</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 290" width="100%" height="auto" style="max-width:470px;margin:auto" aria-label="Sumbu Bumi miring menyapu kerucut mengelilingi normal ekliptika akibat tarikan Matahari pada tonjolan ekuator">
+              <!-- ecliptic normal -->
+              <line x1="180" y1="255" x2="180" y2="30" stroke="var(--d-axis)" stroke-width="1.5" stroke-dasharray="6 4"/>
+              <text class="dlm" x="150" y="26">normal ekliptika</text>
+              <!-- precession cone (ellipse at top) -->
+              <ellipse cx="180" cy="52" rx="52" ry="14" fill="none" stroke="var(--d-rust)" stroke-width="1.6" stroke-dasharray="5 4"/>
+              <path d="M 232 52 A 52 14 0 0 1 205 66" fill="none" stroke="var(--d-rust)" stroke-width="1.8" marker-end="url(#e-rust)"/>
+              <text class="dl" x="236" y="50" font-weight="700" fill="var(--d-rust)">26.000 th</text>
+              <!-- Earth's tilted figure axis -->
+              <g transform="rotate(23 180 160)">
+                <line x1="180" y1="238" x2="180" y2="52" stroke="var(--d-blue)" stroke-width="2.5" marker-end="url(#e-blue)"/>
+                <!-- Earth with equatorial bulge (oblate) -->
+                <ellipse cx="180" cy="160" rx="54" ry="44" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.6"/>
+                <ellipse cx="180" cy="160" rx="54" ry="12" fill="none" stroke="var(--d-bodyline)" stroke-width="1" opacity="0.7"/>
+              </g>
+              <text class="dl" x="120" y="60" font-weight="700" fill="var(--d-blue)">sumbu Bumi</text>
+              <text class="dl" x="188" y="44" font-weight="700">&#952;</text>
+              <!-- Sun -->
+              <circle cx="430" cy="200" r="22" fill="#F2D7A0" stroke="var(--d-rust)" stroke-width="1.5"/>
+              <text class="dl" x="414" y="236">Matahari</text>
+              <!-- pull arrows on bulge -->
+              <line x1="250" y1="150" x2="330" y2="176" stroke="var(--d-rust)" stroke-width="1.6" marker-end="url(#e-rust)"/>
+              <text class="dlm" x="268" y="140">tarik tonjolan</text>
+              <defs>
+                <marker id="e-blue" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-blue)"/></marker>
+                <marker id="e-rust" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker>
+              </defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 1. Presesi ekuinoks.</b> Matahari (dan Bulan) menarik tonjolan ekuator Bumi; torka netto membuat sumbu Bumi &mdash; yang miring sebesar obliquity \(\theta\approx 23{,}5^\circ\) &mdash; menyapu kerucut mengelilingi normal ekliptika sekali tiap &plusmn;26.000 tahun.</figcaption>
+        </figure>
+        <div class="callout support"><p><b>Tiga presesi, jangan tertukar.</b> (1) Goyangan Chandler &mdash; presesi <i>bebas torka</i>, &plusmn;14 bulan (&sect;5.6). (2) Presesi ekuinoks &mdash; <i>didorong torka</i> lunisolar, &plusmn;26.000 tahun (halaman ini). (3) Presesi gasing mainan &mdash; model laboratoriumnya (&sect;5.7). Besaran (2) jauh lebih lambat, sehingga pengandaian &ldquo;torka diabaikan&rdquo; di &sect;5.6 memang sah.</p></div>
+      </section>
+
+      <section class="block" id="potensial">
+        <h2>2. Alat: potensial benda tak-bola</h2>
+        <p>Untuk menghitung torkanya kita perlu energi potensial gravitasi antara sebuah titik massa \(M\) (Matahari/Bulan) dan sebaran massa Bumi. Jaraknya diuraikan dengan <b>polinomial Legendre</b> &mdash; inti teknik multipol:</p>
+        <div class="eq">$$ V=-\frac{GM}{r}\sum_{n=0}^{\infty}\left(\frac{r_i'}{r}\right)^n P_n(\cos\psi_i),\qquad P_0=1,\ P_1=x,\ P_2=\tfrac12(3x^2-1). $$</div>
+        <p>di sini \(r\) jarak ke \(M\), \(r_i'\) posisi partikel ke-\(i\) Bumi dari pusat, dan \(\psi_i\) sudut antara keduanya (penjumlahan atas semua partikel Bumi tersirat). Tiga suku pertama bercerita banyak:</p>
+        <ul class="points">
+          <li><b>\(n=0\) (monopol).</b> Memberi \(-GMm/r\) biasa &mdash; seolah Bumi bola. Tak bergantung orientasi, jadi <b>tak memberi torka</b>.</li>
+          <li><b>\(n=1\) (dipol).</b> <b>Lenyap</b> karena kita pilih titik asal di pusat massa: \(\sum_i m_i\mathbf{r}_i'=0\).</li>
+          <li><b>\(n=2\) (kuadrupol).</b> Suku pertama yang <b>bergantung orientasi</b> &mdash; inilah satu-satunya yang bisa memberi torka. Terkait langsung dengan tonjolan ekuator / tensor inersia Bumi.</li>
+        </ul>
+        <div class="callout"><p><b>Analogi elektrostatika.</b> Ini adalah uraian multipol gravitasi, sejajar potensial muatan. Suku dipol absen karena &ldquo;muatan&rdquo; gravitasi hanya satu tanda (tak ada massa negatif). Jadi efek yang kita cari berasal dari <b>momen kuadrupol gravitasi</b> Bumi yang pepat &mdash; yang dalam geodesi dilambangkan koefisien \(J_2\).</p></div>
+      </section>
+
+      <section class="block" id="maccullagh">
+        <h2>3. Formula MacCullagh dan suku pengganggu</h2>
+        <p>Menyusun suku \(n=2\) dengan tensor inersia menghasilkan <b>formula MacCullagh</b> untuk potensial benda hampir bola:</p>
+        <div class="eq">$$ V=-\frac{GMm}{r}+\frac{GM}{2r^3}\left[\,3I_r-(I_1+I_2+I_3)\,\right], \tag{5.86}$$</div>
+        <p>dengan \(I_r\) momen inersia Bumi terhadap arah \(\mathbf{r}\) ke benda langit. Untuk Bumi simetris (\(I_1=I_2\)), bila \(\gamma\) kosinus arah \(\mathbf{r}\) terhadap sumbu figur, maka \(I_r=I_1+(I_3-I_1)\gamma^2\), sehingga:</p>
+        <div class="eq">$$ V=-\frac{GMm}{r}+\frac{GM(I_3-I_1)}{r^3}\,P_2(\gamma). \tag{5.88}$$</div>
+        <p>Hanya suku kedua yang bergantung orientasi \(\gamma\), jadi hanya ia yang menghasilkan torka:</p>
+        <div class="eq">$$ V_2=\frac{GM(I_3-I_1)}{r^3}\,P_2(\gamma). \tag{5.89}$$</div>
+        <p>Faktor \((I_3-I_1)\) adalah ukuran kepepatan Bumi: andai Bumi bola sempurna \(I_3=I_1\), suku ini lenyap dan tak ada presesi ekuinoks sama sekali. Jadi presesi ekuinoks adalah <b>bukti langsung bahwa Bumi pepat</b>.</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 190" width="100%" height="auto" style="max-width:480px;margin:auto" aria-label="Tiga suku multipol: monopol bola, dipol nol, kuadrupol pepat">
+              <!-- monopole -->
+              <circle cx="90" cy="80" r="40" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.5"/>
+              <text class="dl" x="90" y="150" text-anchor="middle" font-weight="700">n=0</text>
+              <text class="dlm" x="90" y="170" text-anchor="middle">bola &middot; tanpa torka</text>
+              <!-- dipole = 0 -->
+              <circle cx="260" cy="80" r="40" fill="none" stroke="var(--d-bodyline)" stroke-width="1.3" stroke-dasharray="4 4"/>
+              <line x1="236" y1="56" x2="284" y2="104" stroke="var(--d-rust)" stroke-width="2.5"/>
+              <text class="dl" x="260" y="150" text-anchor="middle" font-weight="700">n=1</text>
+              <text class="dlm" x="260" y="170" text-anchor="middle">dipol = 0 (pusat massa)</text>
+              <!-- quadrupole oblate -->
+              <ellipse cx="430" cy="80" rx="46" ry="32" fill="var(--d-bodyfill)" stroke="var(--d-teal)" stroke-width="2"/>
+              <ellipse cx="430" cy="80" rx="46" ry="9" fill="none" stroke="var(--d-teal)" stroke-width="1" opacity="0.7"/>
+              <text class="dl" x="430" y="150" text-anchor="middle" font-weight="700" fill="var(--d-teal)">n=2</text>
+              <text class="dlm" x="430" y="170" text-anchor="middle">kuadrupol &middot; pemberi torka</text>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 2. Uraian multipol.</b> Monopol memperlakukan Bumi sebagai bola (tanpa torka); dipol lenyap karena titik asal di pusat massa; kuadrupol &mdash; tonjolan pepat &mdash; adalah suku pertama yang bergantung orientasi dan karenanya satu-satunya pemberi torka.</figcaption>
+        </figure>
+      </section>
+
+      <section class="block" id="rata">
+        <h2>4. Rata-rata atas orbit</h2>
+        <p>Arah \(\gamma\) berubah saat Matahari/Bulan mengelilingi orbit tampaknya. Dengan \(\theta\) obliquity (kemiringan sumbu Bumi) dan \(\eta\) posisi benda di orbit, geometri memberi \(\gamma=\sin\theta\cos\eta\).</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 220" width="100%" height="auto" style="max-width:420px;margin:auto" aria-label="Geometri gamma: sumbu figur z miring theta, benda langit di orbit xy pada sudut eta">
+              <!-- z axis -->
+              <line x1="230" y1="200" x2="230" y2="30" stroke="var(--d-axis)" stroke-width="1.3"/>
+              <text class="dlm" x="236" y="36">z (vertikal)</text>
+              <!-- figure axis tilted theta -->
+              <line x1="230" y1="200" x2="300" y2="48" stroke="var(--d-blue)" stroke-width="2.5" marker-end="url(#r-blue)"/>
+              <text class="dl" x="304" y="46" font-weight="700" fill="var(--d-blue)">sumbu figur</text>
+              <path d="M 230 90 A 110 110 0 0 1 258 96" fill="none" stroke="var(--d-axis)" stroke-width="1.2"/>
+              <text class="dl" x="238" y="86" font-weight="700">&#952;</text>
+              <!-- orbit ellipse (xy plane) -->
+              <ellipse cx="230" cy="200" rx="150" ry="36" fill="none" stroke="var(--d-teal)" stroke-width="1.5"/>
+              <text class="dlm" x="360" y="214">orbit (ekliptika)</text>
+              <!-- celestial body on orbit -->
+              <circle cx="350" cy="182" r="7" fill="#F2D7A0" stroke="var(--d-rust)" stroke-width="1.3"/>
+              <line x1="230" y1="200" x2="350" y2="182" stroke="var(--d-rust)" stroke-width="1.6" marker-end="url(#r-rust)"/>
+              <text class="dl" x="300" y="196" fill="var(--d-rust)">r</text>
+              <path d="M 285 200 A 55 14 0 0 1 350 184" fill="none" stroke="var(--d-axis)" stroke-width="1.1"/>
+              <text class="dl" x="300" y="214" font-weight="700">&#951;</text>
+              <defs>
+                <marker id="r-blue" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-blue)"/></marker>
+                <marker id="r-rust" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker>
+              </defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 3. Geometri \(\gamma\).</b> \(\theta\) adalah obliquity sumbu figur, \(\eta\) posisi benda langit di orbitnya; \(\gamma=\sin\theta\cos\eta\) (bandingkan Goldstein Gambar 5.13).</figcaption>
+        </figure>
+
+        <p>Orbit jauh lebih cepat daripada presesinya, jadi cukup kita rata-ratakan \(V_2\) atas satu periode orbit. Karena \(\langle\cos^2\eta\rangle=\tfrac12\), potensial efektif yang terasa oleh gerak presesi lambat menjadi:</p>
+        <div class="eq">$$ \overline{V}_2=-\frac{GM(I_3-I_1)}{2r^3}\,P_2(\cos\theta). \tag{5.90}$$</div>
+        <p>Perhatikan: kini \(\overline{V}_2\) hanya bergantung pada \(\cos\theta\) &mdash; bentuk yang persis sama dengan potensial gasing berat di &sect;5.7. Torkanya tegak lurus sumbu figur dan normal orbit, sehingga presesinya mengitari <b>normal orbit</b> (peran &ldquo;vertikal&rdquo; di sini dimainkan arah tegak lurus ekliptika).</p>
+      </section>
+
+      <section class="block" id="laju">
+        <h2>5. Laju presesi: 26.000 tahun</h2>
+        <p>Karena \(\overline{V}_2=V(\cos\theta)\), kita pakai langsung hasil presesi lambat &sect;5.7. Untuk presesi seragam dengan \(\dot{\phi}\ll\omega_3\):</p>
+        <div class="eq">$$ \dot{\phi}=\frac{1}{I_3\omega_3}\frac{\partial V}{\partial(\cos\theta)}. \tag{5.93}$$</div>
+        <p>Masukkan \(\overline{V}_2\) (dengan \(P_2(\cos\theta)=\tfrac12(3\cos^2\theta-1)\)):</p>
+        <div class="eq">$$ \dot{\phi}=-\frac{3GM}{2\omega_3 r^3}\,\frac{I_3-I_1}{I_3}\,\cos\theta. \tag{5.94}$$</div>
+        <p>Pakai hukum Kepler \(\omega_0^2=GM/r^3\) (\(\omega_0\) laju sudut orbit), laju presesi relatif terhadap \(\omega_0\):</p>
+        <div class="eq">$$ \frac{\dot{\phi}}{\omega_0}=-\frac{3}{2}\,\frac{\omega_0}{\omega_3}\,\frac{I_3-I_1}{I_3}\,\cos\theta. \tag{5.95}$$</div>
+        <p>Dengan nilai \((I_3-I_1)/I_3\) dari &sect;5.6 dan \(\theta=23^\circ27'\):</p>
+        <table class="data">
+          <tr><th>Sumber torka</th><th>Periode presesi penuh</th><th>Catatan</th></tr>
+          <tr><td>Matahari saja</td><td>&plusmn;81.000 tahun</td><td>dari (5.95)</td></tr>
+          <tr><td>Bulan saja</td><td>&plusmn;2&times; efek Matahari</td><td>lebih kecil tapi jauh lebih dekat</td></tr>
+          <tr><td><b>Gabungan (lunisolar)</b></td><td><b>&plusmn;26.000 tahun</b></td><td>50,25&Prime; per tahun</td></tr>
+        </table>
+        <p>Tanda minus berarti presesinya <b>retrograd</b> (berlawanan arah rotasi harian). Karena orbit Bulan miring \(5^\circ\) terhadap ekliptika dan Matahari-Bulan-Bumi terus bergerak, muncul pula <b>nutasi astronomis</b>: osilasi periodik \(\pm 9\Prime\) pada \(\theta\) dan \(\pm 18\Prime\) pada \(\phi\) &mdash; jauh lebih besar daripada nutasi bebas Chandler (hanya beberapa persepuluh detik busur).</p>
+        <div class="callout support"><p><b>Satu teknik, dua skala.</b> Rumus presesi lambat yang sama (\(\overline{\dot{\phi}}=Mgl/I_3\omega_3\) untuk gasing mainan di &sect;5.7) di sini menghasilkan 26.000 tahun untuk Bumi. Yang berubah hanya sumber potensialnya: \(Mgl\cos\theta\) untuk gasing, \(\overline{V}_2\) untuk Bumi. Itulah daya teknik potensial efektif.</p></div>
+      </section>
+
+      <section class="block" id="satelit">
+        <h2>6. Presesi orbit satelit</h2>
+        <p>Potensial yang sama, dibaca terbalik, memberi fenomena kedua yang sangat praktis. Interaksi gravitasi bersifat <b>timbal balik</b>: jika tonjolan Bumi memberi torka pada benda langit, maka tonjolan Bumi juga memberi gaya tak-sentral pada satelit yang mengorbitnya. Efeknya: <b>bidang orbit satelit berpresesi</b> mengelilingi sumbu Bumi.</p>
+        <p>Caranya persis dual dari presesi ekuinoks: satelit dirata-ratakan menjadi sebuah <b>cincin tegar</b> bermassa \(M\) seradius orbit, berputar dengan frekuensi orbit. Cincin itu berada dalam medan potensial (5.90), lalu diperlakukan seperti gasing &mdash; bidangnya berpresesi (regresi simpul) mengitari sumbu kutub Bumi. Lajunya sebanding kepepatan Bumi (\(J_2\)) dan \(\cos i\), dengan \(i\) inklinasi orbit.</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 240" width="100%" height="auto" style="max-width:460px;margin:auto" aria-label="Bidang orbit satelit miring berpresesi mengelilingi sumbu kutub Bumi, garis simpul beregresi">
+              <!-- polar axis -->
+              <line x1="230" y1="215" x2="230" y2="25" stroke="var(--d-axis)" stroke-width="1.5" stroke-dasharray="6 4"/>
+              <text class="dlm" x="200" y="22">sumbu kutub</text>
+              <!-- Earth oblate -->
+              <ellipse cx="230" cy="130" rx="52" ry="42" fill="var(--d-bodyfill)" stroke="var(--d-bodyline)" stroke-width="1.6"/>
+              <ellipse cx="230" cy="130" rx="52" ry="12" fill="none" stroke="var(--d-bodyline)" stroke-width="1" opacity="0.7"/>
+              <!-- satellite orbit plane (inclined ellipse) -->
+              <ellipse cx="230" cy="130" rx="120" ry="40" fill="none" stroke="var(--d-teal)" stroke-width="2" transform="rotate(-24 230 130)"/>
+              <text class="dl" x="330" y="78" fill="var(--d-teal)" font-weight="700">orbit satelit</text>
+              <!-- node line + regression arrow -->
+              <ellipse cx="230" cy="130" rx="118" ry="30" fill="none" stroke="var(--d-rust)" stroke-width="1.4" stroke-dasharray="5 4"/>
+              <path d="M 348 130 A 118 30 0 0 1 300 150" fill="none" stroke="var(--d-rust)" stroke-width="1.8" marker-end="url(#s-rust)"/>
+              <text class="dl" x="300" y="176" fill="var(--d-rust)">regresi simpul</text>
+              <text class="dl" x="250" y="150" font-weight="700">i</text>
+              <defs><marker id="s-rust" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker></defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 4. Regresi simpul orbit satelit.</b> Tonjolan ekuator Bumi membuat bidang orbit satelit (inklinasi \(i\)) berpresesi mengelilingi sumbu kutub; garis simpulnya bergeser pelan &mdash; laju \(\propto J_2\cos i\).</figcaption>
+        </figure>
+
+        <div class="callout try"><p><b>Mengapa ini penting untuk geofisika.</b> Regresi simpul ini justru dimanfaatkan: dengan memilih inklinasi yang tepat (\(i\approx 98^\circ\), orbit nyaris kutub), laju presesi disetel agar bidang orbit berputar <b>tepat \(360^\circ\) per tahun</b> &mdash; mengikuti Matahari. Itulah <b>orbit sinkron-Matahari</b> yang dipakai satelit penginderaan jauh (Landsat, Sentinel) supaya selalu melintas pada waktu lokal yang sama. Kepepatan Bumi yang &ldquo;mengganggu&rdquo; justru menjadi alat perancangan misi.</p></div>
+      </section>
+
+      <section class="block" id="rangkuman">
+        <h2>7. Rangkuman dan rumus kunci</h2>
+        <h3>Alur penalaran</h3>
+        <ol class="steps">
+          <li>Bumi pepat + tarikan tak simetris Matahari/Bulan &rarr; torka pada tonjolan ekuator.</li>
+          <li>Uraikan potensial dengan multipol: \(n=0\) bola (tanpa torka), \(n=1\) nol, \(n=2\) kuadrupol (pemberi torka).</li>
+          <li>Formula MacCullagh &rarr; suku pengganggu \(V_2\propto(I_3-I_1)P_2(\gamma)\).</li>
+          <li>Rata-ratakan atas orbit (\(\gamma=\sin\theta\cos\eta\)) &rarr; \(\overline{V}_2\propto P_2(\cos\theta)\).</li>
+          <li>Pakai rumus presesi lambat &sect;5.7 &rarr; laju presesi; lunisolar &asymp; 26.000 tahun.</li>
+          <li>Secara timbal balik, potensial yang sama membuat bidang orbit satelit beregresi &rarr; orbit sinkron-Matahari.</li>
+        </ol>
+        <h3>Kotak rumus</h3>
+        <div class="eq">$$ V=-\frac{GMm}{r}+\frac{GM(I_3-I_1)}{r^3}P_2(\gamma)\quad\text{(MacCullagh, simetris)} $$</div>
+        <div class="eq">$$ \overline{V}_2=-\frac{GM(I_3-I_1)}{2r^3}P_2(\cos\theta),\qquad \frac{\dot{\phi}}{\omega_0}=-\frac{3}{2}\frac{\omega_0}{\omega_3}\frac{I_3-I_1}{I_3}\cos\theta $$</div>
+        <div class="callout"><p><b>Penutup Bab 5.</b> Satu gagasan menyatukan ketiga topik: benda tegar simetris dijelaskan oleh dua besaran kekal dan satu potensial efektif dalam \(\theta\). Yang bebas torka memberi goyangan Chandler (&sect;5.6); yang ditorka gravitasi memberi gasing (&sect;5.7) dan &mdash; pada skala planet &mdash; presesi ekuinoks serta regresi orbit satelit (&sect;5.8).</p></div>
+      </section>
+
+      <section class="block" id="rujukan">
+        <h2>8. Rujukan</h2>
+        <ul class="points">
+          <li>Goldstein, H., Poole, C. P. &amp; Safko, J. L. (2002). <i>Classical Mechanics</i>, 3rd ed., &sect;5.8 &ldquo;Precession of the Equinoxes and of Satellite Orbits&rdquo;, hlm. 223&ndash;228. Addison-Wesley.</li>
+          <li>Stacey, F. D. &amp; Davis, P. M. (2008). <i>Physics of the Earth</i>, 4th ed. &mdash; kepepatan Bumi, \(J_2\), dan presesi.</li>
+          <li>Montenbruck, O. &amp; Gill, E. (2000). <i>Satellite Orbits: Models, Methods and Applications</i>. Springer &mdash; regresi simpul dan orbit sinkron-Matahari.</li>
+          <li>Materi terkait: <a href="/kuliah/mekanika-klasik/gerak-bebas-torka/">&sect;5.6 Gerak Bebas Torka</a> dan <a href="/kuliah/mekanika-klasik/gasing-berat-simetris/">&sect;5.7 Gasing Berat Simetris</a>.</li>
+        </ul>
+        <p class="source-note">Bahan ini adalah penyederhanaan pedagogis. Penurunan lengkap formula MacCullagh dan presesi orbit satelit ada di teks aslinya, Goldstein &sect;5.8.</p>
+      </section>
+
+      <nav class="seq-nav" aria-label="Navigasi topik">
+        <a href="/kuliah/mekanika-klasik/gasing-berat-simetris/"><span class="lbl">&larr; Sebelumnya &middot; &sect;5.7</span>Gasing Berat Simetris Bertumpu Satu Titik</a>
+        <a class="nx" href="/kuliah/mekanika-klasik/"><span class="lbl">Daftar topik &uarr;</span>Mekanika Klasik</a>
+      </nav>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
