@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presesi Larmor — Mekanika Klasik — Wiwit Suryanto</title>
+  <meta name="description" content="Materi kuliah Mekanika Klasik (Program Magister Fisika UGM), Goldstein §5.9: presesi sistem muatan dalam medan magnet. Momen magnet M=γL, torka N=M×B, frekuensi Larmor, teorema Larmor, dan penerapannya pada efek Zeeman serta NMR/MRI.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:44px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    main h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:28px 0 8px}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);border-radius:6px;overflow:hidden}
+    figure.fig > div{padding:18px 16px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);padding:10px 16px;border-top:1px solid var(--border)}
+    figure.fig figcaption b{color:var(--text);font-weight:600}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+    ol.steps{font-family:var(--sans);font-size:16px;line-height:1.55;padding-left:22px;margin:16px 0}
+    ol.steps li{margin:0 0 10px}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:22px 0}
+    .callout p:first-child{margin-top:0}
+    .callout p:last-child{margin-bottom:0}
+    .callout.support{background:#EDF3F2;border-color:#C7DAD6}
+    .callout.try{background:#FBF1EC;border-color:#E6C9BB}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    .seq-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:40px 0 0;font-family:var(--sans)}
+    .seq-nav a{display:block;border:1px solid var(--border);border-radius:6px;padding:14px 16px;text-decoration:none;background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+    .seq-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    .seq-nav .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .seq-nav a:hover .lbl{color:var(--accent)}
+    .seq-nav .nx{text-align:right}
+    @media (max-width:560px){ .seq-nav{grid-template-columns:1fr} .seq-nav .nx{text-align:left} }
+
+    .toc{font-family:var(--sans);font-size:15px;columns:2;column-gap:32px;margin:28px 0 0;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:2px 0;break-inside:avoid}
+    .toc a{text-decoration:none}
+    table.data{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;line-height:1.5;margin:0 0 20px;background:var(--surface);border:1px solid var(--border)}
+    table.data th,table.data td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+    table.data th{background:var(--surface-muted);font-weight:600}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+
+    .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-teal:#2F5D62; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
+    text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
+    text.dlm{font-family:var(--sans);font-size:12px;fill:#5F625C}
+    .figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:8px 0 20px}
+    .stage-fig{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px}
+    .stage-fig svg{width:100%;height:auto;display:block}
+    .stage-fig p{margin:10px 0 0;font-family:var(--sans);font-size:13.5px;line-height:1.45;color:var(--text-muted)}
+    .stage-fig p b{color:var(--text)}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:34px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:29px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .toc{columns:1}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; <a href="/kuliah/mekanika-klasik/">Mekanika Klasik</a> &nbsp;/&nbsp; Presesi Larmor</p>
+      <p class="eyebrow">Mekanika Klasik &middot; Program Magister</p>
+      <h1>Presesi Muatan dalam Medan Magnet</h1>
+      <p class="lede">Hal mengejutkan: sistem muatan dalam medan magnet &mdash; atom, spin inti &mdash; berpresesi dengan hukum yang <b>sama persis</b> seperti gasing yang ditarik gravitasi. Inilah presesi Larmor, dan ia menutup Bab 5 sekaligus menjadi dasar efek Zeeman dan MRI. Mengikuti Goldstein, <i>Classical Mechanics</i>, &sect;5.9.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Mekanika Klasik (Program Magister Fisika)</dd>
+        <dt>Rujukan utama</dt><dd>Goldstein, Poole &amp; Safko (2002), edisi ke-3, &sect;5.9, hlm. 230&ndash;232</dd>
+        <dt>Prasyarat</dt><dd>Rumus giroskop (&sect;5.7), gaya Lorentz, dan potensial vektor \(\mathbf{A}\)</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <nav class="toc" aria-label="Daftar isi"><ol>
+        <li><a href="#dipol">Muatan bergerak sebagai dipol magnet</a></li>
+        <li><a href="#torka">Dipol dalam medan: torka tanpa gaya</a></li>
+        <li><a href="#larmor">Persamaan presesi Larmor</a></li>
+        <li><a href="#teorema">Teorema Larmor</a></li>
+        <li><a href="#terapan">Mengapa penting: Zeeman, NMR, MRI</a></li>
+        <li><a href="#rangkuman">Rangkuman &amp; rumus kunci</a></li>
+        <li><a href="#rujukan">Rujukan</a></li>
+      </ol></nav>
+
+      <section class="block" id="dipol">
+        <h2>1. Muatan bergerak sebagai dipol magnet</h2>
+        <p>Gerak sistem muatan dalam medan magnet biasanya bukan gerak benda tegar. Tetapi, seperti ditekankan Goldstein, dalam banyak kasus penting ia paling elegan dibahas dengan teknik benda tegar yang baru kita bangun &mdash; dan ini sangat penting di fisika atom dan inti.</p>
+        <p>Kuncinya: <b>momen magnet</b> \(\mathbf{M}\) sebuah sistem muatan yang bergerak dan <b>momentum sudut</b> \(\mathbf{L}\)-nya punya bentuk yang serupa:</p>
+        <div class="eq">$$ \mathbf{M}=\tfrac{1}{2}\sum_i q_i(\mathbf{r}_i\times\mathbf{v}_i),\qquad \mathbf{L}=\sum_i m_i(\mathbf{r}_i\times\mathbf{v}_i). $$</div>
+        <p>Bila semua partikel punya rasio muatan-ke-massa \(q/m\) yang sama, keduanya menjadi <b>sejajar sempurna</b>:</p>
+        <div class="eq">$$ \mathbf{M}=\gamma\mathbf{L},\qquad \gamma=\frac{q}{2m}. \tag{5.99&ndash;5.100}$$</div>
+        <p>\(\gamma\) disebut <b>rasio giromagnetik</b>. (Untuk spin partikel dan atom, \(\gamma\) sering dibiarkan tak tertentu karena melibatkan faktor-\(g\) kuantum.) Inti pesannya: momen magnet dan momentum sudut adalah dua wajah dari besaran yang sama.</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 190" width="100%" height="auto" style="max-width:360px;margin:auto" aria-label="Muatan beredar menghasilkan arus melingkar dengan momentum sudut L dan momen magnet M sejajar">
+              <!-- current loop -->
+              <ellipse cx="200" cy="120" rx="80" ry="26" fill="none" stroke="var(--d-teal)" stroke-width="2"/>
+              <!-- circulating charge -->
+              <circle cx="280" cy="120" r="8" fill="#F2D7A0" stroke="var(--d-rust)" stroke-width="1.4"/>
+              <text class="dl" x="290" y="124" fill="var(--d-rust)" font-weight="700">+q</text>
+              <path d="M 262 104 A 80 26 0 0 1 240 100" fill="none" stroke="var(--d-rust)" stroke-width="1.6" marker-end="url(#l-rust)"/>
+              <text class="dlm" x="150" y="100">v</text>
+              <!-- L and M arrows up -->
+              <line x1="200" y1="120" x2="200" y2="30" stroke="var(--d-blue)" stroke-width="2.5" marker-end="url(#l-blue)"/>
+              <text class="dl" x="176" y="40" font-weight="700" fill="var(--d-blue)">L</text>
+              <line x1="228" y1="120" x2="228" y2="48" stroke="var(--d-axis)" stroke-width="2" marker-end="url(#l-ax)"/>
+              <text class="dl" x="234" y="48" font-weight="700">M = &#947;L</text>
+              <defs>
+                <marker id="l-blue" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-blue)"/></marker>
+                <marker id="l-rust" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker>
+                <marker id="l-ax" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-axis)"/></marker>
+              </defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 1. Momen magnet dari muatan beredar.</b> Muatan yang mengorbit membentuk arus melingkar; momentum sudut \(\mathbf{L}\) dan momen magnet \(\mathbf{M}=\gamma\mathbf{L}\) sejajar (untuk \(q&gt;0\)). Rasio giromagnetik \(\gamma=q/2m\).</figcaption>
+        </figure>
+      </section>
+
+      <section class="block" id="torka">
+        <h2>2. Dipol dalam medan: torka tanpa gaya</h2>
+        <p>Gaya dan torka pada dipol magnet berasal dari potensial</p>
+        <div class="eq">$$ V=-\,\mathbf{M}\cdot\mathbf{B}. \tag{5.101}$$</div>
+        <p>Jika \(\mathbf{B}\) seragam, \(V\) hanya bergantung pada <b>orientasi</b> \(\mathbf{M}\) terhadap \(\mathbf{B}\) &mdash; tak ada gaya netto pada dipol, tetapi ada <b>torka</b>:</p>
+        <div class="eq">$$ \mathbf{N}=\mathbf{M}\times\mathbf{B}. \tag{5.102}$$</div>
+        <div class="callout support"><p><b>Pola yang sudah kita kenal.</b> Bandingkan dengan torka gravitasi pada gasing, \(\mathbf{N}=\mathbf{R}\times M\mathbf{g}\) (&sect;5.7), dan pada tonjolan Bumi (&sect;5.8). Struktur torkanya identik: sebuah vektor (di sini \(\mathbf{M}\), sejajar \(\mathbf{L}\)) di-&ldquo;silang&rdquo; dengan medan. Hasilnya pun akan sama: <b>presesi</b>, bukan penyelarasan.</p></div>
+      </section>
+
+      <section class="block" id="larmor">
+        <h2>3. Persamaan presesi Larmor</h2>
+        <p>Laju perubahan momentum sudut sama dengan torka, \(\mathrm{d}\mathbf{L}/\mathrm{d}t=\mathbf{N}\). Dengan \(\mathbf{M}=\gamma\mathbf{L}\):</p>
+        <div class="eq">$$ \frac{\mathrm{d}\mathbf{L}}{\mathrm{d}t}=\gamma\,\mathbf{L}\times\mathbf{B}. \tag{5.103}$$</div>
+        <p>Ini <b>persis</b> persamaan sebuah vektor berbesar tetap yang berputar di ruang mengelilingi arah \(\mathbf{B}\). Bandingkan dengan presesi bebas &sect;5.6, \(\dot{\boldsymbol{\omega}}=\boldsymbol{\omega}\times\boldsymbol{\Omega}\) &mdash; bentuknya sama. Jadi efek medan magnet seragam pada dipol permanen adalah membuat \(\mathbf{L}\) (dan \(\mathbf{M}\)) <b>berpresesi seragam</b> dengan kecepatan sudut:</p>
+        <div class="eq">$$ \boldsymbol{\omega}_l=-\frac{q\mathbf{B}}{2m}. \tag{5.104}$$</div>
+        <p>Inilah <b>frekuensi Larmor</b>. Untuk elektron \(q\) negatif, sehingga presesi Larmor berlawanan arah jarum jam terhadap arah \(\mathbf{B}\). Torka tak pernah memperbesar \(\mathbf{L}\); ia hanya memutar arahnya &mdash; prinsip giroskopik yang sama, kini untuk spin.</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 250" width="100%" height="auto" style="max-width:420px;margin:auto" aria-label="Momentum sudut L dan momen magnet M berpresesi mengelilingi B, torka N tegak lurus">
+              <!-- B field up -->
+              <line x1="200" y1="235" x2="200" y2="25" stroke="var(--d-axis)" stroke-width="1.6" marker-end="url(#la-ax)"/>
+              <text class="dl" x="206" y="32" font-weight="700">B</text>
+              <!-- precession cone -->
+              <ellipse cx="200" cy="55" rx="58" ry="16" fill="none" stroke="var(--d-rust)" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <path d="M 258 55 A 58 16 0 0 1 226 70" fill="none" stroke="var(--d-rust)" stroke-width="1.8" marker-end="url(#la-rust)"/>
+              <text class="dl" x="262" y="52" fill="var(--d-rust)" font-weight="700">&#969;&#8343;</text>
+              <!-- L vector tilted -->
+              <line x1="200" y1="200" x2="256" y2="62" stroke="var(--d-blue)" stroke-width="2.5" marker-end="url(#la-blue)"/>
+              <text class="dl" x="258" y="66" font-weight="700" fill="var(--d-blue)">L, M</text>
+              <circle cx="200" cy="200" r="3" fill="var(--d-axis)"/>
+              <!-- torque N perpendicular (into/out) -->
+              <circle cx="150" cy="120" r="11" fill="none" stroke="var(--d-teal)" stroke-width="1.6"/>
+              <circle cx="150" cy="120" r="2.4" fill="var(--d-teal)"/>
+              <text class="dl" x="120" y="124" fill="var(--d-teal)" font-weight="700">N</text>
+              <text class="dlm" x="104" y="140">= M&times;B</text>
+              <defs>
+                <marker id="la-ax" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-axis)"/></marker>
+                <marker id="la-blue" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-blue)"/></marker>
+                <marker id="la-rust" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker>
+              </defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 2. Presesi Larmor.</b> Torka \(\mathbf{N}=\mathbf{M}\times\mathbf{B}\) tegak lurus \(\mathbf{L}\), sehingga \(\mathbf{L}\) dan \(\mathbf{M}\) menyapu kerucut mengelilingi \(\mathbf{B}\) dengan frekuensi Larmor \(\omega_l=qB/2m\) &mdash; sama seperti giroskop berpresesi, bukan jatuh menyelaras.</figcaption>
+        </figure>
+
+        <div class="callout"><p><b>Larmor vs siklotron &mdash; jangan tertukar.</b> Frekuensi <b>Larmor</b> (presesi dipol) adalah \(\omega_l=qB/2m\). Frekuensi <b>siklotron</b> (muatan bebas melingkar karena gaya Lorentz) adalah \(\omega_c=qB/m\) &mdash; tepat <b>dua kali</b> Larmor. Faktor 2 berasal dari definisi \(\gamma=q/2m\); keduanya sering tertukar.</p></div>
+      </section>
+
+      <section class="block" id="teorema">
+        <h2>4. Teorema Larmor</h2>
+        <p>Hasil di atas berlaku untuk dipol kaku. Tetapi klaim yang lebih kuat berlaku untuk <b>sistem muatan apa pun</b> (dengan \(q/m\) seragam dan potensial antar-partikel yang hanya bergantung jarak). Tulis Lagrangiannya dengan \(\mathbf{B}\) dari potensial vektor \(\mathbf{A}=\tfrac12\mathbf{B}\times\mathbf{r}\):</p>
+        <div class="eq">$$ L=\tfrac{1}{2}m_i v_i^2+\frac{q\mathbf{B}}{2m}\cdot(\mathbf{r}_i\times m_i\mathbf{v}_i)+V(|\mathbf{r}_i-\mathbf{r}_j|). \tag{5.107}$$</div>
+        <p>Kini pindah ke <b>kerangka berputar</b> yang berotasi seragam dengan \(\boldsymbol{\omega}_l\): \(\mathbf{v}_i=\mathbf{v}_i'+\boldsymbol{\omega}_l\times\mathbf{r}_i\). Jaraknya tak berubah (jadi \(V\) sama). Yang menarik: semua suku <b>linear</b> dalam \(\boldsymbol{\omega}_l\) &mdash; termasuk suku magnet &mdash; saling meniadakan, menyisakan hanya suku kuadratik kecil:</p>
+        <div class="eq">$$ L=\tfrac{1}{2}m_i v_i'^2+V(|\mathbf{r}_i-\mathbf{r}_j|)-\tfrac{1}{2}I_l\,\omega_l^2. \tag{5.110}$$</div>
+        <p>Suku magnet linear <b>lenyap</b> di kerangka berputar. Suku sisa \(\tfrac12 I_l\omega_l^2\) berorde \((\omega_l/\omega)^2\) dibanding energi kinetik &mdash; dapat diabaikan bila frekuensi alami sistem \(\omega\) jauh melampaui \(\omega_l\) (benar untuk hampir semua sistem atomik). Maka:</p>
+        <div class="callout support"><p><b>Teorema Larmor.</b> Sampai orde pertama dalam \(\mathbf{B}\), efek medan magnet konstan pada sistem klasik hanyalah <b>menumpangkan presesi seragam</b> berfrekuensi \(\boldsymbol{\omega}_l\) pada gerak normalnya (gerak tanpa medan). Dengan kata lain: dilihat dari kerangka yang berputar pada frekuensi Larmor, medan magnet seolah &ldquo;hilang&rdquo;.</p></div>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 210" width="100%" height="auto" style="max-width:480px;margin:auto" aria-label="Di kerangka lab gerak atom rumit; di kerangka berputar frekuensi Larmor medan hilang dan gerak kembali normal">
+              <!-- lab frame -->
+              <circle cx="130" cy="105" r="70" fill="none" stroke="var(--d-axis)" stroke-width="1" stroke-dasharray="3 3"/>
+              <path d="M 130 105 m 0 -54 a 54 20 0 1 0 1 0 z" fill="none" stroke="var(--d-blue)" stroke-width="1.6" transform="rotate(20 130 105)"/>
+              <path d="M 130 105 m 0 -54 a 54 20 0 1 0 1 0 z" fill="none" stroke="var(--d-blue)" stroke-width="1.6" transform="rotate(70 130 105)"/>
+              <path d="M 130 105 m 0 -54 a 54 20 0 1 0 1 0 z" fill="none" stroke="var(--d-blue)" stroke-width="1.6" transform="rotate(120 130 105)"/>
+              <circle cx="130" cy="105" r="4" fill="var(--d-rust)"/>
+              <text class="dl" x="130" y="196" text-anchor="middle" font-weight="700">kerangka lab</text>
+              <text class="dlm" x="130" y="212" text-anchor="middle">orbit + presesi: rumit</text>
+              <!-- arrow -->
+              <line x1="215" y1="105" x2="300" y2="105" stroke="var(--d-axis)" stroke-width="1.6" marker-end="url(#t-ax)"/>
+              <text class="dlm" x="222" y="96">putar &#969;&#8343;</text>
+              <!-- rotating frame -->
+              <circle cx="400" cy="105" r="70" fill="none" stroke="var(--d-axis)" stroke-width="1" stroke-dasharray="3 3"/>
+              <ellipse cx="400" cy="105" rx="54" ry="20" fill="none" stroke="var(--d-teal)" stroke-width="2" transform="rotate(20 400 105)"/>
+              <circle cx="400" cy="105" r="4" fill="var(--d-rust)"/>
+              <text class="dl" x="400" y="196" text-anchor="middle" font-weight="700">kerangka berputar</text>
+              <text class="dlm" x="400" y="212" text-anchor="middle">medan &ldquo;hilang&rdquo;: normal</text>
+              <defs><marker id="t-ax" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-axis)"/></marker></defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 3. Inti teorema Larmor.</b> Gerak atom yang tampak rumit di kerangka lab (orbit ditambah presesi) menjadi gerak bebas-medan yang sederhana bila dilihat dari kerangka yang berputar pada frekuensi Larmor.</figcaption>
+        </figure>
+      </section>
+
+      <section class="block" id="terapan">
+        <h2>5. Mengapa penting: Zeeman, NMR, MRI</h2>
+        <ul class="points">
+          <li><b>Efek Zeeman.</b> Dalam efek Zeeman sederhana, pergeseran frekuensi garis spektrum ketika atom ditaruh dalam medan magnet tepat sebesar <b>frekuensi Larmor</b>. Garis spektrum terbelah &mdash; bukti langsung presesi Larmor level atom.</li>
+          <li><b>NMR &amp; MRI.</b> Spin inti (mis. proton hidrogen dalam tubuh) berpresesi mengelilingi \(\mathbf{B}\) pada frekuensi Larmor \(\omega=\gamma B\). Pada 1,5 T, proton berpresesi &plusmn;64 MHz. Mesin MRI &ldquo;mendengar&rdquo; presesi ini: inilah fondasi pencitraan medis.</li>
+          <li><b>Resonansi spin.</b> Bila ditambahkan medan berosilasi tepat pada frekuensi Larmor, spin menyerap energi (resonansi) &mdash; dasar ESR, NMR spektroskopi, dan jam atom.</li>
+        </ul>
+        <div class="callout try"><p><b>Satu rumus, banyak alat.</b> Dari \(\dot{\mathbf{L}}=\gamma\mathbf{L}\times\mathbf{B}\) yang sama &mdash; hukum gasing berbaju elektromagnetik &mdash; lahir pembelahan garis spektrum, pencitraan MRI, dan presisi jam atom. Mekanika klasik benda tegar ternyata memberi bahasa yang pas untuk fisika spin.</p></div>
+      </section>
+
+      <section class="block" id="rangkuman">
+        <h2>6. Rangkuman dan rumus kunci</h2>
+        <h3>Alur penalaran</h3>
+        <ol class="steps">
+          <li>Momen magnet dan momentum sudut sebangun &rarr; \(\mathbf{M}=\gamma\mathbf{L}\), \(\gamma=q/2m\).</li>
+          <li>Medan seragam: tanpa gaya, tetapi torka \(\mathbf{N}=\mathbf{M}\times\mathbf{B}\).</li>
+          <li>\(\dot{\mathbf{L}}=\gamma\mathbf{L}\times\mathbf{B}\) &rarr; presesi Larmor, \(\omega_l=qB/2m\).</li>
+          <li>Kerangka berputar \(\boldsymbol{\omega}_l\): suku magnet linear lenyap &rarr; teorema Larmor.</li>
+          <li>Penerapan: efek Zeeman, NMR/MRI, resonansi spin.</li>
+        </ol>
+        <h3>Kotak rumus</h3>
+        <div class="eq">$$ \mathbf{M}=\gamma\mathbf{L},\quad \gamma=\frac{q}{2m},\qquad \mathbf{N}=\mathbf{M}\times\mathbf{B},\qquad \frac{\mathrm{d}\mathbf{L}}{\mathrm{d}t}=\gamma\mathbf{L}\times\mathbf{B} $$</div>
+        <div class="eq">$$ \boldsymbol{\omega}_l=-\frac{q\mathbf{B}}{2m}\ \text{(Larmor)},\qquad \omega_c=\frac{qB}{m}=2\omega_l\ \text{(siklotron)} $$</div>
+        <div class="callout"><p><b>Penutup Bab 5.</b> Empat topik, satu gagasan presesi: benda bebas yang menggeleng (&sect;5.6), gasing yang ditorka gravitasi (&sect;5.7), Bumi dan satelit pada skala planet (&sect;5.8), dan kini spin dalam medan magnet (&sect;5.9). Torka \(\propto\) (sebuah vektor) \(\times\) (medan) selalu menghasilkan presesi, bukan penyelarasan &mdash; dari gasing mainan hingga mesin MRI.</p></div>
+      </section>
+
+      <section class="block" id="rujukan">
+        <h2>7. Rujukan</h2>
+        <ul class="points">
+          <li>Goldstein, H., Poole, C. P. &amp; Safko, J. L. (2002). <i>Classical Mechanics</i>, 3rd ed., &sect;5.9 &ldquo;Precession of Systems of Charges in a Magnetic Field&rdquo;, hlm. 230&ndash;232. Addison-Wesley.</li>
+          <li>Jackson, J. D. (1999). <i>Classical Electrodynamics</i>, 3rd ed., &sect;5.7 &mdash; momen magnet dan presesi Larmor.</li>
+          <li>Levitt, M. H. (2008). <i>Spin Dynamics: Basics of Nuclear Magnetic Resonance</i>, 2nd ed. &mdash; presesi Larmor sebagai dasar NMR/MRI.</li>
+          <li>Materi terkait: <a href="/kuliah/mekanika-klasik/gasing-berat-simetris/">&sect;5.7 Gasing Berat Simetris</a> (rumus giroskop) dan <a href="/kuliah/mekanika-klasik/presesi-ekuinoks/">&sect;5.8 Presesi Ekuinoks</a>.</li>
+        </ul>
+        <p class="source-note">Bahan ini adalah penyederhanaan pedagogis. Penurunan lengkap teorema Larmor dan batas validitasnya ada di teks aslinya, Goldstein &sect;5.9.</p>
+      </section>
+
+      <nav class="seq-nav" aria-label="Navigasi topik">
+        <a href="/kuliah/mekanika-klasik/presesi-ekuinoks/"><span class="lbl">&larr; Sebelumnya &middot; &sect;5.8</span>Presesi Ekuinoks dan Orbit Satelit</a>
+        <a class="nx" href="/kuliah/mekanika-klasik/"><span class="lbl">Bab 5 selesai &middot; Daftar topik &uarr;</span>Mekanika Klasik</a>
+      </nav>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
