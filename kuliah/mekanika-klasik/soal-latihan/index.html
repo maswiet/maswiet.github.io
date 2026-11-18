@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Soal Latihan Bab 5 — Mekanika Klasik — Wiwit Suryanto</title>
+  <meta name="description" content="Soal latihan terpilih Bab 5 Goldstein dengan penyelesaian lengkap: bar berpegas (19), pendulum batang-cakram (20), pintu mobil menutup sendiri (23), dan sintesis presesi bebas-paksa Bumi (27).">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:44px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    /* problem block */
+    .problem{padding:48px 0 0;scroll-margin-top:14px}
+    .phead{display:flex;gap:16px;align-items:baseline;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:4px}
+    .pnum{font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--on-accent);background:var(--accent);padding:4px 10px;border-radius:4px;white-space:nowrap;align-self:center}
+    .phead h2{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15;margin:0}
+    .pstate{background:var(--surface-muted);border:1px solid var(--border);border-left:4px solid var(--support);border-radius:6px;padding:18px 20px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:20px 0}
+    .pstate .lbl{display:block;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--support);margin-bottom:8px}
+    .pstate p{margin:8px 0}
+    main h3{font-family:var(--serif);font-size:19px;font-weight:600;margin:26px 0 6px;color:var(--text)}
+    .steplabel{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--support);margin:22px 0 2px}
+    p{margin:14px 0}
+    main p,main li{max-width:72ch}
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 12px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+
+    .answer{background:#EDF3F2;border:1px solid #C7DAD6;border-radius:6px;padding:16px 20px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:20px 0}
+    .answer .lbl{display:block;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--support);margin-bottom:6px}
+    .answer p{margin:6px 0}
+    .insight{background:#FBF1EC;border:1px solid #E6C9BB;border-radius:6px;padding:16px 20px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:20px 0}
+    .insight .lbl{display:block;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+    .insight p{margin:6px 0}
+
+    figure.fig{margin:0 0 20px;border:1px solid var(--border);background:var(--surface);border-radius:6px;overflow:hidden}
+    figure.fig > div{padding:18px 16px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);padding:10px 16px;border-top:1px solid var(--border)}
+    figure.fig figcaption b{color:var(--text);font-weight:600}
+
+    .eq{overflow-x:auto;margin:6px 0 16px}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+    .toc{font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:3px 0}
+    .toc a{text-decoration:none}
+
+    .seq-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:44px 0 0;font-family:var(--sans)}
+    .seq-nav a{display:block;border:1px solid var(--border);border-radius:6px;padding:14px 16px;text-decoration:none;background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+    .seq-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    .seq-nav .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .seq-nav a:hover .lbl{color:var(--accent)}
+    .seq-nav .nx{text-align:right}
+    @media (max-width:560px){ .seq-nav{grid-template-columns:1fr} .seq-nav .nx{text-align:left} }
+
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-teal:#2F5D62; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
+    text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
+    text.dlm{font-family:var(--sans);font-size:12px;fill:#5F625C}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:34px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:28px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .phead{flex-direction:column;gap:8px}
+      .phead h2{font-size:23px}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; <a href="/kuliah/mekanika-klasik/">Mekanika Klasik</a> &nbsp;/&nbsp; Soal Latihan</p>
+      <p class="eyebrow">Mekanika Klasik &middot; Program Magister</p>
+      <h1>Soal Latihan Terpilih &mdash; Bab 5</h1>
+      <p class="lede">Empat soal dari latihan Bab 5 Goldstein, dengan penyelesaian lengkap. Tiga soal pertama melatih penyusunan Lagrangian benda tegar; soal keempat menyatukan seluruh bab &mdash; membuktikan bahwa presesi bebas dan presesi paksa Bumi berlangsung bersamaan.</p>
+
+      <dl class="meta-grid">
+        <dt>Sumber soal</dt><dd>Goldstein, Poole &amp; Safko (2002), edisi ke-3, Bab 5, Latihan 19, 20, 23, 27</dd>
+        <dt>Prasyarat</dt><dd>Persamaan Lagrange; untuk no.&nbsp;27: &sect;5.6&ndash;5.8</dd>
+        <dt>Catatan</dt><dd>Nomor soal mengikuti penomoran edisi ke-3</dd>
+      </dl>
+
+      <nav class="toc" aria-label="Daftar soal"><ol>
+        <li><a href="#s19">No.&nbsp;19 &mdash; Bar seragam digantung pegas</a></li>
+        <li><a href="#s20">No.&nbsp;20 &mdash; Pendulum batang dengan cakram di ujung</a></li>
+        <li><a href="#s23">No.&nbsp;23 &mdash; Pintu mobil yang menutup sendiri</a></li>
+        <li><a href="#s27">No.&nbsp;27 &mdash; Presesi bebas dan paksa Bumi (sintesis)</a></li>
+      </ol></nav>
+
+      <!-- ============ 19 ============ -->
+      <section class="problem" id="s19">
+        <div class="phead"><span class="pnum">Soal 19</span><h2>Bar seragam digantung pegas</h2></div>
+        <div class="pstate">
+          <span class="lbl">Soal</span>
+          <p>Sebuah bar seragam bermassa \(M\) dan panjang \(2l\) digantung pada salah satu ujungnya oleh pegas berkonstanta \(k\). Bar hanya dapat berayun dalam satu bidang vertikal, dan pegas hanya bergerak arah vertikal. Susun persamaan geraknya dalam formulasi Lagrangian.</p>
+        </div>
+
+        <p class="steplabel">Koordinat umum</p>
+        <p>Dua derajat kebebasan: \(y\) = simpangan vertikal ujung atas bar (= rentangan pegas dari panjang alaminya, arah ke bawah positif), dan \(\theta\) = sudut bar terhadap vertikal. Pusat massa bar berada \(l\) dari ujung atas; momen inersia terhadap pusat massa \(I_{cm}=\tfrac{1}{12}M(2l)^2=\tfrac{1}{3}Ml^2\).</p>
+        <p>Posisi pusat massa: \(x_{cm}=l\sin\theta\), \(y_{cm}=y+l\cos\theta\). Maka \(\dot{x}_{cm}=l\cos\theta\,\dot{\theta}\), \(\dot{y}_{cm}=\dot{y}-l\sin\theta\,\dot{\theta}\).</p>
+
+        <p class="steplabel">Energi kinetik dan potensial</p>
+        <div class="eq">$$ T=\tfrac{1}{2}M(\dot{x}_{cm}^2+\dot{y}_{cm}^2)+\tfrac{1}{2}I_{cm}\dot{\theta}^2 =\tfrac{1}{2}M\dot{y}^2+\tfrac{2}{3}Ml^2\dot{\theta}^2-Ml\sin\theta\,\dot{y}\dot{\theta}. $$</div>
+        <div class="eq">$$ V=\tfrac{1}{2}ky^2-Mg\,(y+l\cos\theta). $$</div>
+        <p>(Suku \(\tfrac12 Ml^2\dot\theta^2\) dari translasi pusat massa dan \(\tfrac16 Ml^2\dot\theta^2\) dari rotasi bergabung menjadi \(\tfrac23 Ml^2\dot\theta^2\).) Lagrangian \(L=T-V\).</p>
+
+        <p class="steplabel">Persamaan gerak</p>
+        <div class="eq">$$ \boxed{\,M\ddot{y}+ky-Mg-Ml\left(\ddot{\theta}\sin\theta+\dot{\theta}^2\cos\theta\right)=0\,} $$</div>
+        <div class="eq">$$ \boxed{\,\tfrac{4}{3}l\,\ddot{\theta}-\ddot{y}\sin\theta+g\sin\theta=0\,} $$</div>
+
+        <div class="insight">
+          <span class="lbl">Wawasan</span>
+          <p>Kedua persamaan terkopel lewat suku \(\sin\theta\): ayunan bar &ldquo;memompa&rdquo; pegas dan sebaliknya. Pada kesetimbangan \(\theta=0\), \(y_0=Mg/k\). Untuk simpangan kecil, koplingnya berorde \(\theta\) sehingga pada orde terendah mode vertikal (\(\omega^2=k/M\)) dan mode ayun (\(\omega^2=3g/4l\)) terpisah &mdash; contoh bagus menuju Bab 6 (osilasi kecil &amp; mode normal).</p>
+        </div>
+      </section>
+
+      <!-- ============ 20 ============ -->
+      <section class="problem" id="s20">
+        <div class="phead"><span class="pnum">Soal 20</span><h2>Pendulum batang dengan cakram di ujung</h2></div>
+        <div class="pstate">
+          <span class="lbl">Soal</span>
+          <p>Pendulum bidang terdiri atas batang seragam panjang \(l\), tebal diabaikan, bermassa \(m\), digantung pada satu ujung. Di ujung lain dipasang cakram seragam berjari-jari \(a\) dan bermassa \(M\) yang <b>bebas berputar</b> dalam bidangnya sendiri (bidang vertikal). Susun persamaan geraknya dalam formulasi Lagrangian.</p>
+        </div>
+
+        <p class="steplabel">Koordinat umum</p>
+        <p>Dua derajat kebebasan: \(\theta\) = sudut batang terhadap vertikal, dan \(\phi\) = sudut putar cakram terhadap porosnya sendiri. Batang: \(I_{\text{batang}}=\tfrac{1}{3}ml^2\) terhadap gantungan. Cakram: pusatnya di jarak \(l\) dari poros, \(I_{cm}=\tfrac12 Ma^2\).</p>
+
+        <p class="steplabel">Energi kinetik dan potensial</p>
+        <div class="eq">$$ T=\tfrac{1}{6}ml^2\dot{\theta}^2+\tfrac{1}{2}Ml^2\dot{\theta}^2+\tfrac{1}{4}Ma^2\dot{\phi}^2,\qquad V=-\left(\tfrac{m}{2}+M\right)gl\cos\theta. $$</div>
+        <p>Pusat cakram ikut batang (laju \(l\dot\theta\)); putaran sendirinya \(\dot\phi\) terpisah. Lagrangian \(L=T-V\).</p>
+
+        <p class="steplabel">Persamaan gerak</p>
+        <p>Koordinat \(\phi\) <b>siklik</b> (\(L\) tak memuat \(\phi\)), maka:</p>
+        <div class="eq">$$ \frac{\mathrm{d}}{\mathrm{d}t}\!\left(\tfrac{1}{2}Ma^2\dot{\phi}\right)=0 \ \Longrightarrow\ \boxed{\ \dot{\phi}=\text{tetap}\ } $$</div>
+        <div class="eq">$$ \boxed{\,\left(\tfrac{m}{3}+M\right)l\,\ddot{\theta}+\left(\tfrac{m}{2}+M\right)g\sin\theta=0\,} $$</div>
+
+        <div class="insight">
+          <span class="lbl">Wawasan</span>
+          <p>Hasil yang elegan: <b>putaran cakram terpisah total dari ayunan</b>. Karena porosnya tanpa gesekan, tak ada torka pada cakram, jadi \(\dot\phi\) kekal dan tak memengaruhi \(\theta\). Cakram menyumbang ke pendulum hanya lewat <i>massanya</i> \(M\) di jarak \(l\) &mdash; bukan inersia putarnya. Untuk ayunan kecil, \(\omega^2=\dfrac{(m/2+M)g}{(m/3+M)l}\).</p>
+        </div>
+      </section>
+
+      <!-- ============ 23 ============ -->
+      <section class="problem" id="s23">
+        <div class="phead"><span class="pnum">Soal 23</span><h2>Pintu mobil yang menutup sendiri</h2></div>
+        <div class="pstate">
+          <span class="lbl">Soal</span>
+          <p>Sebuah mobil berangkat dari diam dengan salah satu pintunya awalnya tegak lurus bodi. Bila engselnya di sisi depan, pintu akan membanting menutup saat mobil memperoleh laju. Dapatkan rumus waktu yang diperlukan pintu untuk menutup bila percepatan \(f\) konstan, jari-jari girasi pintu terhadap sumbu engsel \(r_0\), dan pusat massa berjarak \(a\) dari engsel. Tunjukkan bahwa untuk \(f=0{,}3\ \mathrm{m/s^2}\) dan pintu persegi seragam selebar \(1{,}2\ \mathrm{m}\), waktunya &plusmn;\(3{,}04\) s.</p>
+        </div>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 235" width="100%" height="auto" style="max-width:480px;margin:auto" aria-label="Tampak atas: pintu berengsel di depan mobil berayun dari posisi tegak lurus ke belakang karena gaya semu akibat percepatan maju">
+              <!-- car body outline (to the left / rear of the hinge) -->
+              <rect x="48" y="120" width="238" height="86" rx="6" fill="var(--surface-muted)" stroke="var(--d-bodyline)" stroke-width="1.5"/>
+              <text class="dlm" x="128" y="167">bodi mobil</text>
+              <!-- acceleration direction (forward = right) -->
+              <line x1="338" y1="34" x2="470" y2="34" stroke="var(--d-teal)" stroke-width="2.5" marker-end="url(#d-teal-a)"/>
+              <text class="dl" x="360" y="26" fill="var(--d-teal)" font-weight="700">f (percepatan maju)</text>
+              <!-- hinge at front-right -->
+              <circle cx="330" cy="120" r="4" fill="var(--d-axis)"/>
+              <text class="dlm" x="318" y="139">engsel</text>
+              <!-- forward reference tick -->
+              <line x1="330" y1="120" x2="384" y2="120" stroke="var(--d-axis)" stroke-width="1" stroke-dasharray="3 3"/>
+              <text class="dlm" x="360" y="114">depan</text>
+              <!-- door open 90deg (dashed, straight up = perpendicular) -->
+              <line x1="330" y1="120" x2="330" y2="44" stroke="var(--d-bodyline)" stroke-width="1.6" stroke-dasharray="5 4"/>
+              <text class="dlm" x="276" y="44">buka 90&deg;</text>
+              <!-- door current position: swung up-left toward closed -->
+              <line x1="330" y1="120" x2="264" y2="62" stroke="var(--d-blue)" stroke-width="3" marker-end="url(#d-blue-a)"/>
+              <text class="dl" x="238" y="58" fill="var(--d-blue)" font-weight="700">pintu</text>
+              <!-- CM on door + pseudo-force to the rear (left) -->
+              <circle cx="294" cy="86" r="3" fill="var(--d-axis)"/>
+              <text class="dlm" x="246" y="102">pm (jarak a)</text>
+              <line x1="294" y1="86" x2="230" y2="86" stroke="var(--d-rust)" stroke-width="2" marker-end="url(#d-rust-a)"/>
+              <text class="dl" x="204" y="78" fill="var(--d-rust)" font-weight="700">&minus;Mf</text>
+              <!-- theta arc from forward reference to the door -->
+              <path d="M 358 120 A 28 28 0 0 0 312 100" fill="none" stroke="var(--d-axis)" stroke-width="1.3"/>
+              <text class="dl" x="340" y="110" font-weight="700">&#952;</text>
+              <defs>
+                <marker id="d-teal-a" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-teal)"/></marker>
+                <marker id="d-blue-a" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-blue)"/></marker>
+                <marker id="d-rust-a" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker>
+              </defs>
+            </svg>
+          </div>
+          <figcaption><b>Tampak atas.</b> Di kerangka mobil yang berakselerasi, gaya semu \(-Mf\) menarik pusat massa pintu ke belakang, menimbulkan torka yang menutup pintu dari \(\theta=90^\circ\) ke \(180^\circ\).</figcaption>
+        </figure>
+
+        <p class="steplabel">Persamaan gerak (kerangka mobil)</p>
+        <p>Dalam kerangka mobil yang berakselerasi, bekerja gaya semu \(-Mf\) (ke belakang) di pusat massa. Dengan \(\theta\) diukur dari arah depan, torka terhadap engsel \(=Mfa\sin\theta\), dan \(I=Mr_0^2\):</p>
+        <div class="eq">$$ Mr_0^2\,\ddot{\theta}=Mfa\sin\theta \ \Longrightarrow\ \ddot{\theta}=\frac{fa}{r_0^2}\sin\theta. $$</div>
+        <p>Kondisi awal: \(\theta=\tfrac{\pi}{2}\), \(\dot\theta=0\). Kalikan \(\dot\theta\) lalu integralkan (integral pertama):</p>
+        <div class="eq">$$ \dot{\theta}^2=\frac{2fa}{r_0^2}\left(-\cos\theta\right). $$</div>
+
+        <p class="steplabel">Waktu menutup</p>
+        <p>Pintu menutup saat \(\theta:\tfrac{\pi}{2}\to\pi\). Maka</p>
+        <div class="eq">$$ t=\frac{r_0}{\sqrt{2fa}}\int_{\pi/2}^{\pi}\frac{\mathrm{d}\theta}{\sqrt{-\cos\theta}} =\varpi\,\frac{r_0}{\sqrt{2fa}},\qquad \varpi=\int_{0}^{\pi/2}\frac{\mathrm{d}\psi}{\sqrt{\cos\psi}}\approx 2{,}6221. $$</div>
+        <p>(\(\varpi\) adalah konstanta lemniskat.) Untuk pintu persegi seragam selebar \(w=1{,}2\) m: pusat massa \(a=w/2=0{,}6\) m dan \(r_0^2=w^2/3=0{,}48\ \mathrm{m^2}\) (\(r_0=0{,}693\) m). Dengan \(f=0{,}3\ \mathrm{m/s^2}\):</p>
+        <div class="eq">$$ t=2{,}6221\times\frac{0{,}693}{\sqrt{2(0{,}3)(0{,}6)}}=2{,}6221\times\frac{0{,}693}{0{,}6}\approx 3{,}03\ \text{s}. $$</div>
+
+        <div class="answer">
+          <span class="lbl">Jawaban</span>
+          <p>\(\displaystyle t=\varpi\,\frac{r_0}{\sqrt{2fa}}\approx 3{,}0\ \text{s}\) &mdash; sesuai nilai Goldstein \(\approx 3{,}04\) s (selisih kecil dari pembulatan konstanta lemniskat).</p>
+        </div>
+        <div class="insight">
+          <span class="lbl">Wawasan</span>
+          <p>Ini masalah &ldquo;pendulum terbalik&rdquo;: gaya semu memerankan gravitasi, dan \(\theta=\pi/2\) adalah titik setimbang <i>tak stabil</i> sehingga pintu meluncur menjauhinya. Karena mulai tepat di titik tak stabil, integralnya berupa konstanta lemniskat &mdash; bukan fungsi elementer. Pelajaran praktis: engsel di depan membuat pintu menutup sendiri saat mobil maju (desain yang lebih aman).</p>
+        </div>
+      </section>
+
+      <!-- ============ 27 ============ -->
+      <section class="problem" id="s27">
+        <div class="phead"><span class="pnum">Soal 27</span><h2>Presesi bebas dan paksa Bumi &mdash; sebuah sintesis</h2></div>
+        <div class="pstate">
+          <span class="lbl">Soal</span>
+          <p>Di &sect;5.6 presesi sumbu Bumi dihitung dengan anggapan <i>tanpa torka</i>; di &sect;5.8 Bumi mengalami presesi <i>paksa</i> oleh torka Matahari&ndash;Bulan. Keduanya sebenarnya benar: gerak sumbu rotasi terhadap sumbu simetri muncul sebagai <b>nutasi</b> dalam perjalanan presesi paksanya. Buktikan dengan menghitung \(\theta\) dan \(\dot\phi\) sebagai fungsi waktu untuk gasing simetris berat yang diberi \(\dot\phi_0\) besar terhadap \(\beta/2a\) tetapi kecil terhadap \(\omega_3\). Tunjukkan (5.71) tetap berlaku dengan \(x_1=\left(\dfrac{\beta}{a^2}-\dfrac{2\dot\phi_0}{a}\right)\sin^2\theta_0\), lalu buktikan \(\boldsymbol\omega\) berpresesi mengitari sumbu figur dengan \(\Omega=\dfrac{I_3-I_1}{I_1}\omega_3\).</p>
+        </div>
+
+        <p class="steplabel">Hierarki tiga skala waktu</p>
+        <p>Kuncinya adalah tiga laju yang terpisah jauh:</p>
+        <ul class="points">
+          <li>\(\omega_3\) &mdash; rotasi harian (periode \(\sim\)1 hari).</li>
+          <li>\(\dot\phi_0\) &mdash; laju presesi awal yang dipilih (periode \(\sim\)1600 tahun).</li>
+          <li>\(\beta/2a\) &mdash; laju presesi paksa lunisolar (periode \(\sim\)26.000 tahun).</li>
+        </ul>
+        <p>Jadi \(\dfrac{\beta}{2a}\ll\dot\phi_0\ll\omega_3\). Dalam kondisi ini lingkaran pembatas sumbu figur berdekatan, tetapi lokusnya berbentuk jerat besar (Gambar 5.9b) yang bergeser lambat mengelilingi vertikal.</p>
+
+        <p class="steplabel">Alur pembuktian</p>
+        <p>Mulai dari potensial efektif gasing berat &sect;5.7. Karena simpangan nutasi kecil, tulis \(u=\cos\theta=u_0-x\) dan selesaikan \(\dot u^2=f(u)\) hingga orde pertama. Solusi (5.71) bertahan, \(x=\tfrac{x_1}{2}(1-\cos at)\), tetapi kini amplitudonya menyertakan dorongan awal \(\dot\phi_0\):</p>
+        <div class="eq">$$ x_1=\left(\frac{\beta}{a^2}-\frac{2\dot\phi_0}{a}\right)\sin^2\theta_0. $$</div>
+        <p>Dari \(\theta(t)\) dan \(\dot\phi(t)=(b-a\cos\theta)/\sin^2\theta\), hitung komponen \(\omega_1=\dot\phi\sin\theta\sin\psi+\dot\theta\cos\psi\) dan \(\omega_2=\dot\phi\sin\theta\cos\psi-\dot\theta\sin\psi\). Untuk \(\beta/2a\) kecil terhadap \(\dot\phi_0\), keduanya berosilasi sefase dengan frekuensi</p>
+        <div class="eq">$$ \boxed{\ \Omega=\frac{I_3-I_1}{I_1}\,\omega_3\ } $$</div>
+        <p>yaitu \(\boldsymbol\omega\) berpresesi mengitari sumbu figur &mdash; <b>persis persamaan (5.49) dari &sect;5.6</b>, presesi bebas benda simetris.</p>
+
+        <div class="insight">
+          <span class="lbl">Mengapa soal ini menutup Bab 5</span>
+          <p>Hasilnya menyatukan tiga sub-bab sekaligus. Jerat cepat (\(\dot\phi_0\), \(\sim\)1600 tahun) adalah <b>presesi bebas</b> Euler (&sect;5.6) yang menampakkan diri sebagai nutasi; pergeseran lambat jerat (\(\beta/2a\), \(\sim\)26.000 tahun) adalah <b>presesi paksa</b> lunisolar (&sect;5.8). Keduanya berlangsung <i>serentak</i>: gasing berat (&sect;5.7) adalah kerangka yang memuat keduanya. &ldquo;Tanpa torka&rdquo; dan &ldquo;dengan torka&rdquo; bukan dua jawaban yang bersaing, melainkan dua lapis gerak yang sama.</p>
+        </div>
+      </section>
+
+      <nav class="seq-nav" aria-label="Navigasi">
+        <a href="/kuliah/mekanika-klasik/presesi-larmor/"><span class="lbl">&larr; Materi &middot; &sect;5.9</span>Presesi Muatan dalam Medan Magnet</a>
+        <a class="nx" href="/kuliah/mekanika-klasik/"><span class="lbl">Daftar topik &uarr;</span>Mekanika Klasik</a>
+      </nav>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -65,6 +65,16 @@
     .topic p{font-family:var(--sans);font-size:15px;line-height:1.55;color:var(--text-muted);margin:0}
     .topic .more{display:inline-block;margin-top:12px;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--accent)}
 
+    .summary{margin:52px 0 0;padding-top:40px;border-top:1px solid var(--border)}
+    .summary h2{font-family:var(--serif);font-size:28px;font-weight:600;margin:0 0 12px}
+    .summary p{font-size:17px;line-height:1.62;margin:0 0 16px;max-width:70ch}
+    .synth{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14.5px;line-height:1.45;margin:20px 0;background:var(--surface);border:1px solid var(--border)}
+    .synth th,.synth td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+    .synth th{background:var(--surface-muted);font-weight:600}
+    .synth td:first-child{font-weight:700;color:var(--support);white-space:nowrap}
+    .synth tr:last-child td{border-bottom:none}
+    .topic.ex{border-color:var(--accent);border-width:1.5px;margin-top:28px}
+    .topic.ex .tag{color:var(--accent)}
     .footer{margin-top:72px;padding-top:30px;border-top:1px solid var(--border);color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
 
     @media (max-width:920px){
@@ -154,6 +164,26 @@
           <span class="more">Buka materi &rarr;</span>
         </a>
       </div>
+
+      <section class="summary" aria-label="Ringkasan Bab 5">
+        <h2>Ringkasan Bab 5</h2>
+        <p>Keempat topik ini adalah satu lagu dengan empat bait. Benda tegar simetris selalu dijelaskan oleh <b>besaran kekal</b> &mdash; energi dan komponen momentum sudut &mdash; yang memampatkan gerak tiga sudut Euler menjadi satu derajat kebebasan dalam sudut miring \(\theta\), yaitu sebuah <b>potensial efektif</b>. Dari sumur potensial itu terbaca seluruh wataknya: nutasi, bentuk lokus, dan laju presesi.</p>
+        <table class="synth">
+          <tr><th>Sub-bab</th><th>Kerangka</th><th>Gagasan kunci</th></tr>
+          <tr><td>&sect;5.6</td><td>Bebas torka</td><td>\(\mathbf{L}\) tetap, \(\boldsymbol{\omega}\) mengitarinya; konstruksi Poinsot; ketakstabilan sumbu tengah (raket tenis).</td></tr>
+          <tr><td>&sect;5.7</td><td>Torka gravitasi</td><td>Dua momentum siklik &rarr; potensial efektif \(V'(\theta)\); nutasi; presesi semu-teratur; gasing tidur.</td></tr>
+          <tr><td>&sect;5.8</td><td>Skala planet</td><td>Suku kuadrupol (MacCullagh); presesi ekuinoks 26.000 tahun; regresi orbit satelit.</td></tr>
+          <tr><td>&sect;5.9</td><td>Medan magnet</td><td>\(\mathbf{M}=\gamma\mathbf{L}\); \(\dot{\mathbf{L}}=\gamma\mathbf{L}\times\mathbf{B}\); frekuensi Larmor; efek Zeeman &amp; MRI.</td></tr>
+        </table>
+        <p>Dan satu pola berulang mengikat semuanya: <b>torka berupa (sebuah vektor) \(\times\) (sebuah medan) selalu menghasilkan presesi, bukan penyelarasan</b> &mdash; dari gasing mainan hingga spin proton di dalam mesin MRI. Soal no.&nbsp;27 pada halaman latihan menutup lingkaran ini: ia membuktikan bahwa presesi bebas (&sect;5.6) dan presesi paksa (&sect;5.8) berlangsung <i>bersamaan</i> pada Bumi &mdash; yang satu tampak sebagai nutasi dari yang lain.</p>
+      </section>
+
+      <a class="topic ex" href="/kuliah/mekanika-klasik/soal-latihan/">
+        <span class="tag">Latihan &middot; Bab 5</span>
+        <h2>Soal Latihan Terpilih</h2>
+        <p>Empat soal dengan penyelesaian lengkap: bar berpegas (no.&nbsp;19), pendulum batang&ndash;cakram (no.&nbsp;20), pintu mobil yang menutup sendiri (no.&nbsp;23), dan sintesis presesi bebas&ndash;paksa Bumi (no.&nbsp;27).</p>
+        <span class="more">Buka soal latihan &rarr;</span>
+      </a>
 
       <footer class="footer">
         <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
