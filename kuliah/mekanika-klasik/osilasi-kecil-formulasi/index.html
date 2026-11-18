@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Osilasi Kecil — Formulasi — Mekanika Klasik — Wiwit Suryanto</title>
+  <meta name="description" content="Materi kuliah Mekanika Klasik (Program Magister Fisika UGM), Goldstein Bab 6: pengantar osilasi kecil dan §6.1 Formulasi Masalah — kesetimbangan, stabilitas, ekspansi potensial, matriks T dan V, dan persamaan gerak tergandeng.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:43px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    main h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:28px 0 8px}
+    .chapline{width:56px;height:4px;background:var(--accent);margin:12px 0 20px}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);border-radius:6px;overflow:hidden}
+    figure.fig > div{padding:18px 16px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);padding:10px 16px;border-top:1px solid var(--border)}
+    figure.fig figcaption b{color:var(--text);font-weight:600}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+    ol.steps{font-family:var(--sans);font-size:16px;line-height:1.55;padding-left:22px;margin:16px 0}
+    ol.steps li{margin:0 0 10px}
+    .arc{list-style:none;margin:16px 0;padding:0;font-family:var(--sans);font-size:16px}
+    .arc li{display:flex;gap:14px;align-items:baseline;padding:10px 0;border-top:1px solid var(--border);line-height:1.5}
+    .arc li:first-child{border-top:none}
+    .arc .sx{flex:none;min-width:3.2em;font-weight:700;color:var(--support);font-size:14px}
+    .arc b{font-weight:600}
+    .arc .cur{color:var(--accent)}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:22px 0}
+    .callout p:first-child{margin-top:0}
+    .callout p:last-child{margin-bottom:0}
+    .callout.support{background:#EDF3F2;border-color:#C7DAD6}
+    .callout.try{background:#FBF1EC;border-color:#E6C9BB}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    .seq-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:44px 0 0;font-family:var(--sans)}
+    .seq-nav a{display:block;border:1px solid var(--border);border-radius:6px;padding:14px 16px;text-decoration:none;background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+    .seq-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    .seq-nav .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .seq-nav a:hover .lbl{color:var(--accent)}
+    .seq-nav .nx{text-align:right}
+    @media (max-width:560px){ .seq-nav{grid-template-columns:1fr} .seq-nav .nx{text-align:left} }
+
+    .toc{font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:3px 0}
+    .toc a{text-decoration:none}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+
+    .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-teal:#2F5D62; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
+    text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
+    text.dlm{font-family:var(--sans);font-size:12px;fill:#5F625C}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:33px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:28px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; <a href="/kuliah/mekanika-klasik/">Mekanika Klasik</a> &nbsp;/&nbsp; Osilasi Kecil &mdash; Formulasi</p>
+      <p class="eyebrow">Mekanika Klasik &middot; Bab 6 &middot; Program Magister</p>
+      <h1>Osilasi Kecil: Pengantar dan Formulasi Masalah</h1>
+      <p class="lede">Hampir setiap sistem fisis, bila diusik sedikit dari keadaan setimbangnya yang stabil, bergetar seperti sekumpulan osilator harmonik yang saling tergandeng. Bab ini membangun kerangka umumnya. Kita mulai dengan konteks Bab 6, lalu &sect;6.1: bagaimana sembarang sistem direduksi menjadi dua matriks &mdash; \(\mathbf{T}\) dan \(\mathbf{V}\). Mengikuti Goldstein, <i>Classical Mechanics</i>, Bab 6 &amp; &sect;6.1.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Mekanika Klasik (Program Magister Fisika)</dd>
+        <dt>Rujukan utama</dt><dd>Goldstein, Poole &amp; Safko (2002), edisi ke-3, Bab 6 &amp; &sect;6.1, hlm. 238&ndash;241</dd>
+        <dt>Prasyarat</dt><dd>Osilator harmonik 1-DK; persamaan Lagrange; nilai eigen &amp; sumbu utama (&sect;5.4)</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <nav class="toc" aria-label="Daftar isi"><ol>
+        <li><a href="#pengantar">Pengantar Bab 6: mengapa osilasi kecil</a></li>
+        <li><a href="#peta">Peta bab &amp; jembatan dari Bab 5</a></li>
+        <li><a href="#setimbang">&sect;6.1a Kesetimbangan dan stabilitas</a></li>
+        <li><a href="#ekspansi">&sect;6.1b Ekspansi potensial: bentuk kuadratik</a></li>
+        <li><a href="#kinetik">&sect;6.1c Energi kinetik dan Lagrangian</a></li>
+        <li><a href="#contoh">Contoh: dua massa, tiga pegas</a></li>
+        <li><a href="#rangkuman">Rangkuman</a></li>
+      </ol></nav>
+
+      <!-- ===== PENGANTAR ===== -->
+      <section class="block" id="pengantar">
+        <h2>Pengantar Bab 6: mengapa osilasi kecil</h2>
+        <div class="chapline"></div>
+        <p>Salah satu kelas gerak yang paling &ldquo;mekanika Lagrangian banget&rdquo; adalah gerak sistem di sekitar posisi setimbang. Teorinya &mdash; <b>osilasi kecil</b> &mdash; muncul di mana-mana: akustik, spektrum getaran molekul, getaran mesin dan struktur, rangkaian listrik tergandeng. Bagi kita di geofisika, inilah bahasa getaran bebas Bumi (<i>normal modes</i> seismik), resonansi bangunan saat gempa, dan dinamika kisi kristal.</p>
+        <p>Gagasan sentralnya sederhana dan kuat:</p>
+        <div class="callout support"><p><b>Satu ide besar.</b> Di dekat posisi setimbang yang <i>stabil</i>, simpangan selalu cukup kecil sehingga energi potensial dapat didekati dengan <b>parabola</b> (suku kuadratik). Akibatnya, sistem apa pun &mdash; berapa pun derajat kebebasannya, bahkan tanpa benda tegar &mdash; berperilaku seperti sekumpulan <b>osilator harmonik yang saling tergandeng</b>. Tugas kita hanya &ldquo;menguraikan&rdquo; gandengan itu menjadi getaran-getaran mandiri.</p></div>
+        <p>Buku mengandaikan kita sudah akrab dengan osilator harmonik satu derajat kebebasan (bebas maupun paksa, dengan atau tanpa redaman). Yang baru di sini adalah menanganinya untuk <b>banyak derajat kebebasan</b> sekaligus &mdash; dan di situlah muncul konsep paling penting Bab 6: <b>moda normal</b> dan <b>frekuensi normal</b>.</p>
+      </section>
+
+      <!-- ===== PETA ===== -->
+      <section class="block" id="peta">
+        <h2>Peta bab dan jembatan dari Bab 5</h2>
+        <div class="chapline"></div>
+        <p>Alur Bab 6 bergerak dari perumusan ke penyelesaian lalu ke penerapan:</p>
+        <ul class="arc">
+          <li><span class="sx cur">&sect;6.1</span><span><b class="cur">Formulasi masalah</b> &mdash; reduksi ke dua matriks \(\mathbf{T}\) dan \(\mathbf{V}\) (halaman ini).</span></li>
+          <li><span class="sx">&sect;6.2</span><span><b>Persamaan nilai eigen</b> &mdash; mencari frekuensi lewat determinan sekular \(|\mathbf{V}-\omega^2\mathbf{T}|=0\).</span></li>
+          <li><span class="sx">&sect;6.3</span><span><b>Frekuensi getaran bebas &amp; koordinat normal</b> &mdash; mengubah gerak tergandeng menjadi osilator-osilator mandiri.</span></li>
+          <li><span class="sx">&sect;6.4</span><span><b>Molekul triatomik linear</b> &mdash; contoh klasik tiga massa (mis. CO\(_2\)).</span></li>
+          <li><span class="sx">&sect;6.5</span><span><b>Getaran paksa &amp; gaya disipatif</b> &mdash; resonansi dan redaman.</span></li>
+        </ul>
+        <div class="callout"><p><b>Jembatan dari Bab 5.</b> Teknik matematikanya nyaris sama dengan gerak benda tegar: mencari <b>nilai eigen</b> dan melakukan <b>transformasi sumbu utama</b> (&sect;5.4). Di sana kita mendiagonalkan tensor inersia; di sini kita mendiagonalkan sepasang matriks \(\mathbf{T}\) dan \(\mathbf{V}\) secara serentak. Soal <a href="/kuliah/mekanika-klasik/soal-latihan/#s19">no.&nbsp;19 (bar berpegas)</a> dari Bab 5 adalah pemanasan yang pas menuju ke sini.</p></div>
+      </section>
+
+      <!-- ===== 6.1a ===== -->
+      <section class="block" id="setimbang">
+        <h2>&sect;6.1a &nbsp;Kesetimbangan dan stabilitas</h2>
+        <div class="chapline"></div>
+        <p>Tinjau sistem konservatif dengan energi potensial \(V=V(q_1,\dots,q_n)\), dan transformasi koordinat yang tak memuat waktu secara eksplisit (tanpa kendala bergantung waktu). Sistem berada dalam <b>kesetimbangan</b> saat gaya rampatan lenyap:</p>
+        <div class="eq">$$ Q_i=-\left(\frac{\partial V}{\partial q_i}\right)_0=0. \tag{6.1}$$</div>
+        <p>Jadi \(V\) memiliki <b>titik ekstrem</b> di konfigurasi setimbang \(q_{0i}\). Jenis ekstrem itu menentukan nasib sistem bila diusik sedikit:</p>
+        <ul class="points">
+          <li><b>Stabil</b> &mdash; \(V\) berupa <i>minimum</i>. Usikan kecil hanya menghasilkan gerak terbatas di sekitar setimbang (seperti pendulum menggantung).</li>
+          <li><b>Tak stabil</b> &mdash; \(V\) berupa <i>maksimum</i>. Usikan sekecil apa pun membesar tak terbatas (seperti telur berdiri di ujungnya).</li>
+          <li><b>Netral</b> &mdash; \(V\) datar ke suatu arah; sistem setimbang di sembarang nilai koordinat itu.</li>
+        </ul>
+        <p>Argumen energinya sederhana: jika \(V\) minimum, usikan menaikkan \(V\), maka demi kekekalan energi laju harus turun dan gerak tetap terbatas. Jika \(V\) maksimum, menyimpang justru menurunkan \(V\) dan menaikkan laju &mdash; lepas kendali.</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 240" width="100%" height="auto" style="max-width:500px;margin:auto" aria-label="Kurva energi potensial: lembah stabil dengan pendekatan parabola, dan puncak tak stabil">
+              <line x1="40" y1="200" x2="490" y2="200" stroke="var(--d-axis)" stroke-width="1.3"/>
+              <line x1="40" y1="200" x2="40" y2="30" stroke="var(--d-axis)" stroke-width="1.3"/>
+              <text class="dlm" x="482" y="220">q</text>
+              <text class="dlm" x="20" y="40">V</text>
+              <!-- potential curve: valley then hill -->
+              <path d="M 60 70 C 110 190, 170 190, 200 160 C 230 130, 250 60, 320 60 C 380 60, 395 120, 430 190" fill="none" stroke="var(--d-blue)" stroke-width="2.5"/>
+              <!-- parabola approximation at the minimum (~x=150) -->
+              <path d="M 108 120 Q 150 212 196 132" fill="none" stroke="var(--d-rust)" stroke-width="1.8" stroke-dasharray="5 4"/>
+              <circle cx="152" cy="178" r="4" fill="var(--d-blue)"/>
+              <text class="dl" x="120" y="96" fill="var(--d-rust)">pendekatan parabola</text>
+              <text class="dl" x="130" y="200" dy="18" fill="var(--d-blue)" font-weight="700">stabil (min)</text>
+              <!-- hill top (~x=320) -->
+              <circle cx="320" cy="60" r="4" fill="var(--d-blue)"/>
+              <text class="dl" x="300" y="48" font-weight="700">tak stabil (maks)</text>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 1. Bentuk \(V\) di titik setimbang</b> (bandingkan Goldstein Gambar 6.1). Di lembah (minimum) gerak terbatas &mdash; stabil; di puncak (maksimum) menyimpang tak terbatas &mdash; tak stabil. Kunci bab ini: di sekitar minimum, \(V\) sangat mirip parabola (garis putus merah).</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===== 6.1b ===== -->
+      <section class="block" id="ekspansi">
+        <h2>&sect;6.1b &nbsp;Ekspansi potensial: bentuk kuadratik</h2>
+        <div class="chapline"></div>
+        <p>Karena kita hanya meninjau gerak dekat setimbang stabil, tulis simpangan kecil \(\eta_i\) dari posisi setimbang:</p>
+        <div class="eq">$$ q_i=q_{0i}+\eta_i. \tag{6.2}$$</div>
+        <p>Uraikan \(V\) dalam deret Taylor di sekitar \(q_{0i}\):</p>
+        <div class="eq">$$ V=V(q_{0})+\left(\frac{\partial V}{\partial q_i}\right)_0\eta_i+\frac{1}{2}\left(\frac{\partial^2 V}{\partial q_i\,\partial q_j}\right)_0\eta_i\eta_j+\cdots \tag{6.3}$$</div>
+        <p>Dua penyederhanaan membersihkannya: suku <b>linear lenyap</b> karena syarat kesetimbangan (6.1), dan konstanta \(V(q_0)\) bisa dibuat nol dengan menggeser acuan potensial. Tersisa <b>suku kuadratik</b> sebagai hampiran pertama:</p>
+        <div class="eq">$$ V=\frac{1}{2}\left(\frac{\partial^2 V}{\partial q_i\,\partial q_j}\right)_0\eta_i\eta_j=\frac{1}{2}V_{ij}\,\eta_i\eta_j. \tag{6.4}$$</div>
+        <p>Koefisien \(V_{ij}=\left(\partial^2 V/\partial q_i\partial q_j\right)_0\) adalah <b>konstanta</b> (dihitung di titik setimbang) dan <b>simetris</b>, \(V_{ij}=V_{ji}\). Mereka membentuk matriks kekakuan \(\mathbf{V}\). Bila sebagian \(V_{ij}\) lenyap &mdash; potensial datar atau hanya berorde lebih tinggi &mdash; kita berhadapan dengan kesetimbangan netral yang perlu penanganan khusus.</p>
+      </section>
+
+      <!-- ===== 6.1c ===== -->
+      <section class="block" id="kinetik">
+        <h2>&sect;6.1c &nbsp;Energi kinetik dan Lagrangian</h2>
+        <div class="chapline"></div>
+        <p>Perlakuan serupa untuk energi kinetik. Karena koordinat tak memuat waktu eksplisit, \(T\) adalah fungsi kuadratik homogen dari laju:</p>
+        <div class="eq">$$ T=\tfrac{1}{2}m_{ij}(q)\,\dot q_i\dot q_j=\tfrac{1}{2}m_{ij}\,\dot\eta_i\dot\eta_j. \tag{6.5}$$</div>
+        <p>Koefisien \(m_{ij}(q)\) umumnya bergantung koordinat, tetapi karena (6.5) sudah kuadratik dalam \(\dot\eta\), hampiran terendah cukup mengambil nilainya <b>di titik setimbang</b>, \(T_{ij}\equiv m_{ij}(q_0)\):</p>
+        <div class="eq">$$ T=\tfrac{1}{2}T_{ij}\,\dot\eta_i\dot\eta_j, \qquad T_{ij}=T_{ji}. \tag{6.6}$$</div>
+        <p>Matriks massa \(\mathbf{T}\) juga simetris. Lagrangian menjadi sepasang bentuk kuadratik yang bersih:</p>
+        <div class="eq">$$ L=\tfrac{1}{2}\left(T_{ij}\,\dot\eta_i\dot\eta_j-V_{ij}\,\eta_i\eta_j\right). \tag{6.7}$$</div>
+        <p>Dengan \(\eta\) sebagai koordinat rampatan, persamaan Lagrange menghasilkan \(n\) <b>persamaan gerak linear tergandeng</b>:</p>
+        <div class="eq">$$ \boxed{\,T_{ij}\,\ddot\eta_j+V_{ij}\,\eta_j=0\,} \tag{6.8}$$</div>
+        <div class="callout support"><p><b>Inilah hasil &sect;6.1.</b> Sembarang sistem di dekat setimbang stabil direduksi menjadi dua matriks simetris: <b>\(\mathbf{T}\)</b> (inersia/massa) dan <b>\(\mathbf{V}\)</b> (kekakuan). Seluruh dinamikanya termuat dalam \(\mathbf{T}\ddot{\boldsymbol\eta}+\mathbf{V}\boldsymbol\eta=0\). Kestabilan setara dengan syarat \(\mathbf{V}\) <b>definit positif</b> (semua nilai eigennya positif) &mdash; itulah bukti rapi bahwa minimum potensial berarti gerak stabil, yang akan kita tuntaskan di &sect;6.2.</p></div>
+        <p>Umumnya kedua persamaan di (6.8) saling tergandeng (tiap persamaan memuat semua \(\eta\)). Seni Bab 6 adalah mencari kombinasi koordinat &mdash; <b>koordinat normal</b> &mdash; yang membuat keduanya terurai menjadi osilator mandiri. Itu pekerjaan &sect;6.2&ndash;6.3.</p>
+      </section>
+
+      <!-- ===== CONTOH ===== -->
+      <section class="block" id="contoh">
+        <h2>Contoh: dua massa, tiga pegas</h2>
+        <div class="chapline"></div>
+        <p>Agar matriks \(\mathbf{T}\) dan \(\mathbf{V}\) terasa konkret, tinjau dua massa sama \(m\) di antara dua dinding, dihubungkan tiga pegas identik berkonstanta \(k\). Ambil simpangan \(\eta_1,\eta_2\) dari setimbang.</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 150" width="100%" height="auto" style="max-width:500px;margin:auto" aria-label="Dua massa dihubungkan tiga pegas di antara dua dinding, dengan simpangan eta1 dan eta2">
+              <!-- walls -->
+              <rect x="30" y="50" width="12" height="60" fill="var(--d-axis)"/>
+              <rect x="478" y="50" width="12" height="60" fill="var(--d-axis)"/>
+              <!-- springs as zigzag (simplified) -->
+              <path d="M42 80 l14 -10 l18 20 l18 -20 l18 20 l14 -10 l26 0" fill="none" stroke="var(--d-bodyline)" stroke-width="1.6"/>
+              <path d="M200 80 l14 -10 l18 20 l18 -20 l18 20 l14 -10 l26 0" fill="none" stroke="var(--d-bodyline)" stroke-width="1.6"/>
+              <path d="M358 80 l14 -10 l18 20 l18 -20 l18 20 l14 -10 l38 0" fill="none" stroke="var(--d-bodyline)" stroke-width="1.6"/>
+              <text class="dlm" x="100" y="64">k</text><text class="dlm" x="258" y="64">k</text><text class="dlm" x="416" y="64">k</text>
+              <!-- masses -->
+              <rect x="150" y="58" width="50" height="44" rx="4" fill="var(--d-bodyfill)" stroke="var(--d-blue)" stroke-width="1.8"/>
+              <rect x="308" y="58" width="50" height="44" rx="4" fill="var(--d-bodyfill)" stroke="var(--d-blue)" stroke-width="1.8"/>
+              <text class="dl" x="175" y="84" text-anchor="middle" font-weight="700">m</text>
+              <text class="dl" x="333" y="84" text-anchor="middle" font-weight="700">m</text>
+              <!-- displacement arrows -->
+              <line x1="175" y1="120" x2="205" y2="120" stroke="var(--d-rust)" stroke-width="1.8" marker-end="url(#o-rust)"/>
+              <text class="dl" x="168" y="138" fill="var(--d-rust)" font-weight="700">&#951;&#8321;</text>
+              <line x1="333" y1="120" x2="363" y2="120" stroke="var(--d-rust)" stroke-width="1.8" marker-end="url(#o-rust)"/>
+              <text class="dl" x="326" y="138" fill="var(--d-rust)" font-weight="700">&#951;&#8322;</text>
+              <defs><marker id="o-rust" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker></defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 2.</b> Dua osilator tergandeng: pegas tengah menggandeng \(\eta_1\) dan \(\eta_2\). Sistem paling sederhana yang memperlihatkan moda normal.</figcaption>
+        </figure>
+
+        <p>Energi potensial = jumlah energi ketiga pegas:</p>
+        <div class="eq">$$ V=\tfrac{1}{2}k\eta_1^2+\tfrac{1}{2}k(\eta_2-\eta_1)^2+\tfrac{1}{2}k\eta_2^2=\tfrac{1}{2}k\left(2\eta_1^2-2\eta_1\eta_2+2\eta_2^2\right). $$</div>
+        <p>Energi kinetik \(T=\tfrac12 m(\dot\eta_1^2+\dot\eta_2^2)\). Membaca koefisiennya langsung memberi kedua matriks:</p>
+        <div class="eq">$$ \mathbf{V}=k\begin{pmatrix}2&-1\\-1&2\end{pmatrix},\qquad \mathbf{T}=m\begin{pmatrix}1&0\\0&1\end{pmatrix}. $$</div>
+        <p>Maka persamaan gerak (6.8) menjadi</p>
+        <div class="eq">$$ m\ddot\eta_1+2k\eta_1-k\eta_2=0,\qquad m\ddot\eta_2-k\eta_1+2k\eta_2=0. $$</div>
+        <div class="callout try"><p><b>Pratinjau moda normal.</b> Elemen luar-diagonal \(V_{12}=-k\) itulah &ldquo;gandengan&rdquo;-nya. Di &sect;6.3 kita akan temukan dua getaran mandiri: moda <b>simetris</b> (kedua massa searah, \(\omega^2=k/m\)) dan moda <b>antisimetris</b> (berlawanan, \(\omega^2=3k/m\)). Setiap gerak sekecil apa pun adalah campuran keduanya &mdash; itulah inti koordinat normal.</p></div>
+      </section>
+
+      <!-- ===== RANGKUMAN ===== -->
+      <section class="block" id="rangkuman">
+        <h2>Rangkuman</h2>
+        <div class="chapline"></div>
+        <ol class="steps">
+          <li>Di dekat setimbang stabil (minimum \(V\)), simpangan kecil \(\eta_i=q_i-q_{0i}\).</li>
+          <li>Ekspansi Taylor: suku linear lenyap, konstanta digeser nol &rarr; \(V=\tfrac12 V_{ij}\eta_i\eta_j\).</li>
+          <li>Energi kinetik di titik setimbang: \(T=\tfrac12 T_{ij}\dot\eta_i\dot\eta_j\).</li>
+          <li>Lagrangian \(L=\tfrac12(T_{ij}\dot\eta_i\dot\eta_j-V_{ij}\eta_i\eta_j)\) &rarr; persamaan gerak \(T_{ij}\ddot\eta_j+V_{ij}\eta_j=0\).</li>
+          <li>Kedua matriks simetris; stabil &hArr; \(\mathbf{V}\) definit positif. Penyelesaiannya (frekuensi &amp; moda normal) di &sect;6.2&ndash;6.3.</li>
+        </ol>
+        <div class="callout"><p><b>Satu kalimat.</b> Fisika osilasi kecil seluruhnya terbungkus dalam sepasang matriks simetris \(\mathbf{T}\) dan \(\mathbf{V}\); sisa bab adalah soal aljabar linear &mdash; mendiagonalkan keduanya serentak untuk menemukan frekuensi dan moda normal.</p></div>
+        <p class="source-note">Bahan ini adalah penyederhanaan pedagogis. Penurunan penuh ada di Goldstein Bab 6, &sect;6.1 (hlm. 238&ndash;241).</p>
+      </section>
+
+      <nav class="seq-nav" aria-label="Navigasi topik">
+        <a href="/kuliah/mekanika-klasik/soal-latihan/"><span class="lbl">&larr; Bab 5 &middot; Latihan</span>Soal Latihan Terpilih</a>
+        <a class="nx" href="/kuliah/mekanika-klasik/"><span class="lbl">Daftar topik &uarr; &middot; &sect;6.2 menyusul</span>Mekanika Klasik</a>
+      </nav>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
