@@ -180,8 +180,9 @@
         <li><a href="#nyata">4. Frekuensi nyata dan positif</a></li>
         <li><a href="#diagonal">5. Ortogonalitas &amp; diagonalisasi serentak</a></li>
         <li><a href="#contoh">6. Contoh lengkap: dua massa, tiga pegas</a></li>
-        <li><a href="#kembar">7. Catatan: akar kembar</a></li>
-        <li><a href="#rangkuman">8. Rangkuman</a></li>
+        <li><a href="#umum2dk">7. Partikel 2-DK: gandengan &amp; Gambar 6.2</a></li>
+        <li><a href="#kembar">8. Catatan: akar kembar</a></li>
+        <li><a href="#rangkuman">9. Rangkuman</a></li>
       </ol></nav>
 
       <!-- 1 -->
@@ -344,8 +345,82 @@
       </section>
 
       <!-- 7 -->
+      <section class="block" id="umum2dk">
+        <h2>7. Partikel 2-DK: bagaimana gandengan memutar moda</h2>
+        <div class="chapline"></div>
+        <p>Contoh pegas tadi punya simetri khusus. Untuk melihat perilaku <i>umum</i>, tinjau sebuah partikel bermassa \(m\) dengan dua derajat kebebasan \((x_1,x_2)\) dan Lagrangian</p>
+        <div class="eq">$$ L=\tfrac{1}{2}m(\dot x_1^2+\dot x_2^2)-\tfrac{1}{2}V_{ij}x_ix_j. $$</div>
+        <p>Di sini \(\mathbf{T}=m\mathbf{1}\) (diagonal). Ambil \(m=1\) (atau serap ke dalam \(V\)) sehingga \(\lambda=\omega^2\); persamaan sekularnya</p>
+        <div class="eq">$$ \begin{vmatrix} V_{11}-\lambda & V_{12}\\ V_{21} & V_{22}-\lambda \end{vmatrix}=0 \;\Longrightarrow\; \lambda_{1,2}=\tfrac{1}{2}\!\left(V_{11}+V_{22}\pm\sqrt{(V_{11}-V_{22})^2+4V_{12}V_{21}}\right). $$</div>
+        <p>Seluruh watak sistem bergantung pada <b>seberapa kuat gandengan</b> \(V_{12}\) dibanding beda diagonal \((V_{11}-V_{22})\). Dua kasus pembatas memperjelasnya.</p>
+
+        <h3>Gandengan lemah</h3>
+        <p>Bila \(V_{12}\ll(V_{11}-V_{22})\), tulis \(\delta=V_{12}/(V_{11}-V_{22})\) yang kecil. Hingga orde pertama dalam \(\delta\):</p>
+        <div class="eq">$$ \lambda_1\approx V_{11}+V_{12}\delta,\qquad \lambda_2\approx V_{22}-V_{12}\delta. $$</div>
+        <p>Frekuensi nyaris tak bergeser dari nilai &ldquo;telanjang&rdquo; \(V_{11},V_{22}\), dan vektor eigennya hampir sejajar sumbu asli: \(\mathbf{a}_1\approx(1,\,\delta)\), \(\mathbf{a}_2\approx(-\delta,\,1)\). <b>Gandengan lemah &rArr; moda = koordinat asli yang hanya sedikit dimiringkan.</b></p>
+
+        <h3>Gandengan kuat</h3>
+        <p>Bila sebaliknya \((V_{11}-V_{22})\ll V_{12}\), tulis \(\varepsilon=(V_{11}-V_{22})/8V_{12}\) yang kecil:</p>
+        <div class="eq">$$ \lambda_{1,2}\approx\tfrac{1}{2}(V_{11}+V_{22})\pm V_{12}. $$</div>
+        <p>Frekuensi terbelah simetris sebesar \(\pm V_{12}\), dan vektor eigennya menjadi kombinasi <b>simetris/antisimetris</b> (sudut \(\pm45^\circ\)): \(\mathbf{a}_1\approx\tfrac{1}{\sqrt2}(1,\,1)\), \(\mathbf{a}_2\approx\tfrac{1}{\sqrt2}(-1,\,1)\) &mdash; persis watak contoh pegas tadi. <b>Gandengan kuat &rArr; moda = campuran simetris/antisimetris.</b></p>
+
+        <h3>Gambar 6.2: perjalanan dari lemah ke kuat</h3>
+        <p>Naikkan rasio \(V_{12}/(V_{11}-V_{22})\) dari 0 ke 3 (dengan \(V_{11}=2,\ V_{22}=1\)); kedua panel menunjukkan peralihan mulus antara kedua kasus:</p>
+
+        <figure class="fig">
+          <div>
+            <div class="figrow">
+              <div class="stage-fig">
+                <svg class="dg" viewBox="0 0 230 210" aria-label="Panel a: nilai eigen lambda1 naik dan lambda2 turun saat rasio gandengan naik dari 0 ke 3">
+                  <line x1="44" y1="24" x2="44" y2="186" stroke="var(--d-axis)" stroke-width="1.2"/>
+                  <line x1="44" y1="140.7" x2="216" y2="140.7" stroke="var(--d-axis)" stroke-width="1" opacity="0.55"/>
+                  <text class="dlm" x="40" y="100" text-anchor="end">V&#8321;&#8321;</text>
+                  <text class="dlm" x="40" y="122" text-anchor="end">V&#8322;&#8322;</text>
+                  <text class="dlm" x="40" y="144" text-anchor="end">0</text>
+                  <polyline fill="none" stroke="var(--d-blue)" stroke-width="2" points="44.0,96.4 57.8,95.1 71.7,91.8 85.5,87.5 99.3,82.7 113.2,77.7 127.0,72.5 140.8,67.2 154.7,61.9 168.5,56.5 182.3,51.0 196.2,45.6 210.0,40.2"/>
+                  <polyline fill="none" stroke="var(--d-rust)" stroke-width="2" points="44.0,118.6 57.8,119.9 71.7,123.2 85.5,127.5 99.3,132.3 113.2,137.3 127.0,142.5 140.8,147.8 154.7,153.1 168.5,158.5 182.3,164.0 196.2,169.4 210.0,174.8"/>
+                  <text class="dl" x="176" y="44" fill="var(--d-blue)" font-weight="700">&#955;&#8321;</text>
+                  <text class="dl" x="176" y="172" fill="var(--d-rust)" font-weight="700">&#955;&#8322;</text>
+                  <text class="dlm" x="99.3" y="198" text-anchor="middle">1</text>
+                  <text class="dlm" x="154.7" y="198" text-anchor="middle">2</text>
+                  <text class="dlm" x="210" y="198" text-anchor="middle">3</text>
+                </svg>
+                <p><b>(a) Nilai eigen.</b> \(\lambda_1\) naik dari \(V_{11}\), \(\lambda_2\) turun dari \(V_{22}\) &mdash; frekuensi saling menolak.</p>
+              </div>
+              <div class="stage-fig">
+                <svg class="dg" viewBox="0 0 230 210" aria-label="Panel b: komponen vektor eigen berputar dari sumbu koordinat menuju kombinasi 45 derajat">
+                  <line x1="44" y1="24" x2="44" y2="186" stroke="var(--d-axis)" stroke-width="1.2"/>
+                  <line x1="44" y1="107.5" x2="216" y2="107.5" stroke="var(--d-axis)" stroke-width="1" opacity="0.55"/>
+                  <line x1="44" y1="52.7" x2="216" y2="52.7" stroke="var(--d-bodyline)" stroke-width="1" stroke-dasharray="4 3"/>
+                  <line x1="44" y1="162.3" x2="216" y2="162.3" stroke="var(--d-bodyline)" stroke-width="1" stroke-dasharray="4 3"/>
+                  <text class="dlm" x="40" y="34" text-anchor="end">1</text>
+                  <text class="dlm" x="40" y="56" text-anchor="end">1/&#8730;2</text>
+                  <text class="dlm" x="40" y="111" text-anchor="end">0</text>
+                  <text class="dlm" x="40" y="166" text-anchor="end">&minus;1/&#8730;2</text>
+                  <polyline fill="none" stroke="var(--d-blue)" stroke-width="2" points="44.0,30.0 57.8,32.1 71.7,35.9 85.5,39.2 99.3,41.6 113.2,43.3 127.0,44.6 140.8,45.6 154.7,46.4 168.5,47.0 182.3,47.6 196.2,48.0 210.0,48.4"/>
+                  <polyline fill="none" stroke="var(--d-teal)" stroke-width="2" points="44.0,107.5 57.8,89.7 71.7,77.8 85.5,70.9 99.3,66.8 113.2,64.1 127.0,62.2 140.8,60.8 154.7,59.8 168.5,59.0 182.3,58.4 196.2,57.8 210.0,57.4"/>
+                  <polyline fill="none" stroke="var(--d-rust)" stroke-width="2" points="44.0,107.5 57.8,125.3 71.7,137.2 85.5,144.1 99.3,148.2 113.2,150.9 127.0,152.8 140.8,154.2 154.7,155.2 168.5,156.0 182.3,156.6 196.2,157.2 210.0,157.6"/>
+                  <text class="dl" x="150" y="40" fill="var(--d-blue)" font-weight="700">a&#8321;&#8321;, a&#8322;&#8322;</text>
+                  <text class="dl" x="120" y="72" fill="var(--d-teal)" font-weight="700">a&#8321;&#8322;</text>
+                  <text class="dl" x="120" y="148" fill="var(--d-rust)" font-weight="700">a&#8322;&#8321;</text>
+                  <text class="dlm" x="99.3" y="198" text-anchor="middle">1</text>
+                  <text class="dlm" x="154.7" y="198" text-anchor="middle">2</text>
+                  <text class="dlm" x="210" y="198" text-anchor="middle">3</text>
+                </svg>
+                <p><b>(b) Komponen vektor eigen.</b> Dari sumbu asli (\(1\) dan \(0\)) berputar menuju \(\pm1/\sqrt2\) (kombinasi \(45^\circ\)).</p>
+              </div>
+            </div>
+          </div>
+          <figcaption><b>Gambar 6.2.</b> Perilaku (a) nilai eigen dan (b) komponen vektor eigen saat rasio energi \(V_{12}/(V_{11}-V_{22})\) berubah dari 0 ke 3 (sumbu datar). Digambar ulang dari Goldstein Gambar 6.2.</figcaption>
+        </figure>
+
+        <div class="callout support"><p><b>Dua pelajaran dari Gambar 6.2.</b> (a) Kedua frekuensi <b>saling menolak</b>: makin kuat gandengan, makin jauh \(\lambda_1\) naik dan \(\lambda_2\) turun &mdash; dikenal sebagai <i>tolakan aras</i> (level repulsion), gejala universal dari pendulum tergandeng hingga aras energi kuantum. (b) Moda <b>berputar</b> dari sumbu koordinat (komponen \(1\) dan \(0\)) menuju kombinasi \(\pm45^\circ\) (komponen \(\pm1/\sqrt2\)).</p></div>
+        <div class="callout"><p><b>Kaitan dengan stabilitas.</b> Perhatikan \(\lambda_2\) menembus <i>nol</i> saat rasio melewati \(\sqrt2\), lalu menjadi <b>negatif</b>. Di situ \(\mathbf{V}\) berhenti definit positif &mdash; potensial bukan lagi minimum di arah itu &mdash; sehingga \(\omega_2=\sqrt{\lambda_2}\) menjadi imajiner dan moda itu tak lagi berosilasi melainkan lepas (tak stabil). Jadi gandengan yang terlampau kuat dapat meruntuhkan kestabilan &mdash; menegaskan kembali syarat \(\mathbf{V}\) definit positif dari &sect;4.</p></div>
+      </section>
+
+      <!-- 8 -->
       <section class="block" id="kembar">
-        <h2>7. Catatan: akar kembar (degenerasi)</h2>
+        <h2>8. Catatan: akar kembar (degenerasi)</h2>
         <div class="chapline"></div>
         <p>Argumen ortogonalitas (6.22a) mensyaratkan akar-akar \(\lambda\) <i>berbeda</i>. Bila dua akar atau lebih <b>sama</b> (degenerasi), persamaan eigen tak lagi menetapkan arah vektor eigen secara tunggal &mdash; sebarang kombinasi liniernya juga vektor eigen. Namun kita selalu <i>dapat memilih</i> pasangan vektor yang saling ortogonal (prosedur Gram&ndash;Schmidt), sehingga matriks \(\mathbf{A}\) dan persamaan (6.23) tetap berlaku.</p>
         <div class="callout"><p><b>Gambaran geometris.</b> Untuk akar ganda, <i>seluruh bidang</i> vektor adalah vektor eigen; kita tinggal memilih dua arah tegak lurus di dalamnya sebagai sumbu utama baru. Sama persis dengan menangani nilai eigen kembar tensor inersia di Bab 5.</p></div>
@@ -353,7 +428,7 @@
 
       <!-- 8 -->
       <section class="block" id="rangkuman">
-        <h2>8. Rangkuman</h2>
+        <h2>9. Rangkuman</h2>
         <div class="chapline"></div>
         <ol class="steps">
           <li>Tebak gerak serempak \(\eta_i=Ca_i e^{-i\omega t}\) (moda normal) &rarr; (6.11).</li>
