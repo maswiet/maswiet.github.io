@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Osilasi Kecil — Persamaan Nilai Eigen — Mekanika Klasik — Wiwit Suryanto</title>
+  <meta name="description" content="Materi kuliah Mekanika Klasik (Program Magister Fisika UGM), Goldstein §6.2: persamaan nilai eigen dan transformasi sumbu utama. Penurunan determinan sekular, masalah nilai eigen rampat Va=λTa, bukti frekuensi nyata & positif, diagonalisasi serentak, dengan contoh dua massa-tiga pegas diselesaikan penuh.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:43px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    section.block{padding:54px 0 0}
+    h2{font-family:var(--serif);font-size:29px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    main h3{font-family:var(--serif);font-size:20px;font-weight:600;margin:26px 0 6px}
+    .chapline{width:56px;height:4px;background:var(--accent);margin:12px 0 20px}
+    .steplabel{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--support);margin:24px 0 2px}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);border-radius:6px;overflow:hidden}
+    figure.fig > div{padding:18px 16px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);padding:10px 16px;border-top:1px solid var(--border)}
+    figure.fig figcaption b{color:var(--text);font-weight:600}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+    ol.steps{font-family:var(--sans);font-size:16px;line-height:1.55;padding-left:22px;margin:16px 0}
+    ol.steps li{margin:0 0 10px}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:22px 0}
+    .callout p:first-child{margin-top:0}
+    .callout p:last-child{margin-bottom:0}
+    .callout.support{background:#EDF3F2;border-color:#C7DAD6}
+    .callout.try{background:#FBF1EC;border-color:#E6C9BB}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    .seq-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:44px 0 0;font-family:var(--sans)}
+    .seq-nav a{display:block;border:1px solid var(--border);border-radius:6px;padding:14px 16px;text-decoration:none;background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+    .seq-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    .seq-nav .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .seq-nav a:hover .lbl{color:var(--accent)}
+    .seq-nav .nx{text-align:right}
+    @media (max-width:560px){ .seq-nav{grid-template-columns:1fr} .seq-nav .nx{text-align:left} }
+
+    .toc{font-family:var(--sans);font-size:15px;columns:2;column-gap:32px;margin:28px 0 0;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:2px 0;break-inside:avoid}
+    .toc a{text-decoration:none}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+
+    .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-teal:#2F5D62; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
+    text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
+    text.dlm{font-family:var(--sans);font-size:12px;fill:#5F625C}
+    .figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:8px 0 20px}
+    .stage-fig{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px}
+    .stage-fig svg{width:100%;height:auto;display:block}
+    .stage-fig p{margin:10px 0 0;font-family:var(--sans);font-size:13.5px;line-height:1.45;color:var(--text-muted)}
+    .stage-fig p b{color:var(--text)}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:33px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:27px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .toc{columns:1}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; <a href="/kuliah/mekanika-klasik/">Mekanika Klasik</a> &nbsp;/&nbsp; Osilasi Kecil &mdash; Persamaan Nilai Eigen</p>
+      <p class="eyebrow">Mekanika Klasik &middot; Bab 6 &middot; Program Magister</p>
+      <h1>Persamaan Nilai Eigen dan Transformasi Sumbu Utama</h1>
+      <p class="lede">Di &sect;6.1 masalah osilasi dipadatkan menjadi dua matriks \(\mathbf{T}\) dan \(\mathbf{V}\). Di sini kita menyelesaikannya: mencari gerak-gerak serempak berfrekuensi tunggal (<b>moda normal</b>) lewat satu persamaan determinan. Penurunannya dikupas langkah demi langkah &mdash; tiap langkah disertai penjelasan sesederhana mungkin. Mengikuti Goldstein, <i>Classical Mechanics</i>, &sect;6.2.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Mekanika Klasik (Program Magister Fisika)</dd>
+        <dt>Rujukan utama</dt><dd>Goldstein, Poole &amp; Safko (2002), edisi ke-3, &sect;6.2, hlm. 241&ndash;250</dd>
+        <dt>Prasyarat</dt><dd><a href="/kuliah/mekanika-klasik/osilasi-kecil-formulasi/">&sect;6.1 Formulasi</a>; aljabar matriks &amp; determinan; nilai eigen (&sect;5.4)</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <nav class="toc" aria-label="Daftar isi"><ol>
+        <li><a href="#tebakan">1. Tebakan cerdas: gerak serempak</a></li>
+        <li><a href="#sekular">2. Menuju determinan sekular</a></li>
+        <li><a href="#rampat">3. Masalah nilai eigen rampat</a></li>
+        <li><a href="#nyata">4. Frekuensi nyata dan positif</a></li>
+        <li><a href="#diagonal">5. Ortogonalitas &amp; diagonalisasi serentak</a></li>
+        <li><a href="#contoh">6. Contoh lengkap: dua massa, tiga pegas</a></li>
+        <li><a href="#kembar">7. Catatan: akar kembar</a></li>
+        <li><a href="#rangkuman">8. Rangkuman</a></li>
+      </ol></nav>
+
+      <!-- 1 -->
+      <section class="block" id="tebakan">
+        <h2>1. Tebakan cerdas: gerak serempak</h2>
+        <div class="chapline"></div>
+        <p>Persamaan gerak kita, \(T_{ij}\ddot\eta_j+V_{ij}\eta_j=0\), adalah persamaan diferensial linear berkoefisien tetap &mdash; bentuk yang akrab dari rangkaian listrik. Untuk persamaan semacam itu, tebakan yang tepat adalah solusi berosilasi. Tetapi di sini ada <i>banyak</i> koordinat \(\eta_i\) yang saling tergandeng, jadi kita cari jenis gerak yang paling istimewa: gerak di mana <b>semua koordinat berosilasi dengan frekuensi dan fase yang sama</b>, hanya berbeda amplitudo. Itulah yang kelak kita sebut <b>moda normal</b>.</p>
+        <div class="eq">$$ \eta_i=C\,a_i\,e^{-i\omega t}. \tag{6.11}$$</div>
+        <p>Di sini \(a_i\) amplitudo (relatif) tiap koordinat, \(\omega\) frekuensi bersama, dan \(C\) faktor skala yang sama untuk semua koordinat. Geraknya yang sebenarnya adalah bagian real dari ungkapan ini. Memakai eksponensial kompleks hanya trik agar turunan menjadi mudah (\(\ddot\eta_i=-\omega^2\eta_i\)).</p>
+        <div class="callout support"><p><b>Penjelasan paling sederhana.</b> Alih-alih memecahkan \(n\) persamaan tergandeng yang rumit, kita bertanya: &ldquo;adakah gerak di mana seluruh sistem bergetar <i>berbarengan</i> pada satu nada?&rdquo; Kalau ada, sistem berperilaku seperti <i>satu</i> osilator. Tugas kita tinggal mencari nada-nada \(\omega\) yang diizinkan beserta pola amplitudonya \(a_i\).</p></div>
+      </section>
+
+      <!-- 2 -->
+      <section class="block" id="sekular">
+        <h2>2. Menuju determinan sekular</h2>
+        <div class="chapline"></div>
+        <p>Masukkan tebakan (6.11) ke persamaan gerak. Karena \(\ddot\eta_j=-\omega^2\eta_j\), faktor \(Ce^{-i\omega t}\) muncul di tiap suku dan bisa dicoret. Yang tersisa hanya persamaan untuk amplitudo:</p>
+        <div class="eq">$$ \left(V_{ij}-\omega^2 T_{ij}\right)a_j=0. \tag{6.12}$$</div>
+        <p>Ini \(n\) persamaan linear <b>homogen</b> (ruas kanan nol) untuk \(n\) amplitudo \(a_j\). Persamaan homogen selalu punya solusi sepele \(a_j=0\) (tidak ada gerak) &mdash; yang tak kita inginkan. Solusi tak-sepele hanya ada bila determinan koefisiennya lenyap:</p>
+        <div class="eq">$$ \left|\,V_{ij}-\omega^2 T_{ij}\,\right|= \begin{vmatrix} V_{11}-\omega^2T_{11} & V_{12}-\omega^2T_{12} & \cdots\\ V_{21}-\omega^2T_{21} & V_{22}-\omega^2T_{22} & \cdots\\ \vdots & & \ddots \end{vmatrix}=0. \tag{6.13}$$</div>
+        <p>Inilah <b>persamaan sekular</b> (atau persamaan karakteristik). Membuka determinannya menghasilkan polinomial berderajat \(n\) dalam \(\omega^2\). Akar-akarnya, \(\omega_1^2,\dots,\omega_n^2\), adalah satu-satunya frekuensi yang membuat tebakan (6.11) benar &mdash; <b>frekuensi getaran bebas</b> sistem.</p>
+        <div class="callout"><p><b>Mengapa &ldquo;determinan nol&rdquo;?</b> Sistem persamaan homogen \(\mathbf{M}\mathbf{a}=0\) hanya punya solusi selain nol jika \(\mathbf{M}\) <i>tidak dapat dibalik</i>, yakni \(\det\mathbf{M}=0\). Secara fisis: hanya pada frekuensi istimewa \(\omega_k\) sistem mengizinkan gerak serempak beramplitudo tak-nol.</p></div>
+      </section>
+
+      <!-- 3 -->
+      <section class="block" id="rampat">
+        <h2>3. Masalah nilai eigen rampat</h2>
+        <div class="chapline"></div>
+        <p>Tulis \(T_{ij}\) sebagai elemen matriks \(\mathbf{T}\), dan \(\lambda\equiv\omega^2\). Persamaan (6.12) menjadi bentuk matriks yang ringkas:</p>
+        <div class="eq">$$ \mathbf{V}\mathbf{a}=\lambda\,\mathbf{T}\mathbf{a}. \tag{6.14}$$</div>
+        <p>Ini mirip masalah nilai eigen biasa \(\mathbf{V}\mathbf{a}=\lambda\mathbf{a}\), tetapi dengan \(\mathbf{T}\) menempel di ruas kanan &mdash; disebut <b>masalah nilai eigen rampat</b> (generalized). Bedanya penting: efek \(\mathbf{V}\) pada \(\mathbf{a}\) bukan sekadar mengalikan \(\mathbf{a}\) dengan sebuah angka, melainkan menghasilkan kelipatan dari \(\mathbf{T}\mathbf{a}\).</p>
+        <div class="callout support"><p><b>Hubungan dengan Bab 5.</b> Ini perumuman langsung dari <b>transformasi sumbu utama</b> tensor inersia (&sect;5.4), kini dalam \(n\) dimensi, bukan tiga. Di sana kita mendiagonalkan satu matriks; di sini kita mendiagonalkan <i>dua</i> matriks (\(\mathbf{T}\) dan \(\mathbf{V}\)) secara serentak. \(\lambda_k=\omega_k^2\) adalah nilai eigen, dan \(\mathbf{a}_k\) vektor eigennya.</p></div>
+        <p>Tiga hal akan kita buktikan, sebab ketiganya yang membuat teori ini bekerja: (i) semua \(\lambda_k\) <b>nyata</b>, (ii) semua \(\lambda_k\) <b>positif</b> (untuk sistem stabil), dan (iii) vektor-vektor eigennya <b>ortogonal</b> (dalam arti khusus) sehingga dapat mendiagonalkan kedua matriks sekaligus.</p>
+      </section>
+
+      <!-- 4 -->
+      <section class="block" id="nyata">
+        <h2>4. Frekuensi nyata dan positif</h2>
+        <div class="chapline"></div>
+        <p>Mengapa ini wajib dibuktikan? Jika \(\lambda=\omega^2\) ternyata kompleks atau negatif, maka \(\omega\) menjadi imajiner dan \(e^{-i\omega t}\) berubah menjadi eksponensial yang <i>membesar</i> tak terbatas &mdash; bukan osilasi, melainkan ketakstabilan. Jadi membuktikan \(\lambda&gt;0\) sama dengan membuktikan sistem benar-benar bergetar stabil.</p>
+
+        <h3>Cara paling sederhana: hasil-bagi Rayleigh</h3>
+        <p>Kalikan (6.14) dari kiri dengan \(\tilde{\mathbf{a}}_k\) (transpos \(\mathbf{a}_k\)), lalu selesaikan untuk \(\lambda_k\):</p>
+        <div class="eq">$$ \lambda_k=\frac{\tilde{\mathbf{a}}_k\,\mathbf{V}\,\mathbf{a}_k}{\tilde{\mathbf{a}}_k\,\mathbf{T}\,\mathbf{a}_k}. \tag{6.21}$$</div>
+        <p>Kedua sisi pecahan ini punya makna fisis langsung:</p>
+        <ul class="points">
+          <li><b>Penyebut</b> \(\tilde{\mathbf{a}}_k\mathbf{T}\mathbf{a}_k\) = dua kali energi kinetik untuk &ldquo;laju&rdquo; \(\mathbf{a}_k\). Energi kinetik selalu positif untuk gerak nyata &rarr; penyebut <b>definit positif</b> (\(&gt;0\)).</li>
+          <li><b>Pembilang</b> \(\tilde{\mathbf{a}}_k\mathbf{V}\mathbf{a}_k\) = dua kali energi potensial untuk simpangan \(\mathbf{a}_k\). Karena di setimbang \(V\) adalah <i>minimum</i>, bentuk ini <b>positif</b> (atau nol).</li>
+        </ul>
+        <p>Positif dibagi positif = <b>positif</b>. Maka \(\lambda_k=\omega_k^2&gt;0\), sehingga \(\omega_k\) nyata: sistem benar-benar berosilasi. <b>Inilah bukti matematis bahwa minimum potensial \(\Rightarrow\) gerak stabil</b> &mdash; janji yang belum lunas sejak &sect;6.1.</p>
+
+        <h3>Mengapa nilai eigennya nyata (versi lengkap)</h3>
+        <p>Bukti \(\lambda\) nyata dapat dibuat rapi dengan konjugat kompleks. Dari (6.15) \(\mathbf{V}\mathbf{a}_k=\lambda_k\mathbf{T}\mathbf{a}_k\) dan persamaan adjoin-nya (transpos-konjugat, memakai kenyataan \(\mathbf{V},\mathbf{T}\) real-simetris), \(\mathbf{a}_l^{\dagger}\mathbf{V}=\lambda_l^{*}\,\mathbf{a}_l^{\dagger}\mathbf{T}\). Kurangkan keduanya untuk \(l=k\):</p>
+        <div class="eq">$$ \left(\lambda_k-\lambda_k^{*}\right)\mathbf{a}_k^{\dagger}\mathbf{T}\mathbf{a}_k=0. \tag{6.18}$$</div>
+        <p>Pisahkan \(\mathbf{a}_k=\boldsymbol\alpha_k+i\boldsymbol\beta_k\); karena \(\mathbf{T}\) simetris, bagian imajiner \(\mathbf{a}_k^{\dagger}\mathbf{T}\mathbf{a}_k\) lenyap dan sisanya \(\tilde{\boldsymbol\alpha}_k\mathbf{T}\boldsymbol\alpha_k+\tilde{\boldsymbol\beta}_k\mathbf{T}\boldsymbol\beta_k&gt;0\) (jumlah dua energi kinetik). Faktor itu tak mungkin nol, jadi \(\lambda_k=\lambda_k^{*}\): nilai eigen <b>nyata</b>. Karena \(\lambda\) nyata, rasio komponen \(a_{jk}\) juga nyata.</p>
+      </section>
+
+      <!-- 5 -->
+      <section class="block" id="diagonal">
+        <h2>5. Ortogonalitas dan diagonalisasi serentak</h2>
+        <div class="chapline"></div>
+        <p>Ambil dua akar <i>berbeda</i> \(\lambda_k\neq\lambda_l\). Argumen pengurangan yang sama (kini untuk \(l\neq k\)) memberi</p>
+        <div class="eq">$$ \left(\lambda_k-\lambda_l\right)\tilde{\mathbf{a}}_l\mathbf{T}\mathbf{a}_k=0 \quad\Longrightarrow\quad \tilde{\mathbf{a}}_l\,\mathbf{T}\,\mathbf{a}_k=0,\quad l\neq k. \tag{6.22a}$$</div>
+        <p>Vektor eigen untuk frekuensi berbeda <b>ortogonal terhadap \(\mathbf{T}\)</b> (bukan ortogonal biasa &mdash; metriknya adalah matriks massa \(\mathbf{T}\)). Amplitudo \(\mathbf{a}_k\) belum ditetapkan skalanya; kita bakukan (normalisasi):</p>
+        <div class="eq">$$ \tilde{\mathbf{a}}_k\,\mathbf{T}\,\mathbf{a}_k=1. \tag{6.22b}$$</div>
+        <p>Susun semua vektor eigen \(\mathbf{a}_k\) sebagai kolom-kolom matriks \(\mathbf{A}\). Kedua syarat (6.22) menyatu menjadi satu persamaan matriks yang anggun:</p>
+        <div class="eq">$$ \boxed{\ \tilde{\mathbf{A}}\,\mathbf{T}\,\mathbf{A}=\mathbf{1}\ } \tag{6.23}$$</div>
+        <p>Operasi \(\tilde{\mathbf{A}}\mathbf{C}\mathbf{A}\) disebut <b>transformasi kongruensi</b>. Jadi \(\mathbf{A}\) mengubah \(\mathbf{T}\) menjadi matriks satuan. Dengan memperkenalkan matriks diagonal \(\boldsymbol\lambda\) (berisi \(\lambda_k\)), persamaan eigen \(\mathbf{V}\mathbf{A}=\mathbf{T}\mathbf{A}\boldsymbol\lambda\) bila dikalikan \(\tilde{\mathbf{A}}\) dari kiri dan memakai (6.23) menjadi:</p>
+        <div class="eq">$$ \boxed{\ \tilde{\mathbf{A}}\,\mathbf{V}\,\mathbf{A}=\boldsymbol\lambda\ }\qquad(\text{diagonal}). \tag{6.26}$$</div>
+        <div class="callout support"><p><b>Inti &sect;6.2 dalam satu kalimat.</b> Ada <i>satu</i> transformasi \(\mathbf{A}\) yang mendiagonalkan <b>kedua</b> matriks sekaligus: \(\mathbf{T}\to\mathbf{1}\) dan \(\mathbf{V}\to\boldsymbol\lambda\) (diagonal, isinya kuadrat frekuensi). Dalam koordinat baru inilah gerak tergandeng terurai menjadi osilator-osilator mandiri &mdash; persis gagasan &ldquo;sumbu utama&rdquo;, kini untuk getaran.</p></div>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 520 170" width="100%" height="auto" style="max-width:500px;margin:auto" aria-label="Transformasi A mengubah dua matriks tergandeng menjadi dua matriks diagonal, mewakili osilator mandiri">
+              <!-- left: coupled matrices -->
+              <rect x="24" y="40" width="150" height="90" rx="6" fill="var(--surface-muted)" stroke="var(--d-bodyline)" stroke-width="1.4"/>
+              <text class="dl" x="99" y="66" text-anchor="middle" font-weight="700">sistem tergandeng</text>
+              <text class="dlm" x="99" y="92" text-anchor="middle">T, V penuh</text>
+              <text class="dlm" x="99" y="112" text-anchor="middle">(elemen luar-diagonal &ne; 0)</text>
+              <!-- arrow -->
+              <line x1="184" y1="85" x2="330" y2="85" stroke="var(--d-rust)" stroke-width="2" marker-end="url(#e-rust)"/>
+              <text class="dl" x="256" y="74" text-anchor="middle" fill="var(--d-rust)" font-weight="700">transformasi A</text>
+              <text class="dlm" x="256" y="104" text-anchor="middle">Ã T A = 1, &nbsp; Ã V A = &lambda;</text>
+              <!-- right: decoupled -->
+              <rect x="342" y="40" width="154" height="90" rx="6" fill="var(--surface-muted)" stroke="var(--d-teal)" stroke-width="1.6"/>
+              <text class="dl" x="419" y="66" text-anchor="middle" font-weight="700" fill="var(--d-teal)">osilator mandiri</text>
+              <text class="dlm" x="419" y="92" text-anchor="middle">&zeta;&#8321;: &omega;&#8321; &nbsp; &zeta;&#8322;: &omega;&#8322; &hellip;</text>
+              <text class="dlm" x="419" y="112" text-anchor="middle">(terdiagonal)</text>
+              <defs><marker id="e-rust" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker></defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 1. Diagonalisasi serentak.</b> Transformasi kongruensi \(\mathbf{A}\) membuat \(\tilde{\mathbf{A}}\mathbf{T}\mathbf{A}=\mathbf{1}\) dan \(\tilde{\mathbf{A}}\mathbf{V}\mathbf{A}=\boldsymbol\lambda\); gerak tergandeng berubah menjadi sekumpulan osilator harmonik mandiri (koordinat normal, dibahas di &sect;6.3).</figcaption>
+        </figure>
+      </section>
+
+      <!-- 6 -->
+      <section class="block" id="contoh">
+        <h2>6. Contoh lengkap: dua massa, tiga pegas</h2>
+        <div class="chapline"></div>
+        <p>Kita selesaikan sistem yang diperkenalkan di <a href="/kuliah/mekanika-klasik/osilasi-kecil-formulasi/#contoh">&sect;6.1</a>: dua massa \(m\) dengan tiga pegas \(k\). Matriksnya</p>
+        <div class="eq">$$ \mathbf{V}=k\begin{pmatrix}2&-1\\-1&2\end{pmatrix},\qquad \mathbf{T}=m\begin{pmatrix}1&0\\0&1\end{pmatrix}. $$</div>
+
+        <p class="steplabel">Langkah 1 &mdash; Persamaan sekular</p>
+        <div class="eq">$$ \left|\mathbf{V}-\omega^2\mathbf{T}\right|= \begin{vmatrix} 2k-m\omega^2 & -k\\ -k & 2k-m\omega^2 \end{vmatrix}= \left(2k-m\omega^2\right)^2-k^2=0. $$</div>
+
+        <p class="steplabel">Langkah 2 &mdash; Akar-akar frekuensi</p>
+        <p>Akar kuadrat kedua ruas: \(2k-m\omega^2=\pm k\), sehingga</p>
+        <div class="eq">$$ \boxed{\ \omega_1^2=\frac{k}{m}\ }\qquad\text{dan}\qquad \boxed{\ \omega_2^2=\frac{3k}{m}\ }. $$</div>
+
+        <p class="steplabel">Langkah 3 &mdash; Pola amplitudo (vektor eigen)</p>
+        <p>Masukkan kembali tiap \(\omega^2\) ke \((\mathbf{V}-\omega^2\mathbf{T})\mathbf{a}=0\):</p>
+        <ul class="points">
+          <li>\(\omega_1^2=k/m\): &nbsp; \((2k-k)a_1-k\,a_2=0\Rightarrow a_1=a_2\). Pola <b>simetris</b> \(\mathbf{a}_1\propto(1,\,1)\) &mdash; kedua massa searah, pegas tengah tak teregang.</li>
+          <li>\(\omega_2^2=3k/m\): &nbsp; \((2k-3k)a_1-k\,a_2=0\Rightarrow a_1=-a_2\). Pola <b>antisimetris</b> \(\mathbf{a}_2\propto(1,\,-1)\) &mdash; kedua massa berlawanan, pegas tengah teregang paling kuat (karena itu frekuensinya lebih tinggi).</li>
+        </ul>
+
+        <p class="steplabel">Langkah 4 &mdash; Normalisasi</p>
+        <p>Dengan \(\mathbf{T}=m\mathbf{1}\), syarat \(\tilde{\mathbf{a}}_k\mathbf{T}\mathbf{a}_k=1\) memberi \(m(a_1^2+a_2^2)=1\), sehingga</p>
+        <div class="eq">$$ \mathbf{a}_1=\frac{1}{\sqrt{2m}}\begin{pmatrix}1\\1\end{pmatrix},\qquad \mathbf{a}_2=\frac{1}{\sqrt{2m}}\begin{pmatrix}1\\-1\end{pmatrix}. $$</div>
+        <p>Mudah dicek bahwa \(\tilde{\mathbf{a}}_1\mathbf{T}\mathbf{a}_2=0\) (ortogonal terhadap \(\mathbf{T}\)), persis ramalan (6.22a).</p>
+
+        <figure class="fig">
+          <div>
+            <div class="figrow">
+              <div class="stage-fig">
+                <svg class="dg" viewBox="0 0 230 120" aria-label="Moda simetris: kedua massa bergerak searah">
+                  <rect x="10" y="40" width="10" height="40" fill="var(--d-axis)"/>
+                  <rect x="210" y="40" width="10" height="40" fill="var(--d-axis)"/>
+                  <path d="M20 60 l10 -8 l12 16 l12 -16 l12 16 l8 -8" fill="none" stroke="var(--d-bodyline)" stroke-width="1.4"/>
+                  <path d="M96 60 l10 -8 l12 16 l12 -16 l12 16 l8 -8" fill="none" stroke="var(--d-bodyline)" stroke-width="1.4"/>
+                  <path d="M172 60 l8 -8 l12 16 l12 -16 l6 8" fill="none" stroke="var(--d-bodyline)" stroke-width="1.4"/>
+                  <rect x="74" y="46" width="30" height="28" rx="3" fill="var(--d-bodyfill)" stroke="var(--d-blue)" stroke-width="1.6"/>
+                  <rect x="150" y="46" width="30" height="28" rx="3" fill="var(--d-bodyfill)" stroke="var(--d-blue)" stroke-width="1.6"/>
+                  <line x1="92" y1="92" x2="116" y2="92" stroke="var(--d-rust)" stroke-width="2" marker-end="url(#m-r)"/>
+                  <line x1="168" y1="92" x2="192" y2="92" stroke="var(--d-rust)" stroke-width="2" marker-end="url(#m-r)"/>
+                  <defs><marker id="m-r" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker></defs>
+                </svg>
+                <p><b>Moda 1 &mdash; simetris.</b> \(\omega_1^2=k/m\). Searah; pegas tengah tak teregang.</p>
+              </div>
+              <div class="stage-fig">
+                <svg class="dg" viewBox="0 0 230 120" aria-label="Moda antisimetris: kedua massa bergerak berlawanan">
+                  <rect x="10" y="40" width="10" height="40" fill="var(--d-axis)"/>
+                  <rect x="210" y="40" width="10" height="40" fill="var(--d-axis)"/>
+                  <path d="M20 60 l10 -8 l12 16 l12 -16 l12 16 l8 -8" fill="none" stroke="var(--d-bodyline)" stroke-width="1.4"/>
+                  <path d="M96 60 l10 -8 l12 16 l12 -16 l12 16 l8 -8" fill="none" stroke="var(--d-bodyline)" stroke-width="1.4"/>
+                  <path d="M172 60 l8 -8 l12 16 l12 -16 l6 8" fill="none" stroke="var(--d-bodyline)" stroke-width="1.4"/>
+                  <rect x="74" y="46" width="30" height="28" rx="3" fill="var(--d-bodyfill)" stroke="var(--d-blue)" stroke-width="1.6"/>
+                  <rect x="150" y="46" width="30" height="28" rx="3" fill="var(--d-bodyfill)" stroke="var(--d-blue)" stroke-width="1.6"/>
+                  <line x1="92" y1="92" x2="68" y2="92" stroke="var(--d-rust)" stroke-width="2" marker-end="url(#m-r2)"/>
+                  <line x1="168" y1="92" x2="192" y2="92" stroke="var(--d-rust)" stroke-width="2" marker-end="url(#m-r2)"/>
+                  <defs><marker id="m-r2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker></defs>
+                </svg>
+                <p><b>Moda 2 &mdash; antisimetris.</b> \(\omega_2^2=3k/m\). Berlawanan; pegas tengah teregang kuat.</p>
+              </div>
+            </div>
+          </div>
+          <figcaption><b>Gambar 2. Dua moda normal.</b> Setiap gerak kecil sistem adalah superposisi kedua moda ini. Moda antisimetris lebih &ldquo;kaku&rdquo; (pegas tengah ikut bekerja) sehingga frekuensinya \(\sqrt{3}\) kali lebih tinggi.</figcaption>
+        </figure>
+        <div class="callout try"><p><b>Pembacaan fisis.</b> Determinan sekular tak hanya memberi angka frekuensi; pola amplitudo \(\mathbf{a}_k\) menceritakan <i>bagaimana</i> sistem bergetar. Di &sect;6.3 kita jadikan kedua pola ini sebagai <b>koordinat normal</b> \(\zeta_1,\zeta_2\), yang tiap-tiapnya berosilasi mandiri seperti pegas tunggal.</p></div>
+      </section>
+
+      <!-- 7 -->
+      <section class="block" id="kembar">
+        <h2>7. Catatan: akar kembar (degenerasi)</h2>
+        <div class="chapline"></div>
+        <p>Argumen ortogonalitas (6.22a) mensyaratkan akar-akar \(\lambda\) <i>berbeda</i>. Bila dua akar atau lebih <b>sama</b> (degenerasi), persamaan eigen tak lagi menetapkan arah vektor eigen secara tunggal &mdash; sebarang kombinasi liniernya juga vektor eigen. Namun kita selalu <i>dapat memilih</i> pasangan vektor yang saling ortogonal (prosedur Gram&ndash;Schmidt), sehingga matriks \(\mathbf{A}\) dan persamaan (6.23) tetap berlaku.</p>
+        <div class="callout"><p><b>Gambaran geometris.</b> Untuk akar ganda, <i>seluruh bidang</i> vektor adalah vektor eigen; kita tinggal memilih dua arah tegak lurus di dalamnya sebagai sumbu utama baru. Sama persis dengan menangani nilai eigen kembar tensor inersia di Bab 5.</p></div>
+      </section>
+
+      <!-- 8 -->
+      <section class="block" id="rangkuman">
+        <h2>8. Rangkuman</h2>
+        <div class="chapline"></div>
+        <ol class="steps">
+          <li>Tebak gerak serempak \(\eta_i=Ca_i e^{-i\omega t}\) (moda normal) &rarr; (6.11).</li>
+          <li>Substitusi &rarr; persamaan amplitudo homogen \((V_{ij}-\omega^2T_{ij})a_j=0\) (6.12).</li>
+          <li>Solusi tak-sepele &hArr; determinan sekular \(|\mathbf{V}-\omega^2\mathbf{T}|=0\) (6.13) &rarr; \(n\) akar \(\omega_k^2\).</li>
+          <li>Bentuk nilai eigen rampat \(\mathbf{V}\mathbf{a}=\lambda\mathbf{T}\mathbf{a}\); hasil-bagi Rayleigh \(\lambda=\dfrac{\tilde{\mathbf{a}}\mathbf{V}\mathbf{a}}{\tilde{\mathbf{a}}\mathbf{T}\mathbf{a}}&gt;0\) &rArr; frekuensi nyata &amp; stabil.</li>
+          <li>Vektor eigen ortogonal-\(\mathbf{T}\) &amp; dinormalkan &rarr; \(\tilde{\mathbf{A}}\mathbf{T}\mathbf{A}=\mathbf{1}\), \(\tilde{\mathbf{A}}\mathbf{V}\mathbf{A}=\boldsymbol\lambda\): <b>dua matriks terdiagonal serentak</b>.</li>
+        </ol>
+        <div class="callout support"><p><b>Satu kalimat.</b> Seluruh &sect;6.2 adalah satu gerakan: ubah persamaan gerak tergandeng menjadi <i>satu</i> persamaan determinan yang memberi frekuensi, dan <i>satu</i> transformasi \(\mathbf{A}\) yang mendiagonalkan \(\mathbf{T}\) dan \(\mathbf{V}\) sekaligus &mdash; membuka jalan ke koordinat normal di &sect;6.3.</p></div>
+        <p class="source-note">Bahan ini adalah penyederhanaan pedagogis. Penurunan penuh, termasuk kasus degenerasi dan transformasi kongruensi, ada di Goldstein &sect;6.2 (hlm. 241&ndash;250).</p>
+      </section>
+
+      <nav class="seq-nav" aria-label="Navigasi topik">
+        <a href="/kuliah/mekanika-klasik/osilasi-kecil-formulasi/"><span class="lbl">&larr; Sebelumnya &middot; &sect;6.1</span>Osilasi Kecil: Pengantar dan Formulasi</a>
+        <a class="nx" href="/kuliah/mekanika-klasik/"><span class="lbl">Daftar topik &uarr; &middot; &sect;6.3 menyusul</span>Mekanika Klasik</a>
+      </nav>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
