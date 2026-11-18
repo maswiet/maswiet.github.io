@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Osilasi Kecil — Koordinat Normal — Mekanika Klasik — Wiwit Suryanto</title>
+  <meta name="description" content="Materi kuliah Mekanika Klasik (Program Magister Fisika UGM), Goldstein §6.3: frekuensi getaran bebas dan koordinat normal. Solusi umum superposisi moda, penentuan dari syarat awal, dan transformasi ke koordinat normal yang mengubah sistem menjadi osilator-osilator mandiri.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:43px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    section.block{padding:54px 0 0}
+    h2{font-family:var(--serif);font-size:29px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    main h3{font-family:var(--serif);font-size:20px;font-weight:600;margin:26px 0 6px}
+    .chapline{width:56px;height:4px;background:var(--accent);margin:12px 0 20px}
+    .steplabel{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--support);margin:24px 0 2px}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);border-radius:6px;overflow:hidden}
+    figure.fig > div{padding:18px 16px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);padding:10px 16px;border-top:1px solid var(--border)}
+    figure.fig figcaption b{color:var(--text);font-weight:600}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+    ol.steps{font-family:var(--sans);font-size:16px;line-height:1.55;padding-left:22px;margin:16px 0}
+    ol.steps li{margin:0 0 10px}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:22px 0}
+    .callout p:first-child{margin-top:0}
+    .callout p:last-child{margin-bottom:0}
+    .callout.support{background:#EDF3F2;border-color:#C7DAD6}
+    .callout.try{background:#FBF1EC;border-color:#E6C9BB}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    .seq-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:44px 0 0;font-family:var(--sans)}
+    .seq-nav a{display:block;border:1px solid var(--border);border-radius:6px;padding:14px 16px;text-decoration:none;background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+    .seq-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    .seq-nav .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .seq-nav a:hover .lbl{color:var(--accent)}
+    .seq-nav .nx{text-align:right}
+    @media (max-width:560px){ .seq-nav{grid-template-columns:1fr} .seq-nav .nx{text-align:left} }
+
+    .toc{font-family:var(--sans);font-size:15px;columns:2;column-gap:32px;margin:28px 0 0;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:2px 0;break-inside:avoid}
+    .toc a{text-decoration:none}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+
+    .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-teal:#2F5D62; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
+    text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
+    text.dlm{font-family:var(--sans);font-size:12px;fill:#5F625C}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:33px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:27px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .toc{columns:1}
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; <a href="/kuliah/mekanika-klasik/">Mekanika Klasik</a> &nbsp;/&nbsp; Osilasi Kecil &mdash; Koordinat Normal</p>
+      <p class="eyebrow">Mekanika Klasik &middot; Bab 6 &middot; Program Magister</p>
+      <h1>Frekuensi Getaran Bebas dan Koordinat Normal</h1>
+      <p class="lede">Determinan sekular memberi \(n\) frekuensi; gerak nyata adalah <b>campuran</b> semuanya &mdash; umumnya rumit dan tak berulang. Tetapi ada koordinat istimewa, <b>koordinat normal</b>, di mana campuran itu terurai: sistem tergandeng menjadi \(n\) osilator harmonik yang sepenuhnya <b>mandiri</b>. Itulah puncak Bab 6. Mengikuti Goldstein, <i>Classical Mechanics</i>, &sect;6.3.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Mekanika Klasik (Program Magister Fisika)</dd>
+        <dt>Rujukan utama</dt><dd>Goldstein, Poole &amp; Safko (2002), edisi ke-3, &sect;6.3, hlm. 250&ndash;253</dd>
+        <dt>Prasyarat</dt><dd><a href="/kuliah/mekanika-klasik/osilasi-kecil-nilai-eigen/">&sect;6.2</a> (nilai eigen, \(\tilde{\mathbf{A}}\mathbf{T}\mathbf{A}=\mathbf{1}\), \(\tilde{\mathbf{A}}\mathbf{V}\mathbf{A}=\boldsymbol\lambda\))</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <nav class="toc" aria-label="Daftar isi"><ol>
+        <li><a href="#umum">1. Solusi umum: superposisi semua moda</a></li>
+        <li><a href="#awal">2. Amplitudo &amp; fase dari syarat awal</a></li>
+        <li><a href="#mengapa">3. Mengapa perlu koordinat baru</a></li>
+        <li><a href="#normal">4. Koordinat normal: T dan V jadi jumlah kuadrat</a></li>
+        <li><a href="#mandiri">5. n osilator mandiri</a></li>
+        <li><a href="#contoh">6. Contoh pegas: dua koordinat normal</a></li>
+        <li><a href="#makna">7. Makna fisis &amp; cakrawala</a></li>
+        <li><a href="#rangkuman">8. Rangkuman</a></li>
+      </ol></nav>
+
+      <!-- 1 -->
+      <section class="block" id="umum">
+        <h2>1. Solusi umum: superposisi semua moda</h2>
+        <div class="chapline"></div>
+        <p>Di &sect;6.2 tiap frekuensi \(\omega_k\) memberi satu solusi berosilasi serempak. Karena persamaan geraknya linear, <b>jumlah</b> semua solusi itu juga solusi &mdash; dan itulah solusi paling umum: superposisi atas semua \(n\) moda (indeks \(k\) dijumlahkan):</p>
+        <div class="eq">$$ \eta_i=\sum_k C_k\,a_{ik}\,e^{-i\omega_k t}. \tag{6.35}$$</div>
+        <p>Karena gerak nyata adalah bagian realnya, bentuk yang sering dipakai adalah</p>
+        <div class="eq">$$ \eta_i=\sum_k f_k\,a_{ik}\cos(\omega_k t+\delta_k), \tag{6.36}$$</div>
+        <p>dengan amplitudo \(f_k\) dan fase \(\delta_k\) tiap moda. Pola spasial tiap suku ditetapkan oleh vektor eigen \(a_{ik}\); yang bebas hanya seberapa kuat (\(f_k\)) dan pada fase apa (\(\delta_k\)) tiap moda tereksitasi.</p>
+      </section>
+
+      <!-- 2 -->
+      <section class="block" id="awal">
+        <h2>2. Amplitudo dan fase dari syarat awal</h2>
+        <div class="chapline"></div>
+        <p>Konstanta \(C_k\) (yakni \(f_k\) dan \(\delta_k\)) ditentukan oleh posisi dan laju awal. Dari (6.35) pada \(t=0\):</p>
+        <div class="eq">$$ \eta_i(0)=\mathrm{Re}\,C_k\,a_{ik},\qquad \dot\eta_i(0)=\mathrm{Im}\,C_k\,a_{ik}\,\omega_k. \tag{6.37&ndash;6.38}$$</div>
+        <p>Menuliskan yang pertama sebagai \(\boldsymbol\eta(0)=\mathbf{A}\,\mathrm{Re}\,\mathbf{C}\) lalu mengalikan \(\tilde{\mathbf{A}}\mathbf{T}\) dari kiri (dan memakai \(\tilde{\mathbf{A}}\mathbf{T}\mathbf{A}=\mathbf{1}\)) langsung memberi</p>
+        <div class="eq">$$ \mathrm{Re}\,C_l=a_{jl}\,T_{jk}\,\eta_k(0),\qquad \mathrm{Im}\,C_l=\frac{1}{\omega_l}\sum_{j,k}a_{jl}\,T_{jk}\,\dot\eta_k(0). \tag{6.39&ndash;6.40}$$</div>
+        <div class="callout support"><p><b>Penjelasan sederhana.</b> Sifat ortogonalitas matriks \(\mathbf{A}\) berbuah manis: ia bekerja seperti &ldquo;saringan&rdquo; yang menarik keluar kontribusi tiap moda dari kondisi awal. Tak perlu memecahkan sistem besar &mdash; cukup kalikan dengan \(\tilde{\mathbf{A}}\mathbf{T}\).</p></div>
+      </section>
+
+      <!-- 3 -->
+      <section class="block" id="mengapa">
+        <h2>3. Mengapa perlu koordinat baru</h2>
+        <div class="chapline"></div>
+        <p>Perhatikan (6.36): tiap koordinat asli \(\eta_i\) adalah <i>jumlah</i> beberapa kosinus berfrekuensi berbeda. Kecuali semua \(\omega_k\) kebetulan sepadan (rasio bilangan bulat), \(\eta_i\) <b>tak pernah berulang</b> &mdash; geraknya kuasi-periodik dan rumit. Massa tunggal pada sistem pegas, misalnya, bergerak seolah tanpa pola.</p>
+        <p>Namun kerumitan itu hanya milik <i>pilihan koordinat</i>. Kita bisa berpindah ke himpunan koordinat baru yang masing-masing berupa fungsi periodik <b>sederhana</b> &mdash; satu frekuensi saja. Itulah <b>koordinat normal</b> \(\zeta_j\).</p>
+      </section>
+
+      <!-- 4 -->
+      <section class="block" id="normal">
+        <h2>4. Koordinat normal: T dan V jadi jumlah kuadrat</h2>
+        <div class="chapline"></div>
+        <p>Definisikan koordinat normal lewat matriks vektor eigen \(\mathbf{A}\) dari &sect;6.2:</p>
+        <div class="eq">$$ \eta_i=a_{ij}\,\zeta_j,\qquad\text{atau}\qquad \boldsymbol\eta=\mathbf{A}\boldsymbol\zeta. \tag{6.41}$$</div>
+        <p>Sekarang lihat apa yang terjadi pada energi. Potensial \(V=\tfrac12\tilde{\boldsymbol\eta}\mathbf{V}\boldsymbol\eta\); substitusikan \(\tilde{\boldsymbol\eta}=\tilde{\boldsymbol\zeta}\tilde{\mathbf{A}}\):</p>
+        <div class="eq">$$ V=\tfrac12\,\tilde{\boldsymbol\zeta}\,(\tilde{\mathbf{A}}\mathbf{V}\mathbf{A})\,\boldsymbol\zeta =\tfrac12\,\tilde{\boldsymbol\zeta}\,\boldsymbol\lambda\,\boldsymbol\zeta =\tfrac12\sum_k \omega_k^2\,\zeta_k^2, \tag{6.43}$$</div>
+        <p>karena \(\tilde{\mathbf{A}}\mathbf{V}\mathbf{A}=\boldsymbol\lambda\) <b>diagonal</b> (hasil &sect;6.2). Energi kinetik lebih sederhana lagi, sebab \(\tilde{\mathbf{A}}\mathbf{T}\mathbf{A}=\mathbf{1}\):</p>
+        <div class="eq">$$ T=\tfrac12\,\tilde{\dot{\boldsymbol\zeta}}\,(\tilde{\mathbf{A}}\mathbf{T}\mathbf{A})\,\dot{\boldsymbol\zeta} =\tfrac12\,\tilde{\dot{\boldsymbol\zeta}}\,\dot{\boldsymbol\zeta} =\tfrac12\sum_k \dot\zeta_k^2. \tag{6.44}$$</div>
+        <div class="callout support"><p><b>Inilah keajaibannya.</b> Dalam koordinat normal, <b>baik \(T\) maupun \(V\) menjadi murni jumlah kuadrat</b> &mdash; tanpa satu pun suku silang \(\zeta_j\zeta_k\). Inilah wujud lain dari transformasi sumbu utama: sama seperti sumbu utama mereduksi momen inersia menjadi jumlah kuadrat (Bab 5), di sini \(\mathbf{A}\) <b>mendiagonalkan dua bentuk kuadratik sekaligus</b>.</p></div>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 240 190" width="100%" height="auto" style="max-width:360px;margin:auto" aria-label="Bidang simpangan dengan sumbu asli eta1,eta2 dan sumbu normal zeta1,zeta2 pada 45 derajat">
+              <!-- original axes -->
+              <line x1="30" y1="100" x2="210" y2="100" stroke="var(--d-axis)" stroke-width="1.1" opacity="0.6"/>
+              <line x1="120" y1="178" x2="120" y2="22" stroke="var(--d-axis)" stroke-width="1.1" opacity="0.6"/>
+              <text class="dlm" x="204" y="114">&#951;&#8321;</text>
+              <text class="dlm" x="126" y="30">&#951;&#8322;</text>
+              <!-- normal axes at 45deg -->
+              <line x1="48" y1="172" x2="192" y2="28" stroke="var(--d-blue)" stroke-width="2" marker-end="url(#n-b)"/>
+              <line x1="192" y1="172" x2="48" y2="28" stroke="var(--d-rust)" stroke-width="2" marker-end="url(#n-r)"/>
+              <text class="dl" x="196" y="28" fill="var(--d-blue)" font-weight="700">&#950;&#8321;</text>
+              <text class="dl" x="36" y="30" fill="var(--d-rust)" font-weight="700">&#950;&#8322;</text>
+              <text class="dlm" x="150" y="62" fill="var(--d-blue)">simetris (1,1)</text>
+              <text class="dlm" x="34" y="150" fill="var(--d-rust)">antisimetris (1,&minus;1)</text>
+              <defs>
+                <marker id="n-b" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-blue)"/></marker>
+                <marker id="n-r" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--d-rust)"/></marker>
+              </defs>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 1. Koordinat normal = sumbu utama.</b> Bagi sistem pegas simetris, sumbu normal \(\zeta_1,\zeta_2\) adalah arah \((1,1)\) dan \((1,-1)\) &mdash; diputar \(45^\circ\) dari sumbu asli \(\eta_1,\eta_2\). Di sepanjang sumbu inilah \(T\) dan \(V\) tak lagi tergandeng.</figcaption>
+        </figure>
+      </section>
+
+      <!-- 5 -->
+      <section class="block" id="mandiri">
+        <h2>5. Hasilnya: n osilator mandiri</h2>
+        <div class="chapline"></div>
+        <p>Dengan \(T\) dan \(V\) kini jumlah kuadrat, Lagrangiannya pecah menjadi jumlah Lagrangian osilator-osilator terpisah:</p>
+        <div class="eq">$$ L=\tfrac12\sum_k\left(\dot\zeta_k^2-\omega_k^2\zeta_k^2\right). \tag{6.45}$$</div>
+        <p>Persamaan Lagrange untuk tiap \(\zeta_k\) tak memuat koordinat lain &mdash; benar-benar <b>terpisah</b>:</p>
+        <div class="eq">$$ \boxed{\ \ddot\zeta_k+\omega_k^2\,\zeta_k=0\ }\qquad\Longrightarrow\qquad \zeta_k=C_k\,e^{-i\omega_k t}. \tag{6.46&ndash;6.47}$$</div>
+        <p>Tiap koordinat normal adalah osilator harmonik tunggal berfrekuensi \(\omega_k\) &mdash; satu nada, periodik murni. Sebuah <b>moda normal</b> adalah gerak ketika <i>hanya satu</i> \(\zeta_k\) tereksitasi: seluruh partikel bergetar dengan frekuensi dan fase yang sama (atau tepat berlawanan fase bila komponen \(a_{ik}\) berbeda tanda), dengan amplitudo relatif diatur oleh vektor eigen.</p>
+        <div class="callout"><p><b>Pembalik kerumitan.</b> Gerak umum yang kuasi-periodik dan membingungkan di koordinat asli \(\eta_i\) ternyata, di koordinat \(\zeta_k\), tak lebih dari beberapa pegas tunggal yang berayun sendiri-sendiri. Koordinat normal tidak mengubah fisika &mdash; ia hanya memilih sudut pandang yang membuat segalanya terurai.</p></div>
+      </section>
+
+      <!-- 6 -->
+      <section class="block" id="contoh">
+        <h2>6. Contoh pegas: dua koordinat normal</h2>
+        <div class="chapline"></div>
+        <p>Kembali ke sistem dua massa&ndash;tiga pegas. Dari &sect;6.2, vektor eigen ternormalkan \(\mathbf{a}_1=\tfrac{1}{\sqrt{2m}}(1,1)\) dan \(\mathbf{a}_2=\tfrac{1}{\sqrt{2m}}(1,-1)\). Membalik \(\boldsymbol\eta=\mathbf{A}\boldsymbol\zeta\) (atau memakai \(\boldsymbol\zeta=\tilde{\mathbf{A}}\mathbf{T}\boldsymbol\eta\)) memberi koordinat normal</p>
+        <div class="eq">$$ \zeta_1=\sqrt{\tfrac{m}{2}}\,(\eta_1+\eta_2),\qquad \zeta_2=\sqrt{\tfrac{m}{2}}\,(\eta_1-\eta_2). $$</div>
+        <p>Keduanya langsung bermakna fisis: \(\zeta_1\) mengukur gerak <b>bersama</b> (simetris) kedua massa, \(\zeta_2\) gerak <b>relatif</b> (antisimetris). Persamaan geraknya terpisah sempurna:</p>
+        <div class="eq">$$ \ddot\zeta_1+\frac{k}{m}\,\zeta_1=0,\qquad \ddot\zeta_2+\frac{3k}{m}\,\zeta_2=0. $$</div>
+        <p>Setiap gerak kecil sistem adalah \(\eta_1=(\zeta_1+\zeta_2)/\sqrt{2m}\), \(\eta_2=(\zeta_1-\zeta_2)/\sqrt{2m}\) &mdash; superposisi dua getaran mandiri berfrekuensi \(\sqrt{k/m}\) dan \(\sqrt{3k/m}\).</p>
+
+        <figure class="fig">
+          <div>
+            <svg class="dg" viewBox="0 0 230 175" width="100%" height="auto" style="max-width:500px;margin:auto" aria-label="Jejak waktu: koordinat normal zeta1 dan zeta2 masing-masing gelombang murni, sedangkan koordinat asli eta1 adalah superposisi yang rumit">
+              <line x1="40" y1="30" x2="40" y2="150" stroke="var(--d-axis)" stroke-width="1.1"/>
+              <line x1="40" y1="90" x2="220" y2="90" stroke="var(--d-axis)" stroke-width="1" opacity="0.5"/>
+              <text class="dlm" x="222" y="104" text-anchor="end">t</text>
+              <polyline fill="none" stroke="var(--d-blue)" stroke-width="1.8" points="40.0,40.0 43.2,41.6 46.4,46.1 49.5,53.4 52.7,63.0 55.9,74.2 59.1,86.5 62.2,98.9 65.4,110.8 68.6,121.4 71.8,130.1 75.0,136.2 78.1,139.5 81.3,139.7 84.5,136.8 87.7,131.0 90.9,122.7 94.0,112.3 97.2,100.5 100.4,88.1 103.6,75.8 106.8,64.4 109.9,54.6 113.1,46.9 116.3,42.0 119.5,40.0 122.6,41.2 125.8,45.3 129.0,52.3 132.2,61.6 135.4,72.7 138.5,84.8 141.7,97.3 144.9,109.3 148.1,120.1 151.2,129.0 154.4,135.6 157.6,139.2 160.8,139.9 164.0,137.4 167.1,132.0 170.3,123.9 173.5,113.8 176.7,102.2 179.9,89.8 183.0,77.4 186.2,65.8 189.4,55.8 192.6,47.8 195.8,42.5 198.9,40.1 202.1,40.8 205.3,44.6 208.5,51.2 211.6,60.3 214.8,71.1 218.0,83.2"/>
+              <polyline fill="none" stroke="var(--d-teal)" stroke-width="1.8" points="40.0,40.0 43.2,44.6 46.4,57.6 49.5,76.6 52.7,98.0 55.9,118.0 59.1,132.8 62.2,139.7 65.4,137.4 68.6,126.4 71.8,108.7 75.0,87.5 78.1,66.7 81.3,50.3 84.5,41.2 87.7,41.1 90.9,50.0 94.0,66.3 97.2,87.0 100.4,108.2 103.6,126.1 106.8,137.3 109.9,139.7 113.1,133.0 116.3,118.4 119.5,98.5 122.6,77.0 125.8,58.0 129.0,44.8 132.2,40.0 135.4,44.4 138.5,57.3 141.7,76.1 144.9,97.6 148.1,117.6 151.2,132.6 154.4,139.6 157.6,137.6 160.8,126.7 164.0,109.1 167.1,87.9 170.3,67.1 173.5,50.6 176.7,41.3 179.9,41.0 183.0,49.8 186.2,66.0 189.4,86.6 192.6,107.8 195.8,125.8 198.9,137.1 202.1,139.8 205.3,133.3 208.5,118.7 211.6,98.9 214.8,77.4 218.0,58.3"/>
+              <polyline fill="none" stroke="var(--d-rust)" stroke-width="2.2" points="40.0,40.0 43.2,43.1 46.4,51.9 49.5,65.0 52.7,80.5 55.9,96.1 59.1,109.6 62.2,119.3 65.4,124.1 68.6,123.9 71.8,119.4 75.0,111.8 78.1,103.1 81.3,95.0 84.5,89.0 87.7,86.1 90.9,86.4 94.0,89.3 97.2,93.8 100.4,98.2 103.6,101.0 106.8,100.8 109.9,97.2 113.1,90.0 116.3,80.2 119.5,69.2 122.6,59.1 125.8,51.7 129.0,48.6 132.2,50.8 135.4,58.5 138.5,71.0 141.7,86.7 144.9,103.4 148.1,118.9 151.2,130.8 154.4,137.6 157.6,138.4 160.8,133.3 164.0,123.2 167.1,109.9 170.3,95.5 173.5,82.2 176.7,71.7 179.9,65.4 183.0,63.6 186.2,65.9 189.4,71.2 192.6,77.8 195.8,84.1 198.9,88.6 202.1,90.3 205.3,88.9 208.5,85.0 211.6,79.6 214.8,74.3 218.0,70.7"/>
+              <text class="dl" x="60" y="26" fill="var(--d-blue)" font-weight="700">&#950;&#8321;</text>
+              <text class="dl" x="92" y="26" fill="var(--d-teal)" font-weight="700">&#950;&#8322;</text>
+              <text class="dl" x="140" y="26" fill="var(--d-rust)" font-weight="700">&#951;&#8321; (asli)</text>
+            </svg>
+          </div>
+          <figcaption><b>Gambar 2. Mandiri vs campuran.</b> Koordinat normal \(\zeta_1,\zeta_2\) (biru, hijau) masing-masing gelombang murni satu frekuensi. Koordinat asli \(\eta_1=(\zeta_1+\zeta_2)/\sqrt{2m}\) (merah) adalah superposisinya &mdash; kuasi-periodik dan tak berulang rapi. Kerumitan ada pada koordinat, bukan pada fisikanya.</figcaption>
+        </figure>
+      </section>
+
+      <!-- 7 -->
+      <section class="block" id="makna">
+        <h2>7. Makna fisis dan cakrawala</h2>
+        <div class="chapline"></div>
+        <ul class="points">
+          <li><b>Tidak ada harmonik.</b> Gerak lengkap hanya memuat frekuensi-frekuensi \(\omega_k\) itu sendiri, tanpa kelipatannya &mdash; akibat langsung dari pengandaian osilasi <i>kecil</i> (potensial kuadratik). Begitu amplitudo membesar, suku anharmonik muncul dan gambaran ini mulai rusak.</li>
+          <li><b>Setiap sistem = kumpulan osilator.</b> Lagrangian (6.45) adalah jumlah Lagrangian osilator harmonik. Jadi getaran kecil apa pun setara dengan &ldquo;membunyikan&rdquo; sekumpulan osilator harmonik mandiri dengan intensitas dan fase berbeda.</li>
+          <li><b>Jembatan ke fisika modern.</b> Gambaran yang sama muncul saat medan elektromagnetik dikuantisasi: tiap moda normal menjadi osilator, frekuensinya menjadi frekuensi foton, dan amplitudo eksitasinya menjadi &ldquo;bilangan okupasi&rdquo; (jumlah foton). Normal modes seismik Bumi dan fonon dalam kristal adalah cerita yang sama.</li>
+        </ul>
+      </section>
+
+      <!-- 8 -->
+      <section class="block" id="rangkuman">
+        <h2>8. Rangkuman</h2>
+        <div class="chapline"></div>
+        <ol class="steps">
+          <li>Solusi umum = superposisi semua moda: \(\eta_i=\sum_k f_k a_{ik}\cos(\omega_k t+\delta_k)\) (6.36).</li>
+          <li>Amplitudo &amp; fase \(C_k\) dari syarat awal lewat \(\tilde{\mathbf{A}}\mathbf{T}\) (6.39&ndash;6.40).</li>
+          <li>Koordinat normal \(\boldsymbol\eta=\mathbf{A}\boldsymbol\zeta\) membuat \(V=\tfrac12\sum\omega_k^2\zeta_k^2\) dan \(T=\tfrac12\sum\dot\zeta_k^2\) (6.43&ndash;6.44).</li>
+          <li>Maka \(\ddot\zeta_k+\omega_k^2\zeta_k=0\): \(n\) osilator harmonik mandiri (6.46).</li>
+          <li>Moda normal = eksitasi satu \(\zeta_k\); gerak umum = superposisinya.</li>
+        </ol>
+        <div class="callout support"><p><b>Satu kalimat.</b> Koordinat normal adalah sudut pandang di mana sistem tergandeng berhenti tampak tergandeng: \(n\) derajat kebebasan yang saling tarik-menarik berubah menjadi \(n\) pegas tunggal yang berayun sendiri-sendiri, masing-masing pada frekuensi \(\omega_k\)-nya.</p></div>
+        <p class="source-note">Bahan ini adalah penyederhanaan pedagogis. Penurunan penuh ada di Goldstein &sect;6.3 (hlm. 250&ndash;253); penerapannya pada molekul triatomik di &sect;6.4.</p>
+      </section>
+
+      <nav class="seq-nav" aria-label="Navigasi topik">
+        <a href="/kuliah/mekanika-klasik/osilasi-kecil-nilai-eigen/"><span class="lbl">&larr; Sebelumnya &middot; &sect;6.2</span>Persamaan Nilai Eigen &amp; Sumbu Utama</a>
+        <a class="nx" href="/kuliah/mekanika-klasik/"><span class="lbl">Daftar topik &uarr; &middot; &sect;6.4 menyusul</span>Mekanika Klasik</a>
+      </nav>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
