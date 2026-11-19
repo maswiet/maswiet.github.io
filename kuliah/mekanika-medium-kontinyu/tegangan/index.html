@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tegangan dan Prinsip Umum — Mekanika Medium Kontinyu — Wiwit Suryanto</title>
+  <meta name="description" content="Bahan ajar Mekanika Medium Kontinyu untuk mahasiswa Geofisika UGM: tegangan dan formulasi prinsip umum (Lai, Rubin &amp; Krempl, Bab 4). Tensor tegangan, tegangan utama, persamaan gerak Cauchy, syarat batas, Piola–Kirchhoff, energi, dan entropi, dengan contoh seismologi, tektonik, dan geodinamika.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:44px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    main h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:28px 0 8px}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);border-radius:6px;overflow:hidden}
+    figure.fig > div{padding:18px 16px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);padding:10px 16px;border-top:1px solid var(--border)}
+    figure.fig figcaption b{color:var(--text);font-weight:600}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+    ol.steps{font-family:var(--sans);font-size:16px;line-height:1.55;padding-left:22px;margin:16px 0}
+    ol.steps li{margin:0 0 10px}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:22px 0}
+    .callout p:first-child{margin-top:0}
+    .callout p:last-child{margin-bottom:0}
+    .callout.support{background:#EDF3F2;border-color:#C7DAD6}
+    .callout.try{background:#FBF1EC;border-color:#E6C9BB}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    .seq-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:40px 0 0;font-family:var(--sans)}
+    .seq-nav a{display:block;border:1px solid var(--border);border-radius:6px;padding:14px 16px;text-decoration:none;background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+    .seq-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    .seq-nav .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .seq-nav a:hover .lbl{color:var(--accent)}
+    .seq-nav .nx{text-align:right}
+    @media (max-width:560px){ .seq-nav{grid-template-columns:1fr} .seq-nav .nx{text-align:left} }
+
+    .toc{font-family:var(--sans);font-size:15px;columns:2;column-gap:32px;margin:28px 0 0;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:2px 0;break-inside:avoid}
+    .toc a{text-decoration:none}
+    table.data{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;line-height:1.5;margin:0 0 20px;background:var(--surface);border:1px solid var(--border)}
+    table.data th,table.data td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+    table.data th{background:var(--surface-muted);font-weight:600}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+
+    .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-teal:#2F5D62; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
+    text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
+    text.dlm{font-family:var(--sans);font-size:12px;fill:#5F625C}
+    .figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:8px 0 20px}
+    .stage-fig{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px}
+    .stage-fig svg{width:100%;height:auto;display:block}
+    .stage-fig p{margin:10px 0 0;font-family:var(--sans);font-size:13.5px;line-height:1.45;color:var(--text-muted)}
+    .stage-fig p b{color:var(--text)}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:34px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:29px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .toc{columns:1}
+    }
+    main ul:not(.points):not(.nav-list):not(.contact-list),main ol:not(.steps){font-family:var(--sans);font-size:16px;line-height:1.6;padding-left:24px}
+    main ul:not(.points) li,main ol:not(.steps) li{margin:0 0 8px}
+    .toc{columns:1}
+    .eq{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:4px 14px}
+    table.data td:nth-child(2){white-space:normal}
+    .table-wrap{overflow-x:auto}
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; <a href="/kuliah/mekanika-medium-kontinyu/">Mekanika Medium Kontinyu</a> &nbsp;/&nbsp; Tegangan</p>
+      <p class="eyebrow">Mekanika Medium Kontinyu &middot; Sarjana Geofisika</p>
+      <h1>Tegangan dan Prinsip Umum Mekanika Kontinyu</h1>
+      <p class="lede">Apa yang membuat batuan saling dorong di dalam Bumi, dan hukum apa yang mengatur semua materi kontinyu, dari kerak sampai inti. Dibangun dari ide paling sederhana (gaya per luas) hingga lima prinsip umum mekanika, dengan penurunan analitik yang utuh. Mengikuti Lai, Rubin &amp; Krempl, Bab 4.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Mekanika Medium Kontinyu (Program Sarjana Geofisika)</dd>
+        <dt>Rujukan utama</dt><dd>Lai, Rubin &amp; Krempl (2010), <i>Introduction to Continuum Mechanics</i>, edisi ke-4, Bab 4</dd>
+        <dt>Prasyarat</dt><dd><a href="/kuliah/mekanika-medium-kontinyu/kinematika/">Bab 3 Kinematika</a>, teorema divergensi, nilai eigen</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <nav class="toc" aria-label="Daftar isi"><ol>
+<li><a href="#pengantar-dari-bagaimana-bergerak-ke-mengapa-ber">Pengantar: Dari "Bagaimana Bergerak" ke "Mengapa Bergerak"</a></li>
+<li><a href="#vektor-tegangan">Vektor Tegangan (4.1)</a></li>
+<li><a href="#tensor-tegangan">Tensor Tegangan (4.2)</a></li>
+<li><a href="#komponen-tensor-tegangan">Komponen Tensor Tegangan (4.3)</a></li>
+<li><a href="#simetri-tensor-tegangan">Simetri Tensor Tegangan (4.4)</a></li>
+<li><a href="#tegangan-utama-dan-tegangan-geser-maksimum">Tegangan Utama dan Tegangan Geser Maksimum (4.5–4.6)</a></li>
+<li><a href="#persamaan-gerak-prinsip-momentum-linear">Persamaan Gerak: Prinsip Momentum Linear (4.7)</a></li>
+<li><a href="#persamaan-gerak-dalam-koordinat-silinder-dan-bol">Persamaan Gerak dalam Koordinat Silinder dan Bola (4.8)</a></li>
+<li><a href="#syarat-batas-tegangan">Syarat Batas Tegangan (4.9)</a></li>
+<li><a href="#tensor-tegangan-piolakirchhoff">Tensor Tegangan Piola–Kirchhoff (4.10–4.11)</a></li>
+<li><a href="#daya-tegangan">Daya Tegangan (4.12–4.13)</a></li>
+<li><a href="#aliran-panas-dan-persamaan-energi">Aliran Panas dan Persamaan Energi (4.14–4.15)</a></li>
+<li><a href="#ketaksamaan-entropi-dan-energi-helmholtz">Ketaksamaan Entropi dan Energi Helmholtz (4.16–4.17)</a></li>
+<li><a href="#formulasi-integral-prinsip-umum-mekanika">Formulasi Integral Prinsip Umum Mekanika (4.18)</a></li>
+<li><a href="#ringkasan-glosarium-dan-latihan">Ringkasan, Glosarium, dan Latihan</a></li>
+      </ol></nav>
+
+<section class="block" id="pengantar-dari-bagaimana-bergerak-ke-mengapa-ber">
+<h2>Pengantar: Dari "Bagaimana Bergerak" ke "Mengapa Bergerak"</h2>
+<p>Bab 3 hanya merekam gerak dan deformasi. Bab ini memperkenalkan <strong>gaya di dalam benda</strong> (tegangan) dan <strong>lima hukum umum</strong> yang berlaku untuk semua materi kontinyu, dari batuan, magma, es, sampai air laut.</p>
+<p>Bayangkan Anda memegang sebongkah batu. Batu itu tidak hancur karena setiap bagian kecilnya <strong>saling dorong dan saling tarik</strong> dengan tetangganya. Gaya "saling dorong" di dalam materi inilah yang disebut tegangan (stress). Di dalam Bumi, tegangan menentukan di mana batuan patah (gempa), ke mana magma naik, dan bagaimana gelombang seismik merambat.</p>
+<p>Ada dua jenis gaya pada benda kontinyu:</p>
+<ul>
+<li><strong>Gaya badan (body force)</strong> bekerja pada seluruh volume, tanpa sentuhan. Contoh: gravitasi. Kita tulis ρ<strong>B</strong> per satuan volume (B = gaya per satuan massa, untuk gravitasi B = <strong>g</strong>).</li>
+<li><strong>Gaya permukaan (surface force)</strong> bekerja melalui sentuhan pada suatu bidang, nyata atau bayangan. Contoh: beban batuan di atas suatu lapisan, tekanan air pada dasar laut, gesekan pada bidang sesar.</li>
+</ul>
+<h3>Capaian pembelajaran</h3>
+<ol>
+<li>Menghitung vektor tegangan pada bidang sembarang dari tensor tegangan, t = Tn.</li>
+<li>Menghitung tegangan utama, arah utama, dan tegangan geser maksimum, lalu menafsirkannya untuk sesar.</li>
+<li>Menurunkan persamaan gerak Cauchy dan menerapkannya pada tekanan litostatik dan syarat batas.</li>
+<li>Memahami tensor Piola–Kirchhoff untuk deformasi besar.</li>
+<li>Menuliskan persamaan energi, ketaksamaan entropi, dan bentuk integral kelima prinsip umum mekanika.</li>
+</ol>
+<h3>Konvensi tanda (penting!)</h3>
+<p>Buku Lai dkk. memakai <strong>tarik bernilai positif</strong> (tensile positive), konvensi fisika dan teknik. Banyak buku geologi dan geomekanika (misalnya Jaeger &amp; Cook, Zoback) memakai <strong>tekan bernilai positif</strong>, karena di dalam Bumi hampir semua tegangan bersifat tekan. Di materi ini kita ikuti Lai: tegangan tekan bernilai <strong>negatif</strong>. Selalu periksa konvensi saat membaca makalah atau memakai perangkat lunak.</p>
+
+</section>
+<section class="block" id="vektor-tegangan">
+<h2>1. Vektor Tegangan (4.1)</h2>
+<p><strong>Vektor tegangan</strong> (traksi) t adalah gaya per satuan luas yang bekerja pada suatu bidang di dalam benda. Satuannya Pa = N/m²; di geofisika biasanya MPa (10⁶ Pa) atau GPa.</p>
+<h3>Ide dasar: potong benda dengan bidang bayangan</h3>
+<p>Ambil titik P di dalam benda dan bayangkan bidang yang melewati P dengan vektor normal satuan n. Bidang ini memotong benda menjadi bagian I (di belakang n) dan bagian II (di depan n). Bagian II mendorong atau menarik bagian I dengan gaya ΔF pada luasan kecil ΔA:</p>
+<div class="eq">$$\mathbf{t}_{\mathbf{n}} = \lim_{\Delta A \to 0} \frac{\Delta \mathbf{F}}{\Delta A}$$</div>
+<p>Menurut hukum aksi-reaksi Newton, bagian I juga mendorong bagian II dengan gaya yang sama besar dan berlawanan arah:</p>
+<div class="eq">$$\mathbf{t}_{-\mathbf{n}} = -\mathbf{t}_{\mathbf{n}}$$</div>
+<p><strong>Prinsip tegangan Cauchy.</strong> Vektor tegangan di suatu titik hanya bergantung pada posisi, waktu, dan arah normal bidang n, tidak pada kelengkungan bidang:</p>
+<div class="eq">$$\mathbf{t} = \mathbf{t}(\mathbf{x}, t, \mathbf{n})$$</div>
+<p><strong>Penting:</strong> t umumnya <strong>tidak sejajar</strong> dengan n. Ia dapat diuraikan menjadi komponen <strong>normal</strong> (tegak lurus bidang: tarik atau tekan) dan komponen <strong>geser</strong> (sejajar bidang). Pada bidang sesar, komponen normal menekan kedua blok, sedangkan komponen geser berusaha menggeserkan keduanya. Gempa terjadi saat geser mengalahkan gesekan.</p>
+<p><strong>Contoh 1.1 — Orde besaran di dalam Bumi.</strong> Pada kedalaman h, berat kolom batuan di atas suatu bidang horizontal per satuan luas adalah ρgh. Untuk ρ = 2700 kg/m³, g = 9,8 m/s², h = 10 km: ρgh = 2700 × 9,8 × 10⁴ ≈ 2,6 × 10⁸ Pa = <strong>265 MPa</strong>. Bandingkan dengan tekanan udara 0,1 MPa: sekitar 2600 kali lebih besar.</p>
+
+</section>
+<section class="block" id="tensor-tegangan">
+<h2>2. Tensor Tegangan (4.2)</h2>
+<p>Inti bagian ini: <strong>cukup tahu tegangan pada tiga bidang koordinat, maka tegangan pada bidang apa pun dapat dihitung</strong>. Alat penghubungnya adalah tensor tegangan Cauchy T:</p>
+<div class="eq">$$\mathbf{t}_{\mathbf{n}} = \mathbf{T}\,\mathbf{n}$$</div>
+<h3>Bukti dengan tetrahedron Cauchy</h3>
+<p>Ambil tetrahedron kecil di titik P: tiga sisinya sejajar bidang koordinat (normal keluar −e₁, −e₂, −e₃) dan sisi miringnya bernormal n dengan luas ΔAₙ. Hukum Newton untuk tetrahedron:</p>
+<div class="eq">$$\mathbf{t}_{-\mathbf{e}_1}\Delta A_1 + \mathbf{t}_{-\mathbf{e}_2}\Delta A_2 + \mathbf{t}_{-\mathbf{e}_3}\Delta A_3 + \mathbf{t}_{\mathbf{n}}\Delta A_n + \rho\mathbf{B}\,\Delta V = \rho\,\Delta V\,\mathbf{a}$$</div>
+<p>Langkah kuncinya adalah membandingkan orde besaran:</p>
+<ul>
+<li>Luas sebanding dengan (panjang)², sedangkan volume ΔV sebanding dengan (panjang)³.</li>
+<li>Saat tetrahedron mengecil menuju titik, suku volume (gaya badan dan massa × percepatan) menghilang <strong>lebih cepat</strong> daripada suku luas. Jadi keduanya dapat diabaikan.</li>
+<li>Luas proyeksi sisi-sisi koordinat adalah ΔAᵢ = nᵢ ΔAₙ.</li>
+</ul>
+<p>Dengan t₋ₑᵢ = −tₑᵢ, diperoleh:</p>
+<div class="eq">$$\mathbf{t}_{\mathbf{n}} = n_1\,\mathbf{t}_{\mathbf{e}_1} + n_2\,\mathbf{t}_{\mathbf{e}_2} + n_3\,\mathbf{t}_{\mathbf{e}_3}$$</div>
+<p>Hubungan ini <strong>linear</strong> dalam n, sehingga ada transformasi linear (tensor) T dengan tₙ = Tn. Hasil ini berlaku <strong>baik benda diam maupun bergerak</strong> (bahkan saat gelombang gempa lewat), karena suku percepatan hilang dalam limit.</p>
+
+</section>
+<section class="block" id="komponen-tensor-tegangan">
+<h2>3. Komponen Tensor Tegangan (4.3)</h2>
+<p>Vektor tegangan pada bidang koordinat adalah kolom-kolom matriks T:</p>
+<div class="eq">$$\mathbf{t}_{\mathbf{e}_j} = \mathbf{T}\mathbf{e}_j = T_{1j}\mathbf{e}_1 + T_{2j}\mathbf{e}_2 + T_{3j}\mathbf{e}_3, \qquad t_i = T_{ij}\,n_j, \qquad [\mathbf{t}] = [\mathbf{T}][\mathbf{n}]$$</div>
+<p>Cara membaca Tᵢⱼ dalam Lai: <strong>indeks kedua j = bidang</strong> (yang normalnya eⱼ), <strong>indeks pertama i = arah</strong> komponen gaya. Jadi T₁₂ adalah komponen arah e₁ yang bekerja pada bidang bernormal e₂.</p>
+<figure class="fig"><div><svg viewBox="0 0 560 330" width="100%" style="max-width:520px;display:block;margin:auto" role="img" aria-label="Komponen tegangan pada tiga muka kubus"><defs><marker id="as" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#B8501F"/></marker></defs><marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5B6472"/></marker><polygon points="170,110 330,110 330,270 170,270" fill="#EEF3F8" stroke="#8FA6BC" stroke-width="1.5"/><polygon points="170,110 230,65 390,65 330,110" fill="#F4F7FA" stroke="#8FA6BC" stroke-width="1.5"/><polygon points="330,110 390,65 390,225 330,270" fill="#E4ECF4" stroke="#8FA6BC" stroke-width="1.5"/><line x1="60" y1="300" x2="120" y2="300" stroke="#5B6472" stroke-width="1.5" marker-end="url(#ax)"/><text x="126" y="304" class="dl">x₁</text><line x1="60" y1="300" x2="60" y2="240" stroke="#5B6472" stroke-width="1.5" marker-end="url(#ax)"/><text x="52" y="232" class="dl">x₂</text><line x1="60" y1="300" x2="30" y2="322" stroke="#5B6472" stroke-width="1.5" marker-end="url(#ax)"/><text x="14" y="326" class="dl">x₃</text><line x1="360" y1="168" x2="430" y2="168" stroke="#B8501F" stroke-width="2" marker-end="url(#as)"/><text x="436" y="172" class="dl">T₁₁</text><line x1="360" y1="168" x2="360" y2="118" stroke="#B8501F" stroke-width="2" marker-end="url(#as)"/><text x="366" y="116" class="dl">T₂₁</text><line x1="360" y1="168" x2="336" y2="186" stroke="#B8501F" stroke-width="2" marker-end="url(#as)"/><text x="332" y="208" class="dl">T₃₁</text><line x1="280" y1="88" x2="280" y2="22" stroke="#B8501F" stroke-width="2" marker-end="url(#as)"/><text x="288" y="26" class="dl">T₂₂</text><line x1="280" y1="88" x2="340" y2="88" stroke="#B8501F" stroke-width="2" marker-end="url(#as)"/><text x="344" y="84" class="dl" dy="-6">T₁₂</text><line x1="280" y1="88" x2="252" y2="108" stroke="#B8501F" stroke-width="2" marker-end="url(#as)"/><text x="214" y="100" class="dl">T₃₂</text><line x1="250" y1="190" x2="215" y2="215" stroke="#B8501F" stroke-width="2" marker-end="url(#as)"/><text x="186" y="236" class="dl">T₃₃</text><line x1="250" y1="190" x2="300" y2="190" stroke="#B8501F" stroke-width="2" marker-end="url(#as)"/><text x="276" y="208" class="dl">T₁₃</text><line x1="250" y1="190" x2="250" y2="145" stroke="#B8501F" stroke-width="2" marker-end="url(#as)"/><text x="256" y="148" class="dl">T₂₃</text></svg></div><figcaption><b>Gambar 1.</b> Komponen tegangan pada tiga muka kubus yang normalnya e₁, e₂, e₃. Indeks kedua menunjukkan bidang, indeks pertama arah. Hanya 6 yang bebas karena Tᵢⱼ = Tⱼᵢ.</figcaption></figure>
+<ul>
+<li><strong>Diagonal</strong> T₁₁, T₂₂, T₃₃: <strong>tegangan normal</strong>. Positif = tarik, negatif = tekan.</li>
+<li><strong>Luar diagonal</strong> T₁₂, T₁₃, T₂₃, …: <strong>tegangan geser</strong>.</li>
+<li>Besar geser total pada bidang e₁: |τ₁| = √(T₂₁² + T₃₁²).</li>
+</ul>
+<p><strong>Contoh 3.1 (Contoh 4.4.2 Lai).</strong> Diketahui (MPa):</p>
+<div class="eq">$$[\mathbf{T}] = \begin{bmatrix} 2 &amp; 4 &amp; 3 \\ 4 &amp; 0 &amp; 0 \\ 3 &amp; 0 &amp; -1 \end{bmatrix}$$</div>
+<p>Bidang sejajar x₁ + 2x₂ + 2x₃ − 6 = 0 punya normal satuan n = (1, 2, 2)/3. Maka:</p>
+<div class="eq">$$[\mathbf{t}] = \frac{1}{3}\begin{bmatrix} 2 &amp; 4 &amp; 3 \\ 4 &amp; 0 &amp; 0 \\ 3 &amp; 0 &amp; -1 \end{bmatrix}\begin{bmatrix} 1 \\ 2 \\ 2 \end{bmatrix} = \frac{1}{3}\begin{bmatrix} 16 \\ 4 \\ 1 \end{bmatrix}\text{ MPa}, \qquad T_n = \mathbf{t}\cdot\mathbf{n} = \frac{16 + 8 + 2}{9} = 2{,}89 \text{ MPa}$$</div>
+<p>Tegangan geser pada bidang itu: |τ|² = |t|² − Tₙ² = (256 + 16 + 1)/9 − 2,89² ≈ 30,33 − 8,35 = 21,98, jadi |τ| ≈ 4,69 MPa.</p>
+
+</section>
+<section class="block" id="simetri-tensor-tegangan">
+<h2>4. Simetri Tensor Tegangan (4.4)</h2>
+<p>Tensor tegangan <strong>simetrik</strong>: Tᵢⱼ = Tⱼᵢ. Jadi hanya ada <strong>6 komponen bebas</strong>, bukan 9.</p>
+<h3>Bukti dengan momen pada kubus kecil</h3>
+<p>Ambil kubus kecil berukuran Δx₁ × Δx₂ × Δx₃ dan hitung momen terhadap sumbu x₃ yang melalui pusatnya. Hanya tegangan geser T₂₁ dan T₁₂ yang memberi momen:</p>
+<div class="eq">$$\sum M_3 = (T_{21} - T_{12})\,\Delta x_1\,\Delta x_2\,\Delta x_3 = I_{33}\,\alpha$$</div>
+<p>Momen inersia I₃₃ sebanding dengan (panjang)⁵, sedangkan ruas kiri sebanding dengan (panjang)³. Saat kubus mengecil, ruas kanan hilang lebih cepat, sehingga T₂₁ = T₁₂. Dengan cara serupa T₁₃ = T₃₁ dan T₂₃ = T₃₂.</p>
+<p>Intuisinya: jika T₂₁ ≠ T₁₂, kubus yang sangat kecil akan berputar dengan percepatan sudut tak hingga. (Simetri ini gagal hanya bila ada <strong>momen badan</strong>, misalnya pada material dengan medan magnet kuat; lihat Soal 4.29 Lai.)</p>
+<h3>Tegangan hidrostatik dan litostatik</h3>
+<p><strong>Contoh 4.1 — Tegangan hidrostatik.</strong> Jika T = −pI, maka t = Tn = −pn: vektor tegangan selalu tegak lurus bidang, <strong>tanpa geser pada bidang mana pun</strong>. Inilah keadaan tegangan di dalam fluida diam (air laut, magma yang diam).</p>
+<p><strong>Contoh 4.2 — Tegangan litostatik (Contoh 4.4.3 Lai).</strong> Dengan sumbu y ke atas, ambil T = (−p + ρgy) I, dengan p tekanan di y = 0. Pada sisi x = 0 (n = −e₁) traksinya t = (p − ρgy)e₁ (mendorong ke dalam). Gaya total pada sisi itu (lebar c, tinggi b):</p>
+<div class="eq">$$\mathbf{F} = \int (p - \rho g y)\,dA\;\mathbf{e}_1 = \left(p\,b\,c - \frac{\rho g b^2 c}{2}\right)\mathbf{e}_1$$</div>
+<p>Model "tekanan sama ke segala arah, bertambah dengan kedalaman" ini disebut <strong>keadaan litostatik</strong>. Ia adalah titik awal semua model tegangan kerak. Tegangan tektonik adalah <strong>simpangan</strong> dari keadaan litostatik ini.</p>
+
+</section>
+<section class="block" id="tegangan-utama-dan-tegangan-geser-maksimum">
+<h2>5. Tegangan Utama dan Tegangan Geser Maksimum (4.5–4.6)</h2>
+<h3>5.1 Tegangan utama</h3>
+<p>Karena T simetrik, selalu ada <strong>tiga bidang saling tegak lurus</strong> yang <strong>tidak mengalami geser</strong> sama sekali. Bidang ini disebut bidang utama; normalnya arah utama (vektor eigen T) dan tegangan normalnya <strong>tegangan utama</strong> T₁, T₂, T₃ (nilai eigen T).</p>
+<div class="eq">$$\mathbf{T}\mathbf{n} = \lambda\,\mathbf{n} \;\;\Rightarrow\;\; \lambda^3 - I_1\lambda^2 + I_2\lambda - I_3 = 0$$</div>
+<div class="eq">$$I_1 = T_{11} + T_{22} + T_{33}, \quad I_2 = \begin{vmatrix} T_{11} &amp; T_{12} \\ T_{21} &amp; T_{22} \end{vmatrix} + \begin{vmatrix} T_{11} &amp; T_{13} \\ T_{31} &amp; T_{33} \end{vmatrix} + \begin{vmatrix} T_{22} &amp; T_{23} \\ T_{32} &amp; T_{33} \end{vmatrix}, \quad I_3 = \det\mathbf{T}$$</div>
+<p>Ini <strong>persis</strong> soal nilai eigen yang sama dengan regangan utama di Bab 3. Tegangan utama memuat tegangan normal <strong>maksimum dan minimum</strong> di antara semua bidang.</p>
+<p>Di geofisika, tegangan utama sering dinamai σ₁ ≥ σ₂ ≥ σ₃ dengan <strong>tekan positif</strong>, sehingga σ₁ adalah tekanan terbesar. Dalam konvensi Lai (tarik positif), σ₁ = −T<sub>min</sub>.</p>
+<h3>5.2 Tegangan geser maksimum</h3>
+<p>Dalam sumbu utama, untuk bidang bernormal n = (n₁, n₂, n₃):</p>
+<div class="eq">$$\mathbf{t} = (T_1 n_1,\; T_2 n_2,\; T_3 n_3), \qquad T_n = T_1 n_1^2 + T_2 n_2^2 + T_3 n_3^2$$</div>
+<div class="eq">$$T_s^2 = |\mathbf{t}|^2 - T_n^2 = T_1^2 n_1^2 + T_2^2 n_2^2 + T_3^2 n_3^2 - \left(T_1 n_1^2 + T_2 n_2^2 + T_3 n_3^2\right)^2$$</div>
+<p>Dengan memaksimumkan Tₛ² terhadap n (dengan syarat n₁² + n₂² + n₃² = 1), hasilnya:</p>
+<div class="eq">$$(T_s)_{\max} = \frac{T_{\max} - T_{\min}}{2}$$</div>
+<p>Tegangan geser maksimum bekerja pada bidang yang <strong>membagi dua (45°)</strong> sudut antara arah tegangan utama maksimum dan minimum. Contoh: jika T₁ ≥ T₂ ≥ T₃, normalnya n = (e₁ ± e₃)/√2, dan tegangan normal pada bidang itu (T₁ + T₃)/2.</p>
+<p><strong>Contoh 5.1.</strong> T = diag(−10, −30, −60) MPa (semua tekan). Maka (Tₛ)ₘₐₓ = (−10 − (−60))/2 = 25 MPa, pada bidang 45° antara e₁ dan e₃, dengan tegangan normal (−10 − 60)/2 = −35 MPa.</p>
+<h3>5.3 Lingkaran Mohr (2D)</h3>
+<p>Untuk bidang yang normalnya membentuk sudut θ dari arah utama 1 (dalam bidang 1–3), rumus di atas menjadi:</p>
+<div class="eq">$$T_n = \frac{T_1 + T_3}{2} + \frac{T_1 - T_3}{2}\cos 2\theta, \qquad T_s = \frac{T_1 - T_3}{2}\sin 2\theta$$</div>
+<p>Pasangan (Tₙ, Tₛ) membentuk <strong>lingkaran</strong> berpusat (T₁ + T₃)/2 dengan jari-jari (T₁ − T₃)/2. Ini alat grafis yang sangat dipakai di geologi struktur dan geomekanika.</p>
+<figure class="fig"><div><svg viewBox="0 0 560 370" width="100%" style="max-width:520px;display:block;margin:auto" role="img" aria-label="Lingkaran Mohr untuk tegangan dua dimensi"><defs><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5B6472"/></marker></defs><line x1="30" y1="200" x2="530" y2="200" stroke="#5B6472" stroke-width="1.5" marker-end="url(#am)"/><text x="500" y="222" class="dl">Tₙ</text><line x1="80" y1="360" x2="80" y2="20" stroke="#5B6472" stroke-width="1.5" marker-end="url(#am)"/><text x="88" y="28" class="dl">Tₛ</text><circle cx="300" cy="200" r="150" fill="#EEF3F8" fill-opacity="0.6" stroke="#2F6FB0" stroke-width="2"/><circle cx="150" cy="200" r="4" fill="#1F1F1B"/><circle cx="450" cy="200" r="4" fill="#1F1F1B"/><circle cx="300" cy="200" r="3" fill="#5B6472"/><text x="140" y="222" class="dl">T₃</text><text x="444" y="222" class="dl">T₁</text><text x="272" y="222" class="dlm">(T₁+T₃)/2</text><line x1="300" y1="200" x2="406" y2="94" stroke="#B8501F" stroke-width="2"/><circle cx="406" cy="94" r="5" fill="#B8501F"/><path d="M345 200 A45 45 0 0 0 332 168" fill="none" stroke="#B8501F" stroke-width="1.5"/><text x="352" y="186" class="dl">2θ</text><text x="414" y="88" class="dl">(Tₙ, Tₛ) pada bidang θ</text><line x1="300" y1="200" x2="300" y2="50" stroke="#5B6472" stroke-dasharray="4 4"/><circle cx="300" cy="50" r="4" fill="#1F1F1B"/><text x="196" y="44" class="dl">geser maks (T₁−T₃)/2</text></svg></div><figcaption><b>Gambar 2.</b> Lingkaran Mohr. Setiap titik pada lingkaran adalah pasangan (tegangan normal, tegangan geser) pada satu bidang. Puncak lingkaran = geser maksimum, pada bidang 45° (2θ = 90°).</figcaption></figure>
+<h3>5.4 Aplikasi: tegangan rata-rata, deviatorik, dan sesar</h3>
+<p><strong>Tegangan rata-rata</strong> dan <strong>tegangan deviatorik</strong>:</p>
+<div class="eq">$$T_m = \tfrac13 T_{kk} = \tfrac13 I_1, \qquad \mathbf{T}' = \mathbf{T} - T_m\,\mathbf{I}$$</div>
+<p>Tₘ (= −tekanan) hanya mengubah volume; T′ yang memicu perubahan bentuk dan patahan. Tegangan geser tidak berubah bila kita menambah atau mengurangi tegangan isotropik.</p>
+<p><strong>Teori sesar Anderson.</strong> Permukaan Bumi bebas traksi geser, sehingga salah satu arah utama hampir selalu <strong>vertikal</strong>. Dalam konvensi tekan positif (σ₁ ≥ σ₂ ≥ σ₃):</p>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Tegangan utama vertikal</th>
+<th>Rezim</th>
+<th>Jenis sesar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>σ₁ (tekanan terbesar)</td>
+<td>ekstensi</td>
+<td>sesar normal (turun)</td>
+</tr>
+<tr>
+<td>σ₂</td>
+<td>geser</td>
+<td>sesar mendatar (strike-slip)</td>
+</tr>
+<tr>
+<td>σ₃ (tekanan terkecil)</td>
+<td>kompresi</td>
+<td>sesar naik (thrust)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Kriteria Coulomb</strong> menyatakan bidang patah bila geser cukup mengalahkan gesekan dan kohesi: |Tₛ| = c + μ σₙ (σₙ tegangan normal tekan). Untuk koefisien gesek batuan μ ≈ 0,6, bidang sesar optimal membentuk sudut sekitar 30° dari arah σ₁, bukan 45°. Gesekan "menggeser" bidang optimal menjauhi bidang geser maksimum.</p>
+
+</section>
+<section class="block" id="persamaan-gerak-prinsip-momentum-linear">
+<h2>6. Persamaan Gerak: Prinsip Momentum Linear (4.7)</h2>
+<p>Ini persamaan terpenting di bab ini: <strong>hukum Newton F = ma untuk setiap titik</strong> di dalam kontinyu.</p>
+<h3>6.1 Mulai dari 1 dimensi</h3>
+<p>Ambil irisan tipis batang (luas A, tebal Δx₁). Hanya ada tegangan T₁₁(x₁). Gaya total pada irisan:</p>
+<div class="eq">$$\underbrace{T_{11}(x_1 + \Delta x_1)A - T_{11}(x_1)A}_{\text{gaya permukaan}} + \underbrace{\rho B_1 A\,\Delta x_1}_{\text{gaya badan}} = \underbrace{\rho A\,\Delta x_1}_{\text{massa}}\,a_1$$</div>
+<p>Bagi dengan AΔx₁ dan ambil limit Δx₁ → 0:</p>
+<div class="eq">$$\frac{\partial T_{11}}{\partial x_1} + \rho B_1 = \rho a_1$$</div>
+<p>Pesannya: <strong>yang menggerakkan materi adalah perbedaan (gradien) tegangan</strong>, bukan besar tegangan itu sendiri. Tegangan seragam, sebesar apa pun, saling meniadakan pada kedua sisi irisan.</p>
+<h3>6.2 Tiga dimensi: persamaan gerak Cauchy</h3>
+<p>Dengan cara yang sama pada kubus kecil (dari keenam sisinya):</p>
+<div class="eq">$$\frac{\partial T_{ij}}{\partial x_j} + \rho B_i = \rho a_i \qquad \Longleftrightarrow \qquad \operatorname{div}\mathbf{T} + \rho\mathbf{B} = \rho\mathbf{a}$$</div>
+<p>Lengkapnya untuk i = 1:</p>
+<div class="eq">$$\frac{\partial T_{11}}{\partial x_1} + \frac{\partial T_{12}}{\partial x_2} + \frac{\partial T_{13}}{\partial x_3} + \rho B_1 = \rho a_1$$</div>
+<ul>
+<li>Jika a = 0: <strong>persamaan kesetimbangan</strong> div T + ρB = 0 (geomekanika, model tegangan statis).</li>
+<li>Dalam seismologi, a = ∂²u/∂t² (untuk gerakan kecil), sehingga ρ ∂²u/∂t² = div T + ρB. Dengan hukum Hooke (Bab 5) inilah yang menjadi <strong>persamaan gelombang seismik</strong>.</li>
+<li>Dalam geodinamika mantel (sangat kental, sangat lambat), suku inersia ρa dapat diabaikan: div T + ρg = 0 (aliran Stokes).</li>
+</ul>
+<p><strong>Contoh 6.1 — Fluida diam dan tekanan litostatik.</strong> Untuk T = −pI, div T = −∇p, sehingga:</p>
+<div class="eq">$$-\nabla p + \rho\mathbf{B} = \rho\mathbf{a}$$</div>
+<p>Untuk fluida diam dengan B = −g e₃ (sumbu x₃ ke atas): dp/dx₃ = −ρg, jadi p = p₀ + ρg(kedalaman). Ini rumus tekanan hidrostatik di laut dan tekanan litostatik di kerak. Persamaan dengan a ≠ 0 adalah <strong>persamaan Euler</strong> untuk fluida tak kental.</p>
+
+</section>
+<section class="block" id="persamaan-gerak-dalam-koordinat-silinder-dan-bol">
+<h2>7. Persamaan Gerak dalam Koordinat Silinder dan Bola (4.8)</h2>
+<p>Untuk masalah berbentuk tabung (sumur bor, konduit gunung api) dan bola (Bumi, dapur magma), tulis div T dalam koordinat lengkung. Suku-suku tambahan muncul karena vektor basis berubah arah. Di <strong>koordinat silinder</strong> (r, θ, z):</p>
+<div class="eq">$$\frac{\partial T_{rr}}{\partial r} + \frac{1}{r}\frac{\partial T_{r\theta}}{\partial \theta} + \frac{T_{rr} - T_{\theta\theta}}{r} + \frac{\partial T_{rz}}{\partial z} + \rho B_r = \rho a_r$$</div>
+<div class="eq">$$\frac{\partial T_{\theta r}}{\partial r} + \frac{1}{r}\frac{\partial T_{\theta\theta}}{\partial \theta} + \frac{2T_{r\theta}}{r} + \frac{\partial T_{\theta z}}{\partial z} + \rho B_\theta = \rho a_\theta, \qquad \frac{\partial T_{zr}}{\partial r} + \frac{1}{r}\frac{\partial T_{z\theta}}{\partial \theta} + \frac{T_{zr}}{r} + \frac{\partial T_{zz}}{\partial z} + \rho B_z = \rho a_z$$</div>
+<p>Di <strong>koordinat bola</strong> (r, θ, φ), persamaan arah radialnya:</p>
+<div class="eq">$$\frac{\partial T_{rr}}{\partial r} + \frac{1}{r}\frac{\partial T_{r\theta}}{\partial \theta} + \frac{1}{r\sin\theta}\frac{\partial T_{r\phi}}{\partial \phi} + \frac{2T_{rr} - T_{\theta\theta} - T_{\phi\phi} + T_{r\theta}\cot\theta}{r} + \rho B_r = \rho a_r$$</div>
+<p>Suku (T<sub>rr</sub> − T<sub>θθ</sub>)/r pada silinder dapat dibayangkan seperti <strong>gelang karet</strong>: tegangan keliling pada cincin melengkung menghasilkan gaya ke arah pusat. Dua persamaan bola lainnya mengikuti pola serupa (lihat Lai Pers. 4.8.2).</p>
+
+</section>
+<section class="block" id="syarat-batas-tegangan">
+<h2>8. Syarat Batas Tegangan (4.9)</h2>
+<p>Pada permukaan batas benda dengan normal keluar n, traksi yang diberikan dari luar t harus sama dengan Tn:</p>
+<div class="eq">$$\mathbf{t} = \mathbf{T}\,\mathbf{n} \quad \text{pada batas}$$</div>
+<p>Kasus khusus t = 0 disebut <strong>batas bebas traksi</strong>. Contoh paling penting di geofisika: <strong>permukaan Bumi</strong> (atmosfer praktis tidak memberi traksi). Pada permukaan horizontal (n = e₃): T₁₃ = T₂₃ = T₃₃ = 0. Itulah sebabnya salah satu tegangan utama dekat permukaan selalu vertikal (dasar teori Anderson), dan mengapa gelombang permukaan Rayleigh muncul.</p>
+<p>Pada <strong>antarmuka dua lapisan batuan yang menempel</strong> (misalnya batas sedimen–batuan dasar), syarat batasnya: perpindahan kontinyu dan traksi kontinyu (T⁽¹⁾n = T⁽²⁾n). Pada <strong>batas padat–fluida</strong> (dasar laut), traksi geser nol dan traksi normal sama dengan −p fluida. Syarat-syarat ini mengatur pantulan dan pembiasan gelombang seismik.</p>
+<p><strong>Contoh 8.1 — Tabung tebal bertekanan (Contoh 4.9.1 Lai): model sumur bor atau konduit magma.</strong> Medan tegangan</p>
+<div class="eq">$$T_{rr} = A + \frac{B}{r^2}, \qquad T_{\theta\theta} = A - \frac{B}{r^2}, \qquad T_{r\theta} = T_{rz} = T_{\theta z} = T_{zz} = 0$$</div>
+<p>memenuhi kesetimbangan arah r: dT<sub>rr</sub>/dr + (T<sub>rr</sub> − T<sub>θθ</sub>)/r = −2B/r³ + 2B/r³ = 0. Syarat batas: dinding dalam r = rᵢ ditekan pᵢ, jadi T<sub>rr</sub> = −pᵢ; dinding luar r = rₒ bebas traksi, jadi T<sub>rr</sub> = 0. Hasilnya:</p>
+<div class="eq">$$T_{rr} = \frac{p_i r_i^2}{r_o^2 - r_i^2}\left(1 - \frac{r_o^2}{r^2}\right), \qquad T_{\theta\theta} = \frac{p_i r_i^2}{r_o^2 - r_i^2}\left(1 + \frac{r_o^2}{r^2}\right)$$</div>
+<p>Perhatikan: tekanan di dalam (T<sub>rr</sub> tekan) menimbulkan <strong>tegangan tarik keliling</strong> (T<sub>θθ</sub> &gt; 0). Inilah mekanisme <strong>rekahan hidraulik</strong> (hydraulic fracturing) dan pembentukan <strong>retakan radial (dike)</strong> di sekitar dapur magma: dinding retak sejajar sumbu ketika T<sub>θθ</sub> melebihi kuat tarik batuan.</p>
+
+</section>
+<section class="block" id="tensor-tegangan-piolakirchhoff">
+<h2>9. Tensor Tegangan Piola–Kirchhoff (4.10–4.11)</h2>
+<p>Tensor Cauchy T adalah gaya <strong>sekarang</strong> per luas <strong>sekarang</strong> (tegangan "sejati"). Untuk deformasi besar, sering lebih praktis memakai luas <strong>awal</strong>, karena bentuk awal yang diketahui.</p>
+<h3>9.1 Analogi 1D: uji tarik</h3>
+<p>Sebatang karet ditarik gaya P. Luas awalnya A₀, kini menyusut menjadi A.</p>
+<ul>
+<li>Tegangan sejati (Cauchy): P/A.</li>
+<li>Tegangan teknik ("nominal", Piola–Kirchhoff pertama): P/A₀.</li>
+</ul>
+<p>Untuk regangan kecil keduanya hampir sama. Untuk regangan besar (karet, es, batuan di zona geser), keduanya berbeda jauh.</p>
+<h3>9.2 Bentuk 3D</h3>
+<p>Gaya yang sama df dihitung dengan dua cara: df = Tn dA = T₀n₀ dA₀. Dengan rumus Nanson dari Bab 3, dA n = J (F⁻¹)ᵀn₀ dA₀, diperoleh:</p>
+<div class="eq">$$\mathbf{T}_0 = J\,\mathbf{T}\,(\mathbf{F}^{-1})^T, \qquad J = \det\mathbf{F} \qquad (\text{Piola–Kirchhoff pertama})$$</div>
+<div class="eq">$$\tilde{\mathbf{T}} = \mathbf{F}^{-1}\mathbf{T}_0 = J\,\mathbf{F}^{-1}\mathbf{T}(\mathbf{F}^{-1})^T \qquad (\text{Piola–Kirchhoff kedua})$$</div>
+<ul>
+<li>T₀ umumnya <strong>tidak simetrik</strong>; ia memberi gaya sesungguhnya per luas awal.</li>
+<li>T̃ <strong>simetrik</strong>, sehingga cocok dipasangkan dengan regangan Lagrange E* dalam hukum material.</li>
+</ul>
+<p><strong>Persamaan gerak terhadap konfigurasi acuan.</strong> Dengan turunan terhadap koordinat material X dan ρ₀ densitas awal:</p>
+<div class="eq">$$\frac{\partial (T_0)_{ij}}{\partial X_j} + \rho_0 B_i = \rho_0 a_i \qquad \Longleftrightarrow \qquad \operatorname{Div}\mathbf{T}_0 + \rho_0\mathbf{B} = \rho_0\mathbf{a}$$</div>
+<p>Bentuk ini dipakai dalam simulasi numerik (elemen hingga) deformasi besar, misalnya pemodelan pelipatan, diapir garam, dan aliran gletser.</p>
+
+</section>
+<section class="block" id="daya-tegangan">
+<h2>10. Daya Tegangan (4.12–4.13)</h2>
+<p><strong>Daya tegangan</strong> Pₛ adalah laju kerja per satuan volume yang dipakai tegangan untuk <strong>mengubah bentuk dan volume</strong> materi (bukan untuk menggerakkannya).</p>
+<h3>Penurunan</h3>
+<p>Laju kerja oleh semua traksi pada permukaan sebuah volume ditambah kerja gaya badan, setelah memakai teorema divergensi dan persamaan gerak, terbagi menjadi dua:</p>
+<div class="eq">$$\mathcal{P} = \frac{D}{Dt}\int \tfrac12\rho\,v^2\,dV + \int P_s\,dV, \qquad P_s = T_{ij}\frac{\partial v_i}{\partial x_j}$$</div>
+<p>Bagian pertama menambah energi kinetik; bagian kedua (daya tegangan) mengubah bentuk. Karena T simetrik dan spin W antisimetrik, T:W = 0, sehingga:</p>
+<div class="eq">$$P_s = T_{ij} D_{ij} = \operatorname{tr}(\mathbf{T}\mathbf{D})$$</div>
+<p>Artinya <strong>rotasi kaku tidak menyerap kerja</strong>; hanya laju deformasi D yang menyerap. Bentuk lain dengan tensor Piola–Kirchhoff (per volume awal): Pₛ dV = (T₀ : Ḟ) dV₀ = (T̃ : Ė*) dV₀.</p>
+<p><strong>Aplikasi.</strong> Dalam geodinamika, T:D adalah <strong>pemanasan geser (shear heating)</strong>: kerja deformasi pada zona geser dan mantel yang berubah menjadi panas. Pada gempa, sebagian besar kerja pada bidang sesar juga berubah menjadi panas gesekan (kadang sampai melelehkan batuan menjadi pseudotakilit).</p>
+
+</section>
+<section class="block" id="aliran-panas-dan-persamaan-energi">
+<h2>11. Aliran Panas dan Persamaan Energi (4.14–4.15)</h2>
+<h3>11.1 Aliran panas konduksi</h3>
+<p>Misalkan <strong>q</strong> vektor fluks panas (W/m²). Laju panas netto yang masuk ke elemen kecil per satuan volume adalah:</p>
+<div class="eq">$$-\operatorname{div}\mathbf{q} = -\frac{\partial q_i}{\partial x_i}$$</div>
+<p>Untuk konduksi, dipakai <strong>hukum Fourier</strong> dengan κ konduktivitas termal (sekitar 2,5 W/m·K untuk batuan kerak):</p>
+<div class="eq">$$\mathbf{q} = -\kappa\,\nabla\Theta$$</div>
+<h3>11.2 Persamaan energi (hukum I termodinamika)</h3>
+<p>Untuk partikel bermassa ρdV dengan energi dalam per satuan massa u: laju kenaikan energi dalam = daya tegangan + panas masuk lewat konduksi + panas yang dibangkitkan di dalam (qₛ per satuan massa):</p>
+<div class="eq">$$\rho\frac{Du}{Dt} = T_{ij}D_{ij} - \frac{\partial q_i}{\partial x_i} + \rho\,q_s$$</div>
+<p><strong>Contoh 11.1 — Geoterm kerak dengan panas radiogenik.</strong> Kondisi tunak, 1D (z ke bawah), tanpa deformasi, dengan u = cΘ dan produksi panas radioaktif ρqₛ = A₀ (W/m³):</p>
+<div class="eq">$$\kappa\frac{d^2\Theta}{dz^2} + A_0 = 0 \;\;\Rightarrow\;\; \Theta(z) = \Theta_0 + \frac{q_0}{\kappa}z - \frac{A_0}{2\kappa}z^2$$</div>
+<p>dengan q₀ fluks panas permukaan. Untuk q₀ = 65 mW/m², κ = 2,5 W/m·K, A₀ = 1 μW/m³, pada z = 10 km: Θ − Θ₀ = 0,026 × 10⁴ − (10⁻⁶/5) × 10⁸ = 260 − 20 = <strong>240 °C</strong>. Kurva melengkung karena panas radiogenik.</p>
+
+</section>
+<section class="block" id="ketaksamaan-entropi-dan-energi-helmholtz">
+<h2>12. Ketaksamaan Entropi dan Energi Helmholtz (4.16–4.17)</h2>
+<h3>12.1 Hukum II termodinamika</h3>
+<p>Dengan η entropi per satuan massa dan Θ suhu mutlak, laju kenaikan entropi partikel minimal sama dengan entropi yang dibawa masuk oleh panas:</p>
+<div class="eq">$$\rho\frac{D\eta}{Dt} \ge -\operatorname{div}\left(\frac{\mathbf{q}}{\Theta}\right) + \frac{\rho\,q_s}{\Theta}$$</div>
+<p><strong>Contoh 12.1 — Panas mengalir dari panas ke dingin.</strong> Konduksi tunak 1D antara Θ₁ dan Θ₂, dengan hukum Fourier q = −κ dΘ/dx₁. Ketaksamaan entropi memberi:</p>
+<div class="eq">$$\kappa\,\frac{1}{\Theta^2}\left(\frac{d\Theta}{dx_1}\right)^2 \ge 0 \;\;\Rightarrow\;\; \kappa \ge 0$$</div>
+<p>Hukum II "memaksa" konduktivitas termal positif, jadi panas selalu mengalir dari panas ke dingin. Contoh ini menunjukkan peran ketaksamaan entropi: <strong>membatasi bentuk hukum material</strong> yang boleh dipakai.</p>
+<h3>12.2 Bentuk energi Helmholtz</h3>
+<p>Definisikan energi bebas Helmholtz A = u − Θη. Gabungan hukum I dan II memberi:</p>
+<div class="eq">$$-\rho\left(\frac{DA}{Dt} + \eta\frac{D\Theta}{Dt}\right) + T_{ij}D_{ij} - \frac{q_i}{\Theta}\frac{\partial \Theta}{\partial x_i} \ge 0$$</div>
+<p><strong>Contoh 12.2 — Asal hukum elastik dari termodinamika.</strong> Untuk termoelastisitas linear, A = A(Eᵢⱼ, Θ). Karena ketaksamaan harus berlaku untuk sembarang Dᵢⱼ dan DΘ/Dt, haruslah:</p>
+<div class="eq">$$T_{ij} = \rho\frac{\partial A}{\partial E_{ij}}, \qquad \eta = -\frac{\partial A}{\partial \Theta}, \qquad -\frac{q_i}{\Theta}\frac{\partial \Theta}{\partial x_i} \ge 0$$</div>
+<p>Tegangan diturunkan dari suatu <strong>fungsi potensial (energi regangan)</strong>. Fakta ini adalah dasar teori elastisitas di Bab 5.</p>
+
+</section>
+<section class="block" id="formulasi-integral-prinsip-umum-mekanika">
+<h2>13. Formulasi Integral Prinsip Umum Mekanika (4.18)</h2>
+<p>Semua hukum di atas dapat ditulis dalam dua bentuk yang <strong>setara</strong>:</p>
+<ul>
+<li><strong>Bentuk integral (global)</strong>: berlaku untuk volume material Vₘ sembarang yang bergerak bersama materi.</li>
+<li><strong>Bentuk diferensial (lokal)</strong>: berlaku di setiap titik.</li>
+</ul>
+<p>Jembatannya adalah dua fakta: D(dV)/Dt = (div v) dV (Bab 3) dan <strong>teorema divergensi</strong> (∫ Tn dA = ∫ div T dV). Karena bentuk integral harus berlaku untuk <strong>setiap</strong> volume, integrannya harus nol di setiap titik.</p>
+<p><strong>Contoh penurunan: momentum linear.</strong> Laju perubahan momentum sebuah volume material sama dengan gaya total padanya:</p>
+<div class="eq">$$\frac{D}{Dt}\int_{V_m}\rho\,\mathbf{v}\,dV = \int_{S}\mathbf{T}\mathbf{n}\,dA + \int_{V_m}\rho\,\mathbf{B}\,dV \;\;\Rightarrow\;\; \int_{V}\left(\rho\mathbf{a} - \operatorname{div}\mathbf{T} - \rho\mathbf{B}\right)dV = 0 \;\;\Rightarrow\;\; \operatorname{div}\mathbf{T} + \rho\mathbf{B} = \rho\mathbf{a}$$</div>
+<h3>Lima prinsip umum mekanika kontinyu</h3>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Prinsip</th>
+<th>Bentuk integral (volume material)</th>
+<th>Bentuk lokal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kekekalan massa</td>
+<td>D/Dt ∫ ρ dV = 0</td>
+<td>Dρ/Dt + ρ div v = 0</td>
+</tr>
+<tr>
+<td>Momentum linear</td>
+<td>D/Dt ∫ ρv dV = ∫ Tn dA + ∫ ρB dV</td>
+<td>div T + ρB = ρa</td>
+</tr>
+<tr>
+<td>Momentum sudut</td>
+<td>D/Dt ∫ x × ρv dV = ∫ x × Tn dA + ∫ x × ρB dV</td>
+<td>T = Tᵀ</td>
+</tr>
+<tr>
+<td>Kekekalan energi</td>
+<td>D/Dt ∫ ρ(u + v²/2) dV = ∫ (Tn)·v dA + ∫ ρB·v dV − ∫ q·n dA + ∫ ρqₛ dV</td>
+<td>ρ Du/Dt = T:D − div q + ρqₛ</td>
+</tr>
+<tr>
+<td>Ketaksamaan entropi</td>
+<td>D/Dt ∫ ρη dV ≥ −∫ (q·n)/Θ dA + ∫ ρqₛ/Θ dV</td>
+<td>ρ Dη/Dt ≥ −div(q/Θ) + ρqₛ/Θ</td>
+</tr>
+</tbody>
+</table></div>
+<p>Kelima prinsip ini berlaku untuk <strong>semua</strong> materi. Namun jumlah persamaannya belum cukup: untuk masalah mekanis ada 10 besaran tak diketahui (ρ, 3 komponen v, 6 komponen T) tetapi hanya 4 persamaan (massa 1 + momentum 3). Kekurangan 6 persamaan ditutup oleh <strong>hukum material</strong> (persamaan konstitutif), yang membedakan batuan dari air. Itulah topik Bab 5.</p>
+
+</section>
+<section class="block" id="ringkasan-glosarium-dan-latihan">
+<h2>14. Ringkasan, Glosarium, dan Latihan</h2>
+<h3>14.1 Ringkasan rumus kunci</h3>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Konsep</th>
+<th>Rumus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vektor tegangan</td>
+<td>t = Tn, tᵢ = Tᵢⱼnⱼ</td>
+</tr>
+<tr>
+<td>Tegangan normal pada bidang</td>
+<td>Tₙ = n·Tn</td>
+</tr>
+<tr>
+<td>Tegangan geser pada bidang</td>
+<td>Tₛ² = |t|² − Tₙ²</td>
+</tr>
+<tr>
+<td>Simetri</td>
+<td>Tᵢⱼ = Tⱼᵢ (6 komponen bebas)</td>
+</tr>
+<tr>
+<td>Tegangan utama</td>
+<td>det(T − λI) = 0</td>
+</tr>
+<tr>
+<td>Geser maksimum</td>
+<td>(Tₘₐₓ − Tₘᵢₙ)/2, pada bidang 45°</td>
+</tr>
+<tr>
+<td>Rata-rata dan deviatorik</td>
+<td>Tₘ = Tₖₖ/3, T′ = T − TₘI</td>
+</tr>
+<tr>
+<td>Persamaan gerak Cauchy</td>
+<td>∂Tᵢⱼ/∂xⱼ + ρBᵢ = ρaᵢ</td>
+</tr>
+<tr>
+<td>Fluida diam</td>
+<td>−∇p + ρB = 0</td>
+</tr>
+<tr>
+<td>Syarat batas</td>
+<td>t = Tn; permukaan bebas: Tn = 0</td>
+</tr>
+<tr>
+<td>Piola–Kirchhoff</td>
+<td>T₀ = JT(F⁻¹)ᵀ, T̃ = F⁻¹T₀</td>
+</tr>
+<tr>
+<td>Daya tegangan</td>
+<td>Pₛ = T:D</td>
+</tr>
+<tr>
+<td>Hukum Fourier</td>
+<td>q = −κ∇Θ</td>
+</tr>
+<tr>
+<td>Persamaan energi</td>
+<td>ρ Du/Dt = T:D − div q + ρqₛ</td>
+</tr>
+<tr>
+<td>Entropi</td>
+<td>ρ Dη/Dt ≥ −div(q/Θ) + ρqₛ/Θ</td>
+</tr>
+</tbody>
+</table></div>
+<h3>14.2 Glosarium Indonesia–Inggris</h3>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Istilah Indonesia</th>
+<th>Istilah Inggris</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gaya badan / gaya permukaan</td>
+<td>body force / surface force</td>
+</tr>
+<tr>
+<td>vektor tegangan, traksi</td>
+<td>stress vector, traction</td>
+</tr>
+<tr>
+<td>tensor tegangan Cauchy</td>
+<td>Cauchy stress tensor</td>
+</tr>
+<tr>
+<td>tegangan normal / geser</td>
+<td>normal / shear stress</td>
+</tr>
+<tr>
+<td>tegangan utama</td>
+<td>principal stress</td>
+</tr>
+<tr>
+<td>tegangan deviatorik</td>
+<td>deviatoric stress</td>
+</tr>
+<tr>
+<td>persamaan kesetimbangan</td>
+<td>equilibrium equations</td>
+</tr>
+<tr>
+<td>bebas traksi</td>
+<td>traction-free</td>
+</tr>
+<tr>
+<td>tensor Piola–Kirchhoff</td>
+<td>Piola–Kirchhoff stress tensor</td>
+</tr>
+<tr>
+<td>daya tegangan</td>
+<td>stress power</td>
+</tr>
+<tr>
+<td>fluks panas</td>
+<td>heat flux</td>
+</tr>
+<tr>
+<td>ketaksamaan entropi</td>
+<td>entropy inequality</td>
+</tr>
+<tr>
+<td>energi bebas Helmholtz</td>
+<td>Helmholtz free energy</td>
+</tr>
+</tbody>
+</table></div>
+<h3>14.3 Latihan soal</h3>
+<ol>
+<li><strong>Traksi pada bidang sesar.</strong> Di kedalaman 5 km, tegangan (MPa, tarik positif, x₁ timur, x₂ utara, x₃ atas): T = [[−150, 0, 0], [0, −90, 0], [0, 0, −130]]. Sebuah sesar vertikal berarah timur laut–barat daya punya normal n = (1, −1, 0)/√2. Hitung t, Tₙ, dan Tₛ. Dengan kriteria Coulomb tanpa kohesi dan μ = 0,6 (σₙ = −Tₙ), apakah sesar ini akan tergelincir?</li>
+<li><strong>Tegangan utama.</strong> Untuk T = [[−50, 20, 0], [20, −80, 0], [0, 0, −60]] MPa, hitung tegangan utama, arahnya, dan tegangan geser maksimum. Rezim Anderson apa yang berlaku jika x₃ vertikal?</li>
+<li><strong>Tekanan litostatik.</strong> Hitung tekanan litostatik di dasar kerak benua setebal 35 km jika ρ = 2800 kg/m³. Nyatakan dalam MPa dan GPa.</li>
+<li><strong>Kesetimbangan.</strong> Periksa apakah medan T₁₁ = x₂, T₂₂ = x₁, T₁₂ = 0, lainnya nol, memenuhi kesetimbangan tanpa gaya badan. Bagaimana jika T₁₂ = x₁ + x₂?</li>
+<li><strong>Tekanan dalam konduit magma.</strong> Konduit berjari-jari 10 m dalam batuan tebal (rₒ → ∞) ditekan magma berlebih pᵢ = 15 MPa. Dari Contoh 8.1, berapa T<sub>θθ</sub> di dinding konduit? Jika kuat tarik batuan 10 MPa, akankah terbentuk retakan radial?</li>
+<li><strong>Piola–Kirchhoff.</strong> Batang dengan regangan uniaksial x₁ = 2X₁, x₂ = X₂, x₃ = X₃ memiliki T₁₁ = 100 MPa (lainnya nol). Hitung T₀ dan T̃.</li>
+<li><strong>Geoterm.</strong> Dengan q₀ = 80 mW/m², κ = 3 W/m·K, A₀ = 2 μW/m³, hitung suhu pada 20 km di atas suhu permukaan.</li>
+</ol>
+<h3>14.4 Kunci jawaban singkat</h3>
+<ol>
+<li>t = Tn = (−150, 90, 0)/√2 = (−106,1; 63,6; 0). Tₙ = (−150 − 90)/2 = −120 MPa (tekan 120 MPa). |t|² = (22500 + 8100)/2 = 15300, Tₛ² = 15300 − 14400 = 900, jadi Tₛ = 30 MPa. Batas gesekan μσₙ = 0,6 × 120 = 72 MPa &gt; 30 MPa: <strong>tidak tergelincir</strong>.</li>
+<li>Blok 2×2: pusat −65, jari-jari √(15² + 20²) = 25, jadi −40 dan −90; ditambah −60. Tegangan utama −40, −60, −90 MPa. Arah −40: (2, 1, 0)/√5; arah −90: (1, −2, 0)/√5; arah −60: e₃. Geser maks (−40 + 90)/2 = 25 MPa. Tekan positif: σ₁ = 90 dan σ₃ = 40 (horizontal), σ₂ = 60 vertikal → <strong>rezim sesar mendatar</strong>.</li>
+<li>p = 2800 × 9,8 × 35 000 ≈ 9,6 × 10⁸ Pa ≈ 960 MPa ≈ 0,96 GPa.</li>
+<li>Kasus pertama: ∂T₁₁/∂x₁ + ∂T₁₂/∂x₂ = 0 dan ∂T₂₁/∂x₁ + ∂T₂₂/∂x₂ = 0, jadi <strong>memenuhi</strong>. Kasus kedua: persamaan 1 memberi 0 + 1 = 1 ≠ 0, <strong>tidak memenuhi</strong>.</li>
+<li>Untuk rₒ → ∞: T<sub>rr</sub> = −pᵢrᵢ²/r², T<sub>θθ</sub> = +pᵢrᵢ²/r². Di dinding T<sub>θθ</sub> = +15 MPa (tarik) &gt; 10 MPa: <strong>retakan radial terbentuk</strong>.</li>
+<li>F = diag(2, 1, 1), J = 2. T₀ = JT F⁻ᵀ: (T₀)₁₁ = 2 × 100 × ½ = 100 MPa. T̃ = F⁻¹T₀: T̃₁₁ = ½ × 100 = 50 MPa. Lainnya nol. (Di sini luas penampang tidak berubah, sehingga T₀ = T.)</li>
+<li>Θ − Θ₀ = (0,08/3) × 2 × 10⁴ − (2 × 10⁻⁶/6) × 4 × 10⁸ = 533 − 133 = <strong>400 °C</strong>.</li>
+</ol>
+<h3>14.5 Bacaan</h3>
+<p>W. Michael Lai, David Rubin, Erhard Krempl. <em>Introduction to Continuum Mechanics</em>, edisi ke-4, Elsevier, 2010. Bab 4: Stress and Integral Formulations of General Principles, beserta soal latihannya. Untuk aplikasi geofisika: Turcotte &amp; Schubert, <em>Geodynamics</em> (Bab 2–4); Zoback, <em>Reservoir Geomechanics</em> (tegangan in-situ dan sesar).</p>
+</section>
+
+      <p class="source-note">Bahan ini adalah penyederhanaan pedagogis dari Lai, Rubin &amp; Krempl (2010), Bab 4, dengan konvensi tarik positif seperti di buku. Lingkaran Mohr, teori sesar Anderson, kriteria Coulomb, dan contoh geoterm ditambahkan sebagai jembatan ke geofisika dan tidak berasal dari buku. Penurunan lengkap ada di teks aslinya.</p>
+
+      <nav class="seq-nav" aria-label="Navigasi topik">
+        <a href="/kuliah/mekanika-medium-kontinyu/kinematika/"><span class="lbl">&larr; Sebelumnya &middot; Bab 3</span>Kinematika Benda Kontinyu</a>
+        <a class="nx" href="/kuliah/mekanika-medium-kontinyu/padatan-elastik/"><span class="lbl">Selanjutnya &middot; Bab 5 &rarr;</span>Padatan Elastik</a>
+      </nav>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

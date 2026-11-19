@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Padatan Elastik — Mekanika Medium Kontinyu — Wiwit Suryanto</title>
+  <meta name="description" content="Bahan ajar Mekanika Medium Kontinyu untuk mahasiswa Geofisika UGM: padatan elastik (Lai, Rubin &amp; Krempl, Bab 5). Hukum Hooke, konstanta elastik, persamaan Navier, gelombang P dan S, pantulan, fungsi Airy, lubang bor, solusi Kelvin dan Boussinesq, anisotropi, dan elastisitas deformasi besar.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:44px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    main h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:28px 0 8px}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);border-radius:6px;overflow:hidden}
+    figure.fig > div{padding:18px 16px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);padding:10px 16px;border-top:1px solid var(--border)}
+    figure.fig figcaption b{color:var(--text);font-weight:600}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+    ol.steps{font-family:var(--sans);font-size:16px;line-height:1.55;padding-left:22px;margin:16px 0}
+    ol.steps li{margin:0 0 10px}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:22px 0}
+    .callout p:first-child{margin-top:0}
+    .callout p:last-child{margin-bottom:0}
+    .callout.support{background:#EDF3F2;border-color:#C7DAD6}
+    .callout.try{background:#FBF1EC;border-color:#E6C9BB}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    .seq-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:40px 0 0;font-family:var(--sans)}
+    .seq-nav a{display:block;border:1px solid var(--border);border-radius:6px;padding:14px 16px;text-decoration:none;background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+    .seq-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    .seq-nav .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .seq-nav a:hover .lbl{color:var(--accent)}
+    .seq-nav .nx{text-align:right}
+    @media (max-width:560px){ .seq-nav{grid-template-columns:1fr} .seq-nav .nx{text-align:left} }
+
+    .toc{font-family:var(--sans);font-size:15px;columns:2;column-gap:32px;margin:28px 0 0;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:2px 0;break-inside:avoid}
+    .toc a{text-decoration:none}
+    table.data{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;line-height:1.5;margin:0 0 20px;background:var(--surface);border:1px solid var(--border)}
+    table.data th,table.data td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+    table.data th{background:var(--surface-muted);font-weight:600}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+
+    .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-teal:#2F5D62; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
+    text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
+    text.dlm{font-family:var(--sans);font-size:12px;fill:#5F625C}
+    .figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:8px 0 20px}
+    .stage-fig{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px}
+    .stage-fig svg{width:100%;height:auto;display:block}
+    .stage-fig p{margin:10px 0 0;font-family:var(--sans);font-size:13.5px;line-height:1.45;color:var(--text-muted)}
+    .stage-fig p b{color:var(--text)}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:34px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:29px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .toc{columns:1}
+    }
+    main ul:not(.points):not(.nav-list):not(.contact-list),main ol:not(.steps){font-family:var(--sans);font-size:16px;line-height:1.6;padding-left:24px}
+    main ul:not(.points) li,main ol:not(.steps) li{margin:0 0 8px}
+    .toc{columns:1}
+    .eq{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:4px 14px}
+    table.data td:nth-child(2){white-space:normal}
+    .table-wrap{overflow-x:auto}
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; <a href="/kuliah/mekanika-medium-kontinyu/">Mekanika Medium Kontinyu</a> &nbsp;/&nbsp; Padatan Elastik</p>
+      <p class="eyebrow">Mekanika Medium Kontinyu &middot; Sarjana Geofisika</p>
+      <h1>Padatan Elastik</h1>
+      <p class="lede">Dari hukum pegas F = kx ke hukum Hooke tiga dimensi, lalu ke kelahiran gelombang P dan S. Bab ini adalah jembatan langsung ke seismologi, geomekanika, dan deformasi gunung api: setiap persamaan dibangun dari konsep paling dasar, lalu dipakai pada data nyata. Mengikuti Lai, Rubin &amp; Krempl, Bab 5.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Mekanika Medium Kontinyu (Program Sarjana Geofisika)</dd>
+        <dt>Rujukan utama</dt><dd>Lai, Rubin &amp; Krempl (2010), <i>Introduction to Continuum Mechanics</i>, edisi ke-4, Bab 5</dd>
+        <dt>Prasyarat</dt><dd><a href="/kuliah/mekanika-medium-kontinyu/kinematika/">Bab 3</a> dan <a href="/kuliah/mekanika-medium-kontinyu/tegangan/">Bab 4</a>, persamaan diferensial parsial dasar</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <nav class="toc" aria-label="Daftar isi"><ol>
+<li><a href="#pengantar-mengapa-butuh-hukum-material">Pengantar: Mengapa Butuh Hukum Material?</a></li>
+<li><a href="#sifat-mekanik-dari-eksperimen">Sifat Mekanik dari Eksperimen (5.1)</a></li>
+<li><a href="#padatan-elastik-linear-hukum-hooke-umum">Padatan Elastik Linear: Hukum Hooke Umum (5.2)</a></li>
+<li><a href="#padatan-elastik-isotropik">Padatan Elastik Isotropik (5.3)</a></li>
+<li><a href="#modulus-young-rasio-poisson-modulus-geser-dan-mo">Modulus Young, Rasio Poisson, Modulus Geser, dan Modulus Bulk (5.4)</a></li>
+<li><a href="#persamaan-teori-elastisitas-infinitesimal">Persamaan Teori Elastisitas Infinitesimal (5.5)</a></li>
+<li><a href="#persamaan-navier">Persamaan Navier (5.6–5.7)</a></li>
+<li><a href="#prinsip-superposisi">Prinsip Superposisi (5.8)</a></li>
+<li><a href="#gelombang-bidang-irotasional-gelombang-p">Gelombang Bidang Irotasional: Gelombang P (5.9)</a></li>
+<li><a href="#gelombang-bidang-ekuivolumial-gelombang-s">Gelombang Bidang Ekuivolumial: Gelombang S (5.10)</a></li>
+<li><a href="#pantulan-gelombang-elastik-di-permukaan-bebas">Pantulan Gelombang Elastik di Permukaan Bebas (5.11)</a></li>
+<li><a href="#getaran-pelat-dan-resonansi-lapisan">Getaran Pelat dan Resonansi Lapisan (5.12)</a></li>
+<li><a href="#tarikan-sederhana-dan-puntiran">Tarikan Sederhana dan Puntiran (5.13–5.18)</a></li>
+<li><a href="#masalah-dua-dimensi-regangan-bidang-tegangan-bid">Masalah Dua Dimensi: Regangan Bidang, Tegangan Bidang, dan Fungsi Airy (5.20–5.26)</a></li>
+<li><a href="#konsentrasi-tegangan-di-sekitar-lubang">Konsentrasi Tegangan di Sekitar Lubang (5.34–5.35)</a></li>
+<li><a href="#beban-titik-flamant-kelvin-dan-boussinesq">Beban Titik: Flamant, Kelvin, dan Boussinesq (5.36–5.45)</a></li>
+<li><a href="#padatan-elastik-anisotropik">Padatan Elastik Anisotropik (5.46–5.55)</a></li>
+<li><a href="#elastisitas-deformasi-besar">Elastisitas Deformasi Besar (5.56–5.62)</a></li>
+<li><a href="#ringkasan-glosarium-dan-latihan">Ringkasan, Glosarium, dan Latihan</a></li>
+      </ol></nav>
+
+<section class="block" id="pengantar-mengapa-butuh-hukum-material">
+<h2>Pengantar: Mengapa Butuh Hukum Material?</h2>
+<p>Bab 4 memberi lima hukum umum yang berlaku untuk semua materi. Namun hukum itu <strong>tidak tahu</strong> apakah bendanya baja, batuan, atau air. Hitung saja: untuk masalah mekanis ada 10 besaran tak diketahui (ρ, 3 komponen v, 6 komponen T), tetapi hanya 4 persamaan (massa 1 + momentum 3). <strong>Kurang 6 persamaan.</strong></p>
+<p>Enam persamaan yang hilang adalah <strong>persamaan konstitutif</strong> (hukum material): hubungan antara tegangan T dan deformasi. Bab ini membahas model paling penting bagi geofisikawan: <strong>padatan elastik linear</strong>, yaitu benda yang kembali ke bentuk semula saat beban dilepas, dan tegangannya sebanding dengan regangannya.</p>
+<p>Mengapa ini fondasi seismologi? Batuan yang dilewati gelombang gempa mengalami regangan sangat kecil (sekitar 10⁻⁶) dan sangat cepat. Pada kondisi itu batuan berperilaku elastik nyaris sempurna. Dari hukum elastik + persamaan gerak Cauchy, kita akan <strong>menurunkan sendiri</strong> keberadaan gelombang P dan S beserta kecepatannya.</p>
+<h3>Capaian pembelajaran</h3>
+<ol>
+<li>Menuliskan hukum Hooke umum dan isotropik, serta menghubungkan λ, μ, Eʏ, ν, dan k.</li>
+<li>Menurunkan persamaan Navier dan persamaan gelombang P dan S, lalu menghitung kecepatannya dari konstanta elastik.</li>
+<li>Menerapkan syarat batas pada pantulan gelombang, resonansi lapisan, dan masalah elastostatik klasik.</li>
+<li>Menyelesaikan masalah 2D dengan fungsi tegangan Airy, termasuk lubang bor dan rongga bertekanan.</li>
+<li>Memahami solusi titik (Kelvin, Boussinesq) sebagai dasar model sumber gempa dan deformasi gunung api.</li>
+<li>Mengenali anisotropi elastik (VTI, ortotropik) dan elastisitas deformasi besar.</li>
+</ol>
+
+</section>
+<section class="block" id="sifat-mekanik-dari-eksperimen">
+<h2>1. Sifat Mekanik dari Eksperimen (5.1)</h2>
+<p>Semua konstanta elastik berasal dari <strong>uji laboratorium sederhana</strong>. Sebelum rumus, kenali dulu eksperimennya.</p>
+<p><strong>Uji tarik.</strong> Batang berpenampang awal A₀ ditarik gaya P. Ukur tegangan σ = P/A₀ dan regangan aksial εₐ = Δℓ/ℓ. Selama hubungannya linear dan kembali saat beban dilepas, benda bersifat elastik:</p>
+<div class="eq">$$E_Y = \frac{\sigma}{\varepsilon_a} \qquad (\text{modulus Young}), \qquad \nu = -\frac{\varepsilon_d}{\varepsilon_a} \qquad (\text{rasio Poisson})$$</div>
+<p>εd adalah regangan lateral (diameter mengecil saat batang ditarik, sehingga ν positif). Untuk baja Eʏ ≈ 207 GPa dan ν ≈ 0,3.</p>
+<p><strong>Uji tekan hidrostatik.</strong> Benda ditekan merata dari segala arah (Tᵢⱼ = σδᵢⱼ), lalu ukur dilatasi e:</p>
+<div class="eq">$$k = \frac{\sigma}{e} \qquad (\text{modulus bulk})$$</div>
+<p><strong>Uji puntir.</strong> Silinder berjari-jari r dan panjang ℓ dipuntir momen Mₜ hingga berputar sudut θ:</p>
+<div class="eq">$$\mu = \frac{M_t\,\ell}{I_p\,\theta}, \qquad I_p = \frac{\pi r^4}{2} \qquad (\text{modulus geser})$$</div>
+<p><strong>Istilah penting:</strong></p>
+<ul>
+<li><strong>Isotropik</strong>: hasil uji sama untuk spesimen yang dipotong ke segala arah. <strong>Anisotropik</strong>: bergantung arah (kayu, serpih/shale, batuan berlapis, mantel atas).</li>
+<li><strong>Homogen</strong>: sifatnya sama di setiap tempat. <strong>Heterogen</strong>: berubah dari tempat ke tempat (misalnya Bumi berlapis).</li>
+</ul>
+<p><strong>Contoh 1.1 — Orde regangan.</strong> Batang baja berpenampang 32,3 cm² menahan 667 kN: εₐ = (667 000 / 32,3 × 10⁻⁴) / 207 × 10⁹ ≈ 10⁻³. Regangan elastik logam dan batuan memang kecil, sehingga teori regangan infinitesimal (Bab 3) cukup.</p>
+
+</section>
+<section class="block" id="padatan-elastik-linear-hukum-hooke-umum">
+<h2>2. Padatan Elastik Linear: Hukum Hooke Umum (5.2)</h2>
+<h3>2.1 Mulai dari pegas</h3>
+<p>Hukum Hooke pegas: F = kx. Versi kontinyunya: <strong>setiap komponen tegangan adalah kombinasi linear dari semua komponen regangan</strong>:</p>
+<div class="eq">$$T_{ij} = C_{ijkl}\,E_{kl}$$</div>
+<p>Cᵢⱼₖₗ adalah <strong>tensor elastisitas</strong> (tensor orde 4). Bayangkan ia sebagai "tabel kekakuan" yang menjawab: jika saya meregangkan benda dengan cara kl, berapa tegangan ij yang muncul?</p>
+<h3>2.2 Dari 81 ke 21 konstanta</h3>
+<p>Tensor orde 4 di 3D punya 3⁴ = 81 komponen. Simetri memangkasnya:</p>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Alasan</th>
+<th>Akibat</th>
+<th>Sisa konstanta bebas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(awal)</td>
+<td>—</td>
+<td>81</td>
+</tr>
+<tr>
+<td>Regangan simetrik, Eₖₗ = Eₗₖ</td>
+<td>Cᵢⱼₖₗ = Cᵢⱼₗₖ</td>
+<td>54</td>
+</tr>
+<tr>
+<td>Tegangan simetrik, Tᵢⱼ = Tⱼᵢ</td>
+<td>Cᵢⱼₖₗ = Cⱼᵢₖₗ</td>
+<td>36</td>
+</tr>
+<tr>
+<td>Ada energi regangan U</td>
+<td>Cᵢⱼₖₗ = Cₖₗᵢⱼ</td>
+<td>21</td>
+</tr>
+</tbody>
+</table></div>
+<h3>2.3 Energi regangan</h3>
+<p>Material disebut elastik bila ada <strong>fungsi energi regangan</strong> U(Eᵢⱼ), energi yang tersimpan per satuan volume, seperti energi pegas ½kx²:</p>
+<div class="eq">$$T_{ij} = \frac{\partial U}{\partial E_{ij}}, \qquad U = \tfrac12\,C_{ijkl}\,E_{ij}\,E_{kl} = \tfrac12\,T_{ij}\,E_{ij}$$</div>
+<p>Karena Cᵢⱼₖₗ = ∂²U/∂Eᵢⱼ∂Eₖₗ dan urutan turunan kedua boleh ditukar, diperoleh Cᵢⱼₖₗ = Cₖₗᵢⱼ. Pada regangan kecil, D ≈ DE/Dt, sehingga daya tegangan Pₛ = Tᵢⱼ Dᵢⱼ = DU/Dt: <strong>semua kerja deformasi tersimpan sebagai energi</strong>, tanpa hilang menjadi panas. Inilah arti fisis "elastik". (Bab 4, Contoh 12.2, menunjukkan bahwa U tidak lain adalah energi bebas Helmholtz pada suhu tetap.)</p>
+<p>Energi inilah yang dilepaskan saat gempa: batuan di sekitar sesar menyimpan energi regangan elastik selama ratusan tahun, lalu melepasnya dalam beberapa detik (teori <strong>elastic rebound</strong> Reid, 1910).</p>
+
+</section>
+<section class="block" id="padatan-elastik-isotropik">
+<h2>3. Padatan Elastik Isotropik (5.3)</h2>
+<p>Jika material <strong>isotropik</strong>, nilai Cᵢⱼₖₗ tidak boleh berubah saat sumbu koordinat diputar. Tensor orde 4 isotropik paling umum hanyalah kombinasi δᵢⱼδₖₗ, δᵢₖδⱼₗ, dan δᵢₗδⱼₖ. Setelah memakai simetri, tinggal <strong>dua konstanta</strong>:</p>
+<div class="eq">$$C_{ijkl} = \lambda\,\delta_{ij}\delta_{kl} + \mu\left(\delta_{ik}\delta_{jl} + \delta_{il}\delta_{jk}\right)$$</div>
+<p>Substitusikan ke Tᵢⱼ = Cᵢⱼₖₗ Eₖₗ:</p>
+<div class="eq">$$T_{ij} = \lambda\,e\,\delta_{ij} + 2\mu\,E_{ij}, \qquad e = E_{kk} \qquad \Longleftrightarrow \qquad \mathbf{T} = \lambda\,(\operatorname{tr}\mathbf{E})\,\mathbf{I} + 2\mu\,\mathbf{E}$$</div>
+<p>λ dan μ disebut <strong>konstanta Lamé</strong>. Secara lengkap:</p>
+<div class="eq">$$T_{11} = \lambda e + 2\mu E_{11}, \quad T_{22} = \lambda e + 2\mu E_{22}, \quad T_{33} = \lambda e + 2\mu E_{33}, \quad T_{12} = 2\mu E_{12}, \quad T_{13} = 2\mu E_{13}, \quad T_{23} = 2\mu E_{23}$$</div>
+<p>Dua pelajaran penting:</p>
+<ul>
+<li><strong>Geser hanya menghasilkan geser</strong>: T₁₂ = 2μE₁₂. Jadi μ mengukur kekakuan terhadap perubahan bentuk.</li>
+<li><strong>Arah utama tegangan sama dengan arah utama regangan</strong> (karena T hanyalah kombinasi E dan I). Ini hanya benar untuk material isotropik.</li>
+</ul>
+<p>Energi regangan isotropik:</p>
+<div class="eq">$$U = \tfrac12\lambda\,e^2 + \mu\,E_{ij}E_{ij}$$</div>
+
+</section>
+<section class="block" id="modulus-young-rasio-poisson-modulus-geser-dan-mo">
+<h2>4. Modulus Young, Rasio Poisson, Modulus Geser, dan Modulus Bulk (5.4)</h2>
+<h3>4.1 Hukum Hooke terbalik</h3>
+<p>Kadang yang diketahui tegangan, dan kita ingin regangan. Ambil jejak (trace) hukum Hooke: Tₖₖ = (3λ + 2μ)e. Substitusikan kembali:</p>
+<div class="eq">$$E_{ij} = \frac{1}{E_Y}\left[(1+\nu)\,T_{ij} - \nu\,T_{kk}\,\delta_{ij}\right]$$</div>
+<p>Contohnya: E₁₁ = [T₁₁ − ν(T₂₂ + T₃₃)]/Eʏ dan E₁₂ = T₁₂/(2μ).</p>
+<h3>4.2 Hubungan antarkonstanta</h3>
+<p>Dari uji tarik (hanya T₁₁ ≠ 0), uji hidrostatik, dan uji geser:</p>
+<div class="eq">$$E_Y = \frac{\mu(3\lambda + 2\mu)}{\lambda + \mu}, \qquad \nu = \frac{\lambda}{2(\lambda + \mu)}, \qquad k = \lambda + \tfrac23\mu$$</div>
+<div class="eq">$$\lambda = \frac{\nu E_Y}{(1+\nu)(1-2\nu)}, \qquad \mu = \frac{E_Y}{2(1+\nu)}, \qquad k = \frac{E_Y}{3(1-2\nu)}$$</div>
+<p>Hanya <strong>dua</strong> yang bebas; sisanya dapat dihitung. Pasangan mana pun bisa dipakai.</p>
+<h3>4.3 Batas nilai fisis</h3>
+<p>Energi regangan harus positif untuk deformasi apa pun (benda stabil). Syaratnya μ &gt; 0 dan k &gt; 0, sehingga:</p>
+<div class="eq">$$-1 &lt; \nu &lt; \tfrac12$$</div>
+<ul>
+<li>ν → ½: k → ∞, material <strong>inkompresibel</strong> (karet, mendekati lempung jenuh air dan mantel pada skala panjang).</li>
+<li>ν = 0,25: λ = μ, disebut <strong>padatan Poisson</strong>, pendekatan klasik untuk batuan kerak.</li>
+<li>Fluida: μ = 0 (tidak menahan geser), ν = ½.</li>
+</ul>
+<h3>4.4 Contoh nilai</h3>
+<p>Nilai berikut <strong>perkiraan</strong> (orde besaran untuk perbandingan, bervariasi menurut porositas, retakan, dan tekanan):</p>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Material</th>
+<th>ρ (kg/m³)</th>
+<th>Eʏ (GPa)</th>
+<th>ν</th>
+<th>μ (GPa)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Baja</td>
+<td>7800</td>
+<td>207</td>
+<td>0,30</td>
+<td>79</td>
+</tr>
+<tr>
+<td>Granit</td>
+<td>2650</td>
+<td>50–70</td>
+<td>0,25</td>
+<td>20–30</td>
+</tr>
+<tr>
+<td>Batupasir</td>
+<td>2300</td>
+<td>10–30</td>
+<td>0,2–0,3</td>
+<td>5–12</td>
+</tr>
+<tr>
+<td>Serpih (shale)</td>
+<td>2500</td>
+<td>5–30</td>
+<td>0,25–0,35</td>
+<td>2–10</td>
+</tr>
+<tr>
+<td>Es</td>
+<td>917</td>
+<td>9</td>
+<td>0,33</td>
+<td>3,5</td>
+</tr>
+<tr>
+<td>Air</td>
+<td>1000</td>
+<td>—</td>
+<td>0,5</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Contoh 4.1 — Konstanta dari data laboratorium.</strong> Batuan dengan Eʏ = 70 GPa dan ν = 0,25: μ = 70/2,5 = 28 GPa, λ = (0,25 × 70)/(1,25 × 0,5) = 28 GPa (λ = μ, padatan Poisson), k = 70/(3 × 0,5) = 46,7 GPa.</p>
+
+</section>
+<section class="block" id="persamaan-teori-elastisitas-infinitesimal">
+<h2>5. Persamaan Teori Elastisitas Infinitesimal (5.5)</h2>
+<p>Gabungkan semua yang sudah kita punya. Untuk gerakan kecil (perpindahan dan gradiennya kecil), tidak perlu membedakan koordinat X dan x, dan a ≈ ∂²u/∂t². Sistem lengkapnya:</p>
+<div class="eq">$$\underbrace{\rho_0\frac{\partial^2 u_i}{\partial t^2} = \rho_0 B_i + \frac{\partial T_{ij}}{\partial x_j}}_{\text{gerak (3)}}, \qquad \underbrace{E_{ij} = \tfrac12\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)}_{\text{kinematika (6)}}, \qquad \underbrace{T_{ij} = \lambda e\,\delta_{ij} + 2\mu E_{ij}}_{\text{Hooke (6)}}$$</div>
+<p>15 persamaan untuk 15 besaran (3 uᵢ, 6 Eᵢⱼ, 6 Tᵢⱼ). Sistemnya <strong>lengkap</strong>. Masalah elastisitas apa pun, ditambah syarat batas (perpindahan atau traksi) dan syarat awal, punya penyelesaian.</p>
+
+</section>
+<section class="block" id="persamaan-navier">
+<h2>6. Persamaan Navier (5.6–5.7)</h2>
+<p>Substitusikan kinematika ke Hooke, lalu ke persamaan gerak. Langkahnya:</p>
+<div class="eq">$$\frac{\partial T_{ij}}{\partial x_j} = \lambda\frac{\partial e}{\partial x_i} + \mu\left(\frac{\partial^2 u_i}{\partial x_j\partial x_j} + \frac{\partial^2 u_j}{\partial x_i\partial x_j}\right) = \lambda\frac{\partial e}{\partial x_i} + \mu\nabla^2 u_i + \mu\frac{\partial e}{\partial x_i}$$</div>
+<p>Hasilnya <strong>persamaan Navier</strong>, persamaan gerak elastik dalam bentuk perpindahan saja:</p>
+<div class="eq">$$\rho_0\frac{\partial^2\mathbf{u}}{\partial t^2} = \rho_0\mathbf{B} + (\lambda + \mu)\,\nabla(\operatorname{div}\mathbf{u}) + \mu\,\nabla^2\mathbf{u}$$</div>
+<p>Dengan identitas vektor ∇²u = ∇(div u) − rot rot u, bentuk lainnya:</p>
+<div class="eq">$$\rho_0\frac{\partial^2\mathbf{u}}{\partial t^2} = \rho_0\mathbf{B} + (\lambda + 2\mu)\,\nabla(\operatorname{div}\mathbf{u}) - \mu\,\nabla\times(\nabla\times\mathbf{u})$$</div>
+<p>Bentuk kedua sangat berguna: suku pertama berkaitan dengan <strong>perubahan volume</strong> (div u), suku kedua dengan <strong>rotasi</strong> (rot u). Inilah benih gelombang P dan S.</p>
+<p>Dalam koordinat silinder dan bola, Navier ditulis dengan gradien, divergensi, dan rotasi yang sesuai. Misalnya di silinder, dengan e = ∂u<sub>r</sub>/∂r + u<sub>r</sub>/r + (1/r)∂u<sub>θ</sub>/∂θ + ∂u<sub>z</sub>/∂z, persamaan arah r:</p>
+<div class="eq">$$\rho_0\frac{\partial^2 u_r}{\partial t^2} = \rho_0 B_r + (\lambda + 2\mu)\frac{\partial e}{\partial r} - \frac{2\mu}{r}\frac{\partial \omega_z}{\partial \theta} + 2\mu\frac{\partial \omega_\theta}{\partial z}$$</div>
+<p>dengan ω = ½ rot u (vektor rotasi). Komponen θ dan z mengikuti pola serupa (lihat Lai Pers. 5.7.2).</p>
+
+</section>
+<section class="block" id="prinsip-superposisi">
+<h2>7. Prinsip Superposisi (5.8)</h2>
+<p>Karena semua persamaan <strong>linear</strong>, jika (u⁽¹⁾, T⁽¹⁾) menyelesaikan masalah dengan beban 1 dan (u⁽²⁾, T⁽²⁾) menyelesaikan masalah dengan beban 2, maka jumlahnya menyelesaikan masalah dengan beban 1 + 2.</p>
+<p>Superposisi adalah alasan teknik-teknik seismologi bekerja: seismogram dapat dipandang sebagai jumlah respons terhadap banyak impuls kecil (konvolusi dengan fungsi Green), dan sumber gempa yang luas dapat dipandang sebagai jumlah banyak sumber titik.</p>
+
+</section>
+<section class="block" id="gelombang-bidang-irotasional-gelombang-p">
+<h2>8. Gelombang Bidang Irotasional: Gelombang P (5.9)</h2>
+<h3>8.1 Mulai dari 1D</h3>
+<p>Cari gelombang yang perpindahannya <strong>searah rambatan</strong>: u₁ = u₁(x₁, t), u₂ = u₃ = 0, tanpa gaya badan. Maka e = ∂u₁/∂x₁, dan Navier arah 1 menjadi:</p>
+<div class="eq">$$\frac{\partial^2 u_1}{\partial t^2} = c_L^2\,\frac{\partial^2 u_1}{\partial x_1^2}, \qquad c_L = \sqrt{\frac{\lambda + 2\mu}{\rho_0}}$$</div>
+<p>Ini <strong>persamaan gelombang</strong>. Penyelesaian umumnya (d'Alembert): u₁ = f(x₁ − c<sub>L</sub> t) + g(x₁ + c<sub>L</sub> t), yaitu bentuk sembarang yang merambat ke kanan dan ke kiri tanpa berubah bentuk dengan laju c<sub>L</sub>. Untuk gelombang harmonik: u₁ = ε cos[(2π/ℓ)(x₁ − c<sub>L</sub> t)], dengan ℓ panjang gelombang dan frekuensi f = c<sub>L</sub>/ℓ.</p>
+<ul>
+<li>Partikel bergerak <strong>maju-mundur searah rambatan</strong>: gelombang <strong>longitudinal</strong>.</li>
+<li>Volume berubah (e ≠ 0), tetapi tidak ada rotasi (rot u = 0): gelombang <strong>irotasional</strong>.</li>
+<li>Inilah <strong>gelombang P</strong> (primer), yang paling cepat dan pertama tiba di seismometer.</li>
+</ul>
+<p>Perhatikan: modulus yang muncul adalah λ + 2μ (disebut modulus gelombang P atau "P-wave modulus"), <strong>bukan</strong> Eʏ. Pada gelombang bidang, materi di samping tidak bisa menyempit bebas (kondisi regangan uniaksial), sehingga lebih kaku daripada batang yang ditarik.</p>
+<h3>8.2 Bentuk umum 3D</h3>
+<p>Ambil divergensi Navier (tanpa gaya badan). Karena div rot = 0:</p>
+<div class="eq">$$\frac{\partial^2 e}{\partial t^2} = c_L^2\,\nabla^2 e$$</div>
+<p><strong>Setiap perubahan volume merambat dengan laju c<sub>L</sub></strong>, dalam arah apa pun. Di fluida (μ = 0), c<sub>L</sub> = √(λ/ρ) = √(k/ρ): kecepatan bunyi, misalnya sekitar 1500 m/s di air laut.</p>
+
+</section>
+<section class="block" id="gelombang-bidang-ekuivolumial-gelombang-s">
+<h2>9. Gelombang Bidang Ekuivolumial: Gelombang S (5.10)</h2>
+<p>Sekarang cari gelombang yang perpindahannya <strong>tegak lurus rambatan</strong>: u₂ = u₂(x₁, t), u₁ = u₃ = 0. Maka e = 0 (volume tetap), dan Navier arah 2:</p>
+<div class="eq">$$\frac{\partial^2 u_2}{\partial t^2} = c_T^2\,\frac{\partial^2 u_2}{\partial x_1^2}, \qquad c_T = \sqrt{\frac{\mu}{\rho_0}}$$</div>
+<ul>
+<li>Partikel bergerak <strong>tegak lurus rambatan</strong>: gelombang <strong>transversal</strong>.</li>
+<li>Volume tetap (ekuivolumial), tetapi ada rotasi: inilah <strong>gelombang S</strong> (sekunder, shear).</li>
+<li>Dalam bentuk 3D: ambil rotasi Navier, diperoleh ∂²ω/∂t² = c<sub>T</sub>² ∇²ω. <strong>Setiap rotasi merambat dengan laju c<sub>T</sub>.</strong></li>
+<li>Gelombang S punya dua polarisasi: <strong>SH</strong> (gerak horizontal) dan <strong>SV</strong> (gerak dalam bidang vertikal yang memuat arah rambatan).</li>
+</ul>
+<figure class="fig"><div><svg viewBox="0 0 560 250" width="100%" role="img" aria-label="Gerak partikel gelombang P dan S"><defs><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5B6472"/></marker></defs><text x="16" y="30" class="dl" font-weight="600">Gelombang P: gerak partikel searah rambatan, volume berubah</text><circle cx="60.0" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="84.9" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="108.2" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="128.9" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="146.8" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="162.5" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="177.5" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="193.2" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="211.1" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="231.8" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="255.1" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="280.0" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="304.9" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="328.2" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="348.9" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="366.8" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="382.5" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="397.5" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="413.2" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="431.1" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="451.8" cy="70.0" r="4" fill="#2F6FB0"/><circle cx="475.1" cy="70.0" r="4" fill="#2F6FB0"/><line x1="60" y1="100" x2="500" y2="100" stroke="#5B6472" stroke-width="1.2" marker-end="url(#ap)"/><text x="506" y="104" class="dlm">rambat</text><line x1="120" y1="52" x2="134" y2="52" stroke="#2F6FB0" stroke-width="1.5" marker-end="url(#ap)" marker-start="url(#ap)"/><text x="16" y="150" class="dl" font-weight="600">Gelombang S: gerak partikel tegak lurus rambatan, volume tetap</text><circle cx="60.0" cy="195.0" r="4" fill="#B8501F"/><circle cx="80.0" cy="203.7" r="4" fill="#B8501F"/><circle cx="100.0" cy="209.6" r="4" fill="#B8501F"/><circle cx="120.0" cy="210.8" r="4" fill="#B8501F"/><circle cx="140.0" cy="207.1" r="4" fill="#B8501F"/><circle cx="160.0" cy="199.5" r="4" fill="#B8501F"/><circle cx="180.0" cy="190.5" r="4" fill="#B8501F"/><circle cx="200.0" cy="182.9" r="4" fill="#B8501F"/><circle cx="220.0" cy="179.2" r="4" fill="#B8501F"/><circle cx="240.0" cy="180.4" r="4" fill="#B8501F"/><circle cx="260.0" cy="186.3" r="4" fill="#B8501F"/><circle cx="280.0" cy="195.0" r="4" fill="#B8501F"/><circle cx="300.0" cy="203.7" r="4" fill="#B8501F"/><circle cx="320.0" cy="209.6" r="4" fill="#B8501F"/><circle cx="340.0" cy="210.8" r="4" fill="#B8501F"/><circle cx="360.0" cy="207.1" r="4" fill="#B8501F"/><circle cx="380.0" cy="199.5" r="4" fill="#B8501F"/><circle cx="400.0" cy="190.5" r="4" fill="#B8501F"/><circle cx="420.0" cy="182.9" r="4" fill="#B8501F"/><circle cx="440.0" cy="179.2" r="4" fill="#B8501F"/><circle cx="460.0" cy="180.4" r="4" fill="#B8501F"/><circle cx="480.0" cy="186.3" r="4" fill="#B8501F"/><line x1="60" y1="236" x2="500" y2="236" stroke="#5B6472" stroke-width="1.2" marker-end="url(#ap)"/><text x="506" y="240" class="dlm">rambat</text><line x1="40" y1="182" x2="40" y2="208" stroke="#B8501F" stroke-width="1.5" marker-end="url(#ap)" marker-start="url(#ap)"/></svg></div><figcaption><b>Gambar 3.</b> Gelombang P (rapat-renggang, perubahan volume, kecepatan √[(λ+2μ)/ρ]) dan gelombang S (geser, tanpa perubahan volume, kecepatan √(μ/ρ)).</figcaption></figure>
+<h3>9.1 Rasio kecepatan</h3>
+<div class="eq">$$\frac{c_L}{c_T} = \sqrt{\frac{\lambda + 2\mu}{\mu}} = \sqrt{\frac{2(1-\nu)}{1-2\nu}}$$</div>
+<p>Karena λ + 2μ &gt; μ, <strong>gelombang P selalu lebih cepat dari S</strong>. Untuk padatan Poisson (ν = 0,25) rasionya √3 ≈ 1,73. Rasio V<sub>P</sub>/V<sub>S</sub> yang diukur seismolog adalah "jendela" ke rasio Poisson batuan: nilai tinggi (misalnya di atas 1,9) sering menandakan fluida atau lelehan parsial, karena fluida menurunkan μ jauh lebih besar daripada k.</p>
+<p><strong>Contoh 9.1 — Konstanta elastik dari data seismik.</strong> Granit kerak: V<sub>P</sub> = 6,0 km/s, V<sub>S</sub> = 3,5 km/s, ρ = 2700 kg/m³.</p>
+<div class="eq">$$\mu = \rho V_S^2 = 2700 \times (3500)^2 \approx 33{,}1 \text{ GPa}, \qquad \lambda + 2\mu = \rho V_P^2 = 2700 \times (6000)^2 \approx 97{,}2 \text{ GPa}$$</div>
+<p>Maka λ ≈ 31,0 GPa, ν = λ/[2(λ + μ)] ≈ 0,24, k = λ + 2μ/3 ≈ 53 GPa, dan Eʏ = μ(3λ + 2μ)/(λ + μ) ≈ 82 GPa. (Modulus "dinamik" dari gelombang biasanya lebih besar daripada modulus "statik" dari uji tekan, karena retakan menutup pada beban lambat.)</p>
+<p><strong>Bukti inti luar cair.</strong> Gelombang S butuh μ &gt; 0. Inti luar Bumi tidak meneruskan gelombang S, sehingga μ = 0 di sana: inti luar berwujud cair. Ini muncul sebagai <strong>zona bayangan gelombang S</strong> pada jarak episentral lebih dari sekitar 103°.</p>
+
+</section>
+<section class="block" id="pantulan-gelombang-elastik-di-permukaan-bebas">
+<h2>10. Pantulan Gelombang Elastik di Permukaan Bebas (5.11)</h2>
+<p>Gelombang yang tiba di permukaan Bumi (bebas traksi: T₁₂ = T₂₂ = T₃₂ = 0 di x₂ = 0) harus dipantulkan sedemikian rupa sehingga <strong>jumlah gelombang datang + pantul memenuhi syarat batas setiap saat dan di setiap titik</strong>.</p>
+<p>Lai membahas gelombang <strong>SV datang</strong> dengan sudut α₁. Ternyata satu gelombang pantul saja tidak cukup memenuhi dua syarat (T₁₂ = 0 dan T₂₂ = 0). Diperlukan <strong>dua gelombang pantul</strong>: SV pantul (sudut α₂) dan <strong>P pantul</strong> (sudut α₃). Ini disebut <strong>konversi mode</strong>.</p>
+<p>Karena syarat batas harus berlaku untuk semua x₁ dan t, fase ketiga gelombang harus cocok sepanjang batas. Akibatnya:</p>
+<div class="eq">$$\alpha_2 = \alpha_1, \qquad \frac{\sin\alpha_1}{c_T} = \frac{\sin\alpha_3}{c_L}$$</div>
+<p>Ini <strong>hukum Snell</strong> untuk gelombang elastik. Besaran p = sin α / c yang sama untuk semua gelombang disebut <strong>parameter sinar</strong> (ray parameter), konsep sentral dalam penelusuran sinar seismik.</p>
+<ul>
+<li>Karena c<sub>L</sub> &gt; c<sub>T</sub>, maka α₃ &gt; α₁: gelombang P pantul lebih landai.</li>
+<li>Jika sin α₁ &gt; c<sub>T</sub>/c<sub>L</sub>, tidak ada sudut α₃ nyata: <strong>sudut kritis</strong>. Gelombang P "pantul" menjadi gelombang yang meluruh dari permukaan (evanescent).</li>
+<li>Gabungan gelombang P dan SV yang terperangkap di permukaan bebas inilah yang kelak membentuk <strong>gelombang Rayleigh</strong>.</li>
+</ul>
+<p>Amplitudo relatif gelombang pantul diperoleh dari kedua syarat batas (Lai Pers. 5.11.11–5.11.13). Pada antarmuka dua lapisan batuan, hal yang sama menghasilkan pantulan dan pembiasan (persamaan Zoeppritz), dasar metode <strong>seismik refleksi</strong>.</p>
+
+</section>
+<section class="block" id="getaran-pelat-dan-resonansi-lapisan">
+<h2>11. Getaran Pelat dan Resonansi Lapisan (5.12)</h2>
+<p>Pelat tak hingga setebal h dengan <strong>kedua muka bebas traksi</strong> dapat bergetar dalam <strong>gelombang berdiri</strong>. Untuk getaran geser melintang ketebalan (thickness-shear), u₂ = (A cos kx₁ + B sin kx₁) cos ωt dengan syarat T₁₂ = μ ∂u₂/∂x₁ = 0 di kedua muka. Diperoleh frekuensi alami:</p>
+<div class="eq">$$f_n = \frac{n\,c_T}{2h}, \qquad n = 1, 2, 3, \ldots$$</div>
+<p>dan analog f<sub>n</sub> = n c<sub>L</sub>/(2h) untuk getaran tebal-regang (thickness-stretch).</p>
+<p><strong>Aplikasi geofisika: resonansi lapisan sedimen.</strong> Lapisan sedimen lunak setebal H di atas batuan dasar yang jauh lebih kaku berperilaku seperti "pelat" dengan <strong>muka atas bebas</strong> dan <strong>dasar hampir terjepit</strong>. Syarat batasnya berbeda (geser nol di atas, perpindahan nol di bawah), sehingga frekuensinya menjadi:</p>
+<div class="eq">$$f_n = \frac{(2n-1)\,V_S}{4H}, \qquad f_0 = \frac{V_S}{4H}$$</div>
+<p>Untuk lapisan lunak H = 30 m dan V<sub>S</sub> = 200 m/s: f₀ = 200/120 ≈ <strong>1,7 Hz</strong>. Gedung dengan frekuensi alami dekat nilai ini akan beresonansi saat gempa (penyebab kerusakan besar di Mexico City 1985). Metode <strong>HVSR mikrotremor</strong> yang banyak dipakai di Indonesia mengukur f₀ ini untuk mikrozonasi gempa.</p>
+
+</section>
+<section class="block" id="tarikan-sederhana-dan-puntiran">
+<h2>12. Tarikan Sederhana dan Puntiran (5.13–5.18)</h2>
+<p>Bagian ini menunjukkan cara <strong>menyelesaikan masalah elastostatik</strong>: tebak medan tegangan, cek kesetimbangan, cek syarat batas, lalu hitung regangan dan perpindahan.</p>
+<h3>12.1 Tarikan sederhana</h3>
+<p>Batang ditarik tegangan σ di ujungnya, sisi samping bebas. Tebakan T₁₁ = σ, lainnya nol, memenuhi kesetimbangan dan semua syarat batas. Dari Hooke terbalik:</p>
+<div class="eq">$$E_{11} = \frac{\sigma}{E_Y}, \qquad E_{22} = E_{33} = -\frac{\nu\,\sigma}{E_Y}, \qquad (T_s)_{\max} = \frac{\sigma}{2} \text{ pada bidang } 45^\circ$$</div>
+<p>Ini menjelaskan mengapa batuan yang ditekan uniaksial di laboratorium sering patah sepanjang bidang miring: geser terbesar bekerja di sana.</p>
+<h3>12.2 Puntiran silinder lingkaran</h3>
+<p>Silinder dipuntir dengan sudut per satuan panjang α′. Tebakan perpindahannya: setiap penampang berputar kaku sebesar α′x₁. Hasilnya:</p>
+<div class="eq">$$T_{\theta z} = \mu\,\alpha'\,r, \qquad M_t = \mu\,\alpha'\,I_p, \qquad I_p = \frac{\pi a^4}{2}$$</div>
+<p>Tegangan geser nol di sumbu dan maksimum di tepi. Untuk penampang non-lingkaran (elips, persegi panjang), penampang melengkung keluar bidang (warping), diselesaikan dengan fungsi warping atau fungsi tegangan Prandtl (Lai 5.15–5.18). Dalam laboratorium mekanika batuan, uji puntir dipakai untuk mencapai regangan geser sangat besar.</p>
+<h3>12.3 Lentur balok</h3>
+<p>Balok yang dilentur momen M mengalami tegangan aksial yang berubah linear terhadap jarak dari sumbu netral: T₁₁ = −M x₂/I (Lai 5.19). Konsep yang sama, dikembangkan untuk pelat, adalah dasar <strong>lentur litosfer (lithospheric flexure)</strong>: litosfer samudra melengkung di bawah beban gunung laut atau di depan palung subduksi, dan bentuk lengkungannya dipakai untuk mengukur ketebalan elastik litosfer.</p>
+
+</section>
+<section class="block" id="masalah-dua-dimensi-regangan-bidang-tegangan-bid">
+<h2>13. Masalah Dua Dimensi: Regangan Bidang, Tegangan Bidang, dan Fungsi Airy (5.20–5.26)</h2>
+<p>Banyak masalah geofisika dapat dianggap 2D: sesar yang sangat panjang, terowongan, lereng, lubang bor dalam.</p>
+<h3>13.1 Regangan bidang dan tegangan bidang</h3>
+<ul>
+<li><strong>Regangan bidang (plane strain)</strong>: benda sangat panjang di arah x₃ dan tertahan, sehingga u₃ = 0 dan u₁, u₂ tidak bergantung x₃. Akibatnya E₃₃ = E₁₃ = E₂₃ = 0, tetapi T₃₃ = ν(T₁₁ + T₂₂) ≠ 0. Contoh: penampang tegak lurus sesar panjang atau terowongan.</li>
+<li><strong>Tegangan bidang (plane stress)</strong>: pelat tipis bebas di kedua muka, sehingga T₃₃ = T₁₃ = T₂₃ = 0. Contoh: pelat tipis di laboratorium.</li>
+</ul>
+<h3>13.2 Fungsi tegangan Airy</h3>
+<p>Tanpa gaya badan, ambil fungsi φ(x₁, x₂) dan definisikan:</p>
+<div class="eq">$$T_{11} = \frac{\partial^2\varphi}{\partial x_2^2}, \qquad T_{22} = \frac{\partial^2\varphi}{\partial x_1^2}, \qquad T_{12} = -\frac{\partial^2\varphi}{\partial x_1\,\partial x_2}$$</div>
+<p>Persamaan kesetimbangan <strong>otomatis terpenuhi</strong> (cek: ∂T₁₁/∂x₁ + ∂T₁₂/∂x₂ = φ,₂₂₁ − φ,₁₂₂ = 0). Agar regangannya kompatibel (Bab 3, Bagian 7), φ harus memenuhi <strong>persamaan biharmonik</strong>:</p>
+<div class="eq">$$\nabla^4\varphi = \frac{\partial^4\varphi}{\partial x_1^4} + 2\frac{\partial^4\varphi}{\partial x_1^2\,\partial x_2^2} + \frac{\partial^4\varphi}{\partial x_2^4} = 0$$</div>
+<p>Strateginya: pilih polinomial atau fungsi lain yang biharmonik, lalu atur koefisiennya agar syarat batas terpenuhi. Contoh: φ = a x₂²/2 memberi T₁₁ = a (tarikan seragam); φ = b x₂³/6 memberi T₁₁ = b x₂ (lentur murni).</p>
+<h3>13.3 Koordinat polar</h3>
+<p>Untuk masalah berbentuk lingkaran (lubang bor, rongga, terowongan):</p>
+<div class="eq">$$T_{rr} = \frac{1}{r}\frac{\partial\varphi}{\partial r} + \frac{1}{r^2}\frac{\partial^2\varphi}{\partial\theta^2}, \qquad T_{\theta\theta} = \frac{\partial^2\varphi}{\partial r^2}, \qquad T_{r\theta} = -\frac{\partial}{\partial r}\left(\frac{1}{r}\frac{\partial\varphi}{\partial\theta}\right)$$</div>
+<p>Untuk distribusi <strong>simetri aksial</strong> (tidak bergantung θ), dan dengan syarat perpindahan bernilai tunggal:</p>
+<div class="eq">$$T_{rr} = \frac{A}{r^2} + 2C, \qquad T_{\theta\theta} = -\frac{A}{r^2} + 2C$$</div>
+<p>Ini bentuk yang sama dengan Contoh 8.1 Bab 4 (tabung tebal). <strong>Contoh 13.1 — rongga bertekanan dalam batuan tak hingga.</strong> Dengan T<sub>rr</sub> = −p di r = a dan tegangan nol jauh di sana: C = 0, A = −pa², sehingga T<sub>rr</sub> = −pa²/r² dan T<sub>θθ</sub> = +pa²/r². Tekanan meluruh dengan 1/r², dan dinding mengalami <strong>tarik keliling</strong> sebesar p: penyebab rekahan radial di sekitar sumur injeksi dan dapur magma.</p>
+
+</section>
+<section class="block" id="konsentrasi-tegangan-di-sekitar-lubang">
+<h2>14. Konsentrasi Tegangan di Sekitar Lubang (5.34–5.35)</h2>
+<p>Pelat dengan lubang kecil berjari-jari a ditarik tegangan seragam σ jauh dari lubang (arah x₁). Penyelesaian dengan fungsi Airy (masalah <strong>Kirsch</strong>) memberi, di tepi lubang (r = a, θ diukur dari x₁):</p>
+<div class="eq">$$T_{\theta\theta}(r = a) = \sigma\,(1 - 2\cos 2\theta)$$</div>
+<ul>
+<li>Di θ = ±90° (tepi lubang yang tegak lurus arah tarikan): T<sub>θθ</sub> = <strong>3σ</strong>. Lubang kecil <strong>melipattigakan</strong> tegangan.</li>
+<li>Di θ = 0° dan 180°: T<sub>θθ</sub> = −σ (tekan, walaupun beban luarnya tarik!).</li>
+<li>Pengaruh lubang menghilang cepat: pada jarak beberapa kali a, tegangan kembali ke σ.</li>
+</ul>
+<figure class="fig"><div><svg viewBox="0 0 560 300" width="100%" style="max-width:520px;display:block;margin:auto" role="img" aria-label="Breakout lubang bor searah tegangan horizontal minimum"><defs><marker id="ak" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5B6472"/></marker></defs><circle cx="280" cy="150" r="62" fill="#EEF3F8" stroke="#8FA6BC" stroke-width="2"/><path d="M252 94 Q280 70 308 94" fill="#FBF1EC" stroke="#B8501F" stroke-width="2"/><path d="M252 206 Q280 230 308 206" fill="#FBF1EC" stroke="#B8501F" stroke-width="2"/><line x1="40" y1="150" x2="140" y2="150" stroke="#5B6472" stroke-width="2.5" marker-end="url(#ak)"/><line x1="520" y1="150" x2="420" y2="150" stroke="#5B6472" stroke-width="2.5" marker-end="url(#ak)"/><text x="56" y="140" class="dl" font-weight="600">S<tspan baseline-shift="sub" font-size="10">H</tspan></text><text x="474" y="140" class="dl" font-weight="600">S<tspan baseline-shift="sub" font-size="10">H</tspan></text><line x1="280" y1="12" x2="280" y2="48" stroke="#5B6472" stroke-width="1.5" marker-end="url(#ak)"/><line x1="280" y1="290" x2="280" y2="256" stroke="#5B6472" stroke-width="1.5" marker-end="url(#ak)"/><text x="290" y="28" class="dl">S<tspan baseline-shift="sub" font-size="10">h</tspan></text><text x="290" y="282" class="dl">S<tspan baseline-shift="sub" font-size="10">h</tspan></text><text x="322" y="80" class="dl">breakout</text><text x="322" y="80" class="dlm" dy="16">tekan keliling 3S<tspan baseline-shift="sub" font-size="9">H</tspan> − S<tspan baseline-shift="sub" font-size="9">h</tspan></text><text x="352" y="170" class="dlm">tekan keliling</text><text x="352" y="186" class="dlm">3S<tspan baseline-shift="sub" font-size="9">h</tspan> − S<tspan baseline-shift="sub" font-size="9">H</tspan></text><circle cx="342" cy="150" r="3" fill="#2F5D62"/></svg></div><figcaption><b>Gambar 4.</b> Penampang horizontal lubang bor (tampak atas). Tekanan keliling terbesar muncul di sisi yang searah S<sub>h</sub>, sehingga dinding hancur (breakout) di sana. Arah breakout tegak lurus arah S<sub>H</sub>.</figcaption></figure>
+<p><strong>Aplikasi: breakout lubang bor dan arah tegangan tektonik.</strong> Lubang bor vertikal mengalami tegangan horizontal maksimum S<sub>H</sub> dan minimum S<sub>h</sub> (tekan positif). Dengan superposisi dua masalah Kirsch, tegangan keliling di dinding (tanpa tekanan lumpur, θ diukur dari arah S<sub>H</sub>) adalah:</p>
+<div class="eq">$$\sigma_{\theta\theta} = S_H + S_h - 2\,(S_H - S_h)\cos 2\theta$$</div>
+<p>Tekanan terbesar 3S<sub>H</sub> − S<sub>h</sub> terjadi di θ = 90°, yaitu <strong>searah S<sub>h</sub></strong>. Di sana dinding sumur bisa hancur membentuk <strong>breakout</strong> (rongga lonjong). Dengan mengukur arah breakout dari log kaliper atau citra lubang bor, geofisikawan menentukan <strong>arah tegangan horizontal maksimum</strong> (tegak lurus breakout). Data ini adalah bagian besar dari World Stress Map.</p>
+
+</section>
+<section class="block" id="beban-titik-flamant-kelvin-dan-boussinesq">
+<h2>15. Beban Titik: Flamant, Kelvin, dan Boussinesq (5.36–5.45)</h2>
+<p>Solusi beban titik adalah "batu bata" penyusun solusi lain: dengan superposisi (integral), beban apa pun dapat dibangun dari beban titik. Dalam bahasa seismologi, ini adalah <strong>fungsi Green</strong>.</p>
+<h3>15.1 Flamant: beban garis pada setengah ruang 2D</h3>
+<p>Gaya P per satuan panjang menekan permukaan setengah bidang (θ diukur dari arah beban):</p>
+<div class="eq">$$T_{rr} = -\frac{2P\cos\theta}{\pi r}, \qquad T_{\theta\theta} = T_{r\theta} = 0$$</div>
+<p>Tegangan murni radial, meluruh 1/r. Kontur T<sub>rr</sub> konstan adalah lingkaran-lingkaran yang menyinggung permukaan di titik beban ("bola tekanan").</p>
+<h3>15.2 Kelvin: gaya titik di dalam ruang tak hingga</h3>
+<p>Gaya titik P di titik asal dalam padatan elastik tak hingga. Perpindahan di posisi x (jarak R = |x|):</p>
+<div class="eq">$$u_i = \frac{P_j}{16\pi\mu(1-\nu)R}\left[(3 - 4\nu)\,\delta_{ij} + \frac{x_i\,x_j}{R^2}\right]$$</div>
+<p>Perpindahan meluruh 1/R dan tegangan 1/R². Ini adalah <strong>fungsi Green elastostatik</strong>. Dalam seismologi, sumber gempa dimodelkan sebagai pasangan gaya (double couple) yang tersusun dari gaya-gaya titik seperti ini, dengan kekuatan <strong>momen seismik</strong> M₀ = μ × (luas bidang patah) × (rata-rata slip). Versi dinamiknya (fungsi Green elastodinamik) memuat gelombang P dan S yang meluruh 1/R.</p>
+<h3>15.3 Boussinesq: beban titik di permukaan setengah ruang</h3>
+<p>Gaya vertikal P menekan permukaan setengah ruang elastik. Penurunan permukaan pada jarak r dari titik beban:</p>
+<div class="eq">$$u_z(r, z=0) = \frac{P\,(1-\nu)}{2\pi\mu\,r}$$</div>
+<p>Aplikasi: penurunan tanah di bawah fondasi, beban reservoir atau gletser pada kerak, dan dasar bagi masalah indentasi (Lai 5.44–5.45).</p>
+<p><strong>Model Mogi (deformasi gunung api).</strong> Dengan potensial serupa, sumber titik yang <strong>mengembang</strong> (perubahan volume ΔV) pada kedalaman d di setengah ruang elastik menghasilkan pengangkatan permukaan:</p>
+<div class="eq">$$u_z(r) = \frac{(1-\nu)\,\Delta V}{\pi}\,\frac{d}{(r^2 + d^2)^{3/2}}$$</div>
+<p>Model ini dipakai luas untuk menafsirkan data GNSS, tiltmeter, dan InSAR di gunung api (misalnya Merapi, Agung, Sinabung): bentuk kubah pengangkatan memberi kedalaman d, besarnya memberi ΔV. (Model Mogi tidak diturunkan di Lai, tetapi dibangun dengan teknik fungsi potensial yang sama dengan Bagian 5.38–5.40.)</p>
+
+</section>
+<section class="block" id="padatan-elastik-anisotropik">
+<h2>16. Padatan Elastik Anisotropik (5.46–5.55)</h2>
+<p>Banyak batuan <strong>tidak isotropik</strong>: serpih berlapis, batuan bermineral terorientasi, kerak yang penuh retakan sejajar, dan mantel atas (kristal olivin yang terorientasi oleh aliran). Kecepatan gelombangnya bergantung arah.</p>
+<h3>16.1 Notasi Voigt (notasi singkat)</h3>
+<p>Karena simetri, tulis tegangan dan regangan sebagai vektor 6 komponen: T₁ = T₁₁, T₂ = T₂₂, T₃ = T₃₃, T₄ = T₂₃, T₅ = T₁₃, T₆ = T₁₂, dan (dengan faktor 2 untuk geser) E₄ = 2E₂₃, E₅ = 2E₁₃, E₆ = 2E₁₂. Hukum Hooke menjadi perkalian matriks 6×6 simetrik:</p>
+<div class="eq">$$T_I = C_{IJ}\,E_J, \qquad I, J = 1, \ldots, 6$$</div>
+<h3>16.2 Simetri material mengurangi konstanta</h3>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Kelas simetri</th>
+<th>Ciri</th>
+<th>Konstanta bebas</th>
+<th>Contoh geofisika</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Triklinik (umum)</td>
+<td>tanpa simetri</td>
+<td>21</td>
+<td>kristal mineral umum</td>
+</tr>
+<tr>
+<td>Monoklinik</td>
+<td>1 bidang simetri</td>
+<td>13</td>
+<td>batuan dengan fabrik miring</td>
+</tr>
+<tr>
+<td>Ortotropik</td>
+<td>3 bidang simetri tegak lurus</td>
+<td>9</td>
+<td>batuan berlapis dengan retakan vertikal</td>
+</tr>
+<tr>
+<td>Isotropik transversal</td>
+<td>1 sumbu simetri putar</td>
+<td>5</td>
+<td>serpih (VTI), lapisan tipis berulang</td>
+</tr>
+<tr>
+<td>Isotropik</td>
+<td>semua arah sama</td>
+<td>2</td>
+<td>pendekatan batuan masif</td>
+</tr>
+</tbody>
+</table></div>
+<h3>16.3 Isotropik transversal (VTI)</h3>
+<p>Jika sumbu simetri x₃ (vertikal), lima konstanta bebasnya C₁₁, C₃₃, C₄₄, C₆₆, C₁₃, dengan C₁₂ = C₁₁ − 2C₆₆:</p>
+<div class="eq">$$[C] = \begin{bmatrix} C_{11} &amp; C_{11} - 2C_{66} &amp; C_{13} &amp; 0 &amp; 0 &amp; 0 \\ &amp; C_{11} &amp; C_{13} &amp; 0 &amp; 0 &amp; 0 \\ &amp; &amp; C_{33} &amp; 0 &amp; 0 &amp; 0 \\ &amp; &amp; &amp; C_{44} &amp; 0 &amp; 0 \\ &amp; \text{simetrik} &amp; &amp; &amp; C_{44} &amp; 0 \\ &amp; &amp; &amp; &amp; &amp; C_{66} \end{bmatrix}$$</div>
+<p>Gelombang P horizontal merambat dengan √(C₁₁/ρ), vertikal dengan √(C₃₃/ρ). Dalam eksplorasi seismik, anisotropi lemah VTI sering dinyatakan dengan <strong>parameter Thomsen</strong>, misalnya ε = (C₁₁ − C₃₃)/(2C₃₃) dan γ = (C₆₆ − C₄₄)/(2C₄₄). Mengabaikan anisotropi serpih dapat menggeser posisi reflektor dan target sumur.</p>
+<p><strong>Konstanta teknik.</strong> Untuk material ortotropik, ada modulus Young dan rasio Poisson berbeda per arah (E₁, E₂, E₃, ν₁₂, …). Batas fisis (energi positif) membatasi nilai-nilainya (Lai 5.52–5.55).</p>
+<p><strong>Belahan gelombang geser (shear-wave splitting).</strong> Di material anisotropik, gelombang S terbelah menjadi dua gelombang dengan kecepatan berbeda dan polarisasi saling tegak lurus. Waktu tunda antarkeduanya dipakai untuk memetakan arah aliran mantel di bawah stasiun seismik.</p>
+
+</section>
+<section class="block" id="elastisitas-deformasi-besar">
+<h2>17. Elastisitas Deformasi Besar (5.56–5.62)</h2>
+<p>Untuk regangan besar (karet, es, jaringan lunak, dan sebagian model geologi), hukum Hooke linear tidak berlaku. Ada satu syarat yang wajib dipenuhi semua hukum material: <strong>objektivitas</strong> (tidak bergantung pengamat).</p>
+<h3>17.1 Objektivitas</h3>
+<p>Jika pengamat lain berputar atau bergerak relatif terhadap kita, ia harus mendapatkan hukum material yang <strong>sama</strong>. Rotasi kaku benda tidak boleh menimbulkan tegangan. Akibatnya:</p>
+<ul>
+<li>T = f(B) (dengan B tensor Cauchy–Green kiri, Bab 3) <strong>dapat diterima</strong>.</li>
+<li>T = f(C) <strong>tidak dapat diterima</strong> sebagai hubungan Cauchy, karena C tidak objektif dalam arti yang dibutuhkan (Lai Bagian 5.56–5.57).</li>
+</ul>
+<h3>17.2 Material elastik isotropik dan inkompresibel</h3>
+<p>Untuk material isotropik, hukum material paling umum (teorema representasi):</p>
+<div class="eq">$$\mathbf{T} = a_0\,\mathbf{I} + a_1\,\mathbf{B} + a_2\,\mathbf{B}^2$$</div>
+<p>dengan aₖ fungsi invarian B. Untuk material <strong>inkompresibel</strong>, tekanan p tidak ditentukan oleh deformasi (ditentukan oleh syarat batas). Model <strong>Mooney–Rivlin</strong>:</p>
+<div class="eq">$$\mathbf{T} = -p\,\mathbf{I} + \mu_1\,\mathbf{B} - \mu_2\,\mathbf{B}^{-1}$$</div>
+<p>(μ₂ = 0 memberi model <strong>neo-Hookean</strong>.)</p>
+<p><strong>Contoh 17.1 — Geser sederhana besar.</strong> Untuk x₁ = X₁ + kX₂ (Bab 3), Mooney–Rivlin memberi:</p>
+<div class="eq">$$T_{12} = (\mu_1 + \mu_2)\,k, \qquad T_{11} - T_{22} = (\mu_1 + \mu_2)\,k^2$$</div>
+<p>Tegangan geser tetap linear terhadap k, tetapi muncul <strong>perbedaan tegangan normal</strong> sebanding k² yang tidak ada pada teori linear (efek Poynting). Pada regangan kecil (k² diabaikan) dan μ₁ + μ₂ = μ, kita kembali ke hukum Hooke T₁₂ = μk.</p>
+
+</section>
+<section class="block" id="ringkasan-glosarium-dan-latihan">
+<h2>18. Ringkasan, Glosarium, dan Latihan</h2>
+<h3>18.1 Ringkasan rumus kunci</h3>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Konsep</th>
+<th>Rumus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hooke umum</td>
+<td>Tᵢⱼ = Cᵢⱼₖₗ Eₖₗ (21 konstanta)</td>
+</tr>
+<tr>
+<td>Energi regangan</td>
+<td>U = ½ Cᵢⱼₖₗ Eᵢⱼ Eₖₗ</td>
+</tr>
+<tr>
+<td>Hooke isotropik</td>
+<td>T = λ(tr E)I + 2μE</td>
+</tr>
+<tr>
+<td>Hooke terbalik</td>
+<td>E = [(1 + ν)T − ν(tr T)I]/Eʏ</td>
+</tr>
+<tr>
+<td>Modulus</td>
+<td>μ = Eʏ/[2(1 + ν)], k = λ + 2μ/3 = Eʏ/[3(1 − 2ν)]</td>
+</tr>
+<tr>
+<td>Batas Poisson</td>
+<td>−1 &lt; ν &lt; ½</td>
+</tr>
+<tr>
+<td>Navier</td>
+<td>ρü = ρB + (λ + μ)∇(div u) + μ∇²u</td>
+</tr>
+<tr>
+<td>Gelombang P</td>
+<td>c<sub>L</sub> = √[(λ + 2μ)/ρ]</td>
+</tr>
+<tr>
+<td>Gelombang S</td>
+<td>c<sub>T</sub> = √(μ/ρ)</td>
+</tr>
+<tr>
+<td>Rasio</td>
+<td>c<sub>L</sub>/c<sub>T</sub> = √[2(1 − ν)/(1 − 2ν)]</td>
+</tr>
+<tr>
+<td>Snell</td>
+<td>sin α / c sama untuk semua gelombang</td>
+</tr>
+<tr>
+<td>Resonansi lapisan</td>
+<td>f₀ = V<sub>S</sub>/(4H)</td>
+</tr>
+<tr>
+<td>Fungsi Airy</td>
+<td>∇⁴φ = 0</td>
+</tr>
+<tr>
+<td>Kirsch</td>
+<td>T<sub>θθ</sub>(a) = σ(1 − 2 cos 2θ), maks 3σ</td>
+</tr>
+<tr>
+<td>Rongga bertekanan</td>
+<td>T<sub>rr</sub> = −pa²/r², T<sub>θθ</sub> = pa²/r²</td>
+</tr>
+<tr>
+<td>Boussinesq</td>
+<td>u<sub>z</sub> = P(1 − ν)/(2πμr)</td>
+</tr>
+<tr>
+<td>VTI</td>
+<td>5 konstanta: C₁₁, C₃₃, C₄₄, C₆₆, C₁₃</td>
+</tr>
+</tbody>
+</table></div>
+<h3>18.2 Glosarium Indonesia–Inggris</h3>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Istilah Indonesia</th>
+<th>Istilah Inggris</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>persamaan konstitutif</td>
+<td>constitutive equation</td>
+</tr>
+<tr>
+<td>tensor elastisitas</td>
+<td>elasticity tensor</td>
+</tr>
+<tr>
+<td>energi regangan</td>
+<td>strain energy</td>
+</tr>
+<tr>
+<td>konstanta Lamé</td>
+<td>Lamé constants</td>
+</tr>
+<tr>
+<td>modulus Young / geser / bulk</td>
+<td>Young's / shear / bulk modulus</td>
+</tr>
+<tr>
+<td>rasio Poisson</td>
+<td>Poisson's ratio</td>
+</tr>
+<tr>
+<td>gelombang longitudinal / transversal</td>
+<td>longitudinal / transverse wave</td>
+</tr>
+<tr>
+<td>konversi mode</td>
+<td>mode conversion</td>
+</tr>
+<tr>
+<td>sudut kritis</td>
+<td>critical angle</td>
+</tr>
+<tr>
+<td>regangan bidang / tegangan bidang</td>
+<td>plane strain / plane stress</td>
+</tr>
+<tr>
+<td>fungsi tegangan Airy</td>
+<td>Airy stress function</td>
+</tr>
+<tr>
+<td>konsentrasi tegangan</td>
+<td>stress concentration</td>
+</tr>
+<tr>
+<td>setengah ruang</td>
+<td>half-space</td>
+</tr>
+<tr>
+<td>fungsi Green</td>
+<td>Green's function</td>
+</tr>
+<tr>
+<td>isotropik transversal</td>
+<td>transversely isotropic</td>
+</tr>
+<tr>
+<td>objektivitas</td>
+<td>objectivity, frame indifference</td>
+</tr>
+</tbody>
+</table></div>
+<h3>18.3 Latihan soal</h3>
+<ol>
+<li><strong>Konstanta dari uji lab.</strong> Batupasir punya Eʏ = 20 GPa dan ν = 0,2. Hitung μ, λ, dan k. Jika ρ = 2300 kg/m³, hitung V<sub>P</sub> dan V<sub>S</sub>.</li>
+<li><strong>Konstanta dari seismik.</strong> Sedimen jenuh air: V<sub>P</sub> = 1,8 km/s, V<sub>S</sub> = 0,4 km/s, ρ = 2000 kg/m³. Hitung V<sub>P</sub>/V<sub>S</sub>, ν, μ, dan k. Mengapa ν begitu dekat ½?</li>
+<li><strong>Hooke terbalik.</strong> Batuan (Eʏ = 60 GPa, ν = 0,25) diberi T₁₁ = −100 MPa, T₂₂ = T₃₃ = −40 MPa. Hitung E₁₁, E₂₂, dan dilatasi e.</li>
+<li><strong>Regangan uniaksial.</strong> Lapisan sedimen ditekan vertikal (x₃) sehingga E₃₃ = −10⁻³, sedangkan E₁₁ = E₂₂ = 0 (tertahan lateral). Dengan λ = μ = 10 GPa, hitung T₃₃ dan T₁₁. Berapa rasio tegangan horizontal/vertikal?</li>
+<li><strong>Snell.</strong> Gelombang SV dengan sudut datang 20° tiba di permukaan bebas batuan dengan V<sub>P</sub> = 6 km/s dan V<sub>S</sub> = 3,5 km/s. Hitung sudut P pantul dan sudut kritis gelombang SV.</li>
+<li><strong>Resonansi.</strong> Lapisan aluvium setebal 50 m (V<sub>S</sub> = 250 m/s) di atas batuan dasar. Hitung f₀ dan dua frekuensi resonansi berikutnya.</li>
+<li><strong>Breakout.</strong> Lubang bor vertikal dengan S<sub>H</sub> = 60 MPa, S<sub>h</sub> = 40 MPa (tekan positif). Hitung tegangan keliling maksimum dan minimum di dinding, serta arah breakout.</li>
+<li><strong>Mogi.</strong> Sumber Mogi di kedalaman 3 km mengembang ΔV = 10⁶ m³ (ν = 0,25). Hitung pengangkatan maksimum di permukaan dan pengangkatan pada r = 3 km.</li>
+<li><strong>Kompatibilitas fungsi Airy.</strong> Tunjukkan bahwa φ = A x₁² x₂ memenuhi ∇⁴φ = 0, lalu hitung tegangannya.</li>
+</ol>
+<h3>18.4 Kunci jawaban singkat</h3>
+<ol>
+<li>μ = 20/2,4 = 8,33 GPa; λ = (0,2 × 20)/(1,2 × 0,6) = 5,56 GPa; k = 20/(3 × 0,6) = 11,1 GPa. V<sub>P</sub> = √[(5,56 + 16,67) × 10⁹/2300] ≈ 3,11 km/s; V<sub>S</sub> = √(8,33 × 10⁹/2300) ≈ 1,90 km/s.</li>
+<li>V<sub>P</sub>/V<sub>S</sub> = 4,5. Dari rumus rasio: 2(1 − ν)/(1 − 2ν) = 20,25 → ν ≈ 0,474. μ = 2000 × 400² = 0,32 GPa; λ + 2μ = 2000 × 1800² = 6,48 GPa → λ = 5,84 GPa; k = 5,84 + 0,21 = 6,05 GPa. ν dekat ½ karena air pori menahan perubahan volume (k besar) tetapi tidak menahan geser (μ kecil).</li>
+<li>E₁₁ = [−100 − 0,25(−80)]/60 000 = −80/60 000 = −1,33 × 10⁻³; E₂₂ = [−40 − 0,25(−140)]/60 000 = −5/60 000 = −8,3 × 10⁻⁵; e = E₁₁ + 2E₂₂ = −1,5 × 10⁻³ (cek: Tₖₖ/(3k) = −180/(3 × 40 000) = −1,5 × 10⁻³, dengan k = 40 GPa).</li>
+<li>e = −10⁻³. T₃₃ = λe + 2μE₃₃ = −10 − 20 = −30 MPa; T₁₁ = λe = −10 MPa. Rasio = λ/(λ + 2μ) = ν/(1 − ν) = 1/3.</li>
+<li>sin α₃ = (6/3,5) sin 20° = 0,586 → α₃ ≈ 35,9°. Sudut kritis: sin α<sub>c</sub> = 3,5/6 → α<sub>c</sub> ≈ 35,7°.</li>
+<li>f₀ = 250/200 = 1,25 Hz; berikutnya 3f₀ = 3,75 Hz dan 5f₀ = 6,25 Hz.</li>
+<li>Maks 3S<sub>H</sub> − S<sub>h</sub> = 140 MPa (pada arah S<sub>h</sub>), min 3S<sub>h</sub> − S<sub>H</sub> = 60 MPa (pada arah S<sub>H</sub>). Breakout terbentuk <strong>searah S<sub>h</sub></strong>, tegak lurus S<sub>H</sub>.</li>
+<li>Di r = 0: u<sub>z</sub> = (0,75 × 10⁶/π) × 3000/3000³ = 0,75 × 10⁶/(π × 9 × 10⁶) ≈ 0,0265 m = <strong>2,7 cm</strong>. Di r = 3 km: faktor d/(r² + d²)^{3/2} = 3000/(1,8 × 10⁷)^{1,5} ≈ 3,93 × 10⁻⁸, sehingga u<sub>z</sub> ≈ 0,94 cm (sekitar 35% dari maksimum).</li>
+<li>φ,₁₁₁₁ = 0, φ,₂₂₂₂ = 0, φ,₁₁₂₂ = 0, jadi ∇⁴φ = 0. T₁₁ = φ,₂₂ = 0; T₂₂ = φ,₁₁ = 2A x₂; T₁₂ = −φ,₁₂ = −2A x₁.</li>
+</ol>
+<h3>18.5 Bacaan</h3>
+<p>W. Michael Lai, David Rubin, Erhard Krempl. <em>Introduction to Continuum Mechanics</em>, edisi ke-4, Elsevier, 2010. Bab 5: The Elastic Solid. Untuk lanjutan seismologi: Stein &amp; Wysession, <em>An Introduction to Seismology, Earthquakes, and Earth Structure</em> (Bab 2); Shearer, <em>Introduction to Seismology</em>. Untuk geodinamika dan geomekanika: Turcotte &amp; Schubert, <em>Geodynamics</em>; Segall, <em>Earthquake and Volcano Deformation</em>.</p>
+</section>
+
+      <p class="source-note">Bahan ini adalah penyederhanaan pedagogis dari Lai, Rubin &amp; Krempl (2010), Bab 5 (bagian A, B, dan C diringkas). Resonansi lapisan sedimen, breakout lubang bor, model Mogi, parameter Thomsen, dan nilai konstanta batuan ditambahkan sebagai jembatan ke geofisika; nilai pada tabel batuan adalah perkiraan. Penurunan lengkap ada di teks aslinya.</p>
+
+      <nav class="seq-nav" aria-label="Navigasi topik">
+        <a href="/kuliah/mekanika-medium-kontinyu/tegangan/"><span class="lbl">&larr; Sebelumnya &middot; Bab 4</span>Tegangan dan Prinsip Umum</a>
+        <a class="nx" href="/kuliah/mekanika-medium-kontinyu/"><span class="lbl">Kembali &rarr;</span>Daftar materi Mekanika Medium Kontinyu</a>
+      </nav>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
