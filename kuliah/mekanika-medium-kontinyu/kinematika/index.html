@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kinematika Benda Kontinyu — Mekanika Medium Kontinyu — Wiwit Suryanto</title>
+  <meta name="description" content="Bahan ajar Mekanika Medium Kontinyu untuk mahasiswa Geofisika UGM: kinematika benda kontinyu (Lai, Rubin &amp; Krempl, Bab 3) dengan bahasa sederhana dan contoh geofisika — deskripsi Lagrange dan Euler, regangan, laju deformasi, kekekalan massa, deformasi hingga.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+  <style>
+    :root{
+      --page:#F8F6F1;--surface:#FFFFFF;--surface-muted:#F1EEE7;--text:#1F1F1B;
+      --text-muted:#5F625C;--border:#D8D2C5;--accent:#8A2D1F;--accent-hover:#6F2117;
+      --on-accent:#FFFFFF;--support:#2F5D62;
+      --serif:"Source Serif 4",Georgia,serif;
+      --sans:"Inter",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --site-width:1180px;--rail-width:260px;--content-width:820px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--page);color:var(--text);font-family:var(--serif);font-size:18px;line-height:1.7}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}
+    a:hover,a:focus{color:var(--accent-hover)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    img{max-width:100%;display:block}
+
+    .site{width:min(var(--site-width),calc(100% - 64px));margin:0 auto;display:grid;
+      grid-template-columns:var(--rail-width) minmax(0,1fr);gap:64px}
+    .identity-rail{min-height:100vh;padding:48px 0 40px;position:sticky;top:0;align-self:start;
+      display:flex;flex-direction:column;gap:28px;font-family:var(--sans);color:var(--text-muted)}
+    .portrait-wrap{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .portrait{width:120px;height:120px;object-fit:cover;border-radius:9999px;border:1px solid var(--border);background:var(--surface-muted);margin-bottom:18px}
+    .rail-name{margin:0 0 8px;color:var(--text);font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+    .rail-name a{color:inherit;text-decoration:none}
+    .rail-name a:hover{color:var(--accent)}
+    .rail-title{margin:0;font-size:14px;line-height:1.5}
+    .rail-label{margin:0 0 10px;color:var(--text);font-size:13px;font-weight:700}
+    .rail-block{border-bottom:1px solid var(--border);padding-bottom:24px}
+    .nav-list,.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+    .nav-list a,.contact-list a{display:inline-flex;width:fit-content;color:var(--text-muted);font-size:14px;font-weight:500;line-height:1.35;padding:6px 0;text-decoration:none;border-bottom:1px solid transparent}
+    .nav-list a:hover,.contact-list a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    .nav-list a.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+    main{padding:48px 0 72px;max-width:var(--content-width)}
+    .eyebrow{margin:0 0 16px;color:var(--support);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .crumb{font-family:var(--sans);font-size:13px;color:var(--text-muted);margin:0 0 22px}
+    .crumb a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent}
+    .crumb a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+    h1{margin:0 0 20px;font-family:var(--serif);font-size:44px;font-weight:600;line-height:1.08}
+    .lede{margin:0 0 8px;font-size:21px;line-height:1.55;color:var(--text);max-width:70ch}
+
+    .meta-grid{display:grid;grid-template-columns:max-content 1fr;gap:8px 24px;font-family:var(--sans);font-size:15px;margin:28px 0 0;padding:22px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .meta-grid dt{color:var(--text-muted);font-weight:500}
+    .meta-grid dd{margin:0;font-weight:600}
+
+    section.block{padding:56px 0 0}
+    h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.2;margin:0 0 8px}
+    main h3{font-family:var(--serif);font-size:21px;font-weight:600;margin:28px 0 8px}
+
+    figure.fig{margin:0 0 24px;border:1px solid var(--border);background:var(--surface);border-radius:6px;overflow:hidden}
+    figure.fig > div{padding:18px 16px}
+    figure.fig figcaption{font-family:var(--sans);font-size:13px;color:var(--text-muted);padding:10px 16px;border-top:1px solid var(--border)}
+    figure.fig figcaption b{color:var(--text);font-weight:600}
+
+    ul.points{margin:0;padding:0;list-style:none;font-family:var(--sans);font-size:16px;line-height:1.55}
+    ul.points li{position:relative;padding:0 0 14px 26px}
+    ul.points li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;background:var(--accent);border-radius:2px}
+    ul.points b{font-weight:600}
+    ol.steps{font-family:var(--sans);font-size:16px;line-height:1.55;padding-left:22px;margin:16px 0}
+    ol.steps li{margin:0 0 10px}
+
+    .callout{background:var(--surface-muted);border:1px solid var(--border);border-radius:6px;padding:24px;font-family:var(--sans);font-size:15px;line-height:1.55;margin:22px 0}
+    .callout p:first-child{margin-top:0}
+    .callout p:last-child{margin-bottom:0}
+    .callout.support{background:#EDF3F2;border-color:#C7DAD6}
+    .callout.try{background:#FBF1EC;border-color:#E6C9BB}
+    .source-note{margin-top:18px;color:var(--text-muted);font-family:var(--sans);font-size:13px;line-height:1.5}
+    .footer{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);color:var(--text-muted);font-family:var(--sans);font-size:14px;line-height:1.55}
+
+    .seq-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:40px 0 0;font-family:var(--sans)}
+    .seq-nav a{display:block;border:1px solid var(--border);border-radius:6px;padding:14px 16px;text-decoration:none;background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+    .seq-nav a:hover{border-color:var(--accent);color:var(--accent)}
+    .seq-nav .lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+    .seq-nav a:hover .lbl{color:var(--accent)}
+    .seq-nav .nx{text-align:right}
+    @media (max-width:560px){ .seq-nav{grid-template-columns:1fr} .seq-nav .nx{text-align:left} }
+
+    .toc{font-family:var(--sans);font-size:15px;columns:2;column-gap:32px;margin:28px 0 0;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+    .toc ol{margin:0;padding-left:20px}
+    .toc li{padding:2px 0;break-inside:avoid}
+    .toc a{text-decoration:none}
+    table.data{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;line-height:1.5;margin:0 0 20px;background:var(--surface);border:1px solid var(--border)}
+    table.data th,table.data td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+    table.data th{background:var(--surface-muted);font-weight:600}
+    .eq{overflow-x:auto;margin:6px 0 18px}
+    main p,main li{max-width:72ch}
+    code{font-size:.9em;background:var(--surface-muted);padding:1px 5px;border-radius:3px}
+
+    .dg{ --d-axis:#5B6472; --d-blue:#2F6FB0; --d-rust:#B8501F; --d-teal:#2F5D62; --d-bodyfill:#EEF3F8; --d-bodyline:#8FA6BC; }
+    text.dl{font-family:var(--sans);font-size:13px;fill:#1F1F1B}
+    text.dlm{font-family:var(--sans);font-size:12px;fill:#5F625C}
+    .figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:8px 0 20px}
+    .stage-fig{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px}
+    .stage-fig svg{width:100%;height:auto;display:block}
+    .stage-fig p{margin:10px 0 0;font-family:var(--sans);font-size:13.5px;line-height:1.45;color:var(--text-muted)}
+    .stage-fig p b{color:var(--text)}
+
+    @media (max-width:920px){
+      .site{width:min(100% - 40px,820px);display:block}
+      .identity-rail{min-height:auto;position:static;padding:28px 0 20px;gap:18px}
+      .portrait-wrap{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:18px}
+      .portrait{width:88px;height:88px;margin:0}
+      .nav-list,.contact-list{flex-direction:row;flex-wrap:wrap;gap:6px 18px}
+      main{padding-top:16px}
+      h1{font-size:34px}
+    }
+    @media (max-width:560px){
+      body{font-size:17px}
+      .site{width:calc(100% - 32px)}
+      h1{font-size:29px}
+      .meta-grid{grid-template-columns:1fr;gap:2px 0}
+      .meta-grid dt{margin-top:12px}
+      .toc{columns:1}
+    }
+    main ul:not(.points):not(.nav-list):not(.contact-list),main ol:not(.steps){font-family:var(--sans);font-size:16px;line-height:1.6;padding-left:24px}
+    main ul:not(.points) li,main ol:not(.steps) li{margin:0 0 8px}
+    .toc{columns:1}
+    .eq{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:4px 14px}
+    table.data td:nth-child(2){white-space:normal}
+    .table-wrap{overflow-x:auto}
+  </style>
+</head>
+<body>
+  <div class="site">
+    <aside class="identity-rail" aria-label="Profil">
+      <div class="portrait-wrap">
+        <img class="portrait" src="/assets/wiwit-suryanto-profile.jpg" alt="Foto Wiwit Suryanto" width="900" height="900">
+        <div>
+          <p class="rail-name"><a href="/">Wiwit Suryanto</a></p>
+          <p class="rail-title">Dr.rer.nat., S.Si., M.Si.<br>Geofisika, Seismologi, Vulkanologi</p>
+        </div>
+      </div>
+      <nav class="rail-block" aria-label="Navigasi">
+        <p class="rail-label">Navigasi</p>
+        <ul class="nav-list">
+          <li><a href="/">Beranda</a></li>
+          <li><a href="/#teaching" class="active">Teaching</a></li>
+          <li><a href="/#kuliah-umum">Kuliah Umum</a></li>
+          <li><a href="/#research">Research</a></li>
+          <li><a href="/#publications">Publications</a></li>
+        </ul>
+      </nav>
+      <div class="rail-block">
+        <p class="rail-label">Kontak</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a></li>
+          <li><a href="https://acadstaff.ugm.ac.id/wiwit">Profil UGM</a></li>
+          <li><a href="https://scholar.google.com/citations?user=9lJKKt0AAAAJ&amp;hl=en">Google Scholar</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main>
+      <p class="crumb"><a href="/">Beranda</a> &nbsp;/&nbsp; <a href="/#teaching">Teaching</a> &nbsp;/&nbsp; <a href="/kuliah/mekanika-medium-kontinyu/">Mekanika Medium Kontinyu</a> &nbsp;/&nbsp; Kinematika</p>
+      <p class="eyebrow">Mekanika Medium Kontinyu &middot; Sarjana Geofisika</p>
+      <h1>Kinematika Benda Kontinyu</h1>
+      <p class="lede">Bagaimana batuan, magma, es, dan air laut bergerak dan berubah bentuk &mdash; sebelum kita bertanya gaya apa penyebabnya. Disusun dari konsep paling sederhana ke paling umum, dengan contoh dari seismologi, geodesi, geodinamika, dan geologi struktur. Mengikuti Lai, Rubin &amp; Krempl, Bab 3.</p>
+
+      <dl class="meta-grid">
+        <dt>Mata kuliah</dt><dd>Mekanika Medium Kontinyu (Program Sarjana Geofisika)</dd>
+        <dt>Rujukan utama</dt><dd>Lai, Rubin &amp; Krempl (2010), <i>Introduction to Continuum Mechanics</i>, edisi ke-4, Bab 3</dd>
+        <dt>Prasyarat</dt><dd>Kalkulus vektor, aljabar matriks (nilai eigen), dasar tensor (Bab 2)</dd>
+        <dt>Pengampu</dt><dd>Wiwit Suryanto &mdash; Departemen Fisika, FMIPA UGM</dd>
+      </dl>
+
+      <nav class="toc" aria-label="Daftar isi"><ol>
+<li><a href="#pengantar">Pengantar: Mengapa Geofisikawan Perlu Kinematika?</a></li>
+<li><a href="#gerak">Deskripsi Gerak Benda Kontinyu (3.1)</a></li>
+<li><a href="#lagrange-euler">Deskripsi Material (Lagrange) vs Spasial (Euler) dan Turunan Material (3.2–3.3)</a></li>
+<li><a href="#percepatan">Percepatan Partikel (3.4)</a></li>
+<li><a href="#perpindahan">Medan Perpindahan dan Gerak Benda Kaku (3.5–3.6)</a></li>
+<li><a href="#regangan-kecil">Regangan Infinitesimal (3.7–3.11)</a></li>
+<li><a href="#laju-deformasi">Laju Deformasi, Spin, dan Kekekalan Massa (3.12–3.15)</a></li>
+<li><a href="#kompatibilitas">Syarat Kompatibilitas (3.16–3.17)</a></li>
+<li><a href="#deformasi-hingga">Deformasi Hingga (Deformasi Besar) (3.18–3.28)</a></li>
+<li><a href="#koordinat-lain">Koordinat Lengkung dan Konfigurasi Sekarang sebagai Acuan (3.29–3.30)</a></li>
+<li><a href="#ringkasan">Ringkasan, Glosarium, dan Latihan</a></li>
+      </ol></nav>
+
+<section class="block" id="pengantar">
+<h2>Pengantar: Mengapa Geofisikawan Perlu Kinematika?</h2>
+<p>Kinematika adalah ilmu tentang <strong>bagaimana sesuatu bergerak dan berubah bentuk</strong>, tanpa (dulu) bertanya <em>apa gaya penyebabnya</em>. Gaya dan tegangan dibahas di bab berikutnya; di bab ini kita hanya "merekam" gerak dan deformasi.</p>
+<p>Hampir semua yang dipelajari geofisikawan adalah benda yang bergerak atau berubah bentuk:</p>
+<ul>
+<li><strong>Gelombang seismik</strong>: batuan bergetar, memampat dan meregang sangat kecil (regangan sekitar 10⁻⁶).</li>
+<li><strong>Deformasi kerak bumi</strong>: GNSS dan InSAR mengukur pergeseran tanah sebelum, saat, dan setelah gempa.</li>
+<li><strong>Aliran mantel dan magma</strong>: batuan panas "mengalir" seperti fluida sangat kental dalam skala jutaan tahun.</li>
+<li><strong>Lipatan dan sesar</strong>: batuan yang dulunya datar kini terlipat atau tergeser, contoh deformasi besar (hingga).</li>
+</ul>
+<p><strong>Benda kontinyu</strong> artinya kita menganggap materi mengisi ruang secara menerus, tanpa celah antarbutir. Satu "partikel" dalam mekanika kontinyu bukan atom, melainkan <strong>volume yang sangat kecil</strong> dibanding skala masalah, tetapi masih jauh lebih besar dari atom. Contoh: untuk gelombang seismik dengan panjang gelombang ratusan meter, sebongkah batuan 1 cm³ sudah bisa dianggap satu "partikel".</p>
+<h3>Capaian pembelajaran</h3>
+<p>Setelah mempelajari materi ini, mahasiswa mampu:</p>
+<ol>
+<li>Membedakan deskripsi Lagrange (material) dan Euler (spasial), serta menghitung turunan material.</li>
+<li>Menghitung kecepatan, percepatan, dan medan perpindahan dari persamaan gerak.</li>
+<li>Menghitung tensor regangan infinitesimal, regangan utama, dilatasi, dan rotasi, serta menafsirkan artinya secara fisis.</li>
+<li>Menghitung laju deformasi dan spin, serta menerapkan persamaan kekekalan massa.</li>
+<li>Memahami gradien deformasi F, dekomposisi polar, dan tensor regangan hingga untuk deformasi besar.</li>
+</ol>
+<h3>Peta materi</h3>
+<p>Alur bab ini bergerak dari yang paling sederhana ke yang paling umum:</p>
+<ol>
+<li><strong>Gerak</strong>: di mana partikel berada setiap saat? (3.1–3.4)</li>
+<li><strong>Perpindahan</strong>: seberapa jauh partikel berpindah? (3.5–3.6)</li>
+<li><strong>Regangan kecil</strong>: seberapa besar benda berubah bentuk, jika perubahannya kecil? (3.7–3.11)</li>
+<li><strong>Laju</strong>: seberapa cepat benda berubah bentuk? (3.12–3.15)</li>
+<li><strong>Deformasi besar</strong>: bagaimana jika perubahan bentuknya besar? (3.18–3.30)</li>
+</ol>
+<p>Notasi: huruf tebal seperti <strong>x</strong>, <strong>u</strong> adalah vektor; huruf kapital tebal seperti <strong>E</strong>, <strong>F</strong> adalah tensor (bisa dibayangkan sebagai matriks 3×3). Indeks berulang berarti dijumlahkan (konvensi Einstein), misalnya aᵢbᵢ = a₁b₁ + a₂b₂ + a₃b₃.</p>
+
+</section>
+<section class="block" id="gerak">
+<h2>1. Deskripsi Gerak Benda Kontinyu (3.1)</h2>
+<p>Intinya: setiap partikel diberi "nama" berupa <strong>posisi awalnya X</strong>, lalu kita tulis posisinya sekarang <strong>x</strong> sebagai fungsi dari X dan waktu t.</p>
+<h3>Mulai dari yang sederhana: satu partikel</h3>
+<p>Untuk satu partikel (misalnya satu pelampung di laut), lintasannya cukup ditulis sebagai fungsi waktu:</p>
+<div class="eq">$$\mathbf{r} = \mathbf{r}(t), \qquad x_1 = x_1(t),\; x_2 = x_2(t),\; x_3 = x_3(t)$$</div>
+<p>Jika ada N pelampung, kita beri nomor 1, 2, …, N dan tulis N lintasan.</p>
+<h3>Masalahnya: kontinyu punya tak hingga partikel</h3>
+<p>Sebuah lapisan batuan berisi tak hingga partikel, jadi tidak mungkin diberi nomor satu per satu. Solusinya: <strong>beri nama setiap partikel dengan koordinat posisinya pada suatu waktu acuan t₀</strong>. Partikel yang pada t₀ berada di (1, 2, 3) kita sebut "partikel (1, 2, 3)", ke mana pun ia bergerak sesudahnya.</p>
+<p>Analogi: seperti menamai stasiun GNSS dengan koordinat pemasangannya. Walaupun stasiun itu bergeser beberapa cm per tahun karena gerak lempeng, "namanya" tetap koordinat awal.</p>
+<div class="eq">$$\mathbf{x} = \mathbf{x}(\mathbf{X}, t), \qquad \text{dengan } \mathbf{X} = \mathbf{x}(\mathbf{X}, t_0)$$</div>
+<ul>
+<li><strong>X = (X₁, X₂, X₃)</strong> disebut <strong>koordinat material</strong>: label partikel, tidak berubah terhadap waktu.</li>
+<li><strong>x = (x₁, x₂, x₃)</strong> disebut <strong>koordinat spasial</strong>: posisi partikel saat ini di ruang.</li>
+<li>Persamaan di atas disebut <strong>persamaan gerak</strong>; ia memuat lintasan semua partikel sekaligus.</li>
+</ul>
+<h3>Contoh 1.1 — Geser sederhana (simple shear) di zona sesar</h3>
+<p>Bayangkan sebuah blok batuan kubus berukuran 1×1×1 di zona sesar geser (strike-slip). Bagian bawah blok menempel di batuan yang diam, bagian atas terseret ke kanan. Gerak ini dimodelkan sebagai:</p>
+<div class="eq">$$x_1 = X_1 + k\,t\,X_2, \qquad x_2 = X_2, \qquad x_3 = X_3$$</div>
+<p>Cara membacanya, cukup masukkan koordinat material tiap titik:</p>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Titik / garis material</th>
+<th>X (awal)</th>
+<th>x (waktu t)</th>
+<th>Artinya</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O</td>
+<td>(0, 0, 0)</td>
+<td>(0, 0, 0)</td>
+<td>diam</td>
+</tr>
+<tr>
+<td>A</td>
+<td>(1, 0, 0)</td>
+<td>(1, 0, 0)</td>
+<td>diam</td>
+</tr>
+<tr>
+<td>Garis bawah OA</td>
+<td>(X₁, 0, 0)</td>
+<td>(X₁, 0, 0)</td>
+<td>seluruh dasar diam</td>
+</tr>
+<tr>
+<td>Garis atas CB</td>
+<td>(X₁, 1, 0)</td>
+<td>(X₁ + kt, 1, 0)</td>
+<td>bergeser ke kanan sejauh kt</td>
+</tr>
+<tr>
+<td>Garis samping OC</td>
+<td>(0, X₂, 0)</td>
+<td>(ktX₂, X₂, 0)</td>
+<td>tetap lurus tapi miring</td>
+</tr>
+</tbody>
+</table></div>
+<figure class="fig"><div>
+<svg viewBox="0 0 560 230" width="100%" style="max-width:520px;display:block;margin:auto" role="img" aria-label="Kubus satuan berubah menjadi jajaran genjang akibat geser sederhana">
+  <defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5B6472"/></marker></defs>
+  <line x1="40" y1="190" x2="250" y2="190" stroke="#5B6472"/><line x1="60" y1="205" x2="60" y2="20" stroke="#5B6472"/>
+  <rect x="60" y="60" width="130" height="130" fill="#EEF3F8" stroke="#8FA6BC" stroke-width="2"/>
+  <text x="48" y="205" class="dl">O</text><text x="186" y="208" class="dl">A</text><text x="194" y="55" class="dl">B</text><text x="44" y="56" class="dl">C</text>
+  <text x="125" y="226" text-anchor="middle" class="dlm">t = 0 : persegi</text>
+  <line x1="265" y1="125" x2="305" y2="125" stroke="#5B6472" stroke-width="1.5" marker-end="url(#ar1)"/>
+  <line x1="320" y1="190" x2="540" y2="190" stroke="#5B6472"/><line x1="340" y1="205" x2="340" y2="20" stroke="#5B6472"/>
+  <polygon points="340,190 470,190 530,60 400,60" fill="#FBF1EC" stroke="#B8501F" stroke-width="2"/>
+  <line x1="340" y1="60" x2="400" y2="60" stroke="#B8501F" stroke-dasharray="4 4"/>
+  <text x="370" y="52" text-anchor="middle" class="dlm">kt</text>
+  <text x="328" y="205" class="dl">O</text><text x="466" y="208" class="dl">A</text><text x="534" y="56" class="dl">B′</text><text x="392" y="52" class="dl"></text><text x="404" y="78" class="dl">C′</text>
+  <text x="435" y="226" text-anchor="middle" class="dlm">waktu t : jajaran genjang</text>
+</svg></div>
+<figcaption><b>Gambar 1.</b> Geser sederhana x₁ = X₁ + ktX₂. Dasar OA diam, sisi atas bergeser sejauh kt, dan sisi tegak tetap lurus tetapi miring.</figcaption></figure>
+<p>Hasilnya: penampang persegi berubah menjadi <strong>jajaran genjang</strong>. Makin tinggi posisi partikel (X₂ besar), makin jauh ia bergeser. Inilah pola yang terlihat pada <strong>milonit</strong> di zona geser, atau pada lapisan sedimen yang terseret di dekat bidang sesar.</p>
+<p><strong>Catatan.</strong> Koordinat material tidak wajib sama dengan posisi pada suatu waktu. Kita bisa memakai label lain, misalnya Y₁ = X₁, Y₂ = X₂, Y₃ = X₃, dan gerak yang sama tetap bisa ditulis. Namun di materi ini, X selalu posisi pada waktu acuan.</p>
+
+</section>
+<section class="block" id="lagrange-euler">
+<h2>2. Deskripsi Material (Lagrange) vs Spasial (Euler) dan Turunan Material (3.2–3.3)</h2>
+<p>Ada dua cara merekam besaran fisis (suhu, kecepatan, tegangan) pada benda yang bergerak: <strong>mengikuti partikel</strong> (Lagrange) atau <strong>diam di satu titik</strong> (Euler).</p>
+<h3>Analogi oseanografi: pelampung vs stasiun tetap</h3>
+<ul>
+<li><strong>Lagrange</strong>: sebuah <strong>pelampung Argo</strong> hanyut terbawa arus sambil mencatat suhu air. Data yang tercatat adalah suhu <em>paket air yang sama</em> sepanjang perjalanannya.</li>
+<li><strong>Euler</strong>: sebuah <strong>stasiun mooring</strong> yang tertambat di dasar laut mencatat suhu di <em>titik yang sama</em>. Air yang lewat terus berganti.</li>
+</ul>
+<div class="eq">$$\text{Lagrange: } \theta = \hat{\theta}(X_1, X_2, X_3, t) \qquad \text{Euler: } \theta = \tilde{\theta}(x_1, x_2, x_3, t)$$</div>
+<p>Kedua deskripsi terhubung lewat persamaan gerak x = x(X, t): bila gerak diketahui, satu deskripsi dapat diubah menjadi yang lain.</p>
+<p>Contoh geofisika lain: <strong>seismometer</strong> di permukaan merekam getaran titik tanah tempat ia dipasang (secara praktis Lagrange, karena ia ikut bergerak bersama tanah). Model <strong>tomografi</strong> kecepatan gelombang di mantel adalah medan Euler: nilai di setiap titik ruang.</p>
+<h3>Contoh 2.1 — Suhu yang tetap, tapi partikel merasakan perubahan</h3>
+<p>Gerak: x₁ = X₁ + ktX₂, x₂ = (1 + kt)X₂, x₃ = X₃. Medan suhu (Euler) tidak berubah terhadap waktu: θ = α(x₁ + x₂).</p>
+<p><strong>(a) Deskripsi material.</strong> Substitusikan persamaan gerak:</p>
+<div class="eq">$$\theta = \alpha(x_1 + x_2) = \alpha X_1 + \alpha(1 + 2kt)X_2$$</div>
+<p><strong>(b) Kecepatan partikel.</strong> Turunkan posisi terhadap waktu dengan X tetap (mengikuti satu partikel):</p>
+<div class="eq">$$v_1 = kX_2, \quad v_2 = kX_2, \quad v_3 = 0 \qquad \Rightarrow \qquad v_1 = v_2 = \frac{k x_2}{1 + kt} \;\; (\text{bentuk Euler})$$</div>
+<p><strong>(c) Laju perubahan suhu yang dirasakan partikel:</strong></p>
+<div class="eq">$$\left(\frac{\partial \theta}{\partial t}\right)_{X \text{ tetap}} = 2\alpha k X_2 = \frac{2\alpha k x_2}{1 + kt}$$</div>
+<p>Pelajaran penting: <strong>medan suhu di ruang diam, tetapi partikel tetap memanas</strong>, karena ia berpindah ke tempat yang lebih panas. Ini persis yang terjadi pada batuan yang terangkat (eksumasi) atau magma yang naik melewati geoterm yang tetap.</p>
+<h3>Turunan material D/Dt</h3>
+<p><strong>Turunan material</strong> adalah laju perubahan suatu besaran <strong>yang dirasakan oleh partikel tertentu</strong>. Kita tulis D/Dt.</p>
+<p>Jika besaran ditulis secara Lagrange, caranya mudah: turunkan saja terhadap t dengan X tetap.</p>
+<p>Jika ditulis secara Euler, kita perlu aturan rantai, karena posisi partikel x juga berubah terhadap waktu:</p>
+<div class="eq">$$\frac{D\theta}{Dt} = \underbrace{\frac{\partial \theta}{\partial t}}_{\text{perubahan lokal}} + \underbrace{v_1\frac{\partial \theta}{\partial x_1} + v_2\frac{\partial \theta}{\partial x_2} + v_3\frac{\partial \theta}{\partial x_3}}_{\text{perubahan karena berpindah (adveksi)}}$$</div>
+<p>Atau ringkasnya:</p>
+<div class="eq">$$\frac{D\theta}{Dt} = \frac{\partial \theta}{\partial t} + \mathbf{v}\cdot\nabla\theta$$</div>
+<p>Cara memahaminya dengan analogi sehari-hari: Anda naik motor dari pantai ke puncak gunung saat matahari terbenam. Suhu yang Anda rasakan turun karena (1) <strong>hari makin malam</strong> (suku ∂θ/∂t, perubahan lokal) dan (2) <strong>Anda naik ke tempat yang lebih dingin</strong> (suku v·∇θ, adveksi).</p>
+<p>Dua kasus khusus yang perlu diingat:</p>
+<ul>
+<li>Medan <strong>tunak</strong> (∂θ/∂t = 0) tidak berarti partikel tidak mengalami perubahan; suku adveksi masih ada (Contoh 2.1).</li>
+<li>Jika partikel bergerak <strong>sejajar isoterm</strong> (v tegak lurus ∇θ), maka Dθ/Dt = 0.</li>
+</ul>
+<p><strong>Cek Contoh 2.1 dengan rumus ini:</strong> ∇θ = α<strong>e</strong>₁ + α<strong>e</strong>₂ dan ∂θ/∂t = 0, sehingga Dθ/Dt = v₁α + v₂α = 2αkx₂/(1 + kt). Hasilnya sama.</p>
+<p>Bentuk v·∇θ berlaku di semua sistem koordinat; cukup gunakan gradien yang sesuai. Agar tidak tertukar dengan sudut θ, pada dua rumus berikut suhu ditulis Θ. Di koordinat silinder (r, θ, z), berguna untuk sumur bor atau konduit vulkanik:</p>
+<div class="eq">$$\frac{D\Theta}{Dt} = \frac{\partial \Theta}{\partial t} + v_r\frac{\partial \Theta}{\partial r} + \frac{v_\theta}{r}\frac{\partial \Theta}{\partial \theta} + v_z\frac{\partial \Theta}{\partial z}$$</div>
+<p>Di koordinat bola (r, θ, φ), berguna untuk Bumi secara global:</p>
+<div class="eq">$$\frac{D\Theta}{Dt} = \frac{\partial \Theta}{\partial t} + v_r\frac{\partial \Theta}{\partial r} + \frac{v_\theta}{r}\frac{\partial \Theta}{\partial \theta} + \frac{v_\phi}{r\sin\theta}\frac{\partial \Theta}{\partial \phi}$$</div>
+<h3>Contoh 2.2 — "Partikel yang dulu di sana" vs "partikel yang sekarang di sini"</h3>
+<p>Gerak: x₁ = X₁ + k(X₁ + X₂)t, x₂ = X₂ + k(X₁ + X₂)t, x₃ = X₃. Kecepatannya v₁ = v₂ = k(X₁ + X₂).</p>
+<ul>
+<li><strong>Partikel yang dulu</strong> di (1, 1, 0): kecepatan pada t = 2 adalah v = 2k<strong>e</strong>₁ + 2k<strong>e</strong>₂.</li>
+<li><strong>Partikel yang sekarang</strong> (t = 2) berada di (1, 1, 0): cari dulu asalnya. Dari 1 = (1 + 2k)X₁ + 2kX₂ dan 1 = (1 + 2k)X₂ + 2kX₁ diperoleh X₁ = X₂ = 1/(1 + 4k). Jadi v₁ = v₂ = 2k/(1 + 4k).</li>
+</ul>
+<p>Dua pertanyaan yang terdengar mirip ini memberi jawaban berbeda. Selalu tanyakan: "label" atau "lokasi sekarang"?</p>
+
+</section>
+<section class="block" id="percepatan">
+<h2>3. Percepatan Partikel (3.4)</h2>
+<p>Percepatan adalah <strong>turunan material dari kecepatan</strong>: seberapa cepat kecepatan <em>sebuah partikel</em> berubah.</p>
+<div class="eq">$$\mathbf{v} = \left(\frac{\partial \mathbf{x}}{\partial t}\right)_{X \text{ tetap}}, \qquad \mathbf{a} = \left(\frac{\partial \mathbf{v}}{\partial t}\right)_{X \text{ tetap}} = \frac{D\mathbf{v}}{Dt}$$</div>
+<p>Jika kecepatan diketahui secara Lagrange, cukup turunkan terhadap t. Jika kecepatan diketahui secara Euler (yang lebih umum dalam mekanika fluida dan geodinamika), kita pakai rumus turunan material yang sama, kini untuk setiap komponen kecepatan:</p>
+<div class="eq">$$a_i = \frac{\partial v_i}{\partial t} + v_j\frac{\partial v_i}{\partial x_j} \qquad \text{atau} \qquad \mathbf{a} = \frac{\partial \mathbf{v}}{\partial t} + (\nabla \mathbf{v})\,\mathbf{v}$$</div>
+<p>Suku kedua, (∇v)v, disebut <strong>percepatan konvektif</strong>. Suku ini <strong>tidak linear</strong> (kecepatan dikalikan kecepatan), salah satu sumber kerumitan dalam dinamika fluida, termasuk turbulensi di atmosfer dan laut.</p>
+<h3>Contoh 3.1 — Rotasi benda kaku: kecepatan tetap di setiap titik, tapi partikel dipercepat</h3>
+<p>Bayangkan rotasi Bumi, atau sebuah meja putar (turntable) dengan kecepatan sudut ω terhadap sumbu x₃. Kecepatannya v = ω × x:</p>
+<div class="eq">$$v_1 = -\omega x_2, \qquad v_2 = \omega x_1, \qquad v_3 = 0$$</div>
+<p>Medan kecepatan ini <strong>tidak bergantung waktu</strong> (∂v/∂t = 0). Namun percepatan partikel tidak nol:</p>
+<div class="eq">$$a_1 = 0 + (-\omega x_2)(0) + (\omega x_1)(-\omega) = -\omega^2 x_1, \qquad a_2 = -\omega^2 x_2$$</div>
+<p>Jadi a = −ω²r, yaitu <strong>percepatan sentripetal</strong> yang mengarah ke sumbu putar. Di koordinat silinder, dengan v_r = 0 dan v_θ = ωr, diperoleh a_r = −v_θ²/r = −rω². Ini adalah asal percepatan sentripetal yang membuat Bumi sedikit pepat di kutub dan membuat nilai gravitasi efektif di khatulistiwa lebih kecil, koreksi yang dikenal dalam metode gravitasi.</p>
+<p>Perhatikan suku −v_θ²/r di rumus silinder. Suku ini muncul karena <strong>vektor basis e_r dan e_θ ikut berputar</strong> saat partikel bergerak, sehingga rumus percepatan di koordinat lengkung lebih panjang daripada di koordinat Kartesius.</p>
+<h3>Contoh 3.2 — Kebalikannya: kecepatan di titik berubah, tapi partikel tidak dipercepat</h3>
+<p>Medan kecepatan v_i = kx_i/(1 + kt) berubah terhadap waktu di setiap titik tetap. Hitung percepatannya:</p>
+<div class="eq">$$a_i = -\frac{k^2 x_i}{(1+kt)^2} + \frac{k x_j}{1+kt}\cdot\frac{k\,\delta_{ij}}{1+kt} = -\frac{k^2 x_i}{(1+kt)^2} + \frac{k^2 x_i}{(1+kt)^2} = 0$$</div>
+<p>Percepatan nol. Mengapa? Integrasikan v = dx/dt untuk mendapatkan lintasannya: x_i = (1 + kt)X_i. Setiap partikel bergerak lurus dengan <strong>kecepatan konstan</strong>. Medan Euler terlihat berubah karena partikel yang lebih cepat terus menggantikan partikel yang lebih lambat di titik yang sama.</p>
+<p>Contoh 3.1 dan 3.2 bersama-sama menunjukkan bahwa <strong>apa yang dilihat stasiun tetap (Euler) bisa sangat berbeda dengan apa yang dialami partikel (Lagrange)</strong>.</p>
+
+</section>
+<section class="block" id="perpindahan">
+<h2>4. Medan Perpindahan dan Gerak Benda Kaku (3.5–3.6)</h2>
+<p><strong>Perpindahan</strong> u adalah vektor dari posisi awal ke posisi sekarang. Ini besaran yang paling sering <em>diukur langsung</em> oleh geofisikawan.</p>
+<div class="eq">$$\mathbf{u}(\mathbf{X}, t) = \mathbf{x}(\mathbf{X}, t) - \mathbf{X}$$</div>
+<p>Contoh nyata medan perpindahan:</p>
+<ul>
+<li><strong>GNSS/GPS</strong>: vektor pergeseran stasiun (misalnya ±3–7 cm/tahun di Indonesia akibat gerak lempeng).</li>
+<li><strong>InSAR</strong>: peta perpindahan permukaan dalam arah pandang satelit, misalnya penurunan tanah (subsidence) di Jakarta atau Semarang.</li>
+<li><strong>Seismogram</strong>: rekaman perpindahan (atau kecepatan) tanah terhadap waktu di satu titik.</li>
+</ul>
+<p>Jika persamaan gerak diketahui, perpindahan langsung diperoleh, dan sebaliknya.</p>
+<p><strong>Contoh 4.1.</strong> Gerak x₁ = X₁ + (X₁ + X₂)kt, x₂ = X₂ + (X₁ + X₂)kt, x₃ = X₃ memberi u₁ = u₂ = (X₁ + X₂)kt dan u₃ = 0.</p>
+<p><strong>Contoh 4.2 — Kompaksi sedimen.</strong> Deformasi x₁ = ½X₁, x₂ = X₂, x₃ = X₃ memberi u₁ = −½X₁, u₂ = u₃ = 0. Benda memendek setengahnya hanya dalam satu arah, sementara arah lain tidak bisa bergerak. Ini disebut <strong>kompresi terkekang</strong> (confined compression), mirip lapisan sedimen yang memampat vertikal karena beban di atasnya tetapi tertahan secara lateral oleh batuan di sekitarnya.</p>
+<h3>Gerak benda kaku: bergerak tanpa berubah bentuk</h3>
+<p>Tidak semua perpindahan berarti deformasi. Jika seluruh benda hanya bergeser dan berputar, jarak antartitik tidak berubah. Ada tiga jenis:</p>
+<p><strong>(a) Translasi.</strong> Semua titik bergeser dengan vektor yang sama:</p>
+<div class="eq">$$\mathbf{x} = \mathbf{X} + \mathbf{c}(t), \qquad \mathbf{u} = \mathbf{c}(t) \;\; (\text{tidak bergantung pada } \mathbf{X})$$</div>
+<p><strong>(b) Rotasi terhadap titik tetap b.</strong> <strong>R(t)</strong> adalah tensor rotasi (matriks ortogonal, RᵀR = I, det R = +1):</p>
+<div class="eq">$$\mathbf{x} - \mathbf{b} = \mathbf{R}(t)(\mathbf{X} - \mathbf{b})$$</div>
+<p><strong>(c) Gerak kaku umum</strong> = translasi suatu titik acuan + rotasi terhadap titik itu:</p>
+<div class="eq">$$\mathbf{x} = \mathbf{R}(t)(\mathbf{X} - \mathbf{b}) + \mathbf{c}(t)$$</div>
+<p>Bukti bahwa rotasi tidak mengubah jarak cukup satu baris: untuk dua titik, Δx = RΔX, sehingga</p>
+<div class="eq">$$(\Delta \ell)^2 = (\mathbf{R}\Delta\mathbf{X})\cdot(\mathbf{R}\Delta\mathbf{X}) = \Delta\mathbf{X}\cdot\mathbf{R}^T\mathbf{R}\,\Delta\mathbf{X} = \Delta\mathbf{X}\cdot\Delta\mathbf{X} = (\Delta L)^2$$</div>
+<p>Dengan menurunkan persamaan (c) terhadap waktu, diperoleh rumus yang sudah Anda kenal dari fisika dasar:</p>
+<div class="eq">$$\mathbf{v} = \boldsymbol{\omega} \times \mathbf{r} + \dot{\mathbf{c}}(t)$$</div>
+<p>dengan r = x − c posisi relatif terhadap titik acuan, dan ω kecepatan sudut. (Langkahnya: ṘRᵀ selalu antisimetrik, dan setiap tensor antisimetrik setara dengan perkalian silang dengan suatu vektor ω.)</p>
+<p><strong>Aplikasi geofisika: tektonik lempeng.</strong> Teori lempeng tektonik pada dasarnya mengatakan bahwa lempeng bergerak sebagai <strong>benda kaku di permukaan bola</strong>: kecepatan setiap titik di lempeng diberikan oleh v = ω × r, dengan ω adalah <strong>kutub Euler</strong> dan laju rotasinya. Deformasi (regangan) hanya terkonsentrasi di batas lempeng. Karena itu, langkah pertama analisis data GNSS biasanya adalah <strong>mengurangkan gerak kaku lempeng</strong>; sisanya (residual) adalah sinyal deformasi, misalnya akumulasi regangan di zona subduksi.</p>
+
+</section>
+<section class="block" id="regangan-kecil">
+<h2>5. Regangan Infinitesimal (3.7–3.11)</h2>
+<p>Regangan mengukur <strong>perubahan bentuk relatif</strong>: bukan seberapa jauh benda berpindah, tetapi seberapa banyak jarak dan sudut di dalamnya berubah. Untuk gelombang seismik dan deformasi tektonik antargempa, regangan sangat kecil (10⁻⁹ sampai 10⁻⁴), sehingga teori <strong>regangan infinitesimal</strong> (kecil) sudah cukup.</p>
+<h3>5.1 Mulai dari 1 dimensi: sebatang kawat</h3>
+<p>Sebatang kawat sepanjang L ditarik sehingga panjangnya menjadi L + ΔL. Regangannya:</p>
+<div class="eq">$$\varepsilon = \frac{\Delta L}{L}$$</div>
+<p>Jika perpindahan tiap titik kawat adalah u(X), maka dua titik yang berjarak dX berubah jaraknya sebesar du = (du/dX) dX. Jadi regangan 1D adalah <strong>gradien perpindahan</strong>:</p>
+<div class="eq">$$\varepsilon = \frac{du}{dX}$$</div>
+<p>Penting: perpindahan yang <strong>seragam</strong> (u sama di semua titik) memberi du/dX = 0, tidak ada regangan. Regangan muncul hanya jika titik-titik bertetangga berpindah <strong>berbeda</strong>. Inilah sebabnya <strong>strainmeter</strong> di lubang bor mengukur perubahan jarak antara dua titik yang berdekatan, bukan posisi absolut.</p>
+<h3>5.2 Naik ke 3 dimensi: gradien perpindahan ∇u</h3>
+<p>Di 3D, dua titik bertetangga P (di X) dan Q (di X + dX) berubah menjadi x dan x + dx. Dengan cara yang sama seperti 1D:</p>
+<div class="eq">$$d\mathbf{x} = d\mathbf{X} + (\nabla \mathbf{u})\,d\mathbf{X}$$</div>
+<p>∇u adalah matriks 3×3 berisi semua turunan perpindahan:</p>
+<div class="eq">$$[\nabla \mathbf{u}] = \begin{bmatrix} \dfrac{\partial u_1}{\partial X_1} &amp; \dfrac{\partial u_1}{\partial X_2} &amp; \dfrac{\partial u_1}{\partial X_3} \\[10pt] \dfrac{\partial u_2}{\partial X_1} &amp; \dfrac{\partial u_2}{\partial X_2} &amp; \dfrac{\partial u_2}{\partial X_3} \\[10pt] \dfrac{\partial u_3}{\partial X_1} &amp; \dfrac{\partial u_3}{\partial X_2} &amp; \dfrac{\partial u_3}{\partial X_3} \end{bmatrix}$$</div>
+<p>Diagonal ∂u₁/∂X₁ dan seterusnya mirip regangan 1D. Unsur di luar diagonal menyatakan bagaimana perpindahan dalam satu arah berubah ketika kita melangkah ke arah lain (geser).</p>
+<p><strong>Contoh 5.1 (kuantitatif).</strong> Perpindahan u₁ = kX₂², u₂ = u₃ = 0. Di titik C(0, 1, 0), [∇u] hanya punya unsur (1,2) = 2k. Elemen dX⁽¹⁾ = dX₁<strong>e</strong>₁ tidak berubah, sedangkan elemen dX⁽²⁾ = dX₂<strong>e</strong>₂ menjadi dX₂(2k<strong>e</strong>₁ + <strong>e</strong>₂). Hitungan eksak memberi rasio panjang √(1 + 4k²) ≈ 1 + 2k² dan penurunan sudut γ dengan sin γ = 2k/√(1 + 4k²). Jika k kecil, panjang praktis tidak berubah (orde k²) tetapi sudut berkurang ≈ 2k (orde k).</p>
+<h3>5.3 Dari ∇u ke tensor regangan E</h3>
+<p>Kenapa tidak langsung memakai ∇u sebagai regangan? Karena ∇u juga memuat <strong>rotasi kaku</strong>, yang tidak mengubah bentuk. Contoh: memutar buku di meja menghasilkan ∇u ≠ 0, padahal bukunya tidak terdeformasi.</p>
+<p>Setiap matriks dapat dipecah menjadi bagian simetrik + antisimetrik:</p>
+<div class="eq">$$\nabla \mathbf{u} = \underbrace{\tfrac{1}{2}\left[\nabla\mathbf{u} + (\nabla\mathbf{u})^T\right]}_{\mathbf{E}\;(\text{regangan})} + \underbrace{\tfrac{1}{2}\left[\nabla\mathbf{u} - (\nabla\mathbf{u})^T\right]}_{\boldsymbol{\Omega}\;(\text{rotasi})}$$</div>
+<p>Bagian simetrik inilah <strong>tensor regangan infinitesimal</strong>:</p>
+<div class="eq">$$E_{ij} = \frac{1}{2}\left(\frac{\partial u_i}{\partial X_j} + \frac{\partial u_j}{\partial X_i}\right)$$</div>
+<p>Secara lengkap:</p>
+<div class="eq">$$[\mathbf{E}] = \begin{bmatrix} \dfrac{\partial u_1}{\partial X_1} &amp; \tfrac12\left(\dfrac{\partial u_1}{\partial X_2} + \dfrac{\partial u_2}{\partial X_1}\right) &amp; \tfrac12\left(\dfrac{\partial u_1}{\partial X_3} + \dfrac{\partial u_3}{\partial X_1}\right) \\[10pt] \cdot &amp; \dfrac{\partial u_2}{\partial X_2} &amp; \tfrac12\left(\dfrac{\partial u_2}{\partial X_3} + \dfrac{\partial u_3}{\partial X_2}\right) \\[10pt] \text{simetrik} &amp; \cdot &amp; \dfrac{\partial u_3}{\partial X_3} \end{bmatrix}$$</div>
+<p><strong>Dari mana asalnya secara lebih teliti?</strong> Kuadrat panjang elemen setelah deformasi adalah ds² = dX·C dX, dengan <strong>F</strong> = I + ∇u (gradien deformasi) dan <strong>C</strong> = FᵀF = I + 2E*, di mana</p>
+<div class="eq">$$\mathbf{E}^* = \tfrac12\left[\nabla\mathbf{u} + (\nabla\mathbf{u})^T + (\nabla\mathbf{u})^T(\nabla\mathbf{u})\right]$$</div>
+<p>adalah <strong>tensor regangan Lagrange</strong> (berlaku untuk deformasi besar, dibahas di Bagian 8). Jika gradien perpindahan kecil, suku hasil kali (∇u)ᵀ(∇u) jauh lebih kecil dan dapat diabaikan; yang tersisa adalah E. Contoh: jika ∂u/∂X ≈ 10⁻⁶ (gelombang seismik), hasil kalinya ≈ 10⁻¹², sejuta kali lebih kecil.</p>
+<p>Untuk koordinat silinder (berguna untuk sumur bor, terowongan, konduit vulkanik), komponen E adalah:</p>
+<div class="eq">$$E_{rr} = \frac{\partial u_r}{\partial r}, \quad E_{\theta\theta} = \frac{1}{r}\frac{\partial u_\theta}{\partial \theta} + \frac{u_r}{r}, \quad E_{zz} = \frac{\partial u_z}{\partial z}$$</div>
+<div class="eq">$$E_{r\theta} = \tfrac12\left(\frac{1}{r}\frac{\partial u_r}{\partial \theta} - \frac{u_\theta}{r} + \frac{\partial u_\theta}{\partial r}\right), \quad E_{rz} = \tfrac12\left(\frac{\partial u_r}{\partial z} + \frac{\partial u_z}{\partial r}\right), \quad E_{\theta z} = \tfrac12\left(\frac{\partial u_\theta}{\partial z} + \frac{1}{r}\frac{\partial u_z}{\partial \theta}\right)$$</div>
+<p>Perhatikan suku u_r/r pada E_θθ: jika dinding sumur bor mengembang secara radial (u_r &gt; 0), keliling lingkaran ikut bertambah, sehingga muncul regangan arah keliling walaupun tidak ada gerak tangensial. Rumus untuk koordinat bola mengikuti pola serupa (lihat Lai dkk., Pers. 3.7.21).</p>
+<h3>5.4 Arti fisis komponen E</h3>
+<p><strong>Diagonal = regangan normal (perpanjangan per satuan panjang).</strong> Untuk elemen yang semula searah vektor satuan n:</p>
+<div class="eq">$$\frac{ds - dS}{dS} = \mathbf{n}\cdot\mathbf{E}\,\mathbf{n} = E_{nn}$$</div>
+<ul>
+<li>E₁₁ = perpanjangan relatif elemen yang semula searah x₁; begitu pula E₂₂ dan E₃₃.</li>
+<li>Nilai positif = memanjang (ekstensi), negatif = memendek (kompresi).</li>
+</ul>
+<p><strong>Luar diagonal = setengah regangan geser.</strong> Untuk dua elemen yang semula saling tegak lurus searah m dan n:</p>
+<div class="eq">$$\gamma = 2\,\mathbf{m}\cdot\mathbf{E}\,\mathbf{n}, \qquad \text{khususnya } \gamma_{12} = 2E_{12}$$</div>
+<p>2E₁₂ adalah <strong>berkurangnya sudut siku-siku</strong> (dalam radian) antara elemen yang semula searah x₁ dan x₂. Perhatikan faktor 2: γ (regangan geser teknik) = 2 × E₁₂ (regangan geser tensor). Ini sering membingungkan, jadi selalu periksa definisi yang dipakai di buku atau perangkat lunak.</p>
+<p><strong>Contoh 5.2 — kembali ke u₁ = kX₂², dengan k = 10⁻⁴.</strong> Di titik C (X₂ = 1):</p>
+<div class="eq">$$[\mathbf{E}] = \begin{bmatrix} 0 &amp; k &amp; 0 \\ k &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}$$</div>
+<p>E₁₁ = E₂₂ = 0 (panjang tak berubah) dan penurunan sudut 2E₁₂ = 2 × 10⁻⁴ rad. Bandingkan dengan hitungan eksak Contoh 5.1: perubahan panjang ≈ 2k² = 2 × 10⁻⁸ (diabaikan), sudut ≈ 2k. Teori infinitesimal <strong>akurat sampai orde k</strong>.</p>
+<p><strong>Contoh 5.3 — Diagonal kubus.</strong> Kubus satuan diberi u₁ = kX₁ (k = 10⁻⁴), u₂ = u₃ = 0. Diagonal AB di bidang x₁x₂ semula searah n = (<strong>e</strong>₁ + <strong>e</strong>₂)/√2. Maka E_nn = n·En = k/2, dan karena panjang AB = √2, pertambahannya ΔAB = k/√2. Hitungan geometri eksak, √(1 + (1 + k)²) − √2, memberi hasil yang sama untuk k kecil.</p>
+<p><strong>Aplikasi: rosette strain gauge.</strong> Di lapangan atau laboratorium mekanika batuan, regangan diukur dengan tiga pengukur regangan yang dipasang pada sudut berbeda (misalnya 0°, 45°, 90°). Masing-masing mengukur E_nn untuk satu arah n. Dari tiga nilai itu, kita dapat menyelesaikan tiga komponen 2D (E₁₁, E₂₂, E₁₂). Untuk rosette 45°: E₁₁ = a, E₂₂ = c, dan E₁₂ = b − (a + c)/2, dengan a, b, c bacaan pada 0°, 45°, 90°.</p>
+<h3>5.5 Regangan utama (principal strains)</h3>
+<p>Karena E simetrik, selalu ada <strong>tiga arah saling tegak lurus</strong> di mana matriks E menjadi diagonal (tanpa geser). Elemen di arah ini hanya memanjang atau memendek, tetap saling tegak lurus.</p>
+<div class="eq">$$[\mathbf{E}]_{\mathbf{n}_i} = \begin{bmatrix} E_1 &amp; 0 &amp; 0 \\ 0 &amp; E_2 &amp; 0 \\ 0 &amp; 0 &amp; E_3 \end{bmatrix}$$</div>
+<ul>
+<li>E₁, E₂, E₃ = <strong>regangan utama</strong> = nilai eigen E. Di antaranya terdapat regangan normal maksimum dan minimum.</li>
+<li>Arahnya = <strong>arah utama</strong> = vektor eigen E.</li>
+<li>Dicari dari persamaan karakteristik:</li>
+</ul>
+<div class="eq">$$\lambda^3 - I_1\lambda^2 + I_2\lambda - I_3 = 0$$</div>
+<div class="eq">$$I_1 = E_{11} + E_{22} + E_{33}, \quad I_2 = \begin{vmatrix} E_{11} &amp; E_{12} \\ E_{21} &amp; E_{22} \end{vmatrix} + \begin{vmatrix} E_{22} &amp; E_{23} \\ E_{32} &amp; E_{33} \end{vmatrix} + \begin{vmatrix} E_{11} &amp; E_{13} \\ E_{31} &amp; E_{33} \end{vmatrix}, \quad I_3 = \det[\mathbf{E}]$$</div>
+<p>I₁, I₂, I₃ disebut <strong>invarian</strong>: nilainya sama dalam sistem koordinat apa pun. Ini berguna untuk memeriksa apakah dua matriks mewakili keadaan regangan yang sama.</p>
+<p><strong>Aplikasi geofisika.</strong> Dari jaringan GNSS, geofisikawan menghitung tensor laju regangan, lalu menggambar <strong>sumbu regangan utama</strong> di peta (biasanya pasangan panah: memendek ke dalam, memanjang ke luar). Arah pemendekan maksimum di sekitar zona subduksi Sunda umumnya mendekati arah konvergensi lempeng. Pada <strong>mekanisme fokus gempa</strong> (beach ball), sumbu P dan T juga merupakan konsep arah utama, hanya saja untuk regangan atau tegangan akibat gempa.</p>
+<h3>5.6 Dilatasi: perubahan volume</h3>
+<p>Ambil kubus kecil yang rusuknya searah arah utama. Setelah deformasi, rusuknya menjadi dS₁(1 + E₁), dS₂(1 + E₂), dS₃(1 + E₃). Perubahan volume relatif:</p>
+<div class="eq">$$\frac{\Delta(dV)}{dV} = (1+E_1)(1+E_2)(1+E_3) - 1 \approx E_1 + E_2 + E_3$$</div>
+<p>Karena jumlah diagonal bersifat invarian, berlaku umum:</p>
+<div class="eq">$$e = E_{ii} = E_{11} + E_{22} + E_{33} = \frac{\partial u_i}{\partial X_i} = \operatorname{div}\mathbf{u}$$</div>
+<p>Besaran e disebut <strong>dilatasi</strong>. Di koordinat silinder dan bola:</p>
+<div class="eq">$$e_{\text{silinder}} = \frac{\partial u_r}{\partial r} + \frac{1}{r}\left(\frac{\partial u_\theta}{\partial \theta} + u_r\right) + \frac{\partial u_z}{\partial z}, \qquad e_{\text{bola}} = \frac{\partial u_r}{\partial r} + \frac{2u_r}{r} + \frac{1}{r}\frac{\partial u_\theta}{\partial \theta} + \frac{u_\theta\cot\theta}{r} + \frac{1}{r\sin\theta}\frac{\partial u_\phi}{\partial \phi}$$</div>
+<p><strong>Aplikasi: gelombang P dan S.</strong> Dalam teori gelombang elastik, medan perpindahan dipecah menjadi bagian yang mengubah volume dan bagian yang tidak:</p>
+<ul>
+<li><strong>Gelombang P</strong> (primer, kompresional) membawa <strong>dilatasi</strong> (div u ≠ 0): batuan memampat dan meregang bergantian, seperti gelombang bunyi.</li>
+<li><strong>Gelombang S</strong> (sekunder, geser) <strong>tidak mengubah volume</strong> (div u = 0) tetapi membawa <strong>rotasi</strong> (rot u ≠ 0).</li>
+</ul>
+<p>Karena fluida tidak mampu menahan geser, gelombang S tidak merambat di inti luar Bumi yang cair. Inilah bukti seismologis bahwa inti luar berwujud cair.</p>
+<p>Contoh lain: <strong>dilatometer volumetrik</strong> di lubang bor (seperti yang dipasang di Jepang dan California) mengukur langsung dilatasi e dan dapat merekam perubahan regangan yang sangat kecil (sekitar 10⁻¹⁰), termasuk pasang surut Bumi padat.</p>
+<h3>5.7 Tensor rotasi infinitesimal Ω</h3>
+<p>Bagian antisimetrik ∇u adalah <strong>tensor rotasi infinitesimal</strong>:</p>
+<div class="eq">$$\boldsymbol{\Omega} = \tfrac12\left[\nabla\mathbf{u} - (\nabla\mathbf{u})^T\right], \qquad d\mathbf{x} = d\mathbf{X} + \mathbf{E}\,d\mathbf{X} + \boldsymbol{\Omega}\,d\mathbf{X}$$</div>
+<p>Ω menyatakan rotasi kecil dari "triad" elemen di arah utama E. Ia setara dengan vektor rotasi</p>
+<div class="eq">$$\mathbf{t}^A = \Omega_{32}\,\mathbf{e}_1 + \Omega_{13}\,\mathbf{e}_2 + \Omega_{21}\,\mathbf{e}_3, \qquad \boldsymbol{\Omega}\,d\mathbf{X} = \mathbf{t}^A \times d\mathbf{X}$$</div>
+<p>yang komponennya adalah sudut rotasi kecil terhadap sumbu e₁, e₂, e₃. Dalam seismologi modern, <strong>seismometer rotasional</strong> (misalnya sensor ring laser) mengukur langsung komponen rotasi ini, yang melengkapi rekaman translasi biasa.</p>
+<p>Ringkasan Bagian 5:</p>
+<div class="eq">$$\underbrace{\nabla\mathbf{u}}_{\text{gradien perpindahan}} = \underbrace{\mathbf{E}}_{\text{ubah bentuk: panjang, sudut, volume}} + \underbrace{\boldsymbol{\Omega}}_{\text{putar kaku (kecil)}}$$</div>
+
+</section>
+<section class="block" id="laju-deformasi">
+<h2>6. Laju Deformasi, Spin, dan Kekekalan Massa (3.12–3.15)</h2>
+<p>Bagian 5 bertanya "<strong>berapa banyak</strong> benda berubah bentuk?" Bagian ini bertanya "<strong>seberapa cepat</strong> benda berubah bentuk sekarang?" Untuk material yang mengalir (mantel, magma, gletser, lumpur), laju ini lebih berguna daripada regangan total, karena regangan totalnya bisa sangat besar dan acuan awalnya sering tidak diketahui.</p>
+<h3>6.1 Ide dasar: ganti u dengan v</h3>
+<p>Analogi sederhana: regangan berhubungan dengan perpindahan u, sedangkan laju regangan berhubungan dengan kecepatan v. Selama selang waktu kecil dt, partikel berpindah sejauh v dt. Jadi semua rumus Bagian 5 bisa "diterjemahkan" dengan mengganti u menjadi v (dan X menjadi x).</p>
+<p>Elemen material dx berubah dengan laju:</p>
+<div class="eq">$$\frac{D}{Dt}(d\mathbf{x}) = (\nabla \mathbf{v})\,d\mathbf{x}, \qquad [\nabla\mathbf{v}]_{ij} = \frac{\partial v_i}{\partial x_j}$$</div>
+<h3>6.2 Tensor laju deformasi D dan tensor spin W</h3>
+<p>Sama seperti ∇u, gradien kecepatan dipecah menjadi bagian simetrik dan antisimetrik:</p>
+<div class="eq">$$\nabla\mathbf{v} = \underbrace{\tfrac12\left[\nabla\mathbf{v} + (\nabla\mathbf{v})^T\right]}_{\mathbf{D}\;(\text{laju deformasi})} + \underbrace{\tfrac12\left[\nabla\mathbf{v} - (\nabla\mathbf{v})^T\right]}_{\mathbf{W}\;(\text{spin})}$$</div>
+<div class="eq">$$D_{ij} = \frac12\left(\frac{\partial v_i}{\partial x_j} + \frac{\partial v_j}{\partial x_i}\right), \qquad W_{ij} = \frac12\left(\frac{\partial v_i}{\partial x_j} - \frac{\partial v_j}{\partial x_i}\right)$$</div>
+<p>Arti fisis D (bandingkan dengan E):</p>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Komponen</th>
+<th>Arti fisis</th>
+<th>Satuan umum di geofisika</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D₁₁, D₂₂, D₃₃</td>
+<td>laju perpanjangan relatif (<strong>stretching</strong>) elemen searah x₁, x₂, x₃</td>
+<td>s⁻¹, atau nanostrain/tahun</td>
+</tr>
+<tr>
+<td>2D₁₂, 2D₁₃, 2D₂₃</td>
+<td>laju berkurangnya sudut siku-siku (<strong>shearing</strong>)</td>
+<td>s⁻¹</td>
+</tr>
+<tr>
+<td>D₁₁ + D₂₂ + D₃₃</td>
+<td>laju perubahan volume per satuan volume</td>
+<td>s⁻¹</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rumus kuncinya, untuk elemen dx = ds n:</p>
+<div class="eq">$$\frac{1}{ds}\frac{D(ds)}{Dt} = \mathbf{n}\cdot\mathbf{D}\,\mathbf{n} = D_{nn}$$</div>
+<p>Mengapa W tidak muncul? Karena untuk tensor antisimetrik, dx·W dx = 0 selalu. <strong>Spin tidak mengubah panjang</strong>, hanya memutar.</p>
+<p>Skala angka di Bumi (orde besaran) untuk membayangkan:</p>
+<ul>
+<li>Batas lempeng aktif (misalnya Sumatra): laju regangan sekitar 10⁻¹⁴ s⁻¹ (ratusan nanostrain/tahun).</li>
+<li>Interior lempeng stabil: sekitar 10⁻¹⁷–10⁻¹⁶ s⁻¹.</li>
+<li>Aliran mantel: sekitar 10⁻¹⁵ s⁻¹.</li>
+<li>Gelombang seismik: amplitudo regangan 10⁻⁶ dengan periode \~1 s, jadi laju sekitar 10⁻⁶ s⁻¹.</li>
+</ul>
+<h3>6.3 Spin dan kecepatan sudut</h3>
+<p>Tensor antisimetrik W setara dengan vektor kecepatan sudut ω:</p>
+<div class="eq">$$\mathbf{W}\,d\mathbf{x} = \boldsymbol{\omega}\times d\mathbf{x}, \qquad \boldsymbol{\omega} = -(W_{23}\mathbf{e}_1 + W_{31}\mathbf{e}_2 + W_{12}\mathbf{e}_3)$$</div>
+<p>Sehingga laju perubahan elemen material dapat dibaca sebagai "meregang + berputar":</p>
+<div class="eq">$$\frac{D}{Dt}(d\mathbf{x}) = \mathbf{D}\,d\mathbf{x} + \boldsymbol{\omega}\times d\mathbf{x}$$</div>
+<p>Catatan halus: D juga dapat mengubah arah elemen. Hanya tiga elemen yang searah arah utama D yang berputar tepat dengan kecepatan sudut ω. Di meteorologi dan oseanografi, 2ω disebut <strong>vortisitas</strong> (rot v), konsep kunci untuk siklon dan pusaran laut.</p>
+<h3>Contoh 6.1 — Aliran geser: gletser atau lapisan lava</h3>
+<p>Bayangkan es gletser atau lava yang mengalir di atas dasar: lapisan atas lebih cepat dari lapisan bawah. Model sederhananya v₁ = kx₂, v₂ = v₃ = 0.</p>
+<div class="eq">$$[\nabla\mathbf{v}] = \begin{bmatrix} 0 &amp; k &amp; 0 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix} = \underbrace{\begin{bmatrix} 0 &amp; k/2 &amp; 0 \\ k/2 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}}_{\mathbf{D}} + \underbrace{\begin{bmatrix} 0 &amp; k/2 &amp; 0 \\ -k/2 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}}_{\mathbf{W}}$$</div>
+<ul>
+<li>Elemen horizontal (e₁) dan vertikal (e₂): laju perpanjangan D₁₁ = D₂₂ = 0.</li>
+<li>Elemen searah (e₁ + 2e₂)/√5: D_nn = (1/5)[1 2 0]D[1 2 0]ᵀ = 2k/5, jadi memanjang.</li>
+<li>Nilai eigen D: 0, k/2, −k/2. Peregangan maksimum k/2 terjadi pada arah 45° (e₁ + e₂)/√2, dan pemendekan maksimum −k/2 pada arah (e₁ − e₂)/√2.</li>
+</ul>
+<p>Pelajaran untuk geologi struktur: dalam <strong>zona geser</strong>, mineral pipih atau butiran memanjang cenderung berorientasi pada arah peregangan maksimum, sekitar 45° terhadap bidang geser pada awalnya. Itulah dasar fabrik S-C pada milonit.</p>
+<h3>6.4 Kekekalan massa (persamaan kontinuitas)</h3>
+<p>Prinsipnya sederhana: <strong>massa sebuah "paket" material tidak berubah</strong> walaupun volume dan densitasnya berubah.</p>
+<div class="eq">$$\frac{D}{Dt}(\rho\,dV) = 0$$</div>
+<p>Kita sudah tahu bahwa laju perubahan volume per satuan volume adalah div v (dari jejak D):</p>
+<div class="eq">$$\frac{1}{dV}\frac{D(dV)}{Dt} = D_{ii} = \frac{\partial v_i}{\partial x_i} = \operatorname{div}\mathbf{v}$$</div>
+<p>Substitusikan ke prinsip di atas:</p>
+<div class="eq">$$\frac{D\rho}{Dt} + \rho\,\operatorname{div}\mathbf{v} = 0, \qquad \text{dengan } \frac{D\rho}{Dt} = \frac{\partial\rho}{\partial t} + \mathbf{v}\cdot\nabla\rho$$</div>
+<p>Artinya: jika paket material <strong>mengembang</strong> (div v &gt; 0), densitasnya <strong>turun</strong>, dan sebaliknya. Contoh: magma yang naik ke permukaan mengalami penurunan tekanan, gas di dalamnya mengembang membentuk gelembung (vesikulasi), dan densitas campuran menurun drastis. Ini salah satu pendorong letusan eksplosif.</p>
+<p>Dalam koordinat silinder:</p>
+<div class="eq">$$\rho\left(\frac{\partial v_r}{\partial r} + \frac{1}{r}\frac{\partial v_\theta}{\partial \theta} + \frac{v_r}{r} + \frac{\partial v_z}{\partial z}\right) + \frac{\partial\rho}{\partial t} + v_r\frac{\partial\rho}{\partial r} + \frac{v_\theta}{r}\frac{\partial\rho}{\partial\theta} + v_z\frac{\partial\rho}{\partial z} = 0$$</div>
+<p><strong>Material inkompresibel.</strong> Jika densitas setiap partikel tidak berubah (Dρ/Dt = 0), persamaan menjadi sangat sederhana:</p>
+<div class="eq">$$\operatorname{div}\mathbf{v} = \frac{\partial v_1}{\partial x_1} + \frac{\partial v_2}{\partial x_2} + \frac{\partial v_3}{\partial x_3} = 0$$</div>
+<p>Pendekatan ini sangat sering dipakai pada <strong>model konveksi mantel</strong> dan <strong>aliran gletser</strong>: batuan mantel dan es dianggap tidak dapat dimampatkan pada skala aliran. Perhatikan bahwa inkompresibel tidak berarti densitas sama di mana-mana; samudra dengan lapisan densitas berbeda (stratifikasi) tetap dapat dianggap inkompresibel.</p>
+<h3>Contoh 6.2 — Densitas pada aliran yang mengembang</h3>
+<p>Untuk v_i = kx_i/(1 + kt) (Contoh 3.2), div v = 3k/(1 + kt). Maka:</p>
+<div class="eq">$$\frac{D\rho}{Dt} = -\frac{3\rho k}{1+kt} \;\;\Rightarrow\;\; \int_{\rho_0}^{\rho}\frac{d\rho}{\rho} = -\int_0^t\frac{3k\,dt}{1+kt} \;\;\Rightarrow\;\; \rho = \frac{\rho_0}{(1+kt)^3}$$</div>
+<p>Masuk akal: dari Contoh 3.2, setiap panjang membesar dengan faktor (1 + kt), jadi volume membesar (1 + kt)³ dan densitas turun dengan faktor yang sama.</p>
+
+</section>
+<section class="block" id="kompatibilitas">
+<h2>7. Syarat Kompatibilitas (3.16–3.17)</h2>
+<p>Syarat kompatibilitas menjawab pertanyaan: <strong>jika enam komponen regangan diberikan, apakah benar ada medan perpindahan yang menghasilkannya?</strong> Jawabannya belum tentu.</p>
+<h3>7.1 Analogi: puzzle yang harus pas</h3>
+<p>Bayangkan batuan dipotong menjadi banyak kubus kecil. Setiap kubus dideformasi sesuai regangan yang Anda tentukan. Bisakah kubus-kubus itu disusun kembali tanpa celah dan tanpa tumpang tindih? Jika regangannya sembarang, sering tidak bisa. Syarat kompatibilitas adalah aturan agar potongan "puzzle" yang terdeformasi tetap pas.</p>
+<p>Arah sebaliknya selalu aman: <strong>jika u diberikan, regangan yang dihitung darinya otomatis kompatibel</strong> (karena u-nya memang ada).</p>
+<p>Alasan matematisnya: ada 3 fungsi yang dicari (u₁, u₂, u₃), tetapi ada 6 persamaan regangan. Sistem ini "terlalu banyak syarat", jadi E tidak bisa dipilih sesukanya.</p>
+<h3>7.2 Contoh yang gagal</h3>
+<p>Ambil E₁₁ = kX₂², komponen lain nol. Dari E₁₁ = ∂u₁/∂X₁ diperoleh u₁ = kX₁X₂² + f(X₂, X₃). Dari E₂₂ = 0 diperoleh u₂ = g(X₁, X₃). Syarat E₁₂ = 0 menuntut:</p>
+<div class="eq">$$2kX_1X_2 + \frac{\partial f(X_2, X_3)}{\partial X_2} + \frac{\partial g(X_1, X_3)}{\partial X_1} = 0$$</div>
+<p>Suku 2kX₁X₂ tidak mungkin dihapus oleh fungsi f (tanpa X₁) maupun g (tanpa X₂). Jadi <strong>tidak ada</strong> medan perpindahan untuk regangan ini.</p>
+<h3>7.3 Enam persamaan kompatibilitas</h3>
+<p>Untuk daerah <strong>terhubung sederhana</strong> (simply connected), syarat perlu dan cukupnya adalah:</p>
+<div class="eq">$$\frac{\partial^2 E_{11}}{\partial X_2^2} + \frac{\partial^2 E_{22}}{\partial X_1^2} = 2\frac{\partial^2 E_{12}}{\partial X_1\partial X_2}, \quad \frac{\partial^2 E_{22}}{\partial X_3^2} + \frac{\partial^2 E_{33}}{\partial X_2^2} = 2\frac{\partial^2 E_{23}}{\partial X_2\partial X_3}, \quad \frac{\partial^2 E_{33}}{\partial X_1^2} + \frac{\partial^2 E_{11}}{\partial X_3^2} = 2\frac{\partial^2 E_{31}}{\partial X_3\partial X_1}$$</div>
+<div class="eq">$$\frac{\partial^2 E_{11}}{\partial X_2\partial X_3} = \frac{\partial}{\partial X_1}\left(-\frac{\partial E_{23}}{\partial X_1} + \frac{\partial E_{31}}{\partial X_2} + \frac{\partial E_{12}}{\partial X_3}\right)$$</div>
+<div class="eq">$$\frac{\partial^2 E_{22}}{\partial X_3\partial X_1} = \frac{\partial}{\partial X_2}\left(-\frac{\partial E_{31}}{\partial X_2} + \frac{\partial E_{12}}{\partial X_3} + \frac{\partial E_{23}}{\partial X_1}\right), \quad \frac{\partial^2 E_{33}}{\partial X_1\partial X_2} = \frac{\partial}{\partial X_3}\left(-\frac{\partial E_{12}}{\partial X_3} + \frac{\partial E_{23}}{\partial X_1} + \frac{\partial E_{31}}{\partial X_2}\right)$$</div>
+<p>Cara mengingat persamaan pertama: turunkan E₁₁ = ∂u₁/∂X₁ dua kali terhadap X₂, turunkan E₂₂ dua kali terhadap X₁, jumlahkan, maka hasilnya sama dengan turunan kedua dari 2E₁₂. (Bukti lengkap kecukupannya ada di Lampiran 3.1 buku Lai dkk.)</p>
+<p>Trik cepat: semua suku melibatkan <strong>turunan kedua</strong>. Jadi jika regangan <strong>linear</strong> terhadap koordinat (atau konstan), syarat kompatibilitas pasti terpenuhi.</p>
+<h3>7.4 Jebakan: daerah berlubang</h3>
+<p>Regangan E₁₁ = −X₂/(X₁² + X₂²), E₁₂ = X₁/[2(X₁² + X₂²)] memenuhi semua persamaan kompatibilitas. Perpindahannya adalah u₁ = arctan(X₂/X₁), u₂ = u₃ = 0.</p>
+<ul>
+<li>Untuk penampang <strong>pejal</strong> yang tidak mengandung sumbu, u₁ bisa dibuat bernilai tunggal dan kontinu. Aman.</li>
+<li>Untuk penampang <strong>berlubang</strong> yang mengelilingi sumbu (misalnya <strong>pipa</strong> atau <strong>lubang bor dengan casing</strong>), memutari lubang sekali membuat arctan melompat 2π. Perpindahan menjadi tidak kontinu.</li>
+</ul>
+<p>Jadi untuk daerah yang tidak terhubung sederhana (ada lubang), persamaan kompatibilitas <strong>perlu tetapi tidak cukup</strong>. Hal ini relevan dalam teori <strong>dislokasi</strong>, yaitu model matematis sesar dalam seismologi: model sesar Okada yang dipakai untuk inversi data GNSS dan InSAR justru memanfaatkan medan perpindahan yang "melompat" melintasi bidang sesar.</p>
+<h3>7.5 Kompatibilitas laju deformasi</h3>
+<p>Persamaan yang sama berlaku untuk D (dengan E diganti D, X diganti x). Namun dalam mekanika fluida dan geodinamika, kita biasanya langsung bekerja dengan medan kecepatan v, sehingga soal kompatibilitas tidak muncul.</p>
+
+</section>
+<section class="block" id="deformasi-hingga">
+<h2>8. Deformasi Hingga (Deformasi Besar) (3.18–3.28)</h2>
+<p>Regangan kecil tidak cukup untuk lipatan, diapir garam, atau aliran mantel. Di sana batuan bisa memendek 50% atau tergeser berlipat-lipat dari panjang awalnya. Kita butuh alat yang <strong>tidak mengabaikan suku kuadrat</strong>. Kuncinya adalah satu tensor: <strong>gradien deformasi F</strong>.</p>
+<h3>8.1 Gradien deformasi F: "mesin pengubah" vektor kecil</h3>
+<p>F memetakan setiap vektor material kecil dX (sebelum) menjadi dx (sesudah):</p>
+<div class="eq">$$d\mathbf{x} = \mathbf{F}\,d\mathbf{X}, \qquad F_{ij} = \frac{\partial x_i}{\partial X_j}, \qquad \mathbf{F} = \mathbf{I} + \nabla\mathbf{u}$$</div>
+<p>Analogi: bayangkan selembar plastik bergambar lingkaran-lingkaran kecil yang ditarik dan diputar. F adalah "resep" yang mengatakan bagaimana setiap lingkaran kecil berubah. Semua informasi deformasi lokal tersimpan di F.</p>
+<p>Dua sifat fisis F:</p>
+<ul>
+<li><strong>F⁻¹ ada</strong>: dx = 0 hanya jika dX = 0, artinya materi tidak bisa dipadatkan menjadi titik.</li>
+<li><strong>det F &gt; 0</strong>: materi tidak bisa "dibalik" seperti bayangan cermin. Lebih lanjut, det F = rasio volume (8.8).</li>
+</ul>
+<p><strong>Contoh 8.1.</strong> Gerak x₁ = X₁ + αX₁²t, x₂ = X₂ − k(X₂ + X₃)t, x₃ = X₃ + k(X₂ − X₃)t memberi</p>
+<div class="eq">$$[\mathbf{F}] = \begin{bmatrix} 1 + 2\alpha X_1 t &amp; 0 &amp; 0 \\ 0 &amp; 1 - kt &amp; -kt \\ 0 &amp; kt &amp; 1 - kt \end{bmatrix}$$</div>
+<p>Pada t = 0, F = I (belum ada deformasi). Pada t = 1/k dan X₁ = 0, F menjadi matriks rotasi 90° terhadap sumbu x₁. Artinya <strong>elemen material di sekitar X₁ = 0 hanya berputar kaku</strong>, meskipun benda secara keseluruhan terdeformasi. Ini disebut <strong>gerak kaku lokal</strong> (3.19). Contoh geologi: blok-blok kecil yang berotasi di zona sesar (misalnya rotasi paleomagnetik blok kerak) sementara kawasan sekitarnya terdeformasi.</p>
+<h3>8.2 Kasus khusus: peregangan murni U</h3>
+<p>Jika F simetrik dan definit positif (semua nilai eigen positif), kita tulis F = U dan sebut <strong>peregangan murni</strong>. Dalam arah utamanya:</p>
+<div class="eq">$$[\mathbf{U}] = \begin{bmatrix} \lambda_1 &amp; 0 &amp; 0 \\ 0 &amp; \lambda_2 &amp; 0 \\ 0 &amp; 0 &amp; \lambda_3 \end{bmatrix}, \qquad \text{stretch} = \frac{|d\mathbf{x}|}{|d\mathbf{X}|}$$</div>
+<p>λ₁, λ₂, λ₃ adalah <strong>regangan-stretch utama</strong> (principal stretches): rasio panjang akhir terhadap panjang awal. λ = 1 tidak berubah, λ &gt; 1 memanjang, λ &lt; 1 memendek. Elemen di arah utama tidak berubah arah.</p>
+<p><strong>Contoh 8.2.</strong> x₁ = 3X₁, x₂ = 4X₂, x₃ = X₃.</p>
+<ul>
+<li>Garis OP searah e₁: stretch 3. Garis OQ searah e₂: stretch 4 (maksimum).</li>
+<li>Garis OB searah (e₁ + e₂)/√2: dx = (dS/√2)(3e₁ + 4e₂), stretch = 5/√2 ≈ 3,54. Arahnya berubah dari 45° menjadi arctan(4/3) ≈ 53°.</li>
+</ul>
+<p><strong>Contoh 8.3 — Elipsoid regangan.</strong> Bola kecil |dX| = ε setelah peregangan murni menjadi:</p>
+<div class="eq">$$\left(\frac{dx_1}{\lambda_1}\right)^2 + \left(\frac{dx_2}{\lambda_2}\right)^2 + \left(\frac{dx_3}{\lambda_3}\right)^2 = \varepsilon^2$$</div>
+<p>yaitu <strong>elipsoid</strong> dengan sumbu λ₁ε, λ₂ε, λ₃ε. Inilah <strong>elipsoid regangan</strong> dalam geologi struktur. Di lapangan, geolog mengukurnya dari objek yang semula bulat: <strong>ooid</strong>, <strong>fosil</strong>, <strong>kerikil konglomerat</strong>, atau <strong>bintik reduksi</strong> (reduction spots) pada batusabak yang kini lonjong.</p>
+<h3>8.3 Teorema dekomposisi polar: setiap deformasi = regang + putar</h3>
+<p>Teorema ini adalah inti deformasi hingga. <strong>Setiap F dapat dipecah secara unik</strong> menjadi rotasi R dan peregangan murni:</p>
+<div class="eq">$$\mathbf{F} = \mathbf{R}\,\mathbf{U} = \mathbf{V}\,\mathbf{R}$$</div>
+<ul>
+<li><strong>U</strong>: tensor regang kanan (right stretch): regangkan dulu, baru putar.</li>
+<li><strong>V</strong>: tensor regang kiri (left stretch): putar dulu, baru regangkan.</li>
+<li><strong>R</strong>: rotasi yang sama pada kedua bentuk, dengan RᵀR = I dan det R = +1.</li>
+<li>Hubungan U dan V: U = RᵀVR.</li>
+</ul>
+<p>Gambaran geometrisnya: sebuah bola kecil menjadi elipsoid (oleh U), lalu elipsoid itu diputar kaku (oleh R). Atau bola diputar dulu (bola tetap bola), lalu diregangkan oleh V. Hasil akhirnya sama.</p>
+<figure class="fig"><div>
+<svg viewBox="0 0 640 300" width="100%" role="img" aria-label="F = RU = VR: regang lalu putar, atau putar lalu regang menghasilkan bentuk yang sama">
+  <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5B6472"/></marker></defs>
+  <text x="8" y="22" class="dl" font-weight="600">Jalur 1: F = RU</text>
+  <g transform="rotate(0 80 80)"><circle cx="80" cy="80" r="36" fill="none" stroke="#8FA6BC" stroke-width="2"/><line x1="80" y1="80" x2="116" y2="80" stroke="#8FA6BC" stroke-width="1.5"/></g><line x1="130" y1="80" x2="238" y2="80" stroke="#5B6472" stroke-width="1.5" marker-end="url(#ar2)"/><text x="184.0" y="70" text-anchor="middle" class="dlm">U: regangkan</text><g transform="rotate(0 310 80)"><ellipse cx="310" cy="80" rx="62" ry="22" fill="none" stroke="#8FA6BC" stroke-width="2"/><line x1="310" y1="80" x2="372" y2="80" stroke="#8FA6BC" stroke-width="1.5"/></g><line x1="385" y1="80" x2="490" y2="80" stroke="#5B6472" stroke-width="1.5" marker-end="url(#ar2)"/><text x="437.5" y="70" text-anchor="middle" class="dlm">R: putar</text><g transform="rotate(-35 560 80)"><ellipse cx="560" cy="80" rx="62" ry="22" fill="#E6EEF7" stroke="#2F6FB0" stroke-width="2"/><line x1="560" y1="80" x2="622" y2="80" stroke="#2F6FB0" stroke-width="1.5"/></g>
+  <text x="80" y="132" text-anchor="middle" class="dlm">bola awal</text><text x="310" y="132" text-anchor="middle" class="dlm">elipsoid, belum berputar</text><text x="560" y="140" text-anchor="middle" class="dl">F dX</text>
+  <text x="8" y="172" class="dl" font-weight="600">Jalur 2: F = VR</text>
+  <g transform="rotate(0 80 230)"><circle cx="80" cy="230" r="36" fill="none" stroke="#8FA6BC" stroke-width="2"/><line x1="80" y1="230" x2="116" y2="230" stroke="#8FA6BC" stroke-width="1.5"/></g><line x1="130" y1="230" x2="260" y2="230" stroke="#5B6472" stroke-width="1.5" marker-end="url(#ar2)"/><text x="195.0" y="220" text-anchor="middle" class="dlm">R: putar</text><g transform="rotate(-35 310 230)"><circle cx="310" cy="230" r="36" fill="none" stroke="#8FA6BC" stroke-width="2"/><line x1="310" y1="230" x2="346" y2="230" stroke="#8FA6BC" stroke-width="1.5"/></g><line x1="360" y1="230" x2="490" y2="230" stroke="#5B6472" stroke-width="1.5" marker-end="url(#ar2)"/><text x="425.0" y="220" text-anchor="middle" class="dlm">V: regangkan</text><g transform="rotate(-35 560 230)"><ellipse cx="560" cy="230" rx="62" ry="22" fill="#E6EEF7" stroke="#2F6FB0" stroke-width="2"/><line x1="560" y1="230" x2="622" y2="230" stroke="#2F6FB0" stroke-width="1.5"/></g>
+  <text x="80" y="282" text-anchor="middle" class="dlm">bola awal</text><text x="310" y="282" text-anchor="middle" class="dlm">masih bola, sudah berputar</text><text x="560" y="290" text-anchor="middle" class="dl">F dX (sama)</text>
+</svg></div>
+<figcaption><b>Gambar 2.</b> Dekomposisi polar: dua jalur menuju bentuk akhir yang sama.</figcaption></figure>
+<p>Garis di dalam lingkaran menandai satu elemen material: perhatikan bahwa di kedua jalur ia berakhir pada arah dan panjang yang sama.</p>
+<p><strong>Cara menghitung U dan R:</strong></p>
+<ol>
+<li>Hitung C = FᵀF (karena FᵀF = UᵀRᵀRU = U²).</li>
+<li>Diagonalisasi C: nilai eigen λᵢ², vektor eigen nᵢ.</li>
+<li>U = akar positif dari C: dalam basis eigen, U = diag(λ₁, λ₂, λ₃). Transformasikan kembali ke basis eᵢ jika perlu.</li>
+<li>R = FU⁻¹.</li>
+<li>V = FRᵀ = RURᵀ.</li>
+</ol>
+<p><strong>Contoh 8.4.</strong> x₁ = X₁, x₂ = −3X₃, x₃ = 2X₂. (Tanda minus dipakai agar det F &gt; 0; versi buku tanpa tanda minus akan memberi det F &lt; 0, yaitu pencerminan yang tidak fisis.)</p>
+<div class="eq">$$[\mathbf{F}] = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; -3 \\ 0 &amp; 2 &amp; 0 \end{bmatrix}, \quad [\mathbf{U}]^2 = [\mathbf{F}]^T[\mathbf{F}] = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 4 &amp; 0 \\ 0 &amp; 0 &amp; 9 \end{bmatrix} \;\Rightarrow\; [\mathbf{U}] = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 3 \end{bmatrix}$$</div>
+<div class="eq">$$[\mathbf{R}] = [\mathbf{F}][\mathbf{U}]^{-1} = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; -1 \\ 0 &amp; 1 &amp; 0 \end{bmatrix}, \qquad [\mathbf{V}] = [\mathbf{F}][\mathbf{R}]^T = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 3 &amp; 0 \\ 0 &amp; 0 &amp; 2 \end{bmatrix}$$</div>
+<p>Tafsirannya: elemen searah X₂ diregangkan 2 kali dan searah X₃ diregangkan 3 kali (oleh U), lalu semuanya diputar 90° terhadap sumbu x₁ (oleh R). Karena itu V = diag(1, 3, 2): setelah diputar, peregangan 3 kali kini berada di arah x₂.</p>
+<p><strong>Contoh 8.5 — Geser sederhana besar.</strong> x₁ = X₁ + 2X₂, x₂ = X₂, x₃ = X₃ (k = 2).</p>
+<ul>
+<li>C = [[1, 2, 0], [2, 5, 0], [0, 0, 1]]. Nilai eigen 5,828; 0,1716; 1.</li>
+<li>Stretch utama: √5,828 = 2,414 dan √0,1716 = 0,414. Satu arah memanjang 2,4 kali, arah lain memendek menjadi 41% panjangnya.</li>
+<li>Arah utama di bidang x₁x₂: n₁ = 0,383e₁ + 0,924e₂ dan n₂ = 0,924e₁ − 0,383e₂.</li>
+<li>Hasil perhitungan: U = [[0,707, 0,707, 0], [0,707, 2,121, 0], [0, 0, 1]] dan R = [[0,707, 0,707, 0], [−0,707, 0,707, 0], [0, 0, 1]], yaitu rotasi 45° searah jarum jam.</li>
+</ul>
+<p>Rumus umum geser sederhana, dengan f = (1 + k²/4)^(−1/2):</p>
+<div class="eq">$$[\mathbf{R}] = f\begin{bmatrix} 1 &amp; k/2 &amp; 0 \\ -k/2 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1/f \end{bmatrix}, \qquad [\mathbf{U}] = f\begin{bmatrix} 1 &amp; k/2 &amp; 0 \\ k/2 &amp; 1 + k^2/2 &amp; 0 \\ 0 &amp; 0 &amp; 1/f \end{bmatrix}$$</div>
+<p>Makna geologi: geser sederhana adalah <strong>deformasi non-koaksial</strong>. Sumbu-sumbu elipsoid regangan terus berputar selama deformasi (R ≠ I). Sebaliknya, <strong>geser murni</strong> (pure shear, misalnya x₁ = λX₁, x₂ = X₂/λ) bersifat koaksial: R = I. Geolog struktur membedakan keduanya dari fabrik batuan, misalnya <strong>porfiroklas berekor asimetris</strong> (σ dan δ) pada milonit menunjukkan arah geser (shear sense).</p>
+<h3>8.4 Tensor Cauchy-Green kanan C</h3>
+<div class="eq">$$\mathbf{C} = \mathbf{U}^2 = \mathbf{F}^T\mathbf{F}, \qquad d\mathbf{x}^{(1)}\cdot d\mathbf{x}^{(2)} = d\mathbf{X}^{(1)}\cdot\mathbf{C}\,d\mathbf{X}^{(2)}$$</div>
+<p>Keunggulan C: dapat dihitung langsung dari F tanpa perlu menghitung akar matriks. Arti komponennya (untuk elemen yang <strong>semula</strong> searah sumbu koordinat):</p>
+<div class="eq">$$C_{11} = \left(\frac{ds_1}{dS_1}\right)^2, \qquad C_{12} = \frac{ds_1\,ds_2}{dS_1\,dS_2}\cos\left(d\mathbf{x}^{(1)}, d\mathbf{x}^{(2)}\right)$$</div>
+<p>Jadi diagonal C = <strong>kuadrat stretch</strong> (disebut juga <em>quadratic elongation</em> dalam geologi struktur), dan luar diagonal memuat <strong>sudut setelah deformasi</strong>. Hati-hati: secara umum U₁₁ ≠ √C₁₁, kecuali U diagonal.</p>
+<p><strong>Contoh 8.6 — Geser sederhana</strong> x₁ = X₁ + kX₂:</p>
+<div class="eq">$$[\mathbf{C}] = \begin{bmatrix} 1 &amp; k &amp; 0 \\ k &amp; 1 + k^2 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</div>
+<ul>
+<li>Elemen semula searah e₁: stretch √C₁₁ = 1 (tidak berubah).</li>
+<li>Elemen semula searah e₂: stretch √(1 + k²) (garis vertikal memanjang karena miring).</li>
+<li>Elemen semula searah (e₁ + e₂)/√2: stretch √(1 + k + k²/2).</li>
+<li>Sudut antara elemen e₁ dan e₂ setelah deformasi: cos = k/√(1 + k²).</li>
+</ul>
+<h3>8.5 Tensor regangan Lagrange E*</h3>
+<div class="eq">$$\mathbf{E}^* = \tfrac12(\mathbf{C} - \mathbf{I}), \qquad E^*_{ij} = \frac12\left(\frac{\partial u_i}{\partial X_j} + \frac{\partial u_j}{\partial X_i}\right) + \frac12\frac{\partial u_m}{\partial X_i}\frac{\partial u_m}{\partial X_j}$$</div>
+<p>E* = 0 bila tidak ada deformasi (rotasi kaku besar pun memberi E* = 0, berbeda dengan regangan infinitesimal!). Arti diagonalnya:</p>
+<div class="eq">$$E^*_{11} = \frac{ds_1^2 - dS_1^2}{2\,dS_1^2}$$</div>
+<p><strong>Contoh 8.7 — Bandingkan regangan infinitesimal dan Lagrange.</strong> Regangan uniaksial u₁ = kX₁:</p>
+<ul>
+<li>Infinitesimal: E₁₁ = k. Lagrange: E*₁₁ = k + k²/2.</li>
+<li>Untuk elemen searah e₁, keduanya memberi ds = (1 + k)dS dengan tepat.</li>
+<li>Untuk elemen diagonal (e₁ + e₂)/√2: Lagrange memberi ds/dS = √(1 + k + k²/2) (eksak), infinitesimal memberi 1 + k/2 (hanya benar untuk k kecil).</li>
+</ul>
+<p>Untuk k = 0,01, selisihnya sangat kecil. Untuk k = 0,5 (pemanjangan 50%, wajar pada lipatan), selisihnya sudah besar. <strong>Untuk deformasi geologi yang besar, gunakan tensor Lagrange E*, bukan E.</strong></p>
+<p><strong>Peringatan rotasi.</strong> Rotasi kaku 30° memberi ∇u yang unsur-unsurnya sekitar 0,5. Regangan infinitesimal E akan menghasilkan nilai tidak nol yang salah ("regangan palsu"), padahal tidak ada deformasi. E* memberi tepat nol. Inilah alasan teori infinitesimal hanya boleh dipakai jika <strong>regangan dan rotasinya sama-sama kecil</strong>.</p>
+<h3>8.6 Tensor Cauchy-Green kiri B dan regangan Euler e*</h3>
+<div class="eq">$$\mathbf{B} = \mathbf{V}^2 = \mathbf{F}\mathbf{F}^T, \qquad \mathbf{B} = \mathbf{R}\mathbf{C}\mathbf{R}^T$$</div>
+<p>B memiliki nilai eigen yang sama dengan C, tetapi arah eigennya adalah arah eigen C yang <strong>sudah diputar</strong> (Rn). Dengan kata lain, C "hidup" di konfigurasi awal, B "hidup" di konfigurasi akhir.</p>
+<p><strong>Tensor regangan Euler (Almansi)</strong> diukur relatif terhadap panjang <strong>akhir</strong>:</p>
+<div class="eq">$$\mathbf{e}^* = \tfrac12(\mathbf{I} - \mathbf{B}^{-1}), \qquad e^*_{11} = \frac{ds^2 - dS^2}{2\,ds^2} \;\; (\text{elemen yang } \textit{sekarang} \text{ searah } \mathbf{e}_1)$$</div>
+<div class="eq">$$e^*_{ij} = \frac12\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right) - \frac12\frac{\partial u_m}{\partial x_i}\frac{\partial u_m}{\partial x_j}$$</div>
+<p>Perhatikan tanda minus pada suku kuadrat, berbeda dengan E*.</p>
+<p>Kapan memakai yang mana?</p>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Situasi</th>
+<th>Tensor yang cocok</th>
+<th>Contoh geofisika</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bentuk awal diketahui, ingin tahu deformasi relatif terhadap awal</td>
+<td>C, E* (Lagrange)</td>
+<td>rekonstruksi palinspastik lipatan, menghitung pemendekan kerak</td>
+</tr>
+<tr>
+<td>Hanya bentuk sekarang yang teramati</td>
+<td>B, e* (Euler)</td>
+<td>mengukur fabrik pada singkapan, model aliran mantel</td>
+</tr>
+<tr>
+<td>Hukum material (tegangan–deformasi)</td>
+<td>B (objektif, tidak bergantung pengamat)</td>
+<td>hukum elastisitas besar (Bab 5)</td>
+</tr>
+<tr>
+<td>Deformasi kecil</td>
+<td>E (infinitesimal)</td>
+<td>gelombang seismik, deformasi GNSS antargempa</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Contoh 8.8 — Geser sederhana dengan B dan regangan Euler.</strong></p>
+<div class="eq">$$[\mathbf{B}] = \begin{bmatrix} 1 + k^2 &amp; k &amp; 0 \\ k &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}, \qquad [\mathbf{B}^{-1}] = \begin{bmatrix} 1 &amp; -k &amp; 0 \\ -k &amp; 1 + k^2 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}, \qquad [\mathbf{e}^*] = \frac12\begin{bmatrix} 0 &amp; k &amp; 0 \\ k &amp; -k^2 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}$$</div>
+<p>Komponen (1,1) regangan Euler bernilai 0: elemen yang <strong>sekarang</strong> horizontal tidak berubah panjang. Komponen (2,2) bernilai −k²/2: elemen yang <strong>sekarang</strong> vertikal (panjang 1) dulunya lebih panjang, yaitu √(1 + k²), karena dulu ia miring.</p>
+<h3>8.7 Perubahan luas</h3>
+<p>Sebuah bidang kecil dengan luas dA₀ dan normal n₀ berubah menjadi bidang dengan luas dA dan normal n, menurut <strong>rumus Nanson</strong>:</p>
+<div class="eq">$$dA\,\mathbf{n} = dA_0\,J\,(\mathbf{F}^{-1})^T\mathbf{n}_0, \qquad J = \det\mathbf{F}$$</div>
+<p>Perhatikan bahwa normal bidang <strong>tidak</strong> berubah seperti vektor material biasa (yang memakai F), melainkan memakai (F⁻¹)ᵀ. Ini penting ketika menghitung gaya pada bidang sesar atau bidang perlapisan yang ikut terdeformasi (Bab 4, tegangan).</p>
+<h3>8.8 Perubahan volume</h3>
+<p>Rasio volume adalah determinan F:</p>
+<div class="eq">$$dV = J\,dV_0, \qquad J = \det\mathbf{F} = \sqrt{\det\mathbf{C}} = \sqrt{\det\mathbf{B}}$$</div>
+<ul>
+<li>Material inkompresibel: J = 1.</li>
+<li>Kekekalan massa dalam bentuk Lagrange: ρ dV = ρ₀ dV₀, sehingga ρ = ρ₀ / det F.</li>
+</ul>
+<p><strong>Contoh 8.9.</strong> x₁ = λ₁X₁, x₂ = −λ₃X₃, x₃ = λ₂X₂ (tanda minus lagi agar det F &gt; 0).</p>
+<ul>
+<li>det F = λ₁λ₂λ₃, jadi kubus satuan menjadi bervolume λ₁λ₂λ₃.</li>
+<li>Bidang OABC (luas 1, normal e₃): rumus Nanson memberi J(F⁻¹)ᵀe₃ = −λ₁λ₂e₂. Jadi luasnya menjadi λ₁λ₂ dan normalnya kini searah −e₂ (bidang ikut berputar 90°).</li>
+<li>U = diag(λ₁, λ₂, λ₃) dan R = rotasi 90° terhadap e₁.</li>
+</ul>
+<p><strong>Aplikasi geofisika: kompaksi dan diagenesis.</strong> Lapisan lempung yang terkubur kehilangan air pori sehingga porositasnya turun, misalnya dari 60% menjadi 20%. Rasio volume butiran padat tetap, jadi J = (1 − 0,60)/(1 − 0,20) = 0,5: volume lapisan menjadi separuhnya. Jika kompaksi hanya vertikal (kompresi terkekang), stretch vertikal λ₃ = 0,5 dan λ₁ = λ₂ = 1. Perhitungan ini dipakai dalam <strong>dekompaksi</strong> (backstripping) untuk merekonstruksi sejarah penurunan cekungan sedimen.</p>
+
+</section>
+<section class="block" id="koordinat-lain">
+<h2>9. Koordinat Lengkung dan Konfigurasi Sekarang sebagai Acuan (3.29–3.30)</h2>
+<p>Bagian ini bersifat teknis; cukup pahami idenya dan pola rumusnya. Detail penurunannya dapat dibaca langsung di buku.</p>
+<h3>9.1 Komponen "dua titik" dari F</h3>
+<p>Sampai sekarang kita memakai sumbu Kartesius yang sama untuk keadaan awal dan akhir. Dalam koordinat silinder atau bola, <strong>vektor basis berbeda di setiap tempat</strong>: e_r di posisi awal tidak sama dengan e_r di posisi akhir. Karena F menghubungkan dX (di konfigurasi awal) dengan dx (di konfigurasi akhir), komponennya memakai <strong>dua basis sekaligus</strong>. Inilah yang disebut komponen dua titik (two-point components).</p>
+<p>Misalkan gerak dalam koordinat silinder: r = r(r₀, θ₀, z₀, t), θ = θ(r₀, θ₀, z₀, t), z = z(r₀, θ₀, z₀, t). Maka:</p>
+<div class="eq">$$[\mathbf{F}] = \begin{bmatrix} \dfrac{\partial r}{\partial r_0} &amp; \dfrac{\partial r}{r_0\,\partial \theta_0} &amp; \dfrac{\partial r}{\partial z_0} \\[10pt] \dfrac{r\,\partial \theta}{\partial r_0} &amp; \dfrac{r\,\partial \theta}{r_0\,\partial \theta_0} &amp; \dfrac{r\,\partial \theta}{\partial z_0} \\[10pt] \dfrac{\partial z}{\partial r_0} &amp; \dfrac{\partial z}{r_0\,\partial \theta_0} &amp; \dfrac{\partial z}{\partial z_0} \end{bmatrix}$$</div>
+<p>Pola yang perlu diingat: setiap "panjang" diukur dengan faktor skala yang tepat (dr, r dθ, dz untuk silinder; dr, r dθ, r sin θ dφ untuk bola). Setelah [F] diperoleh, cukup hitung:</p>
+<ul>
+<li>&#91;B] = [F][F]ᵀ (komponen di basis <strong>akhir</strong>), misalnya B_rr = (∂r/∂r₀)² + (∂r/r₀∂θ₀)² + (∂r/∂z₀)².</li>
+<li>&#91;C] = [F]ᵀ[F] (komponen di basis <strong>awal</strong>), misalnya C_r₀r₀ = (∂r/∂r₀)² + (r∂θ/∂r₀)² + (∂z/∂r₀)².</li>
+<li>B⁻¹ dan C⁻¹ lebih mudah dihitung dari gerak balik r₀ = r₀(r, θ, z, t), dan seterusnya.</li>
+</ul>
+<p>Kombinasi juga mungkin, misalnya koordinat <strong>Kartesius untuk keadaan awal</strong> dan <strong>silinder untuk keadaan akhir</strong>. Contoh geofisika: lapisan sedimen yang semula datar (Kartesius) terlipat menjadi bentuk melengkung seperti lipatan silindris atau kubah (silinder).</p>
+<p><strong>Contoh 9.1 — Puntiran (torsi) sebuah inti bor.</strong> Gerak r = r₀, θ = θ₀ + kz₀, z = z₀ memuntir silinder: setiap irisan berputar sebanding dengan tingginya. Komponen tak nol F di luar diagonal hanyalah F_θz = r ∂θ/∂z₀ = kr. Jadi geser yang terjadi sebanding dengan jarak dari sumbu: nol di tengah, maksimum di tepi. Ini dasar uji puntir (torsion test) di laboratorium mekanika batuan untuk mencapai regangan geser yang sangat besar.</p>
+<h3>9.2 Konfigurasi sekarang sebagai acuan</h3>
+<p>Untuk fluida (magma, air, mantel dalam skala panjang), "bentuk awal" sering tidak bermakna. Lebih alami memakai <strong>posisi sekarang x pada waktu t</strong> sebagai label, lalu bertanya di mana partikel itu berada pada waktu lain τ:</p>
+<div class="eq">$$\mathbf{x}' = \mathbf{x}'_t(\mathbf{x}, \tau), \qquad \text{dengan } \mathbf{x} = \mathbf{x}'_t(\mathbf{x}, t)$$</div>
+<p>Dari sini didefinisikan tensor relatif: F_t = ∇x′_t (gradien deformasi relatif), C_t = F_tᵀF_t, B_t = F_tF_tᵀ. Tensor relatif ini dipakai untuk merumuskan hukum material fluida non-Newton (Bab 8), misalnya magma kaya kristal atau lumpur yang "mengingat" sejarah deformasinya.</p>
+<p><strong>Contoh 9.2.</strong> Untuk v₁ = kx₂, v₂ = v₃ = 0, selesaikan ∂x′/∂τ = v(x′, τ) dengan syarat x′ = x pada τ = t:</p>
+<div class="eq">$$x'_1 = x_1 + kx_2(\tau - t), \qquad x'_2 = x_2, \qquad x'_3 = x_3$$</div>
+<p>Partikel yang sekarang di x, pada waktu lampau (τ &lt; t) berada lebih ke kiri, dan pada waktu mendatang (τ &gt; t) lebih ke kanan, persis sesuai aliran geser.</p>
+
+</section>
+<section class="block" id="ringkasan">
+<h2>10. Ringkasan, Glosarium, dan Latihan</h2>
+<h3>10.1 Ringkasan rumus kunci</h3>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Konsep</th>
+<th>Rumus</th>
+<th>Kapan dipakai</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Persamaan gerak</td>
+<td>x = x(X, t)</td>
+<td>dasar semua kinematika</td>
+</tr>
+<tr>
+<td>Perpindahan</td>
+<td>u = x − X</td>
+<td>GNSS, InSAR, seismogram</td>
+</tr>
+<tr>
+<td>Turunan material</td>
+<td>Dθ/Dt = ∂θ/∂t + v·∇θ</td>
+<td>besaran Euler, mengikuti partikel</td>
+</tr>
+<tr>
+<td>Percepatan</td>
+<td>a = ∂v/∂t + (∇v)v</td>
+<td>dinamika fluida dan aliran</td>
+</tr>
+<tr>
+<td>Regangan kecil</td>
+<td>E = ½[∇u + (∇u)ᵀ]</td>
+<td>gelombang seismik, deformasi antargempa</td>
+</tr>
+<tr>
+<td>Perpanjangan relatif</td>
+<td>E_nn = n·En</td>
+<td>strainmeter, rosette</td>
+</tr>
+<tr>
+<td>Regangan geser</td>
+<td>γ = 2 m·En</td>
+<td>perubahan sudut siku-siku</td>
+</tr>
+<tr>
+<td>Dilatasi</td>
+<td>e = E_ii = div u</td>
+<td>gelombang P, dilatometer</td>
+</tr>
+<tr>
+<td>Rotasi kecil</td>
+<td>Ω = ½[∇u − (∇u)ᵀ]</td>
+<td>gelombang S, seismometer rotasional</td>
+</tr>
+<tr>
+<td>Laju deformasi</td>
+<td>D = ½[∇v + (∇v)ᵀ]</td>
+<td>laju regangan GNSS, aliran mantel</td>
+</tr>
+<tr>
+<td>Spin</td>
+<td>W = ½[∇v − (∇v)ᵀ]</td>
+<td>vortisitas, rotasi blok</td>
+</tr>
+<tr>
+<td>Kekekalan massa</td>
+<td>Dρ/Dt + ρ div v = 0</td>
+<td>magma, kompaksi</td>
+</tr>
+<tr>
+<td>Inkompresibel</td>
+<td>div v = 0</td>
+<td>konveksi mantel, gletser</td>
+</tr>
+<tr>
+<td>Gradien deformasi</td>
+<td>F = I + ∇u, dx = F dX</td>
+<td>deformasi besar</td>
+</tr>
+<tr>
+<td>Dekomposisi polar</td>
+<td>F = RU = VR</td>
+<td>memisahkan regang dan putar</td>
+</tr>
+<tr>
+<td>Cauchy-Green kanan</td>
+<td>C = FᵀF = U²</td>
+<td>stretch dari konfigurasi awal</td>
+</tr>
+<tr>
+<td>Cauchy-Green kiri</td>
+<td>B = FFᵀ = V²</td>
+<td>stretch di konfigurasi akhir</td>
+</tr>
+<tr>
+<td>Regangan Lagrange</td>
+<td>E* = ½(C − I)</td>
+<td>lipatan, rekonstruksi</td>
+</tr>
+<tr>
+<td>Regangan Euler</td>
+<td>e* = ½(I − B⁻¹)</td>
+<td>fabrik singkapan sekarang</td>
+</tr>
+<tr>
+<td>Perubahan volume</td>
+<td>dV = det F · dV₀</td>
+<td>kompaksi, dekompaksi</td>
+</tr>
+<tr>
+<td>Perubahan luas</td>
+<td>dA n = dA₀ J (F⁻¹)ᵀ n₀</td>
+<td>bidang sesar terdeformasi</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tiga gagasan besar yang harus dibawa pulang:</p>
+<ol>
+<li><strong>Lagrange mengikuti partikel, Euler diam di tempat.</strong> Turunan material menjembatani keduanya.</li>
+<li><strong>Gradien = simetrik (ubah bentuk) + antisimetrik (putar).</strong> Berlaku untuk ∇u (E dan Ω) dan ∇v (D dan W).</li>
+<li><strong>Kecil vs besar.</strong> Jika regangan dan rotasi kecil, pakai E. Jika besar, pakai F, C, B, E*, e*.</li>
+</ol>
+<h3>10.2 Glosarium Indonesia–Inggris</h3>
+<div class="table-wrap"><table class="data">
+<thead>
+<tr>
+<th>Istilah Indonesia</th>
+<th>Istilah Inggris</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>koordinat material / spasial</td>
+<td>material / spatial coordinates</td>
+</tr>
+<tr>
+<td>deskripsi Lagrange / Euler</td>
+<td>Lagrangian / Eulerian description</td>
+</tr>
+<tr>
+<td>turunan material</td>
+<td>material derivative</td>
+</tr>
+<tr>
+<td>medan perpindahan</td>
+<td>displacement field</td>
+</tr>
+<tr>
+<td>gradien perpindahan</td>
+<td>displacement gradient</td>
+</tr>
+<tr>
+<td>tensor regangan infinitesimal</td>
+<td>infinitesimal strain tensor</td>
+</tr>
+<tr>
+<td>regangan normal / geser</td>
+<td>normal / shear strain</td>
+</tr>
+<tr>
+<td>regangan utama, arah utama</td>
+<td>principal strain, principal direction</td>
+</tr>
+<tr>
+<td>dilatasi</td>
+<td>dilatation</td>
+</tr>
+<tr>
+<td>tensor laju deformasi</td>
+<td>rate of deformation tensor</td>
+</tr>
+<tr>
+<td>tensor spin</td>
+<td>spin tensor</td>
+</tr>
+<tr>
+<td>persamaan kontinuitas</td>
+<td>continuity equation</td>
+</tr>
+<tr>
+<td>gradien deformasi</td>
+<td>deformation gradient</td>
+</tr>
+<tr>
+<td>dekomposisi polar</td>
+<td>polar decomposition</td>
+</tr>
+<tr>
+<td>tensor regang kanan / kiri</td>
+<td>right / left stretch tensor</td>
+</tr>
+<tr>
+<td>geser sederhana / murni</td>
+<td>simple / pure shear</td>
+</tr>
+<tr>
+<td>elipsoid regangan</td>
+<td>strain ellipsoid</td>
+</tr>
+</tbody>
+</table></div>
+<h3>10.3 Latihan soal</h3>
+<ol>
+<li><strong>Arus laut seragam.</strong> Air laut bergerak dengan x₁ = X₁ + at, x₂ = X₂, x₃ = X₃. Medan suhu (Euler) θ = Ax₁. (a) Tentukan kecepatan dan percepatan. (b) Tuliskan suhu dalam deskripsi material. (c) Hitung Dθ/Dt dengan dua cara.</li>
+<li><strong>Laju regangan GNSS.</strong> Dari jaringan GNSS diperoleh laju regangan horizontal D₁₁ = 2, D₂₂ = −2, D₁₂ = 1 (satuan 10⁻⁶ per tahun; x₁ = timur, x₂ = utara). (a) Hitung laju perpanjangan dalam arah timur laut (e₁ + e₂)/√2. (b) Hitung laju regangan utama dan arahnya. (c) Berapa laju perubahan luas?</li>
+<li><strong>Rosette 45°.</strong> Bacaan strain gauge pada 0°, 45°, 90° adalah a = 200, b = 50, c = 100 (×10⁻⁶). Hitung E₁₁, E₂₂, E₁₂, regangan utama, dan arahnya.</li>
+<li><strong>Gelombang P dan S.</strong> Untuk (i) u = A sin(kx₁ − ωt) e₁ dan (ii) u = A sin(kx₁ − ωt) e₂: hitung E, dilatasi e, dan Ω. Gelombang mana yang P dan mana yang S?</li>
+<li><strong>Kompatibilitas.</strong> Apakah medan regangan E₁₂ = E₂₁ = kX₁X₂ (lainnya nol) kompatibel?</li>
+<li><strong>Penipisan gletser.</strong> Es (inkompresibel) di sebuah lidah gletser meregang searah aliran dengan v₁ = εx₁ dan v₂ = 0. Tentukan v₃ jika v₃ = 0 di dasar x₃ = 0. Apa artinya bagi ketebalan es?</li>
+<li><strong>Geser sederhana besar.</strong> x₁ = X₁ + X₂, x₂ = X₂, x₃ = X₃. (a) Hitung C. (b) Stretch elemen yang semula searah e₂ dan searah (e₁ + e₂)/√2. (c) Sudut antara elemen e₁ dan e₂ setelah deformasi. (d) Verifikasi bahwa U = f[[1, 1/2], [1/2, 3/2]] dengan f = (5/4)^(−1/2) memenuhi U² = C.</li>
+<li><strong>Kompaksi.</strong> Batupasir terkubur dan porositasnya turun dari 40% menjadi 10% melalui kompaksi vertikal saja. Hitung det F, stretch vertikal λ₃, regangan Lagrange E*₃₃, dan regangan infinitesimal E₃₃. Mengapa keduanya berbeda?</li>
+<li><strong>Ooid terdeformasi.</strong> Ooid berbentuk bola berjari-jari 1 mm kini menjadi elipsoid dengan semi-sumbu 1,5 mm dan 0,8 mm dalam bidang singkapan. Jika volume tetap, berapa semi-sumbu ketiga? Berapa regangan Lagrange di arah sumbu terpanjang?</li>
+</ol>
+<h3>10.4 Kunci jawaban singkat</h3>
+<ol>
+<li>(a) v₁ = a, v₂ = v₃ = 0; a = 0. (b) θ = A(X₁ + at). (c) Lagrange: ∂θ/∂t = Aa. Euler: 0 + v₁A = Aa.</li>
+<li>(a) D_nn = ½(2 + 1 + 1 − 2) = 1 × 10⁻⁶/tahun. (b) λ = ±√5 ≈ ±2,24 × 10⁻⁶/tahun; perpanjangan maksimum sekitar 13° dari timur ke arah utara (n₂/n₁ = √5 − 2 ≈ 0,236), pemendekan maksimum tegak lurus terhadapnya. (c) D₁₁ + D₂₂ = 0, luas tidak berubah (geser murni).</li>
+<li>E₁₁ = 200, E₂₂ = 100, E₁₂ = 50 − 150 = −100 (×10⁻⁶). Regangan utama 150 ± √(50² + 100²) = 261,8 dan 38,2 (×10⁻⁶). Arah maksimum pada −31,7° dari e₁ (tan 2θ = −2).</li>
+<li>(i) E₁₁ = Ak cos(kx₁ − ωt), lainnya nol; e = E₁₁ ≠ 0; Ω = 0 → <strong>gelombang P</strong>. (ii) E₁₂ = E₂₁ = ½Ak cos(kx₁ − ωt); e = 0; Ω₂₁ = −Ω₁₂ = ½Ak cos(kx₁ − ωt) ≠ 0 → <strong>gelombang S</strong>.</li>
+<li>Tidak. Ruas kiri persamaan kompatibilitas pertama bernilai 0, ruas kanannya 2∂²E₁₂/∂X₁∂X₂ = 2k ≠ 0.</li>
+<li>div v = ε + ∂v₃/∂x₃ = 0 → v₃ = −εx₃. Permukaan es (x₃ = H) turun dengan laju εH: gletser menipis ketika meregang.</li>
+<li>(a) C = [[1, 1, 0], [1, 2, 0], [0, 0, 1]]. (b) √2 ≈ 1,414 dan √2,5 ≈ 1,581. (c) cos θ = 1/√2 → θ = 45° (semula 90°). (d) U = [[0,894, 0,447], [0,447, 1,342]], U² = [[1, 1], [1, 2]] = C.</li>
+<li>Volume butiran tetap: det F = (1 − 0,40)/(1 − 0,10) = 0,667 = λ₃. E*₃₃ = (λ₃² − 1)/2 = −0,278. E₃₃ = λ₃ − 1 = −0,333. Berbeda karena deformasinya besar (33%), sehingga suku kuadrat tidak boleh diabaikan.</li>
+<li>λ₁λ₂λ₃ = 1 → λ₃ = 1/(1,5 × 0,8) = 0,833, jadi semi-sumbu ketiga 0,833 mm. E*₁₁ = (1,5² − 1)/2 = 0,625.</li>
+</ol>
+<h3>10.5 Bacaan</h3>
+<p>W. Michael Lai, David Rubin, Erhard Krempl. <em>Introduction to Continuum Mechanics</em>, edisi ke-4, Elsevier, 2010. Bab 3: Kinematics of a Continuum (soal latihan 3.1–3.86).</p>
+</section>
+
+      <p class="source-note">Bahan ini adalah penyederhanaan pedagogis dari Lai, Rubin &amp; Krempl (2010), Bab 3. Contoh 3.22.1 dan 3.28.1 dari buku diberi tanda minus agar det F &gt; 0 (deformasi fisis tanpa pencerminan). Penurunan lengkap dan soal 3.1&ndash;3.86 ada di teks aslinya.</p>
+
+      <nav class="seq-nav" aria-label="Navigasi topik">
+        <a href="/kuliah/mekanika-medium-kontinyu/"><span class="lbl">&larr; Kembali</span>Daftar materi Mekanika Medium Kontinyu</a>
+        <a class="nx" href="/#teaching"><span class="lbl">Teaching &rarr;</span>Semua mata kuliah</a>
+      </nav>
+
+      <footer class="footer">
+        <p><strong>Wiwit Suryanto</strong><br>Departemen Fisika, FMIPA, Universitas Gadjah Mada<br><a href="mailto:ws@ugm.ac.id">ws@ugm.ac.id</a> &middot; <a href="/">maswiet.github.io</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
