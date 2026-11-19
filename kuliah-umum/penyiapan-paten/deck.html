@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Menyiapkan Paten: Dari Hasil Riset ke Nomor Permohonan — Wiwit Suryanto</title>
+<style>
+/* PT Sans (fallback web resmi identitas visual UGM) dipetakan ke nama keluarga yang dipakai deck. */
+@font-face{font-family:'Gama Sans';src:url(assets/fonts/pt-sans-400.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Gama Sans';src:url(assets/fonts/pt-sans-700.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Gama Sans';src:url(assets/fonts/pt-sans-400-italic.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Gama Sans';src:url(assets/fonts/pt-sans-700-italic.woff2) format('woff2');font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:'Gama Sans Bold';src:url(assets/fonts/pt-sans-700.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Gama Sans Bold Italic';src:url(assets/fonts/pt-sans-700-italic.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Gama Sans Light Italic';src:url(assets/fonts/pt-sans-400-italic.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+*{margin:0}
+html,body{height:100%;background:#0b2233;overflow:hidden;font:32px/1.2 'Gama Sans',sans-serif}
+h1{font-size:96px;font-weight:600} h2{font-size:64px;font-weight:600} h3{font-size:44px;font-weight:600}
+p,li,h1,h2,h3,td,th{overflow-wrap:break-word;text-wrap:pretty}
+table{width:100%;border-collapse:separate;border-spacing:0;border:solid #0003;border-width:2px 0 0 2px}
+th,td{padding:.35em .6em;text-align:left;border:solid #0003;border-width:0 2px 2px 0}
+img{display:block}
+svg.icon,svg.check-ic{display:block}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;
+  transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center center}
+#stage>section{position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box}
+#stage>section.off{display:none!important}
+.ui{position:fixed;left:0;right:0;bottom:10px;display:flex;justify-content:center;align-items:center;gap:14px;
+  font:500 13px/1 'Gama Sans',sans-serif;color:#ccd9e1;pointer-events:none}
+.ui button{pointer-events:auto;background:rgba(1,65,107,.75);color:#fff;border:1px solid rgba(255,255,255,.3);
+  border-radius:0;width:34px;height:28px;font:700 16px/1 'Gama Sans',sans-serif;cursor:pointer}
+.ui button:hover{background:#01416b}
+@page{size:1920px 1080px;margin:0}
+@media print{
+  html,body{height:auto;overflow:visible;background:#fff}
+  #stage{position:static;transform:none;width:1920px;height:auto}
+  #stage>section.off{display:block!important}
+  #stage>section{break-after:page;page-break-after:always;break-inside:avoid}
+  #stage>section:last-child{break-after:auto;page-break-after:auto}
+  .rise{animation:none!important}
+  .ui{display:none}
+}
+</style>
+<style>
+/* Universitas Gadjah Mada — tokens from the UGM design system */
+section {
+  --ugm-blue: #01416b;
+  --ugm-yellow: #fdd402;
+  --ugm-black: #000000;
+  --ugm-grey-dark: #5b5858;
+  --ugm-grey-light: #fcfcfc;
+  --ugm-band-grey: #d9d9d9;
+  --ugm-blue-line: #1d4f80;
+  --ugm-blue-muted: #29547f;
+  --ink-muted-dark: #ccd9e1;
+  --i: 0;
+  counter-increment: page;
+  box-sizing: border-box;
+  padding: 136px 128px 168px;
+  background: #ffffff;
+  color: var(--ugm-black);
+  font-family: 'Gama Sans', 'PT Sans', 'Open Sans', Calibri, Arial, sans-serif;
+  font-size: 28px;
+  line-height: 1.4;
+}
+section.blue { background: var(--ugm-blue); color: #ffffff; padding: 256px 128px 128px; }
+section.split { padding: 128px; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0px); } }
+.rise { animation: rise 500ms ease-out both; animation-delay: calc(var(--i) * 120ms); }
+
+/* type */
+.title { font-family: 'Gama Sans Bold', 'PT Sans', Calibri, Arial, sans-serif; font-weight: 400; font-size: 60px; line-height: 1.1; color: var(--ugm-blue); margin: 0 0 40px; width: 1340px; }
+.eyebrow { font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 24px; line-height: 1.2; letter-spacing: 4px; color: var(--ugm-grey-dark); margin: 0 0 12px; }
+.h3 { font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-weight: 400; font-size: 36px; line-height: 1.2; color: var(--ugm-blue); margin: 0; }
+.txt { font-size: 28px; line-height: 1.4; margin: 0; }
+.small { font-size: 24px; line-height: 1.4; margin: 0; color: var(--ugm-grey-dark); }
+.quote { font-family: 'Gama Sans Light Italic', Calibri, Arial, sans-serif; font-size: 36px; line-height: 1.35; color: var(--ugm-blue); margin: 0; }
+
+/* layout */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+.card { background: var(--ugm-grey-light); border: 2px solid var(--ugm-band-grey); padding: 40px; display: flex; flex-direction: column; gap: 16px; }
+.card-tight { background: var(--ugm-grey-light); border: 2px solid var(--ugm-band-grey); padding: 28px 32px; display: flex; flex-direction: column; gap: 10px; }
+.icon { width: 56px; height: 56px; color: var(--ugm-blue); }
+.note { margin: 0; padding: 28px 32px; background: var(--ugm-blue); color: #ffffff; font-size: 28px; line-height: 1.4; }
+.note-y { margin: 0; padding: 28px 32px; background: var(--ugm-yellow); color: var(--ugm-blue); font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 28px; line-height: 1.4; }
+.numsq { flex: none; width: 64px; height: 64px; margin: 0; background: var(--ugm-blue); color: var(--ugm-yellow); font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 36px; line-height: 64px; text-align: center; }
+.numsq-y { flex: none; width: 64px; height: 64px; margin: 0; background: var(--ugm-yellow); color: var(--ugm-blue); font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 36px; line-height: 64px; text-align: center; }
+
+/* content-slide frame: logo top right, grey tagline band at the foot */
+.logo-sm { position: absolute; left: 1556px; top: 52px; width: 268px; height: 77px; object-fit: contain; }
+.foot { position: absolute; left: 0px; top: 992px; width: 1920px; height: 88px; box-sizing: border-box; padding: 0 128px; background: var(--ugm-band-grey); display: flex; align-items: center; gap: 32px; }
+.tag { flex: 1; margin: 0; font-family: 'Gama Sans Bold Italic', Calibri, Arial, sans-serif; font-size: 24px; line-height: 1.2; color: var(--ugm-blue); }
+.url { margin: 0; font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 24px; line-height: 1.2; letter-spacing: 4px; color: var(--ugm-blue); }
+.pg { margin: 0; width: 56px; text-align: right; font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 24px; line-height: 1.2; color: var(--ugm-blue); }
+.pg::after { content: counter(page); }
+
+/* blue slides: cover, dividers, closing */
+.rings { position: absolute; left: 1040px; top: 0px; width: 880px; height: 1080px; }
+.logo-lg { position: absolute; left: 128px; top: 96px; width: 348px; height: 100px; object-fit: contain; }
+.slab-r { position: absolute; left: 1824px; top: 0px; width: 96px; height: 1080px; background: var(--ugm-yellow); }
+.band { position: absolute; left: 0px; top: 1054px; width: 1920px; height: 26px; background: var(--ugm-yellow); }
+.tag-b { position: absolute; left: 128px; top: 972px; width: 1100px; margin: 0; font-family: 'Gama Sans Bold Italic', Calibri, Arial, sans-serif; font-size: 24px; line-height: 1.2; color: #ffffff; }
+.url-b { position: absolute; left: 1360px; top: 972px; width: 400px; margin: 0; text-align: right; font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 24px; line-height: 1.2; letter-spacing: 4px; color: var(--ugm-yellow); }
+.display { font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-weight: 400; font-size: 88px; line-height: 1.1; color: var(--ugm-yellow); margin: 0; width: 1240px; }
+.rule { width: 123px; height: 6px; background: var(--ugm-yellow); margin: 40px 0px; }
+.eyebrow-b { font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 24px; line-height: 1.2; letter-spacing: 4px; color: var(--ugm-yellow); margin: 0 0 24px; }
+.sub-b { font-size: 28px; line-height: 1.4; color: #ffffff; margin: 0; width: 1100px; }
+.name-b { font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 36px; line-height: 1.2; color: #ffffff; margin: 48px 0 8px; }
+.muted-b { font-size: 28px; line-height: 1.4; color: var(--ink-muted-dark); margin: 0; }
+
+/* statement split */
+.panel-b { position: absolute; left: 0px; top: 0px; width: 832px; height: 1080px; background: var(--ugm-blue); }
+.slab-v { position: absolute; left: 832px; top: 0px; width: 40px; height: 1080px; background: var(--ugm-yellow); }
+.split-grid { display: grid; grid-template-columns: 640px 1fr; gap: 128px; }
+.big-w { font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-weight: 400; font-size: 60px; line-height: 1.15; color: #ffffff; margin: 0 0 32px; }
+.chips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.chip { margin: 0; padding: 20px 24px; background: var(--ugm-grey-light); border: 2px solid var(--ugm-band-grey); font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 28px; line-height: 1.2; color: var(--ugm-blue); }
+
+/* rows */
+.row-line { border-top: 2px solid var(--ugm-band-grey); }
+.agenda-row { display: grid; grid-template-columns: 96px 1fr 180px; gap: 32px; align-items: center; padding: 22px 0px; border-top: 2px solid var(--ugm-band-grey); }
+.agenda-num { margin: 0; font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 60px; line-height: 1; color: var(--ugm-blue); }
+.agenda-time { margin: 0; font-size: 28px; color: var(--ugm-grey-dark); text-align: right; }
+.def-row { display: grid; grid-template-columns: 320px 1fr; gap: 48px; padding: 30px 0px; border-top: 2px solid var(--ugm-band-grey); align-items: start; }
+.item { display: flex; gap: 24px; align-items: flex-start; }
+.stack { display: flex; flex-direction: column; gap: 6px; }
+
+/* lists */
+.lst { margin: 0; padding-left: 36px; font-size: 28px; line-height: 1.35; color: var(--ugm-black); }
+.lst li { margin: 0 0 10px; }
+
+/* tables */
+.tbl { width: 100%; font-size: 28px; line-height: 1.35; color: var(--ugm-black); }
+.tbl-s { width: 100%; font-size: 24px; line-height: 1.35; color: var(--ugm-black); }
+.thead { background: var(--ugm-blue); }
+.th { color: #ffffff; padding: 14px 20px; }
+.td { padding: 14px 20px; }
+.hl { background: var(--ugm-yellow); }
+
+/* process steps */
+.steps { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; }
+.step { background: var(--ugm-grey-light); border: 2px solid var(--ugm-band-grey); display: flex; flex-direction: column; }
+.bar-y { height: 12px; background: var(--ugm-yellow); }
+.bar-b { height: 12px; background: var(--ugm-blue); }
+.bar-g { height: 12px; background: var(--ugm-grey-dark); }
+.step-in { padding: 22px 26px 26px; display: flex; flex-direction: column; gap: 8px; }
+.who { margin: 0; font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 24px; line-height: 1.2; letter-spacing: 3px; color: var(--ugm-grey-dark); }
+
+/* checklist */
+.checks { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 56px; }
+.check-ic { flex: none; width: 44px; height: 44px; color: var(--ugm-blue); }
+
+/* technical drawing */
+.frame { border: 2px solid var(--ugm-band-grey); background: #ffffff; padding: 16px; }
+.drawing { position: relative; width: 760px; height: 560px; }
+.lbl { position: absolute; width: 40px; margin: 0; text-align: center; font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 28px; line-height: 1.2; color: #000000; }
+
+/* claim */
+.claim { border: 2px solid var(--ugm-band-grey); background: var(--ugm-grey-light); padding: 36px 44px; display: flex; flex-direction: column; gap: 22px; }
+.claim-p { font-size: 28px; line-height: 1.5; margin: 0; }
+.struct { display: flex; gap: 16px; align-items: stretch; }
+.blk { flex: 1; padding: 24px 28px; display: flex; flex-direction: column; gap: 8px; }
+.blk-b { background: var(--ugm-blue); }
+.blk-g { background: var(--ugm-grey-light); border: 2px solid var(--ugm-band-grey); }
+.blk-y { background: var(--ugm-yellow); }
+.on-b { margin: 0; color: #ffffff; font-size: 24px; line-height: 1.35; }
+.on-b-h { margin: 0; color: var(--ugm-yellow); font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 28px; line-height: 1.2; }
+.on-y { margin: 0; color: var(--ugm-blue); font-size: 24px; line-height: 1.35; }
+.on-y-h { margin: 0; color: var(--ugm-blue); font-family: 'Gama Sans Bold', Calibri, Arial, sans-serif; font-size: 28px; line-height: 1.2; }
+.join { flex: none; align-self: center; width: 150px; margin: 0; text-align: center; font-family: 'Gama Sans Light Italic', Calibri, Arial, sans-serif; font-size: 24px; line-height: 1.3; color: var(--ugm-grey-dark); }
+
+</style>
+<style>
+.pg::after{content:none}
+/* Latar yang disematkan sebelum isi mengalir dicat di bawah isi, seperti di aplikasi Slides. */
+#stage>section{isolation:isolate}
+.rings,.panel-b,.slab-v,.slab-r,.band{z-index:-1}
+</style>
+</head>
+<body>
+<main id="stage" aria-label="Presentasi">
+<section id="cover" class="blue" data-transition="fade">
+<div class="rings"><svg width="880" height="1080" viewBox="0 0 880 1080"><g fill="none" stroke="#1d4f80" stroke-width="3"><circle cx="720" cy="660" r="150"/><circle cx="720" cy="660" r="240"/><circle cx="720" cy="660" r="330"/><circle cx="720" cy="660" r="420"/><circle cx="720" cy="660" r="510"/><circle cx="720" cy="660" r="600"/><circle cx="720" cy="660" r="690"/></g></svg></div>
+<div class="slab-r"></div>
+<img class="logo-lg" src="assets/ugm-logo-putih.svg" alt="Universitas Gadjah Mada">
+<p class="eyebrow-b">MATERI NARASUMBER | PENYIAPAN PATEN</p>
+<h1 class="display">Menyiapkan Paten: Dari Hasil Riset ke Nomor Permohonan</h1>
+<div class="rule"></div>
+<p class="sub-b">Panduan praktis bagi dosen, peneliti, dan mahasiswa Universitas Gadjah Mada</p>
+<p class="name-b">Dr.rer.nat. Ir. Wiwit Suryanto, M.Si</p>
+<p class="muted-b">Wakil Dekan Bidang Penelitian dan Pengabdian kepada Masyarakat, FMIPA UGM</p>
+<p class="muted-b">21 November 2026</p>
+<p class="tag-b">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p>
+<p class="url-b">ugm.ac.id</p>
+</section>
+<section id="mengapa">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">2</p></div>
+<p class="eyebrow">PENGANTAR</p>
+<h2 class="title">Mengapa Paten Penting bagi Kita?</h2>
+<div class="grid3">
+<div class="card rise" style="--i:1"><svg class="icon" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+</svg><h3 class="h3">Melindungi hasil riset</h3><p class="txt">Paten adalah hak eksklusif dari negara. Selama masa pelindungan, pihak lain tidak boleh membuat, memakai, atau menjual invensi Anda tanpa izin.</p></div>
+<div class="card rise" style="--i:2"><svg class="icon" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg><h3 class="h3">Membuka jalan hilirisasi</h3><p class="txt">Paten bisa dilisensikan ke industri atau mitra. Posisi tawar UGM dan inventor lebih kuat saat bekerja sama.</p></div>
+<div class="card rise" style="--i:3"><svg class="icon" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+  <path d="M22 10v6" />
+  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+</svg><h3 class="h3">Diakui sebagai luaran</h3><p class="txt">Paten sering menjadi luaran wajib hibah penelitian dan bahan laporan monev, sejajar dengan publikasi ilmiah.</p></div>
+</div>
+<p class="quote" style="margin-top:40px">Paten dan publikasi bisa berjalan bersama, asalkan urutannya benar.</p>
+</section>
+<section id="agenda">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">3</p></div>
+<h2 class="title">Yang Akan Kita Bahas</h2>
+<div>
+<div class="agenda-row rise" style="--i:1"><p class="agenda-num">1</p><div class="stack"><h3 class="h3">Memahami paten</h3><p class="small">Definisi, syarat, jenis paten, dan yang tidak bisa dipatenkan</p></div><p class="agenda-time">8 menit</p></div>
+<div class="agenda-row rise" style="--i:2"><p class="agenda-num">2</p><div class="stack"><h3 class="h3">Menjaga kebaruan dan menelusuri paten</h3><p class="small">Aturan publikasi, masa tenggang, dan cara menelusuri</p></div><p class="agenda-time">10 menit</p></div>
+<div class="agenda-row rise" style="--i:3"><p class="agenda-num">3</p><div class="stack"><h3 class="h3">Menyusun draf dan klaim</h3><p class="small">Delapan bagian draf, gambar teknik, dan contoh klaim</p></div><p class="agenda-time">14 menit</p></div>
+<div class="agenda-row rise" style="--i:4"><p class="agenda-num">4</p><div class="stack"><h3 class="h3">Alur dan berkas di UGM</h3><p class="small">Dari Simaster sampai DJKI, lampiran, dan daftar periksa</p></div><p class="agenda-time">8 menit</p></div>
+<div class="agenda-row rise" style="--i:5"><p class="agenda-num">5</p><div class="stack"><h3 class="h3">Setelah pengajuan</h3><p class="small">Yang perlu dipantau, perubahan UU, dan ringkasan</p></div><p class="agenda-time">5 menit</p></div>
+</div>
+</section>
+<section id="definisi">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">4</p></div>
+<p class="eyebrow">BAGIAN 1 | MEMAHAMI PATEN</p>
+<h2 class="title">Paten, Invensi, dan Inventor</h2>
+<div>
+<div class="def-row rise" style="--i:1"><h3 class="h3">Paten</h3><p class="txt">Hak eksklusif yang diberikan negara kepada inventor atas invensinya di bidang teknologi, untuk jangka waktu tertentu.</p></div>
+<div class="def-row rise" style="--i:2"><h3 class="h3">Invensi</h3><p class="txt">Ide inventor yang diwujudkan menjadi pemecahan masalah teknis yang spesifik: produk atau proses, penyempurnaan dan pengembangannya, serta sistem, metode, dan penggunaan.</p></div>
+<div class="def-row rise" style="--i:3"><h3 class="h3">Inventor</h3><p class="txt">Satu orang atau beberapa orang yang bersama-sama mewujudkan ide menjadi invensi.</p></div>
+</div>
+<p class="note-y rise" style="--i:4; margin-top:32px">Kata kuncinya: ada masalah teknis, ada solusi teknis. Ide atau temuan saja belum cukup.</p>
+</section>
+<section id="syarat">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">5</p></div>
+<p class="eyebrow">BAGIAN 1 | MEMAHAMI PATEN</p>
+<h2 class="title">Tiga Syarat Invensi Dapat Dipatenkan</h2>
+<div class="grid3">
+<div class="card rise" style="--i:1"><p class="numsq">1</p><h3 class="h3">Baru</h3><p class="txt">Belum pernah diungkapkan ke publik, di mana pun dan dalam bentuk apa pun, sebelum tanggal penerimaan.</p><p class="small">Uji: adakah dokumen yang sudah memuat hal yang sama?</p></div>
+<div class="card rise" style="--i:2"><p class="numsq">2</p><h3 class="h3">Mengandung langkah inventif</h3><p class="txt">Tidak dapat diduga sebelumnya oleh orang yang ahli di bidang teknik tersebut.</p><p class="small">Uji: apakah ahli di bidang ini akan menganggapnya “sudah jelas”?</p></div>
+<div class="card rise" style="--i:3"><p class="numsq">3</p><h3 class="h3">Dapat diterapkan dalam industri</h3><p class="txt">Dapat dibuat atau dipakai secara berulang dengan hasil yang sama.</p><p class="small">Uji: bisakah diproduksi atau dijalankan, bukan sekadar teori?</p></div>
+</div>
+</section>
+<section id="langkah-inventif">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">6</p></div>
+<p class="eyebrow">BAGIAN 1 | MEMAHAMI PATEN</p>
+<h2 class="title">Menunjukkan Langkah Inventif</h2>
+<p class="quote" style="margin-bottom:28px">Kuncinya: efek teknis yang tidak terduga oleh orang yang ahli di bidangnya.</p>
+<div class="grid2">
+<div class="card-tight rise" style="--i:1"><h3 class="h3">Efektivitas</h3><p class="txt">Hasilnya lebih baik dari teknologi sebelumnya.</p><ul class="lst"><li>Kinerja lebih tinggi</li><li>Bahan lebih murni</li><li>Khasiat obat lebih kuat</li></ul></div>
+<div class="card-tight rise" style="--i:2"><h3 class="h3">Efisiensi</h3><p class="txt">Cara mencapainya lebih hemat atau sederhana.</p><ul class="lst"><li>Tahapan proses lebih sedikit</li><li>Biaya lebih murah</li><li>Bahan pengganti lokal yang lebih melimpah</li><li>Lebih mudah dioperasikan</li></ul></div>
+</div>
+<p class="note rise" style="--i:3; margin-top:28px">Contoh dari LPIK ITB: proteksi petir saluran transmisi dan katalis BBM lokal pengganti impor. Keduanya bernilai karena efisiensinya terbukti di industri.</p>
+</section>
+<section id="jenis">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">7</p></div>
+<p class="eyebrow">BAGIAN 1 | MEMAHAMI PATEN</p>
+<h2 class="title">Paten atau Paten Sederhana?</h2>
+<table class="tbl">
+<tr class="thead"><th class="th" style="width:26%">Aspek</th><th class="th" style="width:37%">Paten</th><th class="th" style="width:37%">Paten sederhana</th></tr>
+<tr><td class="td">Cocok untuk</td><td class="td">Invensi baru yang mengandung langkah inventif</td><td class="td">Pengembangan produk atau proses yang sudah ada, dengan kegunaan praktis</td></tr>
+<tr><td class="td">Masa pelindungan</td><td class="td">20 tahun sejak tanggal penerimaan, tidak dapat diperpanjang</td><td class="td">10 tahun sejak tanggal penerimaan, tidak dapat diperpanjang</td></tr>
+<tr><td class="td">Pemeriksaan substantif</td><td class="td">Diminta terpisah, paling lambat 36 bulan sejak tanggal penerimaan</td><td class="td">Diajukan bersamaan dengan permohonan</td></tr>
+<tr><td class="td">Lama proses</td><td class="td">Lebih panjang</td><td class="td">Lebih singkat; masa pengumuman 14 hari</td></tr>
+<tr><td class="td">Kode nomor permohonan</td><td class="td">P00202XXXX</td><td class="td">S00202XXXX</td></tr>
+</table>
+<p class="small" style="margin-top:24px">Ragu memilih jenisnya? Diskusikan dengan Tim IPMO UGM sebelum mengunggah berkas.</p>
+</section>
+<section id="batasan">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">8</p></div>
+<p class="eyebrow">BAGIAN 1 | MEMAHAMI PATEN</p>
+<h2 class="title">Yang Tidak Bisa Dipatenkan</h2>
+<div class="grid2">
+<div class="card-tight rise" style="--i:1"><h3 class="h3">Tidak dianggap invensi</h3><ul class="lst"><li>Kreasi estetika</li><li>Skema</li><li>Aturan dan metode untuk kegiatan mental, permainan, atau bisnis</li><li>Presentasi informasi</li><li>Program komputer murni, kecuali yang memiliki efek dan karakter teknis</li><li>Penggunaan baru produk yang sudah ada, atau bentuk baru senyawa tanpa peningkatan khasiat bermakna</li></ul></div>
+<div class="card-tight rise" style="--i:2"><h3 class="h3">Invensi yang tidak dapat diberi paten</h3><ul class="lst"><li>Yang bertentangan dengan peraturan, agama, ketertiban umum, atau kesusilaan</li><li>Metode pemeriksaan, perawatan, pengobatan, atau pembedahan pada manusia dan hewan</li><li>Teori dan metode di bidang ilmu pengetahuan dan matematika</li><li>Makhluk hidup, kecuali jasad renik</li><li>Proses biologis yang esensial untuk menghasilkan tanaman atau hewan</li></ul></div>
+</div>
+<p class="note-y rise" style="--i:3; margin-top:28px">Alat kesehatan dan obat tetap bisa dipatenkan; yang dikecualikan adalah metode pengobatannya.</p>
+</section>
+<section id="contoh-software">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">9</p></div>
+<p class="eyebrow">BAGIAN 1 | MEMAHAMI PATEN</p>
+<h2 class="title">Contoh Paten Software yang Granted</h2>
+<div class="grid2">
+<div class="card-tight rise" style="--i:1"><h3 class="h3">Indonesia</h3>
+<div class="stack" style="gap:18px; margin-top:8px">
+<div class="stack"><p class="on-y-h">Penerjemah SIBI ke teks di telepon pintar</p><p class="small">IDP000078068 | Universitas Indonesia</p></div>
+<div class="stack"><p class="on-y-h">Pengendali drone berbasis jaringan saraf tiruan</p><p class="small">IDP000075867 | Universitas Indonesia</p></div>
+<div class="stack"><p class="on-y-h">Kontrol akses kanal dinamis jaringan VANET</p><p class="small">IDP000088549 | Universitas Indonesia</p></div>
+<div class="stack"><p class="on-y-h">Pra-pemrosesan rekam medis untuk prediksi VBAC</p><p class="small">S00202416058 (paten sederhana) | Universitas Gunadarma</p></div>
+</div></div>
+<div class="card-tight rise" style="--i:2"><h3 class="h3">Luar negeri</h3>
+<div class="stack" style="gap:18px; margin-top:8px">
+<div class="stack"><p class="on-y-h">PageRank: pemeringkatan halaman web</p><p class="small">US 6,285,999 | Stanford University, 2001 | dilisensikan secara eksklusif ke Google</p></div>
+<div class="stack"><p class="on-y-h">RSA: sistem komunikasi kriptografi</p><p class="small">US 4,405,829 | MIT, 1983 | tidak terlindungi di luar AS karena sudah dipublikasikan lebih dulu</p></div>
+<div class="stack"><p class="on-y-h">Amazon 1-Click: pemesanan sekali klik</p><p class="small">US 5,960,411 | Amazon, 1999 | contoh pembanding: dekat ke fungsi bisnis</p></div>
+</div></div>
+</div>
+<p class="note-y rise" style="--i:3; margin-top:28px">Polanya: ditulis sebagai metode atau sistem yang memecahkan masalah teknis, bukan sekadar “aplikasi X”.</p>
+</section>
+<section id="halaman-depan">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">10</p></div>
+<p class="eyebrow">BAGIAN 1 | CONTOH NYATA</p>
+<h2 class="title">Membaca Halaman Depan Paten</h2>
+<div style="display:grid; grid-template-columns:464px 410px 1fr; gap:32px; align-items:start">
+<div class="stack rise" style="--i:1; gap:12px"><img src="assets/paten-us9335430.png" alt="Halaman depan paten AS US 9,335,430 B2, Wave Field Separation by Mixed Domain Inversion, milik PGS Geophysical AS" style="width:464px; height:520px; object-fit:contain; background:#ffffff; border:2px solid #d9d9d9"><p class="small">US 9,335,430 B2 | PGS Geophysical, 2016 | pengolahan data seismik</p></div>
+<div class="stack rise" style="--i:2; gap:12px"><img src="assets/paten-us5960411.png" alt="Halaman depan paten AS US 5,960,411, Method and System for Placing a Purchase Order via a Communications Network, milik Amazon.com" style="width:410px; height:520px; object-fit:contain; background:#ffffff; border:2px solid #d9d9d9"><p class="small">US 5,960,411 | Amazon, 1999 | pemesanan sekali klik</p></div>
+<div class="stack rise" style="--i:3; gap:14px">
+<h3 class="h3" style="margin-bottom:4px">Yang perlu dibaca</h3>
+<div class="item" style="gap:20px"><p style="flex:none; width:92px; margin:0; padding:6px 0; text-align:center; background:#fdd402; color:#01416b; font-family:'Gama Sans Bold', Calibri, Arial, sans-serif; font-size:24px; line-height:1.2">(54)</p><p class="txt">Judul invensi</p></div>
+<div class="item" style="gap:20px"><p style="flex:none; width:92px; margin:0; padding:6px 0; text-align:center; background:#fdd402; color:#01416b; font-family:'Gama Sans Bold', Calibri, Arial, sans-serif; font-size:24px; line-height:1.2">(75)</p><p class="txt">Inventor; (73) pemegang paten</p></div>
+<div class="item" style="gap:20px"><p style="flex:none; width:92px; margin:0; padding:6px 0; text-align:center; background:#fdd402; color:#01416b; font-family:'Gama Sans Bold', Calibri, Arial, sans-serif; font-size:24px; line-height:1.2">(22)</p><p class="txt">Tanggal pengajuan; (45) tanggal paten diberikan</p></div>
+<div class="item" style="gap:20px"><p style="flex:none; width:92px; margin:0; padding:6px 0; text-align:center; background:#fdd402; color:#01416b; font-family:'Gama Sans Bold', Calibri, Arial, sans-serif; font-size:24px; line-height:1.2">(51)</p><p class="txt">Klasifikasi IPC: G01V untuk geofisika, G06F untuk pengolahan data</p></div>
+<div class="item" style="gap:20px"><p style="flex:none; width:92px; margin:0; padding:6px 0; text-align:center; background:#fdd402; color:#01416b; font-family:'Gama Sans Bold', Calibri, Arial, sans-serif; font-size:24px; line-height:1.2">(57)</p><p class="txt">Abstrak, lalu jumlah klaim dan lembar gambar</p></div>
+<p class="note" style="margin-top:10px">Contoh dari geofisika: PGS mengklaim metode, perangkat, dan media terbaca komputer untuk mengolah data seismik.</p>
+</div>
+</div>
+</section>
+<section id="div-kebaruan" class="blue" data-transition="fade">
+<div class="rings"><svg width="880" height="1080" viewBox="0 0 880 1080"><g fill="none" stroke="#1d4f80" stroke-width="3"><circle cx="720" cy="660" r="150"/><circle cx="720" cy="660" r="240"/><circle cx="720" cy="660" r="330"/><circle cx="720" cy="660" r="420"/><circle cx="720" cy="660" r="510"/><circle cx="720" cy="660" r="600"/><circle cx="720" cy="660" r="690"/></g></svg></div>
+<div class="band"></div>
+<img class="logo-lg" src="assets/ugm-logo-putih.svg" alt="Universitas Gadjah Mada">
+<p class="eyebrow-b">BAGIAN 2</p>
+<h2 class="display">Jaga Kebaruan, Telusuri Dulu</h2>
+<p class="sub-b" style="margin-top:40px">Kebaruan adalah syarat pertama dan yang paling mudah hilang. Penelusuran membantu kita tahu posisi invensi sebelum mulai menulis.</p>
+<p class="tag-b">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p>
+<p class="url-b">ugm.ac.id</p>
+</section>
+<section id="aturan-emas" class="split">
+<div class="panel-b"></div>
+<div class="slab-v"></div>
+<img src="assets/ugm-logo-putih.svg" alt="Universitas Gadjah Mada" style="position:absolute; left:128px; top:880px; width:268px; height:77px; object-fit:contain">
+<div class="split-grid" style="height:824px; align-items:center">
+<div>
+<p class="eyebrow-b">ATURAN EMAS</p>
+<h2 class="big-w">Jangan publikasikan invensi sebelum mendapat nomor permohonan.</h2>
+<p class="muted-b">Begitu invensi terbuka untuk publik, kebaruannya hilang dan tidak bisa dikembalikan.</p>
+</div>
+<div class="stack" style="gap:24px">
+<h3 class="h3">Berlaku untuk publikasi dalam bentuk apa pun:</h3>
+<div class="chips"><p class="chip">Jurnal</p><p class="chip">Prosiding</p><p class="chip">Buku</p><p class="chip">Media sosial</p><p class="chip">Pamflet dan leaflet</p><p class="chip">Presentasi dan poster</p></div>
+<p class="txt">Naskah skripsi, tesis, atau disertasi yang terbuka di repositori juga termasuk.</p>
+<p class="note-y">Kabar baiknya: setelah nomor permohonan keluar, invensi boleh dipublikasikan dan dikomersialkan tanpa menunggu paten diberikan.</p>
+</div>
+</div>
+</section>
+<section id="masa-tenggang">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">13</p></div>
+<p class="eyebrow">BAGIAN 2 | KEBARUAN</p>
+<h2 class="title">Masa Tenggang: Jaring Pengaman</h2>
+<div class="grid2">
+<div class="card-tight rise" style="--i:1"><h3 class="h3">Yang diatur UU 65/2024</h3><ul class="lst"><li>Masa tenggang diperpanjang dari 6 menjadi 12 bulan sebelum tanggal penerimaan.</li><li>Berlaku untuk pengungkapan di pameran resmi (dalam atau luar negeri), uji coba atau pengembangan, dan forum ilmiah.</li><li>Pengungkapan oleh pihak lain yang melanggar kewajiban menjaga kerahasiaan juga tidak dihitung.</li></ul></div>
+<div class="card-tight rise" style="--i:2"><h3 class="h3">Mengapa jangan diandalkan</h3><ul class="lst"><li>Ini aturan Indonesia. Banyak negara, misalnya di Eropa, tidak mengenal masa tenggang yang serupa.</li><li>Publikasi lebih dulu bisa menutup peluang paten di luar negeri.</li><li>Kebijakan IPMO UGM tetap: jangan publikasi sebelum nomor permohonan keluar.</li></ul></div>
+</div>
+<div class="struct rise" style="--i:3; margin-top:32px">
+<div class="blk blk-y"><p class="on-y-h">1. Daftarkan dulu</p></div>
+<p class="join">lalu</p>
+<div class="blk blk-b"><p class="on-b-h">2. Dapat nomor permohonan</p></div>
+<p class="join">baru</p>
+<div class="blk blk-g"><p class="on-y-h">3. Publikasikan</p></div>
+</div>
+</section>
+<section id="penelusuran">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">14</p></div>
+<p class="eyebrow">BAGIAN 2 | PENELUSURAN</p>
+<h2 class="title">Telusuri Dulu Sebelum Menulis</h2>
+<div style="display:grid; grid-template-columns:840px 1fr; gap:64px">
+<div class="grid2" style="gap:20px">
+<div class="card-tight rise" style="--i:1"><h3 class="h3">PDKI</h3><p class="small">pdki-indonesia.dgip.go.id</p><p class="txt">Paten yang diajukan di Indonesia</p></div>
+<div class="card-tight rise" style="--i:2"><h3 class="h3">Espacenet</h3><p class="small">worldwide.espacenet.com</p><p class="txt">Dokumen paten dari banyak negara</p></div>
+<div class="card-tight rise" style="--i:3"><h3 class="h3">Google Patents</h3><p class="small">patents.google.com</p><p class="txt">Pencarian cepat, ada terjemahan otomatis</p></div>
+<div class="card-tight rise" style="--i:4"><h3 class="h3">WIPO PATENTSCOPE</h3><p class="small">patentscope.wipo.int</p><p class="txt">Termasuk permohonan internasional (PCT)</p></div>
+</div>
+<div class="stack rise" style="--i:5; gap:18px">
+<h3 class="h3">Lima langkah praktis</h3>
+<ol class="lst"><li>Tulis inti invensi dalam satu atau dua kalimat.</li><li>Susun kata kunci dan sinonimnya, dalam bahasa Indonesia dan Inggris.</li><li>Persempit hasil dengan kode klasifikasi (IPC) dari dokumen yang mirip.</li><li>Baca klaim, gambar, dan abstrak dokumen yang paling dekat.</li><li>Simpan 3–5 dokumen terdekat untuk tabel pembeda.</li></ol>
+</div>
+</div>
+<p class="note-y rise" style="--i:6; margin-top:28px">Telusuri dua kali: sebelum riset dimulai dan sebelum mendaftar.</p>
+</section>
+<section id="tabel-pembeda">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">15</p></div>
+<p class="eyebrow">BAGIAN 2 | CONTOH ILUSTRATIF</p>
+<h2 class="title">Catat Pembedanya dalam Satu Tabel</h2>
+<p class="txt" style="margin-bottom:28px">Contoh: alat pengering gabah tenaga surya, dibandingkan dengan dua dokumen paten hasil penelusuran (D1 dan D2).</p>
+<table class="tbl">
+<tr class="thead"><th class="th" style="width:46%">Fitur teknis</th><th class="th" style="width:18%">Invensi kita</th><th class="th" style="width:18%">Dokumen D1</th><th class="th" style="width:18%">Dokumen D2</th></tr>
+<tr><td class="td">Ruang pengering dengan rak</td><td class="td">Ada</td><td class="td">Ada</td><td class="td">Ada</td></tr>
+<tr><td class="td">Kolektor surya sebagai sumber panas</td><td class="td">Ada</td><td class="td">Ada</td><td class="td">Tidak ada</td></tr>
+<tr><td class="td">Kipas untuk sirkulasi udara</td><td class="td">Ada</td><td class="td">Tidak ada</td><td class="td">Ada</td></tr>
+<tr class="hl"><td class="td">Sensor kelembapan yang mengatur kipas (pembeda)</td><td class="td">Ada</td><td class="td">Tidak ada</td><td class="td">Tidak ada</td></tr>
+</table>
+<p class="note rise" style="--i:1; margin-top:32px">Fitur yang tidak dimiliki dokumen mana pun adalah calon fitur pembeda. Fitur inilah yang menjadi inti klaim.</p>
+</section>
+<section id="div-draf" class="blue" data-transition="fade">
+<div class="rings"><svg width="880" height="1080" viewBox="0 0 880 1080"><g fill="none" stroke="#1d4f80" stroke-width="3"><circle cx="720" cy="660" r="150"/><circle cx="720" cy="660" r="240"/><circle cx="720" cy="660" r="330"/><circle cx="720" cy="660" r="420"/><circle cx="720" cy="660" r="510"/><circle cx="720" cy="660" r="600"/><circle cx="720" cy="660" r="690"/></g></svg></div>
+<div class="band"></div>
+<img class="logo-lg" src="assets/ugm-logo-putih.svg" alt="Universitas Gadjah Mada">
+<p class="eyebrow-b">BAGIAN 3</p>
+<h2 class="display">Menyusun Draf Paten</h2>
+<p class="sub-b" style="margin-top:40px">Delapan bagian, satu benang merah: judul, deskripsi, gambar, dan klaim harus saling cocok.</p>
+<p class="tag-b">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p>
+<p class="url-b">ugm.ac.id</p>
+</section>
+<section id="anatomi">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">17</p></div>
+<p class="eyebrow">BAGIAN 3 | DRAF PATEN</p>
+<h2 class="title">Delapan Bagian Draf Paten</h2>
+<div class="grid2" style="gap:64px">
+<div class="stack" style="gap:28px">
+<div class="item rise" style="--i:1"><p class="numsq">1</p><div class="stack"><h3 class="h3">Bidang teknik invensi</h3><p class="small">Bidang teknologi tempat invensi berada</p></div></div>
+<div class="item rise" style="--i:2"><p class="numsq">2</p><div class="stack"><h3 class="h3">Latar belakang invensi</h3><p class="small">Masalah teknis dan kekurangan teknologi sebelumnya</p></div></div>
+<div class="item rise" style="--i:3"><p class="numsq">3</p><div class="stack"><h3 class="h3">Uraian singkat invensi</h3><p class="small">Tujuan dan inti solusi</p></div></div>
+<div class="item rise" style="--i:4"><p class="numsq">4</p><div class="stack"><h3 class="h3">Uraian singkat gambar</h3><p class="small">Keterangan tiap gambar; <b>wajib untuk invensi berupa alat</b></p></div></div>
+</div>
+<div class="stack" style="gap:28px">
+<div class="item rise" style="--i:5"><p class="numsq">5</p><div class="stack"><h3 class="h3">Uraian lengkap invensi</h3><p class="small">Cara membuat dan menjalankan, lengkap dengan contoh</p></div></div>
+<div class="item rise" style="--i:6"><p class="numsq">6</p><div class="stack"><h3 class="h3">Klaim</h3><p class="small">Batas perlindungan yang dimintakan</p></div></div>
+<div class="item rise" style="--i:7"><p class="numsq">7</p><div class="stack"><h3 class="h3">Abstrak</h3><p class="small">Ringkasan invensi, <b>maksimal 200 kata</b></p></div></div>
+<div class="item rise" style="--i:8"><p class="numsq">8</p><div class="stack"><h3 class="h3">Gambar</h3><p class="small">Gambar teknik; <b>wajib untuk invensi berupa alat</b></p></div></div>
+</div>
+</div>
+<p class="note" style="margin-top:44px">Gunakan Template Deskripsi Paten dan Template Gambar Paten dari IPMO UGM agar formatnya langsung sesuai.</p>
+</section>
+<section id="urutan-menulis">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">18</p></div>
+<p class="eyebrow">BAGIAN 3 | DRAF PATEN</p>
+<h2 class="title">Urutan Menulis: Mulai dari Klaim</h2>
+<div style="display:grid; grid-template-columns:repeat(7, 1fr); gap:16px; margin-bottom:32px">
+<div class="card-tight rise" style="--i:1; padding:20px"><p class="numsq">1</p><p class="on-y-h">Penelusuran pembanding</p></div>
+<div class="card-tight rise" style="--i:2; padding:20px"><p class="numsq">2</p><p class="on-y-h">Tabel pembeda</p></div>
+<div class="blk blk-y rise" style="--i:3; padding:20px; gap:10px"><p class="numsq">3</p><p class="on-y-h">Klaim</p><p class="on-y">Inti dokumen</p></div>
+<div class="card-tight rise" style="--i:4; padding:20px"><p class="numsq">4</p><p class="on-y-h">Uraian lengkap</p></div>
+<div class="card-tight rise" style="--i:5; padding:20px"><p class="numsq">5</p><p class="on-y-h">Ringkasan dan latar belakang</p></div>
+<div class="card-tight rise" style="--i:6; padding:20px"><p class="numsq">6</p><p class="on-y-h">Uraian gambar</p></div>
+<div class="card-tight rise" style="--i:7; padding:20px"><p class="numsq">7</p><p class="on-y-h">Judul dan abstrak</p></div>
+</div>
+<div class="grid2">
+<div class="card-tight rise" style="--i:8"><h3 class="h3">Mengapa klaim dulu?</h3><p class="txt">Klaim menentukan batas perlindungan. Bagian lain ditulis untuk mendukungnya: ringkasan mencerminkan klaim utama, uraian lengkap menjadi cadangan data bila klaim harus diubah.</p></div>
+<div class="card-tight rise" style="--i:9"><h3 class="h3">Aturan judul</h3><ul class="lst"><li>Singkat dan menggambarkan bidang teknik</li><li>Tanpa merek dagang: “Pompa Air”, bukan “Pompa Air Merek X”</li><li>Tanpa kata promosi seperti “terbaik” atau “terhebat”</li></ul></div>
+</div>
+</section>
+<section id="deskripsi">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">19</p></div>
+<p class="eyebrow">BAGIAN 3 | DRAF PATEN</p>
+<h2 class="title">Menulis Deskripsi: Isi dan Kiatnya</h2>
+<table class="tbl">
+<tr class="thead"><th class="th" style="width:24%">Bagian</th><th class="th" style="width:76%">Yang ditulis</th></tr>
+<tr><td class="td">Bidang teknik</td><td class="td">Satu kalimat, misalnya: “Invensi ini berhubungan dengan alat pengering, lebih khusus lagi alat pengering gabah tenaga surya.”</td></tr>
+<tr><td class="td">Latar belakang</td><td class="td">Masalah teknis yang ada, dokumen terdekat hasil penelusuran, dan kekurangannya.</td></tr>
+<tr><td class="td">Uraian singkat</td><td class="td">Tujuan invensi dan inti solusinya, sejalan dengan klaim pertama.</td></tr>
+<tr><td class="td">Uraian lengkap</td><td class="td">Cukup rinci agar orang yang ahli bisa membuat dan menjalankannya: bahan, ukuran, langkah, contoh, data uji, dan nomor bagian pada gambar.</td></tr>
+<tr><td class="td">Abstrak</td><td class="td">Ringkasan inti invensi, maksimal 200 kata.</td></tr>
+</table>
+<div class="grid3 rise" style="--i:1; gap:20px; margin-top:28px">
+<p class="chip">Satu bagian, satu istilah yang konsisten</p>
+<p class="chip">Nama generik, bukan merek dagang</p>
+<p class="chip">Lengkap sejak awal: isi baru tidak bisa ditambahkan</p>
+</div>
+</section>
+<section id="gambar">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">20</p></div>
+<p class="eyebrow">BAGIAN 3 | CONTOH ILUSTRATIF</p>
+<h2 class="title">Gambar Teknik yang Diterima</h2>
+<div style="display:grid; grid-template-columns:788px 1fr; gap:64px; align-items:start">
+<div class="frame" style="padding:12px">
+<div class="drawing">
+<svg width="760" height="560" viewBox="0 0 760 560" aria-label="Contoh gambar teknik alat pengering gabah tenaga surya dengan nomor bagian 1 sampai 6"><g fill="none" stroke="#000000" stroke-width="4" stroke-linejoin="round"><rect x="200" y="220" width="320" height="260"/><polygon points="200,220 520,220 560,120 240,120"/><line x1="215" y1="480" x2="215" y2="520"/><line x1="505" y1="480" x2="505" y2="520"/><line x1="180" y1="520" x2="540" y2="520"/></g><g fill="none" stroke="#000000" stroke-width="2"><line x1="300" y1="120" x2="260" y2="220"/><line x1="370" y1="120" x2="330" y2="220"/><line x1="440" y1="120" x2="400" y2="220"/><line x1="510" y1="120" x2="470" y2="220"/></g><g fill="none" stroke="#000000" stroke-width="3"><line x1="270" y1="300" x2="500" y2="300"/><line x1="270" y1="370" x2="500" y2="370"/><line x1="270" y1="440" x2="500" y2="440"/><rect x="210" y="236" width="40" height="34"/><rect x="160" y="250" width="40" height="60"/><circle cx="120" cy="280" r="40"/><line x1="120" y1="244" x2="120" y2="316"/><line x1="84" y1="280" x2="156" y2="280"/><circle cx="120" cy="280" r="8"/><rect x="65" y="380" width="110" height="70"/></g><g fill="none" stroke="#000000" stroke-width="2" stroke-dasharray="10 8"><polyline points="230,270 230,415 175,415"/><line x1="120" y1="380" x2="120" y2="320"/></g><g fill="none" stroke="#000000" stroke-width="2"><line x1="500" y1="465" x2="620" y2="500"/><line x1="490" y1="370" x2="620" y2="350"/><line x1="530" y1="170" x2="620" y2="170"/><line x1="250" y1="250" x2="620" y2="250"/><line x1="98" y1="252" x2="60" y2="200"/><line x1="80" y1="450" x2="50" y2="500"/></g></svg>
+<p class="lbl" style="left:624px; top:484px">1</p>
+<p class="lbl" style="left:624px; top:334px">2</p>
+<p class="lbl" style="left:624px; top:154px">3</p>
+<p class="lbl" style="left:30px; top:160px">4</p>
+<p class="lbl" style="left:624px; top:234px">5</p>
+<p class="lbl" style="left:28px; top:502px">6</p>
+</div>
+</div>
+<div class="stack" style="gap:28px">
+<p class="small">1 ruang pengering, 2 rak, 3 kolektor surya, 4 kipas, 5 sensor kelembapan, 6 pengendali</p>
+<div class="stack rise" style="--i:1; gap:14px"><h3 class="h3">Lakukan</h3>
+<div class="item"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg><p class="txt">Gambar teknik dengan garis hitam</p></div>
+<div class="item"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg><p class="txt">Nomor bagian sama dengan uraian lengkap</p></div>
+<div class="item"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg><p class="txt">Tambah tampak depan, samping, atau potongan bila perlu</p></div>
+</div>
+<div class="stack rise" style="--i:2; gap:14px"><h3 class="h3">Hindari</h3>
+<div class="item"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" />
+</svg><p class="txt">Foto</p></div>
+<div class="item"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" />
+</svg><p class="txt">Warna</p></div>
+<div class="item"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" />
+</svg><p class="txt">Nomor baris dan nomor halaman</p></div>
+</div>
+</div>
+</div>
+</section>
+<section id="klaim-dasar">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">21</p></div>
+<p class="eyebrow">BAGIAN 3 | KLAIM</p>
+<h2 class="title">Klaim: Batas Wilayah Perlindungan</h2>
+<div style="display:grid; grid-template-columns:640px 1fr; gap:48px">
+<div class="card rise" style="--i:1; justify-content:center"><p class="quote">Bayangkan sertifikat tanah. Deskripsi menceritakan isi rumahnya; klaim menentukan batas tanahnya.</p><p class="small">Yang dilindungi hanya yang tertulis di klaim.</p></div>
+<div class="grid2" style="gap:24px">
+<div class="card-tight rise" style="--i:2"><h3 class="h3">Klaim mandiri</h3><p class="txt">Berdiri sendiri dan memuat semua fitur esensial. Ini klaim paling luas, biasanya klaim 1.</p></div>
+<div class="card-tight rise" style="--i:3"><h3 class="h3">Klaim turunan</h3><p class="txt">Merujuk klaim lain dan menambah fitur. Menjadi cadangan jika klaim mandiri harus dipersempit.</p></div>
+</div>
+</div>
+<h3 class="h3" style="margin:36px 0 16px">Pola kalimat klaim mandiri</h3>
+<div class="struct rise" style="--i:4">
+<div class="blk blk-b"><p class="on-b-h">Pembuka</p><p class="on-b">Kategori dan nama invensi: “Suatu alat …”</p></div>
+<p class="join">yang terdiri dari</p>
+<div class="blk blk-g"><p class="on-y-h">Fitur yang sudah dikenal</p><p class="on-y" style="color:#000000">Komponen yang juga ada di teknologi sebelumnya</p></div>
+<p class="join">yang dicirikan dengan</p>
+<div class="blk blk-y"><p class="on-y-h">Fitur pembeda</p><p class="on-y">Hal baru yang ditemukan lewat tabel pembeda</p></div>
+</div>
+</section>
+<section id="contoh-klaim">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">22</p></div>
+<p class="eyebrow">BAGIAN 3 | CONTOH ILUSTRATIF</p>
+<h2 class="title">Contoh Klaim untuk Invensi Kita</h2>
+<div style="display:grid; grid-template-columns:1fr 420px; gap:48px; align-items:start">
+<div class="claim rise" style="--i:1">
+<p class="claim-p"><span style="color:#01416b"><b>1. Suatu alat pengering gabah tenaga surya,</b></span> yang terdiri dari: ruang pengering (1) yang dilengkapi rak (2); kolektor surya (3) yang terhubung ke ruang pengering (1); dan kipas (4) untuk mengalirkan udara panas; <b><u>yang dicirikan dengan sensor kelembapan (5) yang terhubung ke pengendali (6) untuk mengatur kecepatan kipas (4) berdasarkan kelembapan udara di dalam ruang pengering (1).</u></b></p>
+<p class="claim-p"><span style="color:#01416b"><b>2. Alat pengering gabah tenaga surya sesuai dengan klaim 1,</b></span> di mana pengendali (6) menghentikan kipas (4) apabila kelembapan mencapai nilai yang ditetapkan.</p>
+</div>
+<div class="stack" style="gap:20px">
+<div class="card-tight rise" style="--i:2"><h3 class="h3">Pembuka</h3><p class="small">Tebal biru. Menyebut kategori dan nama invensi.</p></div>
+<div class="card-tight rise" style="--i:3"><h3 class="h3">Fitur yang sudah dikenal</h3><p class="small">Teks biasa. Komponen yang juga ada di D1 atau D2.</p></div>
+<div class="card-tight rise" style="--i:4"><h3 class="h3">Fitur pembeda</h3><p class="small">Tebal bergaris bawah. Diambil dari tabel pembeda.</p></div>
+</div>
+</div>
+</section>
+<section id="kesalahan-klaim">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">23</p></div>
+<p class="eyebrow">BAGIAN 3 | KLAIM</p>
+<h2 class="title">Kesalahan yang Sering Terjadi</h2>
+<div class="grid2" style="gap:24px 32px">
+<div class="card-tight rise" style="--i:1"><h3 class="h3">Terlalu sempit</h3><p class="txt">Menyebut angka, merek, atau bahan yang tidak esensial. Pesaing mudah menghindar.</p><p class="small">Contoh: “kipas 12 volt merek X” cukup ditulis “kipas”.</p></div>
+<div class="card-tight rise" style="--i:2"><h3 class="h3">Terlalu luas</h3><p class="txt">Mencakup teknologi yang sudah ada, sehingga ditolak karena tidak baru.</p><p class="small">Contoh: hanya “alat pengering gabah” tanpa fitur pembeda.</p></div>
+<div class="card-tight rise" style="--i:3"><h3 class="h3">Tidak didukung deskripsi</h3><p class="txt">Istilah di klaim tidak dijelaskan di uraian lengkap.</p><p class="small">Contoh: klaim menyebut “pengendali”, tetapi uraian tidak menjelaskannya.</p></div>
+<div class="card-tight rise" style="--i:4"><h3 class="h3">Menyebut manfaat, bukan fitur</h3><p class="txt">Menulis hasil yang diinginkan, bukan cara teknis mencapainya.</p><p class="small">Contoh: “alat yang lebih hemat energi”; sebaiknya sebutkan fitur yang membuatnya hemat.</p></div>
+</div>
+</section>
+<section id="kesatuan-invensi">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">24</p></div>
+<p class="eyebrow">BAGIAN 3 | KLAIM</p>
+<h2 class="title">Satu Permohonan, Satu Invensi</h2>
+<p class="txt" style="margin-bottom:28px">Satu permohonan hanya untuk satu invensi, atau beberapa invensi yang merupakan satu kesatuan.</p>
+<div class="grid2">
+<div class="card-tight rise" style="--i:1"><div class="item" style="align-items:center; gap:16px"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" />
+</svg><h3 class="h3">Boleh disatukan</h3></div><p class="txt">Klaim produk “Bahan A” dan klaim proses “Pembuatan Bahan A”.</p><p class="small">Keduanya memecahkan masalah teknis yang sama.</p></div>
+<div class="card-tight rise" style="--i:2"><div class="item" style="align-items:center; gap:16px"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" />
+</svg><h3 class="h3">Ajukan terpisah</h3></div><p class="txt">Klaim proses “Pembuatan Bahan A” dan klaim “Penggunaan Bahan A untuk penjernihan air”.</p><p class="small">Masalah teknisnya berbeda.</p></div>
+</div>
+<p class="note-y rise" style="--i:3; margin-top:28px">Contoh kita: alat pengering gabah dan cara mengoperasikannya boleh dalam satu permohonan. Aplikasi pemasaran gabah sebaiknya dinilai terpisah.</p>
+</section>
+<section id="div-alur" class="blue" data-transition="fade">
+<div class="rings"><svg width="880" height="1080" viewBox="0 0 880 1080"><g fill="none" stroke="#1d4f80" stroke-width="3"><circle cx="720" cy="660" r="150"/><circle cx="720" cy="660" r="240"/><circle cx="720" cy="660" r="330"/><circle cx="720" cy="660" r="420"/><circle cx="720" cy="660" r="510"/><circle cx="720" cy="660" r="600"/><circle cx="720" cy="660" r="690"/></g></svg></div>
+<div class="band"></div>
+<img class="logo-lg" src="assets/ugm-logo-putih.svg" alt="Universitas Gadjah Mada">
+<p class="eyebrow-b">BAGIAN 4</p>
+<h2 class="display">Dari Draf ke DJKI</h2>
+<p class="sub-b" style="margin-top:40px">Inventor menyiapkan isi dan berkas; Tim IPMO UGM mengurus pengajuan ke DJKI.</p>
+<p class="tag-b">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p>
+<p class="url-b">ugm.ac.id</p>
+</section>
+<section id="alur">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">26</p></div>
+<p class="eyebrow">BAGIAN 4 | ALUR DI UGM</p>
+<h2 class="title">Alur Permohonan Paten di UGM</h2>
+<div class="steps" style="margin-bottom:24px">
+<div class="step rise" style="--i:1"><div class="bar-y"></div><div class="step-in"><p class="who">INVENTOR</p><h3 class="h3">1. Penelusuran paten</h3><p class="small">Cek kebaruan di empat basis data paten.</p></div></div>
+<div class="step rise" style="--i:2"><div class="bar-y"></div><div class="step-in"><p class="who">INVENTOR</p><h3 class="h3">2. Pengajuan ke IPMO</h3><p class="small">Unggah draf dan berkas lewat Simaster.</p></div></div>
+<div class="step rise" style="--i:3"><div class="bar-b"></div><div class="step-in"><p class="who">IPMO UGM</p><h3 class="h3">3. Pemeriksaan administratif</h3><p class="small">Tim IPMO memeriksa dan meminta perbaikan.</p></div></div>
+<div class="step rise" style="--i:4"><div class="bar-b"></div><div class="step-in"><p class="who">IPMO UGM</p><h3 class="h3">4. Pengajuan ke DJKI</h3><p class="small">Oleh Tim IPMO; nomor permohonan terbit.</p></div></div>
+</div>
+<div class="steps">
+<div class="step rise" style="--i:5"><div class="bar-g"></div><div class="step-in"><p class="who">DJKI</p><h3 class="h3">5. Pemeriksaan formalitas</h3><p class="small">DJKI memeriksa kelengkapan dokumen.</p></div></div>
+<div class="step rise" style="--i:6"><div class="bar-g"></div><div class="step-in"><p class="who">DJKI</p><h3 class="h3">6. Pengumuman</h3><p class="small">Permohonan diumumkan kepada publik.</p></div></div>
+<div class="step rise" style="--i:7"><div class="bar-g"></div><div class="step-in"><p class="who">DJKI</p><h3 class="h3">7. Pemeriksaan substantif</h3><p class="small">Pemeriksa menilai syarat paten.</p></div></div>
+<div class="step rise" style="--i:8"><div class="bar-g"></div><div class="step-in"><p class="who">DJKI</p><h3 class="h3">8. Keputusan</h3><p class="small">Paten diberi atau ditolak.</p></div></div>
+</div>
+</section>
+<section id="berkas">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">27</p></div>
+<p class="eyebrow">BAGIAN 4 | ALUR DI UGM</p>
+<h2 class="title">Berkas yang Perlu Disiapkan</h2>
+<table class="tbl-s">
+<tr class="thead"><th class="th" style="width:17%">Dokumen</th><th class="th" style="width:35%">Isi</th><th class="th" style="width:20%">Meterai</th><th class="th" style="width:28%">Ditandatangani</th></tr>
+<tr><td class="td">Lampiran 1</td><td class="td">Surat Permohonan Pembiayaan Paten</td><td class="td">Tidak perlu</td><td class="td">Ketua tim inventor</td></tr>
+<tr><td class="td">Lampiran 2</td><td class="td">Surat Pengalihan Hak Paten kepada UGM</td><td class="td">Rp10.000 pada inventor pertama</td><td class="td">Inventor pertama, lalu inventor lain sesuai urutan</td></tr>
+<tr><td class="td">Lampiran 2.1</td><td class="td">Surat pengalihan untuk kepemilikan bersama UGM dan mitra</td><td class="td">Sama dengan Lampiran 2</td><td class="td">Sama dengan Lampiran 2</td></tr>
+<tr><td class="td">Lampiran 3</td><td class="td">Surat Pernyataan Kepemilikan Invensi</td><td class="td">Rp10.000 pada inventor pertama</td><td class="td">Inventor pertama, lalu inventor lain sesuai urutan</td></tr>
+</table>
+<div class="grid2 rise" style="--i:1; margin-top:28px">
+<div class="card-tight"><h3 class="h3">Format unggah</h3><p class="small">Ditandatangani, dipindai, diunggah sebagai PDF lewat Simaster, disertai versi Word (.docx).</p></div>
+<div class="card-tight"><h3 class="h3">Kepemilikan bersama</h3><p class="small">Kirim soft copy PKS yang memuat klausul kepemilikan KI ke hki@ugm.ac.id.</p></div>
+</div>
+</section>
+<section id="daftar-periksa">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">28</p></div>
+<p class="eyebrow">BAGIAN 4 | SEBELUM MENGUNGGAH</p>
+<h2 class="title">Daftar Periksa Sebelum Mengunggah</h2>
+<div class="checks">
+<div class="item rise" style="--i:1"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" />
+</svg><p class="txt">Judul sama persis di deskripsi dan semua berkas permohonan.</p></div>
+<div class="item rise" style="--i:2"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" />
+</svg><p class="txt">Nama inventor sama ejaan dan urutannya di PDF dan Word.</p></div>
+<div class="item rise" style="--i:3"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" />
+</svg><p class="txt">Isi file Word sama dengan PDF; perbedaan data terbawa ke sertifikat.</p></div>
+<div class="item rise" style="--i:4"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" />
+</svg><p class="txt">Gambar teknik hitam putih, tanpa nomor baris dan nomor halaman.</p></div>
+<div class="item rise" style="--i:5"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" />
+</svg><p class="txt">Isi deskripsi sesuai judul: judul berupa proses, deskripsi menjelaskan proses.</p></div>
+<div class="item rise" style="--i:6"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" />
+</svg><p class="txt">Abstrak paling banyak 200 kata.</p></div>
+<div class="item rise" style="--i:7"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" />
+</svg><p class="txt">Invensi belum dipublikasikan dalam bentuk apa pun.</p></div>
+<div class="item rise" style="--i:8"><svg class="check-ic" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" />
+</svg><p class="txt">Diunggah paling lambat satu bulan sebelum publikasi, monev, atau unggah laporan.</p></div>
+</div>
+<p class="note-y" style="margin-top:40px">Ragu? Tanyakan ke Tim IPMO UGM sebelum mengunggah: hki@ugm.ac.id</p>
+</section>
+<section id="setelah">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">29</p></div>
+<p class="eyebrow">BAGIAN 5 | SETELAH PENGAJUAN</p>
+<h2 class="title">Setelah Nomor Permohonan Keluar</h2>
+<div class="grid3">
+<div class="card rise" style="--i:1"><svg class="icon" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
+  <path d="m21.854 2.147-10.94 10.939" />
+</svg><h3 class="h3">Boleh publikasi</h3><p class="txt">Invensi boleh dipublikasikan dan dikomersialkan tanpa menunggu paten diberikan.</p></div>
+<div class="card rise" style="--i:2"><svg class="icon" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="M12 6v6l4 2" />
+</svg><h3 class="h3">Pantau surat DJKI</h3><p class="txt">Kekurangan formalitas dilengkapi dalam 3 bulan sejak pemberitahuan. Tanggapi hasil pemeriksaan substantif tepat waktu, bersama Tim IPMO.</p></div>
+<div class="card rise" style="--i:3"><svg class="icon" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg><h3 class="h3">Jika ditolak</h3><p class="txt">Kini tersedia pemeriksaan substantif kembali sebelum banding, diajukan paling lambat 9 bulan setelah keputusan.</p></div>
+</div>
+<p class="note rise" style="--i:4; margin-top:32px">Setelah paten diberikan, pemegang paten wajib menyampaikan pernyataan pelaksanaan paten dan membayar biaya tahunan. Koordinasikan dengan IPMO UGM.</p>
+</section>
+<section id="komersialisasi">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">30</p></div>
+<p class="eyebrow">BAGIAN 5 | SETELAH PENGAJUAN</p>
+<h2 class="title">Paten sebagai Aset: Komersialisasi</h2>
+<div class="grid3">
+<div class="card rise" style="--i:1"><svg class="icon" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" />
+</svg><h3 class="h3">Mulai dari kebutuhan pasar</h3><p class="txt">Invensi yang lahir dari kebutuhan pasar lebih mudah dikomersialkan dan mampu membiayai pemeliharaan patennya.</p></div>
+<div class="card rise" style="--i:2"><svg class="icon" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" />
+</svg><h3 class="h3">Tidak perlu menunggu granted</h3><p class="txt">Komersialisasi bisa dimulai setelah permohonan terdaftar. Contoh: ventilator ITB dijual pada 2020 saat dibutuhkan.</p></div>
+<div class="card rise" style="--i:3"><svg class="icon" aria-hidden="true" focusable="false"
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" />
+</svg><h3 class="h3">Nilainya bisa dihitung</h3><p class="txt">Valuasi memakai pendekatan biaya, pasar, atau pendapatan. Paten juga dapat dijadikan jaminan fidusia.</p></div>
+</div>
+<p class="note rise" style="--i:4; margin-top:28px">Paten bernilai tinggi: langkah inventifnya kuat, dan efisiensi atau efektivitasnya terbukti di industri.</p>
+</section>
+<section id="uu-baru">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">31</p></div>
+<p class="eyebrow">BAGIAN 5 | REGULASI TERBARU</p>
+<h2 class="title">Yang Baru di UU Nomor 65 Tahun 2024</h2>
+<div class="grid3" style="gap:24px">
+<div class="card-tight rise" style="--i:1"><h3 class="h3">Masa tenggang 12 bulan</h3><p class="small">Sebelumnya 6 bulan sebelum tanggal penerimaan.</p></div>
+<div class="card-tight rise" style="--i:2"><h3 class="h3">Program komputer</h3><p class="small">Dapat dipatenkan bila memiliki efek dan karakter teknis.</p></div>
+<div class="card-tight rise" style="--i:3"><h3 class="h3">Putusan MK 2026</h3><p class="small">Pasal 4 huruf f dipulihkan: penggunaan baru dan bentuk baru senyawa tanpa peningkatan khasiat bermakna kembali bukan invensi.</p></div>
+<div class="card-tight rise" style="--i:4"><h3 class="h3">Percepatan pengumuman</h3><p class="small">Pemohon dapat meminta pengumuman lebih cepat agar pemeriksaan substantif dimulai lebih awal.</p></div>
+<div class="card-tight rise" style="--i:5"><h3 class="h3">Pemeriksaan kembali</h3><p class="small">Pemohon dapat meminta pemeriksaan substantif kembali sebelum banding.</p></div>
+<div class="card-tight rise" style="--i:6"><h3 class="h3">Pernyataan pelaksanaan</h3><p class="small">Pemegang paten wajib menyampaikan pernyataan pelaksanaan paten (Pasal 20A).</p></div>
+</div>
+<p class="small" style="margin-top:28px">Sumber: UU No. 65 Tahun 2024; Putusan MK No. 255/PUU-XXIII/2025; keterangan DJKI; ringkasan kantor hukum.</p>
+</section>
+<section id="ringkasan">
+<img class="logo-sm" src="assets/ugm-logo-warna.svg" alt="Universitas Gadjah Mada">
+<div class="foot"><p class="tag">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p><p class="url">ugm.ac.id</p><p class="pg">32</p></div>
+<p class="eyebrow">RINGKASAN</p>
+<h2 class="title">Lima Hal yang Perlu Diingat</h2>
+<div class="stack" style="gap:26px">
+<div class="item rise" style="--i:1"><p class="numsq-y">1</p><div class="stack"><h3 class="h3">Daftar dulu, publikasi kemudian</h3><p class="small">Kebaruan hilang begitu invensi terbuka untuk publik.</p></div></div>
+<div class="item rise" style="--i:2"><p class="numsq-y">2</p><div class="stack"><h3 class="h3">Telusuri sebelum menulis</h3><p class="small">Tabel pembeda menunjukkan apa yang benar-benar baru.</p></div></div>
+<div class="item rise" style="--i:3"><p class="numsq-y">3</p><div class="stack"><h3 class="h3">Klaim adalah jantung paten</h3><p class="small">Cukup luas, didukung deskripsi, dan memuat fitur pembeda.</p></div></div>
+<div class="item rise" style="--i:4"><p class="numsq-y">4</p><div class="stack"><h3 class="h3">Konsisten di semua dokumen</h3><p class="small">Judul, nama inventor, serta isi Word dan PDF harus sama.</p></div></div>
+<div class="item rise" style="--i:5"><p class="numsq-y">5</p><div class="stack"><h3 class="h3">Unggah lebih awal</h3><p class="small">Paling lambat satu bulan sebelum publikasi, monev, atau laporan.</p></div></div>
+</div>
+</section>
+<section id="penutup" class="blue">
+<div class="rings"><svg width="880" height="1080" viewBox="0 0 880 1080"><g fill="none" stroke="#1d4f80" stroke-width="3"><circle cx="720" cy="660" r="150"/><circle cx="720" cy="660" r="240"/><circle cx="720" cy="660" r="330"/><circle cx="720" cy="660" r="420"/><circle cx="720" cy="660" r="510"/><circle cx="720" cy="660" r="600"/><circle cx="720" cy="660" r="690"/></g></svg></div>
+<div class="slab-r"></div>
+<img class="logo-lg" src="assets/ugm-logo-putih.svg" alt="Universitas Gadjah Mada">
+<p class="eyebrow-b">SESI TANYA JAWAB</p>
+<h2 class="display">Terima Kasih</h2>
+<div class="rule"></div>
+<p class="sub-b">Konsultasi penyiapan paten bersama Tim IPMO UGM</p>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:28px 64px; width:1400px; margin-top:44px">
+<div class="stack"><p class="muted-b">Email</p><p class="sub-b" style="width:auto">hki@ugm.ac.id</p></div>
+<div class="stack"><p class="muted-b">WhatsApp</p><p class="sub-b" style="width:auto">+62 898-8888-035</p></div>
+<div class="stack"><p class="muted-b">Instagram</p><p class="sub-b" style="width:auto">@ipmo.ugm</p></div>
+<div class="stack"><p class="muted-b">Kantor</p><p class="sub-b" style="width:auto">Gedung Pusat UGM Lantai 3 Sayap Barat, Ruang B3-09</p></div>
+</div>
+<p class="tag-b">Merakyat, Mandiri, Berkelanjutan | Inclusive, Self-Reliant, Sustainable</p>
+<p class="url-b">ugm.ac.id</p>
+</section>
+</main>
+<div class="ui" role="group" aria-label="Navigasi slide">
+  <button type="button" id="prev" aria-label="Slide sebelumnya">&#8249;</button>
+  <span id="ctr">1 / 33</span>
+  <button type="button" id="next" aria-label="Slide berikutnya">&#8250;</button>
+</div>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('#stage>section'));
+  var stage=document.getElementById('stage'),ctr=document.getElementById('ctr'),i=0;
+  function fit(){stage.style.setProperty('--s',Math.min(innerWidth/1920,innerHeight/1080))}
+  function show(k){
+    i=Math.max(0,Math.min(slides.length-1,k));
+    slides.forEach(function(el,j){el.classList.toggle('off',j!==i)});
+    ctr.textContent=(i+1)+' / '+slides.length;
+    try{history.replaceState(null,'','#'+(i+1))}catch(e){}
+  }
+  function next(){show(i+1)} function prev(){show(i-1)}
+  addEventListener('resize',fit);fit();
+  var h=parseInt((location.hash||'').slice(1),10);show(isNaN(h)?0:h-1);
+  addEventListener('keydown',function(e){
+    var k=e.key;
+    if(k==='ArrowRight'||k===' '||k==='PageDown'||k==='Enter'){e.preventDefault();next()}
+    else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){e.preventDefault();prev()}
+    else if(k==='Home'){show(0)} else if(k==='End'){show(slides.length-1)}
+    else if(k==='f'||k==='F'){var d=document.documentElement;
+      if(document.fullscreenElement){document.exitFullscreen()}else if(d.requestFullscreen){d.requestFullscreen()}}
+    else if(k==='p'||k==='P'){window.print()}
+  });
+  stage.addEventListener('click',function(e){(e.clientX<innerWidth*0.3)?prev():next()});
+  document.getElementById('prev').addEventListener('click',prev);
+  document.getElementById('next').addEventListener('click',next);
+  var x0=null;
+  addEventListener('touchstart',function(e){x0=e.changedTouches[0].clientX},{passive:true});
+  addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>50){dx<0?next():prev()} x0=null},{passive:true});
+})();
+</script>
+</body>
+</html>
